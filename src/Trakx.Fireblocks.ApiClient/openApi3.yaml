@@ -1,0 +1,269 @@
+﻿openapi: 3.0.0
+info:
+  title: Fireblocks API
+  version: '1.0.0'
+servers:
+  - url: 'https://api.fireblocks.io'
+    description: Fireblocks production base url
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Accounts
+    description: "Endpoints related to getting details about trading accounts"
+  - name: MarketData
+    description: "The MarketData endpoint provide free access to market data information. They do not require credits to be used. API Keys are not required to use Public endpoints. However, requests that do not specify an API key in the header will be rate limited to 10 requests per minute per IP."
+paths:
+  "/v1/{exchange}/ticker":
+    get:
+      operationId: GetTicker
+      tags: 
+        - MarketData
+      description: This endpoint retrieves all Fireblocks supported exchange assets for a particular exchange along with pricing information. The pricing information is updated once per minute.
+      parameters:
+        - in: path
+          name: exchange
+          description: The identifier of the exchange
+          required: true
+          schema:
+            $ref: '#/components/schemas/Exchange'
+      responses:
+        "200":
+          description: List of Tickers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ticker'
+  "/v1/accounts":
+    get:
+      operationId: ListAccounts
+      tags: 
+        - Accounts
+      description: This endpoint retrieves all linked exchange accounts.
+      responses:
+        "200":
+          description: List of Account owned by a user.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+      security: 
+      - ApiKeyAuth: []
+  "/v1/accounts/{exchangeAccountId}":
+    get:
+      operationId: GetAccount
+      tags: 
+        - Accounts
+      description: This endpoint returns the current status of a linked exchange account.
+      parameters:
+      - in: path
+        name: exchangeAccountId
+        description: The exchange account id of the account to retrieve
+        required: true
+        schema:
+          type: number
+          format: int32
+      responses:
+        "200":
+          description: The requested Account.
+          content:
+            application/json:
+              schema:
+                type:
+                $ref: '#/components/schemas/Account'
+      security: 
+      - ApiKeyAuth: []
+  "/v1/accounts/{exchangeAccountId}/balance":
+    get:
+      operationId: GetBalance
+      tags: 
+        - Accounts
+      description: This endpoint retrieves detailed balance data for an exchange account. By default, the most recent balance is returned. Balance is retrieved from the exchange every 15 minutes for each account, as well as immediately after rebalance operations and trade operations.
+      parameters:
+      - in: path
+        name: exchangeAccountId
+        description: The exchange account id of the account to retrieve
+        required: true
+        schema:
+          type: number
+          format: int32
+      - in: query
+        name: date
+        required: false
+        description: If supplied, balance data that is nearest to the date will be returned. If not supplied, the most recent balance data is returned.
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: The requested Balance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBalanceResponse'
+      security: 
+      - ApiKeyAuth: []  
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+  schemas:
+    Account:
+      description: The account object contains information about an exchange account that you have linked to your Fireblocks account.
+      type: object
+      properties:
+        id:
+          description: The unique identifier of the strategy
+          type: number
+          example: 123
+        exchange:
+          $ref: "#/components/schemas/Exchange"
+        isRebalancing:
+          description: True if the account is rebalancing.
+          type: boolean
+        exchangeApiErrors:
+          description: "A list of errors received from the exchange that relate to the user's exchange API keys. This list is generally empty and a non-empty list usually indicates an issue that the user needs to resolve. For example, this list will be non-empty if the user deletes their API keys from the exchange, or has invalid API permission on the exchange."
+          type: array
+          items:
+            $ref: "#/components/schemas/ExchangeApiError"
+    Exchange:
+      type: string
+      enum: [ binance, binanceUs, bittrex, coinbasePro, kraken, kucoin, poloniex, huobiGlobal, okex, gemini, bibox, hitBtc, bitmart, bitstamp, bitfinex ]
+      description: A unique identifier for the exchange that is used with other Fireblocks endpoints. This is typically the lowercase name of the exchange without spaces.
+      example: kucoin
+    ExchangeApiError:
+      type: object
+      description: An Exchange API Error object represents an issue with user exchange api keys.
+      properties:
+        code:
+          description: > 
+            The error code associated with the exchange error.
+            * 1001 - Invalid IP whitelist: The exchange rejected the request from our API servers due to a user's IP whitelist on the exchange. This can happen if a user enables IP whitelisting on the exchange and fails to whitelist all 4 of the IP addresses provisioned by Fireblocks for the user.
+            * 1002 - -Invalid API keys: The API keys are no longer valid. This can happen if the user deletes their exchange API keys from the exchange.
+            * 1003 - Invalid nonce: The exchange rejected a request from our API servers due to the nonce. This can happen on some exchanges if the exchange API keys are shared with another service.
+            * 1004 - Invalid permission: 	PERMISSION_TYPE	The user has not allowed all required permissions on the exchange. The most common values for PERMISSION_TYPE are "balance" and "trade".
+          type: number
+          enum: [1001, 1002, 1003, 1004]
+          example: 1002
+        message:
+          description: A human-readable description of the error.
+          type: string
+          example: Invalid API keys
+    Ticker:
+      type: object
+      description: The ticker type contains public information about a particular asset. The symbol depends on the exchange, so it can vary from exchange to exchange. The price is calculated by taking the average of the latest bid and latest ask.
+      properties:
+        name:
+          description: The name of the asset
+          type: string
+          example: Bitcoin
+        symbol: 
+          description: The symbol of the asset on the exchange
+          type: string
+          example: BTC
+        priceUsd:
+          description: The latest price in United States Dollars
+          type: number
+          format: double
+          example: 3700.0089335
+          nullable: true
+        priceBtc:
+          description: The latest price in Bitcoin
+          type: number
+          format: double
+          example: 1
+          nullable: true
+        percentChange24hUsd:
+          description: The change in USD price in the last 24 hours
+          type: number
+          format: double
+          example: 4.191224354581092
+          nullable: true
+        lastUpdated:
+          description: The time the latest ticker data was retrieved
+          type: string
+          format: date-time
+          example: "2018-12-19T22:51:13.000Z"
+          nullable: true
+    User:
+      type: object
+      description: The user type contains information about a particular user. Users can be enabled and disabled at any time. Trading will continue to work until the expiration date, even if the user is disabled.
+      properties:
+        id:
+          description: The unique identifier of the user.
+          type: string
+          format: uuid
+          example: 701e0d16-1e9e-42c9-b6a1-4cada1f395b8
+        isEnabled:
+          description: True if the user is currently enabled.
+          type: boolean
+        expirationDate:
+          description: The date the user will expire.
+          type: string
+          format: date-time
+          example: "2019-01-12T21:09:25.000Z"
+          nullable: true
+        name:
+          description: The optional name associated with the user.
+          type: string
+          example: customnameforthisuser
+    Balance:
+      type: object
+      description: The user type contains information about a particular user. Users can be enabled and disabled at any time. Trading will continue to work until the expiration date, even if the user is disabled.
+      properties:
+          symbol:
+            description: The symbol of the asset on the exchange.
+            type: string
+            example: KCS
+          nativeValue:
+            description: The amount of the asset on the exchange.
+            type: number
+            example: 2306
+          btcValue: 
+            description: The value of the asset on the exchange, in Bitcoin. This value is computed when the balance data is collected.
+            type: number
+            format: double
+            example: 0.33486579
+          usdValue: 
+            description: The value of the asset on the exchange, in United States Dollars. This value is computed when the balance data is collected.
+            type: number
+            format: double
+            example: 1327.8775274784
+    GetBalanceResponse:
+      type: object
+      description: The user type contains information about a particular user. Users can be enabled and disabled at any time. Trading will continue to work until the expiration date, even if the user is disabled.
+      properties:
+          retrievedAt:
+            description: The date the data was retrieved, or null if no balance data has been retrieved yet.
+            type: string
+            format: date-time
+            example: "2019-01-09T19:17:33.000Z"
+          balances:
+            description: An array of balance information. This array will be empty if no balance data has been retrieved yet.
+            type: array
+            items:
+              $ref: "#/components/schemas/Balance"
+    ExchangeInfo:
+      type: object
+      description: The exchange info type contains basic information about a particular exchange.
+      properties:
+        exchange:
+          $ref: "#/components/schemas/Exchange"
+        bestCaseFee:
+          description: The lowest possible fee on the exchange. Fees are typically lower based on your trading volume, if you are using an exchange-specific discount token, and if you are the maker. A negative fee means you receive a rebate. All fee values are scalar values associated with percentages. For example, 0.001 means "0.1%".
+          type: number
+          example: 0.000125
+        worstCaseFee:
+          description: The highest possible fee on the exchange. All fee values are scalar values associated with percentages. For example, 0.001 means "0.1%".
+          type: number
+          example: 0.001
+        icon:
+          description: A url for a 32x32px icon associated with the exchange.
+          type: string
+          example: https://assets.fireblocks.io/exchanges/kucoin.png

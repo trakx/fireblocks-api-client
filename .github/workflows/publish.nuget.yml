@@ -1,0 +1,87 @@
+name: Publish nuget package
+
+on: 
+  workflow_dispatch:
+    inputs:
+      semverIncrementLevel:
+        description: 'Level of the semver (major.minor.patch) to be increased to get the new package version.'
+        required: true
+        default: 'patch'
+  push:
+    branches: 
+      - master
+
+env:
+  SOLUTION_PATH: "src/Trakx.Fireblocks.ApiClient.sln"
+  PACKAGE_NAME: Trakx.Fireblocks.ApiClient
+  PROJECT_PATH: "src/Trakx.Fireblocks.ApiClient/Trakx.Fireblocks.ApiClient.csproj"
+  TEST_PROJECT_PATH: "src/Trakx.Fireblocks.ApiClient.Tests/Trakx.Fireblocks.ApiClient.Tests.csproj"
+  FireblocksApiConfiguration__ApiKey: ${{secrets.FIREBLOCKS_API_KEY}}
+  FireblocksApiConfiguration__ApiSecret: ${{secrets.FIREBLOCKS_API_SECRET}}
+
+jobs:
+  
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: Set Bump Increment Level
+      id: bumpLevel
+      run: |
+        LEVEL="${{github.event.inputs.semverIncrementLevel}}"
+        LEVEL=${LEVEL:-patch}
+        echo '::set-output name=finalLevel::'$LEVEL
+        
+    - name: checkout
+      uses: actions/checkout@v2
+
+    - name: Get next semver
+      id: bumpSemver
+      uses: anothrNick/github-tag-action@1.26.0
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        DEFAULT_BUMP: ${{steps.bumpLevel.outputs.finalLevel}}
+        DRY_RUN: true
+        WITH_V: false
+        RELEASE_BRANCHES : master
+        INITIAL_VERSION: 0.1.0
+
+    - name: Print bumpSemver outputs
+      run: |
+        echo "latest tag is ${{steps.bumpSemver.outputs.tag}}"
+        echo "bumping ${{steps.bumpSemver.outputs.part}} level on ${{github.ref}} gives new tag ${{steps.bumpSemver.outputs.new_tag}}"
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 5.0.x
+    
+    - name: Add github nuget source
+      run: dotnet nuget add source "https://nuget.pkg.github.com/trakx/index.json" --name "github" --username "trakx-bot" --password ${{secrets.TRAKX_BOT_READONLY_PAT}} --store-password-in-clear-text
+
+    - name: Install dependencies
+      run: dotnet restore ${{env.SOLUTION_PATH}}
+    
+    - name: Remove github source
+      run: dotnet nuget remove source "github"
+    
+    - name: Build
+      run: dotnet build ${{env.SOLUTION_PATH}} --configuration Release --no-restore
+    
+    - name: Test
+      run: dotnet test ${{env.SOLUTION_PATH}} --no-restore --verbosity normal
+
+    - name: Package
+      run: dotnet pack ${{env.PROJECT_PATH}} --no-build --configuration Release --output ./nuget/ -p:PackageVersion=${{ steps.bumpSemver.outputs.new_tag }}
+
+    - name: Publish
+      # https://github.com/NuGet/Home/issues/8580
+      run: dotnet nuget push ./nuget/*.nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/trakx/index.json"
+
+    - name: push version tag
+      uses: anothrNick/github-tag-action@1.26.0
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        CUSTOM_TAG: v${{steps.bumpSemver.outputs.new_tag}}

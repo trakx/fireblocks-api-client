@@ -1,0 +1,30 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ dev, master ]
+  pull_request:
+    branches: [ dev, master ]
+    
+env:
+  SOLUTION_PATH: "src/Trakx.Fireblocks.ApiClient.sln"
+  FireblocksApiConfiguration__ApiKey: ${{secrets.FIREBLOCKS_API_KEY}}
+  FireblocksApiConfiguration__ApiSecret: ${{secrets.FIREBLOCKS_API_SECRET}}
+  
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Install dependencies
+      run: dotnet restore ${{env.SOLUTION_PATH}}
+    - name: Build
+      run: dotnet build ${{env.SOLUTION_PATH}} --configuration Release --no-restore
+    - name: Test
+      run: dotnet test ${{env.SOLUTION_PATH}} --no-restore --logger GitHubActions --verbosity normal

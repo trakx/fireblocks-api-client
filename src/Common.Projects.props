@@ -1,0 +1,33 @@
+<Project>
+    <PropertyGroup>
+        <Company>Trakx</Company>
+        <Copyright>Copyright © 2020 Trakx</Copyright>
+        <RepositoryUrl>https://github.com/trakx/fireblocks-api-client</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <Deterministic>true</Deterministic>
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>Full</DebugType>
+        <DebugSymbols>True</DebugSymbols>
+        <Optimize>False</Optimize>
+        <Nullable>Enable</Nullable>
+        <LangVersion>9.0</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Version)' == '' ">
+        <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">0.1.0</VersionPrefix>
+        <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix).$(VersionSuffix)</Version>
+        <Version Condition=" '$(Version)' == '' ">$(VersionSuffix)</Version>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <DebugType>none</DebugType>
+        <DebugSymbols>False</DebugSymbols>
+        <Optimize>true</Optimize>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)../LICENSE" PackagePath="" Pack="true" />
+    </ItemGroup>
+    <ItemGroup>
+      <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+        <_Parameter1>$(AssemblyName).Tests</_Parameter1>
+      </AssemblyAttribute>
+    </ItemGroup>
+</Project>
