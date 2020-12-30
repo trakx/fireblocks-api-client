@@ -1,269 +1,2517 @@
 ﻿openapi: 3.0.0
 info:
   title: Fireblocks API
-  version: '1.0.0'
+  version: "1.4.0"
 servers:
-  - url: 'https://api.fireblocks.io'
-    description: Fireblocks production base url
-security:
-  - ApiKeyAuth: []
-tags:
-  - name: Accounts
-    description: "Endpoints related to getting details about trading accounts"
-  - name: MarketData
-    description: "The MarketData endpoint provide free access to market data information. They do not require credits to be used. API Keys are not required to use Public endpoints. However, requests that do not specify an API key in the header will be rate limited to 10 requests per minute per IP."
+  - url: 'https://api.fireblocks.io/v1'
 paths:
-  "/v1/{exchange}/ticker":
+  #  VAULT
+  '/vault/accounts':
     get:
-      operationId: GetTicker
-      tags: 
-        - MarketData
-      description: This endpoint retrieves all Fireblocks supported exchange assets for a particular exchange along with pricing information. The pricing information is updated once per minute.
+      summary: Returns all accounts of the active Vault
+      responses:
+        '200':
+          description: A list of Vault accounts
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VaultAccount'
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Creates a new vault account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  description: Account Name
+                  type: string
+                hiddenOnUI:
+                  description: >-
+                    Optional - if true, the created account and all related transactions will not be shown on Fireblocks console
+                  type: boolean
+                customerRefId:
+                  description: >-
+                    Optional - Sets a customer reference ID
+                  type: string
+                autoFuel:
+                  description:
+                    Optional - Sets the autoFuel property of the vault account
+                  type: boolean
+      responses:
+        '200':
+          description: A Vault Account object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VaultAccount'
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}':
+    get:
+      summary: Returns a Fireblock Vault account by ID
       parameters:
         - in: path
-          name: exchange
-          description: The identifier of the exchange
+          name: vaultAccountId
+          required: true
+          description: >-
+            The ID of the vault account to return
+            type: string
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A Vault Account object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VaultAccount'
+        default:
+          $ref: '#/components/responses/Error'
+    put:
+      summary: Edit a Fireblock Vault account
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: >-
+            The ID of the vault account to edit
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  description: Account Name
+                  type: string
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/hide':
+    post:
+      summary: Hides a vault account on Fireblocks console
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: The vault account to hide
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/unhide':
+    post:
+      summary: Reveals a hidden vault account on Fireblocks console
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: The vault account to unhide
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/set_customer_ref_id':
+    post:
+      summary: Sets a reference customer ID for AML
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: The vault account ID
+          schema:
+            type: string
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                customerRefId:
+                  description: Customer reference ID
+                  type: string
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/set_auto_fuel':
+    post:
+      summary: Sets the autoFuel property of the vault account to true or false
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: The vault account ID
+          schema:
+            type: string
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                autoFuel:
+                  description: Auto Fuel
+                  type: boolean
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/{assetId}':
+    get:
+      summary: Returns a wallet of a specific asset inside a Fireblocks Vault account
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: >-
+            The ID of the vault account to return
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A VaultAsset object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VaultAsset'
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Creates a new wallet in a Vault account
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: >-
+            The ID of the vault account to return, or 'default' for the default vault account
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              properties:
+                eosAccountName:
+                  description: Optional - when creating an EOS wallet, the account name. If not provided, a random name will be generated
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateVaultAssetResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/{assetId}/addresses':
+    get:
+      summary: Returns all addresses generated for a Vault wallet
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: >-
+            The ID of the vault account to return
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of deposit addresses
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VaultWalletAddress'
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Generate a new deposit address for a Vault wallet
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              properties:
+                description:
+                  description: (Optional) Attach a description to the new address
+                  type: string
+                customerRefId:
+                  description: >-
+                    Optional - Sets a customer reference ID
+                  type: string
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: >-
+            The ID of the vault account to return
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The created address
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateAddressResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}':
+    put:
+      summary: Update the description of an existing address within a vault wallet
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              properties:
+                description:
+                  description: The address description
+                  type: string
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: >-
+            The ID of the vault account
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset
+          schema:
+            type: string
+        - in: path
+          name: addressId
+          required: true
+          description: >-
+            The address for which to add a description. For XRP, use <address>:<tag>, for all other assets, use only the address
+          schema:
+            type: string
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}/set_customer_ref_id':
+    post:
+      summary: Sets a reference customer ID for AML
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: >-
+            The ID of the vault account
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset
+          schema:
+            type: string
+        - in: path
+          name: addressId
+          required: true
+          description: >-
+            The address for which to add a description. For XRP, use <address>:<tag>, for all other assets, use only the address
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                customerRefId:
+                  description: Customer reference ID
+                  type: string
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}/create_legacy':
+    post:
+      summary: Translates an existing segwit address to the legacy format
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: >-
+            The ID of the vault account
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset
+          schema:
+            type: string
+        - in: path
+          name: addressId
+          required: true
+          description: >-
+            The segwit address to translate
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The created address
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateAddressResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/public_key_info/':
+    get:
+      summary: Gets the public key information based on derivationPath and signing algorithm
+      parameters:
+        - in: query
+          name: derivationPath
           required: true
           schema:
-            $ref: '#/components/schemas/Exchange'
+            type: string
+        - in: query
+          name: algorithm
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: compressed
+          schema:
+            type: boolean
       responses:
-        "200":
-          description: List of Tickers
+        '200':
+          description: Public key information
           content:
-            application/json:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicKeyInformation'
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/{assetId}/{change}/{addressIndex}/public_key_info':
+    get:
+      summary: Gets the public key information for vault account
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: change
+          required: true
+          schema:
+            type: number
+        - in: path
+          name: addressIndex
+          required: true
+          schema:
+            type: number
+        - in: query
+          name: compressed
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Public Key Information
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicKeyInformation'
+        default:
+          $ref: '#/components/responses/Error'
+  #  INTERNAL WALLETS
+  /internal_wallets:
+    get:
+      summary: Gets a list of internal wallets
+      responses:
+        '200':
+          description: A list of internal wallets
+          content:
+            '*/*':
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Ticker'
-  "/v1/accounts":
-    get:
-      operationId: ListAccounts
-      tags: 
-        - Accounts
-      description: This endpoint retrieves all linked exchange accounts.
+                  $ref: '#/components/schemas/UnmanagedWallet'
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Creates a new internal wallet
       responses:
-        "200":
-          description: List of Account owned by a user.
+        '200':
+          description: A new wallet object
           content:
-            application/json:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UnmanagedWallet'
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description: the wallet's display name
+                customerRefId:
+                  description: >-
+                    Optional - Sets a customer reference ID
+                  type: string
+  '/internal_wallets/{walletId}':
+    get:
+      summary: Returns an internal wallet by ID
+      parameters:
+        - in: path
+          name: walletId
+          required: true
+          description: The ID of the wallet to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A Wallet object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UnmanagedWallet'
+        default:
+          $ref: '#/components/responses/Error'
+    delete:
+      summary: Deletes an internal wallet by ID
+      parameters:
+        - in: path
+          name: walletId
+          required: true
+          description: The ID of the wallet to delete
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/internal_wallets/{walletId}/set_customer_ref_id':
+    post:
+      summary: Sets a reference customer ID for AML
+      parameters:
+        - in: path
+          name: walletId
+          required: true
+          description: The wallet ID
+          schema:
+            type: string
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                customerRefId:
+                  description: Customer reference ID
+                  type: string
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/internal_wallets/{walletId}/{assetId}':
+    get:
+      summary: Returns an internal wallet asset by ID
+      parameters:
+        - in: path
+          name: walletId
+          required: true
+          description: The ID of the wallet
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A Wallet Asset object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WalletAsset'
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Create asset to an existing internal wallet
+      parameters:
+        - in: path
+          name: walletId
+          required: true
+          description: The ID of the wallet
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset to add
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A Wallet Asset object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WalletAsset'
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                address:
+                  type: string
+                  description: The wallet's address or, for EOS wallets, the account name
+                tag:
+                  type: string
+                  description: for XRP wallets, the destination tag. For EOS, the memo
+              required:
+                - address
+    delete:
+      summary: Deletes an internal wallet asset by ID
+      parameters:
+        - in: path
+          name: walletId
+          required: true
+          description: The ID of the wallet
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset to delete
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  # EXTERNAL WALLETS
+  /external_wallets:
+    get:
+      summary: Gets a list of external wallets under the tenant
+      responses:
+        '200':
+          description: A list of external wallets
+          content:
+            '*/*':
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Account'
-      security: 
-      - ApiKeyAuth: []
-  "/v1/accounts/{exchangeAccountId}":
-    get:
-      operationId: GetAccount
-      tags: 
-        - Accounts
-      description: This endpoint returns the current status of a linked exchange account.
-      parameters:
-      - in: path
-        name: exchangeAccountId
-        description: The exchange account id of the account to retrieve
-        required: true
-        schema:
-          type: number
-          format: int32
+                  $ref: '#/components/schemas/UnmanagedWallet'
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Creates a new external wallet
       responses:
-        "200":
-          description: The requested Account.
+        '200':
+          description: A Wallet object
           content:
-            application/json:
+            '*/*':
               schema:
-                type:
-                $ref: '#/components/schemas/Account'
-      security: 
-      - ApiKeyAuth: []
-  "/v1/accounts/{exchangeAccountId}/balance":
+                $ref: '#/components/schemas/UnmanagedWallet'
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description: the wallet's display name
+                customerRefId:
+                  description: >-
+                    Optional - Sets a customer reference ID
+                  type: string
+  '/external_wallets/{walletId}':
     get:
-      operationId: GetBalance
-      tags: 
-        - Accounts
-      description: This endpoint retrieves detailed balance data for an exchange account. By default, the most recent balance is returned. Balance is retrieved from the exchange every 15 minutes for each account, as well as immediately after rebalance operations and trade operations.
+      summary: Returns an external wallet by ID
       parameters:
-      - in: path
-        name: exchangeAccountId
-        description: The exchange account id of the account to retrieve
-        required: true
-        schema:
-          type: number
-          format: int32
-      - in: query
-        name: date
-        required: false
-        description: If supplied, balance data that is nearest to the date will be returned. If not supplied, the most recent balance data is returned.
-        schema:
-          type: string
-          format: date-time
+        - in: path
+          name: walletId
+          required: true
+          description: The ID of the wallet to return
+          schema:
+            type: string
+            minimum: 1
       responses:
-        "200":
-          description: The requested Balance.
+        '200':
+          description: A Wallet object
           content:
-            application/json:
+            '*/*':
               schema:
-                $ref: '#/components/schemas/GetBalanceResponse'
-      security: 
-      - ApiKeyAuth: []  
-
+                $ref: '#/components/schemas/UnmanagedWallet'
+        default:
+          $ref: '#/components/responses/Error'
+    delete:
+      summary: Deletes an external wallet by ID
+      parameters:
+        - in: path
+          name: walletId
+          required: true
+          description: The ID of the wallet to delete
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/external_wallets/{walletId}/set_customer_ref_id':
+    post:
+      summary: Sets a reference customer ID for AML
+      parameters:
+        - in: path
+          name: walletId
+          required: true
+          description: The wallet ID
+          schema:
+            type: string
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                customerRefId:
+                  description: Customer reference ID
+                  type: string
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/external_wallets/{walletId}/{assetId}':
+    get:
+      summary: Returns an external wallet asset by ID
+      parameters:
+        - in: path
+          name: walletId
+          required: true
+          description: The ID of the wallet
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A Wallet Asset object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExternalWalletAsset'
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Adds an asset to an existing external wallet
+      parameters:
+        - in: path
+          name: walletId
+          required: true
+          description: The ID of the wallet
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset to add
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A Wallet Asset object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExternalWalletAsset'
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                address:
+                  type: string
+                  description: The wallet's address (or xpub) of the wallet
+                tag:
+                  type: string
+                  description: The destination tag, for XRP wallets
+              required:
+                - address
+    delete:
+      summary: Deletes an external wallet asset by ID
+      parameters:
+        - in: path
+          name: walletId
+          required: true
+          description: The ID of the wallet
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset to delete
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  # EXCHANGE ACCOUNTS
+  /exchange_accounts:
+    get:
+      summary: Returns all exchange accounts
+      responses:
+        '200':
+          description: An ExchangeAccount object
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExchangeAccount'
+        default:
+          $ref: '#/components/responses/Error'
+  '/exchange_accounts/{exchangeAccountId}':
+    get:
+      summary: Returns an exchange account by ID
+      parameters:
+        - in: path
+          name: exchangeAccountId
+          required: true
+          description: The ID of the exchange account to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: An ExchangeAccount object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExchangeAccount'
+        default:
+          $ref: '#/components/responses/Error'
+  '/exchange_accounts/{exchangeAccountId}/{assetId}':
+    get:
+      summary: Returns a single asset within an exchange account
+      parameters:
+        - in: path
+          name: exchangeAccountId
+          required: true
+          description: The ID of the exchange account to return
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: An ExchangeAccountAsset object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExchangeAsset'
+        default:
+          $ref: '#/components/responses/Error'
+  '/exchange_accounts/{exchangeAccountId}/{assetId}/transfer_to_subaccount':
+    post:
+      summary: Transfer to a subaccount. Only allowed on an exchange main account
+      parameters:
+        - in: path
+          name: exchangeAccountId
+          required: true
+          description: The ID of the exchange account to return
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: Transfer succeeded
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                subaccountId:
+                  type: string
+                amount:
+                  oneOf:
+                    - type: number
+                    - type: string
+  '/exchange_accounts/{exchangeAccountId}/{assetId}/transfer_from_subaccount':
+    post:
+      summary: Transfer from a subaccount. Only allowed on an exchange main account
+      parameters:
+        - in: path
+          name: exchangeAccountId
+          required: true
+          description: The ID of the exchange account to return
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: Transfer succeeded
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                subaccountId:
+                  type: string
+                amount:
+                  oneOf:
+                    - type: number
+                    - type: string
+  # FIAT ACCOUNTS
+  /fiat_accounts:
+    get:
+      summary: Returns all fiat accounts
+      responses:
+        '200':
+          description: A fiat account object
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FiatAccount'
+        default:
+          $ref: '#/components/responses/Error'
+  '/fiat_accounts/{accountId}':
+    get:
+      summary: Returns a fiat account by ID
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the fiat account to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A fiat account object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/FiatAccount'
+        default:
+          $ref: '#/components/responses/Error'
+  '/fiat_accounts/{accountId}/redeem_to_linked_dda':
+    post:
+      summary: Redeem funds to DDA
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the fiat account to use
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: Transfer succeeded
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                amount:
+                  type: number
+  '/fiat_accounts/{accountId}/deposit_from_linked_dda':
+    post:
+      summary: Deposit funds from DDA
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the fiat account to use
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: Transfer succeeded
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                amount:
+                  type: number
+  # TRANSACTIONS
+  /transactions:
+    get:
+      summary: Gets a list of transactions under the tenant
+      parameters:
+        - in: query
+          name: before
+          description: >-
+            Unix timestamp in milliseconds. Returns only transactions created before the
+            specified date
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: after
+          description: >-
+            Unix timestamp in milliseconds. Returns only transactions created after the
+            specified date
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: status
+          description: >-
+            Comma-separated list of statuses. Returns only transactions with
+            one of the specified statuses
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: orderBy
+          description: The field to order the results by
+          required: false
+          schema:
+            type: string
+            enum:
+              - createdAt
+              - lastUpdated
+            default: createdAt
+        - in: query
+          name: limit
+          description: >-
+            Limits the number of results. If not provided, a limit of 200 will be used. The maximum allowed limit is 500
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 200
+        - in: query
+          name: sourceType
+          description: The source type of the transaction
+          required: false
+          schema:
+            type: string
+            enum:
+              - VAULT_ACCOUNT
+              - EXCHANGE_ACCOUNT
+              - INTERNAL_WALLET
+              - EXTERNAL_WALLET
+              - FIAT_ACCOUNT
+              - NETWORK_CONNECTION
+              - COMPOUND
+              - UNKNOWN
+              - GAS_STATION
+        - in: query
+          name: sourceId
+          description: The source ID of the transaction
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: destType
+          description: The destination type of the transaction
+          required: false
+          schema:
+            type: string
+            enum:
+              - VAULT_ACCOUNT
+              - EXCHANGE_ACCOUNT
+              - INTERNAL_WALLET
+              - EXTERNAL_WALLET
+              - FIAT_ACCOUNT
+              - NETWORK_CONNECTION
+              - COMPOUND
+        - in: query
+          name: destId
+          description: The destination ID of the transaction
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: assets
+          description: A list of assets to filter by, seperated by commas
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: txHash
+          description: Returns only results with a specified txHash
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of transactions
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TransactionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Creates a new transaction
+      responses:
+        '200':
+          description: A transaction object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateTransactionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+  '/transactions/estimate_fee':
+    post:
+      summary: >-
+        Estimates the transaction fee for a given transaction request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+      responses:
+        '200':
+          description: Estimated fees respose
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EstimatedTransactionFeeResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/transactions/{txId}':
+    get:
+      summary: Returns a transaction by ID
+      parameters:
+        - in: path
+          name: txId
+          required: true
+          description: The ID of the transaction to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: An Transaction object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/transactions/{txId}/set_confirmation_threshold':
+    post:
+      summary: Overrides the required number of confirmations for a transaction completion by transaction ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetConfirmationsThresholdRequest'
+      parameters:
+        - in: path
+          name: txId
+          required: true
+          description: The ID of the transaction
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: Set successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetConfirmationsThresholdResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/transactions/{txId}/drop':
+    post:
+      summary: Drop ETH based transaction by ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DropTransactionRequest'
+      parameters:
+        - in: path
+          name: txId
+          required: true
+          description: The ID of the transaction
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: Created successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DropTransactionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/transactions/{txId}/cancel':
+    post:
+      summary: Cancels a transaction by ID
+      parameters:
+        - in: path
+          name: txId
+          required: true
+          description: The ID of the transaction to cancel
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: An Transaction object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CancelTransactionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  # TXHASH
+  '/txHash/{txHash}/set_confirmation_threshold':
+    post:
+      summary: Overrides the required number of confirmations for a transaction completion by its TxHash
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetConfirmationsThresholdRequest'
+      parameters:
+        - in: path
+          name: txHash
+          required: true
+          description: The TxHash
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A list of transactions affected by the change
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetConfirmationsThresholdResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  # SUPPORTED ASSETS
+  '/supported_assets':
+    get:
+      summary: Returns all asset types supported by Fireblocks
+      responses:
+        '200':
+          description: A Transaction object
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssetTypeResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  # NETWORK CONNECTIONS
+  '/network_connections':
+    get:
+      summary: Returns all network connections
+      responses:
+        '200':
+          description: A list of network connections
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NetworkConnectionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/network_connections/{connectionId}':
+    get:
+      summary: Gets a network connection by ID
+      parameters:
+        - in: path
+          name: connectionId
+          required: true
+          description: The ID of the connection
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A network connection
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NetworkConnectionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  # TRANSFER TICKETS
+  '/transfer_tickets':
+    get:
+      summary: Gets a list of transfer tickets
+      responses:
+        '200':
+          description: A list of transafer tickets
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TransferTicketResponse'
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Creates a new transfer ticket
+      responses:
+        '200':
+          description: A transfer object with ticket id
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateTransferTicketResponse'
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                terms:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Term'
+                externalTicketId:
+                  type: string
+                description:
+                  type: string
+              required:
+                - terms
+  '/transfer_tickets/{ticketId}':
+    get:
+      summary: Get a specific ticket by ticket ID
+      parameters:
+        - in: path
+          name: ticketId
+          required: true
+          description: The ID of the ticket
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A transfer ticket
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TransferTicketResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  /transfer_tickets/{ticketId}/cancel:
+    post:
+      summary: Cancel a transfer request
+      parameters:
+        - in: path
+          name: ticketId
+          required: true
+          description: The ID of the ticket
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/transfer_tickets/{ticketId}/{termId}':
+    get:
+      summary: Get a term by ticket ID and term ID
+      parameters:
+        - in: path
+          name: ticketId
+          required: true
+          description: The ID of the ticket
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: termId
+          required: true
+          description: The ID of the term
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A term
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TransferTicketTermResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  /transfer_tickets/{ticketId}/{termId}/transfer:
+    post:
+      summary: Triggers a transfer for a term in ticket
+      parameters:
+        - in: path
+          name: ticketId
+          required: true
+          description: The ID of the ticket
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: termId
+          required: true
+          description: The ID of the term
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                source:
+                  $ref: '#/components/schemas/TransferPeerPath'
+  # ESTIMATE NETWORK FEE
+  '/estimate_network_fee':
+    get:
+      summary: >-
+        Estimates the required fee for a given asset.
+        For UTXO based assets, the response will contain the suggested fee per byte,
+        for ETH/ETC based assets, the suggested gas price, and for XRP/XLM, the transaction fee
+      parameters:
+        - in: query
+          name: assetId
+          description: >-
+            The asset for which to estimate the fee
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Estimated fees respose
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EstimatedNetworkFeeResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/gas_station':
+    get:
+      summary: >-
+        Returns a summary of Gas Station configuration and balances
+      responses:
+        '200':
+          description: Gas Station properties
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GasStationPropertiesResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/gas_station/configuration':
+    put:
+      summary: >-
+        Sets Gas Station configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GasStationConfiguration'
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+security:
+  - bearerTokenAuth: [ ]
+  - ApiKeyAuth: [ ]
 components:
+  responses:
+    Error:
+      description: Error Response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  requestBodies:
+    NewWallet:
+      content:
+        application/json:
+          schema:
+            properties:
+              name:
+                type: string
+                description: the wallet's display name
+    WalletAddressProperties:
+      content:
+        application/json:
+          schema:
+            properties:
+              address:
+                type: string
+                description: The wallet's address (or xpub) of the wallet
   securitySchemes:
+    bearerTokenAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
     ApiKeyAuth:
       type: apiKey
       in: header
-      name: X-Api-Key
+      name: X-API-Key
   schemas:
-    Account:
-      description: The account object contains information about an exchange account that you have linked to your Fireblocks account.
+    WalletAsset:
       type: object
       properties:
         id:
-          description: The unique identifier of the strategy
-          type: number
-          example: 123
-        exchange:
-          $ref: "#/components/schemas/Exchange"
-        isRebalancing:
-          description: True if the account is rebalancing.
-          type: boolean
-        exchangeApiErrors:
-          description: "A list of errors received from the exchange that relate to the user's exchange API keys. This list is generally empty and a non-empty list usually indicates an issue that the user needs to resolve. For example, this list will be non-empty if the user deletes their API keys from the exchange, or has invalid API permission on the exchange."
+          type: string
+        balance:
+          type: string
+        lockedAmount:
+          type: string
+        status:
+          $ref: '#/components/schemas/ConfigChangeRequestStatus'
+        address:
+          type: string
+        tag:
+          type: string
+        activationTime:
+          type: string
+    ExternalWalletAsset:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          $ref: '#/components/schemas/ConfigChangeRequestStatus'
+        address:
+          type: string
+        tag:
+          type: string
+        activationTime:
+          type: string
+    ExchangeAsset:
+      type: object
+      properties:
+        id:
+          type: string
+        balance:
+          type: string
+        lockedAmount:
+          type: string
+    FiatAsset:
+      type: object
+      properties:
+        id:
+          type: string
+        balance:
+          type: string
+    CreateVaultAssetResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        eosAccountName:
+          type: string
+    VaultAsset:
+      type: object
+      properties:
+        id:
+          type: string
+        total:
+          description: The total wallet balance. In EOS this value includes the network balance, self staking and pending refund. For all other coins it is the balance as it appears on the blockchain.
+          type: string
+        balance:
+          deprecated: true
+          description: Deprecated - replaced by "total"
+          type: string
+        available:
+          description: Funds available for transfer. Equals the blockchain balance minus any locked amounts
+          type: string
+        pending:
+          description: The cumulative balance of all transactions pending to be cleared
+          type: string
+        frozen:
+          description: The cumulative frozen balance
+          type: string
+        lockedAmount:
+          description: Funds in outgoing transactions that are not yet published to the network
+          type: string
+        totalStakedCPU:
+          type: string
+        totalStakedNetwork:
+          type: string
+        selfStakedCPU:
+          type: string
+        selfStakedNetwork:
+          type: string
+        pendingRefundCPU:
+          type: string
+        pendingRefundNetwork:
+          type: string
+    VaultWalletAddress:
+      type: object
+      properties:
+        assetId:
+          type: string
+        address:
+          type: string
+        description:
+          type: string
+        tag:
+          type: string
+        type:
+          type: string
+        customerRefId:
+          type: string
+        addressFormat:
+          type: string
+          enum:
+            - SEGWIT
+            - LEGACY
+    CreateAddressResponse:
+      type: object
+      properties:
+        address:
+          type: string
+        legacyAddress:
+          type: string
+        tag:
+          type: string
+    VaultAccount:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        assets:
           type: array
           items:
-            $ref: "#/components/schemas/ExchangeApiError"
-    Exchange:
-      type: string
-      enum: [ binance, binanceUs, bittrex, coinbasePro, kraken, kucoin, poloniex, huobiGlobal, okex, gemini, bibox, hitBtc, bitmart, bitstamp, bitfinex ]
-      description: A unique identifier for the exchange that is used with other Fireblocks endpoints. This is typically the lowercase name of the exchange without spaces.
-      example: kucoin
-    ExchangeApiError:
+            $ref: '#/components/schemas/VaultAsset'
+        hiddenOnUI:
+          type: boolean
+        customerRefId:
+          type: string
+        autoFuel:
+          type: boolean
+    UnmanagedWallet:
       type: object
-      description: An Exchange API Error object represents an issue with user exchange api keys.
-      properties:
-        code:
-          description: > 
-            The error code associated with the exchange error.
-            * 1001 - Invalid IP whitelist: The exchange rejected the request from our API servers due to a user's IP whitelist on the exchange. This can happen if a user enables IP whitelisting on the exchange and fails to whitelist all 4 of the IP addresses provisioned by Fireblocks for the user.
-            * 1002 - -Invalid API keys: The API keys are no longer valid. This can happen if the user deletes their exchange API keys from the exchange.
-            * 1003 - Invalid nonce: The exchange rejected a request from our API servers due to the nonce. This can happen on some exchanges if the exchange API keys are shared with another service.
-            * 1004 - Invalid permission: 	PERMISSION_TYPE	The user has not allowed all required permissions on the exchange. The most common values for PERMISSION_TYPE are "balance" and "trade".
-          type: number
-          enum: [1001, 1002, 1003, 1004]
-          example: 1002
-        message:
-          description: A human-readable description of the error.
-          type: string
-          example: Invalid API keys
-    Ticker:
-      type: object
-      description: The ticker type contains public information about a particular asset. The symbol depends on the exchange, so it can vary from exchange to exchange. The price is calculated by taking the average of the latest bid and latest ask.
-      properties:
-        name:
-          description: The name of the asset
-          type: string
-          example: Bitcoin
-        symbol: 
-          description: The symbol of the asset on the exchange
-          type: string
-          example: BTC
-        priceUsd:
-          description: The latest price in United States Dollars
-          type: number
-          format: double
-          example: 3700.0089335
-          nullable: true
-        priceBtc:
-          description: The latest price in Bitcoin
-          type: number
-          format: double
-          example: 1
-          nullable: true
-        percentChange24hUsd:
-          description: The change in USD price in the last 24 hours
-          type: number
-          format: double
-          example: 4.191224354581092
-          nullable: true
-        lastUpdated:
-          description: The time the latest ticker data was retrieved
-          type: string
-          format: date-time
-          example: "2018-12-19T22:51:13.000Z"
-          nullable: true
-    User:
-      type: object
-      description: The user type contains information about a particular user. Users can be enabled and disabled at any time. Trading will continue to work until the expiration date, even if the user is disabled.
       properties:
         id:
-          description: The unique identifier of the user.
           type: string
-          format: uuid
-          example: 701e0d16-1e9e-42c9-b6a1-4cada1f395b8
-        isEnabled:
-          description: True if the user is currently enabled.
-          type: boolean
-        expirationDate:
-          description: The date the user will expire.
-          type: string
-          format: date-time
-          example: "2019-01-12T21:09:25.000Z"
-          nullable: true
         name:
-          description: The optional name associated with the user.
           type: string
-          example: customnameforthisuser
-    Balance:
-      type: object
-      description: The user type contains information about a particular user. Users can be enabled and disabled at any time. Trading will continue to work until the expiration date, even if the user is disabled.
-      properties:
-          symbol:
-            description: The symbol of the asset on the exchange.
-            type: string
-            example: KCS
-          nativeValue:
-            description: The amount of the asset on the exchange.
-            type: number
-            example: 2306
-          btcValue: 
-            description: The value of the asset on the exchange, in Bitcoin. This value is computed when the balance data is collected.
-            type: number
-            format: double
-            example: 0.33486579
-          usdValue: 
-            description: The value of the asset on the exchange, in United States Dollars. This value is computed when the balance data is collected.
-            type: number
-            format: double
-            example: 1327.8775274784
-    GetBalanceResponse:
-      type: object
-      description: The user type contains information about a particular user. Users can be enabled and disabled at any time. Trading will continue to work until the expiration date, even if the user is disabled.
-      properties:
-          retrievedAt:
-            description: The date the data was retrieved, or null if no balance data has been retrieved yet.
-            type: string
-            format: date-time
-            example: "2019-01-09T19:17:33.000Z"
-          balances:
-            description: An array of balance information. This array will be empty if no balance data has been retrieved yet.
-            type: array
-            items:
-              $ref: "#/components/schemas/Balance"
-    ExchangeInfo:
-      type: object
-      description: The exchange info type contains basic information about a particular exchange.
-      properties:
-        exchange:
-          $ref: "#/components/schemas/Exchange"
-        bestCaseFee:
-          description: The lowest possible fee on the exchange. Fees are typically lower based on your trading volume, if you are using an exchange-specific discount token, and if you are the maker. A negative fee means you receive a rebate. All fee values are scalar values associated with percentages. For example, 0.001 means "0.1%".
-          type: number
-          example: 0.000125
-        worstCaseFee:
-          description: The highest possible fee on the exchange. All fee values are scalar values associated with percentages. For example, 0.001 means "0.1%".
-          type: number
-          example: 0.001
-        icon:
-          description: A url for a 32x32px icon associated with the exchange.
+        customerRefId:
           type: string
-          example: https://assets.fireblocks.io/exchanges/kucoin.png
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletAsset'
+      required:
+        - id
+        - name
+        - status
+    ExchangeAccount:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ExchangeType'
+        name:
+          type: string
+          description: Display name of the exchange account
+        status:
+          type: string
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExchangeAsset'
+        isSubaccount:
+          description: True if the account is a subaccount in an exchange
+          type: boolean
+    FiatAccount:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/FiatAccountType'
+        name:
+          type: string
+          description: Display name of the fiat account
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/FiatAsset'
+    OneTimeAddress:
+      type: object
+      properties:
+        address:
+          type: string
+        tag:
+          type: string
+      required:
+        - address
+    TransferPeerPath:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - VAULT_ACCOUNT
+            - EXCHANGE_ACCOUNT
+            - INTERNAL_WALLET
+            - EXTERNAL_WALLET
+            - NETWORK_CONNECTION
+            - FIAT_ACCOUNT
+            - COMPOUND
+            - GAS_STATION
+        id:
+          type: string
+      required:
+        - type
+    DestinationTransferPeerPath:
+      allOf:
+        - $ref: '#/components/schemas/TransferPeerPath'
+        - type: object
+          properties:
+            oneTimeAddress:
+              $ref: '#/components/schemas/OneTimeAddress'
+    CreateTransactionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+    CancelTransactionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    AmlScreeningResult:
+      type: object
+      properties:
+        provider:
+          type: string
+        payload:
+          type: object
+    FeeInfo:
+      type: object
+      properties:
+        networkFee:
+          type: string
+        serviceFee:
+          type: string
+    AmountInfo:
+      type: object
+      properties:
+        amount:
+          type: string
+        requestedAmount:
+          type: string
+        netAmount:
+          type: string
+        amountUSD:
+          type: string
+    TransferPeerPathResponse:
+      allOf:
+        - $ref: '#/components/schemas/TransferPeerPath'
+        - type: object
+          properties:
+            name:
+              type: string
+            subType:
+              type: string
+    TransactionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        assetId:
+          type: string
+        source:
+          $ref: '#/components/schemas/TransferPeerPathResponse'
+        destination:
+          $ref: '#/components/schemas/TransferPeerPathResponse'
+        requestedAmount:
+          description: The amount requested by the user
+          type: number
+        amount:
+          description: If the transfer is a withdrawal from an exchange, the actual amount that was requested to be transferred. Otherwise, the requested amount
+          type: number
+        netAmount:
+          description: The net amount of the transaction, after fee deduction
+          type: number
+        amountUSD:
+          description: The USD value of the requested amount
+          type: number
+        serviceFee:
+          description: The total fee deducted by the exchange from the actual requested amount (serviceFee = amount - netAmount)
+          type: number
+        fee:
+          description: Deprecated - replaced by "networkFee"
+          type: number
+          deprecated: true
+        networkFee:
+          description: The fee paid to the network
+          type: number
+        createdAt:
+          type: number
+          description: Unix timestamp
+        lastUpdated:
+          type: number
+          description: Unix timestamp
+        status:
+          type: string
+          enum:
+            - SUBMITTED
+            - PENDING_SIGNATURE
+            - PENDING_AUTHORIZATION
+            - COMPLETED
+            - CONFIRMING
+            - FAILED
+            - REJECTED
+            - CANCELLING
+            - CANCELLED
+            - BROADCASTING
+            - BLOCKED
+            - TIMEOUT
+            - QUEUED
+            - PENDING_3RD_PARTY
+            - PENDING_3RD_PARTY_MANUAL_APPROVAL
+            - PENDING_AML_SCREENING
+            - PARTIALLY_COMPLETED
+        txHash:
+          type: string
+        tag:
+          type: string
+        subStatus:
+          $ref: '#/components/schemas/TransactionSubStatus'
+        destinationAddress:
+          type: string
+        destinationAddressDescription:
+          type: string
+        destinationTag:
+          type: string
+        signedBy:
+          type: array
+          items:
+            type: string
+        createdBy:
+          type: string
+        rejectedBy:
+          type: string
+        addressType:
+          type: string
+        note:
+          type: string
+        exchangeTxId:
+          type: string
+        feeCurrency:
+          type: string
+        operation:
+          $ref: '#/components/schemas/TransactionOperation'
+        networkRecords:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkRecord'
+        amlScreeningResult:
+          $ref: '#/components/schemas/AmlScreeningResult'
+        customerRefId:
+          type: string
+        numOfConfirmations:
+          type: number
+        amountInfo:
+          $ref: '#/components/schemas/AmountInfo'
+        feeInfo:
+          $ref: '#/components/schemas/FeeInfo'
+        signedMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/SignedMessage'
+        extraParameters:
+          type: object
+          properties: {}
+    NetworkRecord:
+      type: object
+      properties:
+        source:
+          $ref: '#/components/schemas/TransferPeerPathResponse'
+        destination:
+          $ref: '#/components/schemas/TransferPeerPathResponse'
+        txHash:
+          type: string
+        networkFee:
+          type: string
+        assetId:
+          type: string
+        netAmount:
+          description: The net amount of the transaction, after fee deduction
+          type: string
+        status:
+          type: string
+          enum:
+            - DROPPED
+            - CONFIRMED
+            - CONFIRMING
+            - FAILED
+            - BROADCASTING
+        type:
+          type: string
+        destinationAddress:
+          type: string
+    AssetTypeResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - BASE_ASSET
+            - ETH_CONTRACT
+            - FIAT
+        contractAddress:
+          type: string
+      required:
+        - id
+        - name
+        - type
+    NetworkConnectionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        localChannel:
+          $ref: '#/components/schemas/Channel'
+        remoteChannel:
+          $ref: '#/components/schemas/Channel'
+      required:
+        - id
+        - localChannel
+        - remoteChannel
+    EstimatedTransactionFeeResponse:
+      type: object
+      properties:
+        low:
+          $ref: '#/components/schemas/TransactionFee'
+        medium:
+          $ref: '#/components/schemas/TransactionFee'
+        high:
+          $ref: '#/components/schemas/TransactionFee'
+      required:
+        - low
+        - medium
+        - high
+    EstimatedNetworkFeeResponse:
+      type: object
+      properties:
+        low:
+          $ref: '#/components/schemas/NetworkFee'
+        medium:
+          $ref: '#/components/schemas/NetworkFee'
+        high:
+          $ref: '#/components/schemas/NetworkFee'
+      required:
+        - low
+        - medium
+        - high
+    GasStationPropertiesResponse:
+      type: object
+      properties:
+        balance:
+          type: object
+        configuration:
+          $ref: '#/components/schemas/GasStationConfiguration'
+      required:
+        - low
+        - medium
+        - high
+    TransactionFee:
+      type: object
+      properties:
+        feePerByte:
+          type: string
+        gasPrice:
+          type: string
+        gasLimit:
+          type: string
+        networkFee:
+          type: string
+    NetworkFee:
+      type: object
+      properties:
+        feePerByte:
+          type: string
+        gasPrice:
+          type: string
+        networkFee:
+          type: string
+    GasStationConfiguration:
+      type: object
+      properties:
+        gasThreshold:
+          type: string
+        gasCap:
+          type: string
+        maxGasPrice:
+          type: string
+    Channel:
+      type: object
+      properties:
+        networkId:
+          type: string
+        name:
+          type: string
+    TransactionRequest:
+      type: object
+      properties:
+        assetId:
+          type: string
+        source:
+          $ref: '#/components/schemas/TransferPeerPath'
+        destination:
+          $ref: '#/components/schemas/DestinationTransferPeerPath'
+        amount:
+          oneOf:
+            - type: number
+            - type: string
+        fee:
+          description: >-
+            - For BTC based assets, the fee per bytes in the asset's smallest unit (Satoshi/Latoshi etc.)
+
+            - For XRP, the fee for the transaction
+          oneOf:
+            - type: number
+            - type: string
+        feeLevel:
+          type: string
+          enum:
+            - LOW
+            - MEDIUM
+            - HIGH
+        failOnLowFee:
+          type: boolean
+        maxFee:
+          type: string
+        gasPrice:
+          description: >-
+            For ETH based asset only. this will be used instead of the fee property. Value is in gwei
+          oneOf:
+            - type: number
+            - type: string
+        gasLimit:
+          oneOf:
+            - type: number
+            - type: string
+        networkFee:
+          oneOf:
+            - type: number
+            - type: string
+        note:
+          type: string
+        autoStaking:
+          type: boolean
+        networkStaking:
+          oneOf:
+            - type: number
+            - type: string
+        cpuStaking:
+          oneOf:
+            - type: number
+            - type: string
+        extraParameters:
+          type: object
+          properties: {}
+        operation:
+          $ref: '#/components/schemas/TransactionOperation'
+        customerRefId:
+          type: string
+    ExchangeType:
+      type: string
+      enum:
+        - BITTREX
+        - COINBASEPRO
+        - BINANCE
+        - BINANCEUS
+        - BITMEX
+        - KRAKEN
+        - GEMINI
+        - BITFINEX
+        - BITSTAMP
+        - POLONIEX
+        - DERIBIT
+        - LIQUID
+        - HUOBI
+        - BITHUMB
+        - OKEX
+        - OKCOIN
+        - HITBTC
+        - KORBIT
+        - SEEDCX
+        - BITSO
+    FiatAccountType:
+      type: string
+      enum:
+        - SIGNET
+    ConfigChangeRequestStatus:
+      type: string
+      enum:
+        - WAITING_FOR_APPROVAL
+        - APPROVED
+        - CANCELLED
+        - REJECTED
+        - FAILED
+    TransactionOperation:
+      type: string
+      enum:
+        - TRANSFER
+        - MINT
+        - BURN
+        - SUPPLY_TO_COMPOUND
+        - REDEEM_FROM_COMPOUND
+        - RAW
+        - CONTRACT_CALL
+      default: TRANSFER
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: number
+    TransactionSubStatus:
+      type: string
+      enum:
+        - INSUFFICIENT_FUNDS
+        - AMOUNT_TOO_SMALL
+        - UNSUPPORTED_ASSET
+        - UNAUTHORISED__MISSING_PERMISSION
+        - INVALID_SIGNATURE
+        - API_INVALID_SIGNATURE
+        - UNAUTHORISED__MISSING_CREDENTIALS
+        - UNAUTHORISED__USER
+        - UNAUTHORISED__DEVICE
+        - INVALID_UNMANAGED_WALLET
+        - INVALID_EXCHANGE_ACCOUNT
+        - INSUFFICIENT_FUNDS_FOR_FEE
+        - INVALID_ADDRESS
+        - WITHDRAW_LIMIT
+        - API_CALL_LIMIT
+        - ADDRESS_NOT_WHITELISTED
+        - TIMEOUT
+        - CONNECTIVITY_ERROR
+        - THIRD_PARTY_INTERNAL_ERROR
+        - CANCELLED_EXTERNALLY
+        - INVALID_THIRD_PARTY_RESPONSE
+        - VAULT_WALLET_NOT_READY
+        - MISSING_DEPOSIT_ADDRESS
+        - INTERNAL_ERROR
+        - UNKNOWN_ERROR
+        - AUTHORIZER_NOT_FOUND
+        - INSUFFICIENT_RESERVED_FUNDING
+        - MANUAL_DEPOSIT_ADDRESS_REQUIRED
+        - INVALID_FEE
+        - ERROR_UNSUPPORTED_TRANSACTION_TYPE
+        - UNSUPPORTED_OPERATION
+        - 3RD_PARTY_PROCESSING
+        - PENDING_BLOCKCHAIN_CONFIRMATIONS
+        - 3RD_PARTY_CONFIRMING
+        - CONFIRMED
+        - 3RD_PARTY_COMPLETED
+        - PENDING_BLOCKCHAIN_CONFIRMATIONSREJECTED_BY_USER
+        - CANCELLED_BY_USER
+        - 3RD_PARTY_CANCELLED
+        - 3RD_PARTY_REJECTED
+        - AML_SCREENING_REJECTED
+        - BLOCKED_BY_POLICY
+        - FAILED_AML_SCREENING
+        - PARTIALLY_FAILED
+        - 3RD_PARTY_FAILED
+        - ZERO_BALANCE_IN_PERMANENT_ADDRESS
+      description: >
+        - `INSUFFICIENT_FUNDS` - Not enough funds to fulfill the withdraw request
+
+        - `AMOUNT_TOO_SMALL` - Attempt to withdraw an amount below the allowed minimum
+
+        - `UNSUPPORTED_ASSET` - Asset is not supported
+
+        - `UNAUTHORISED__MISSING_PERMISSION` - Third party (e.g. exchange) API missing permission
+
+        - `INVALID_SIGNATURE` - Invalid transaction signature
+
+        - `API_INVALID_SIGNATURE` - Third party (e.g. exchange) API call invalid signature
+
+        - `UNAUTHORISED__MISSING_CREDENTIALS` - Missing third party (e.g. exchange) credentials
+
+        - `UNAUTHORISED__USER` - Attempt to initiate or approve a transaction by an unauthorised user
+
+        - `UNAUTHORISED__DEVICE` - Unauthorised user's device
+
+        - `INVALID_UNMANAGED_WALLET` - Unmanaged wallet is disabled or does not exist
+
+        - `INVALID_EXCHANGE_ACCOUNT` - Exchange account is disabled or does not exist
+
+        - `INSUFFICIENT_FUNDS_FOR_FEE` - Not enough balance to fund the requested transaction
+
+        - `INVALID_ADDRESS` - Unsupported address format
+
+        - `WITHDRAW_LIMIT` - Transaction exceeds the exchange's withdraw limit
+
+        - `API_CALL_LIMIT` - Exceeded third party (e.g. exchange) API call limit
+
+        - `ADDRESS_NOT_WHITELISTED` - Attempt to withdraw from an exchange to a non whitelisted address
+
+        - `TIMEOUT` - Request timeout
+
+        - `CONNECTIVITY_ERROR` - Network error
+
+        - `THIRD_PARTY_INTERNAL_ERROR` - Received an internal error response from a third party service
+
+        - `CANCELLED_EXTERNALLY` - Transaction was canceled by a third party service
+
+        - `INVALID_THIRD_PARTY_RESPONSE` - Unrecognized third party response
+
+        - `VAULT_WALLET_NOT_READY` - Vault wallet is not ready
+
+        - `MISSING_DEPOSIT_ADDRESS` - Could not retrieve a deposit address from the exchange
+
+        - `INTERNAL_ERROR` - Internal error while processing the transaction
+
+        - `UNKNOWN_ERROR` - Unexpected error
+
+        - `AUTHORIZER_NOT_FOUND` - No authorizer found to approve the operation or the only authorizer found is the initiator
+
+        - `INSUFFICIENT_RESERVED_FUNDING` - Some assets require a minimum of reserved funds being kept on the account
+
+        - `MANUAL_DEPOSIT_ADDRESS_REQUIRED` - Error while retrieving a deposit address from an exchange. Please generate a deposit address for your exchange account
+
+        - `INVALID_FEE` - Transaction fee is not in the allowed range
+
+        - `ERROR_UNSUPPORTED_TRANSACTION_TYPE` - Attempt to execute an unsupported transaction type
+
+        - `UNSUPPORTED_OPERATION` - Unsupported operation
+
+        - `3RD_PARTY_PROCESSING` - The transaction is pending approval by the 3rd party service (e.g exchange)
+
+        - `PENDING_BLOCKCHAIN_CONFIRMATIONS` - Pending Blockchain confirmations
+
+        - `3RD_PARTY_CONFIRMING` - Pending confirmation on the exchange
+
+        - `CONFIRMED` - Confirmed on the blockchain
+
+        - `3RD_PARTY_COMPLETED` - Completed on the 3rd party service (e.g exchange)
+
+        - `PENDING_BLOCKCHAIN_CONFIRMATIONSREJECTED_BY_USER` - The transaction was rejected by one of the signers
+
+        - `CANCELLED_BY_USER` - The transaction was canceled via the Console or the API
+
+        - `3RD_PARTY_CANCELLED` - Cancelled on the exchange
+
+        - `3RD_PARTY_REJECTED` - Rejected or not approved in time by user
+
+        - `AML_SCREENING_REJECTED` - Rejected on AML Screening
+
+        - `BLOCKED_BY_POLICY` - Transaction is blocked due to a policy rule
+
+        - `FAILED_AML_SCREENING` - AML Screening failed
+
+        - `PARTIALLY_FAILED` - Only for Aggregated transactions. One or more of the associated transaction records failed
+
+        - `3RD_PARTY_FAILED` - Transaction failed at the exchange
+
+        - `ZERO_BALANCE_IN_PERMANENT_ADDRESS` - Not enough BTC balance to fund the requested transaction in legacy address
+
+    TransferTicketTermResponse:
+      type: object
+      properties:
+        termId:
+          type: string
+        networkConnectionId:
+          type: string
+        outgoing:
+          type: boolean
+        asset:
+          type: string
+        amount:
+          type: string
+        txIds:
+          type: array
+          items:
+            type: string
+        operation:
+          type: string
+        status:
+          type: string
+          enum:
+            - OPEN
+            - FULFILLED
+        note:
+          type: string
+    CreateTransferTicketResponse:
+      type: object
+      properties:
+        ticketId:
+          type: string
+    TransferTicketResponse:
+      type: object
+      properties:
+        ticketId:
+          type: string
+        externalTicketId:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+            - OPEN
+            - PARTIALLY_FULFILLED
+            - FULFILLED
+            - FAILED
+            - CANCELED
+        terms:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransferTicketTermResponse'
+    Term:
+      type: object
+      properties:
+        networkConnectionId:
+          type: string
+        outgoing:
+          type: boolean
+        asset:
+          type: string
+        amount:
+          type: string
+        note:
+          type: string
+        operation:
+          type: string
+    SetConfirmationsThresholdRequest:
+      type: object
+      properties:
+        numOfConfirmations:
+          type: number
+    SetConfirmationsThresholdResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        transactions:
+          type: array
+          items:
+            type: string
+    DropTransactionRequest:
+      type: object
+      properties:
+        txId:
+          type: string
+        feeLevel:
+          type: string
+        gasPrice:
+          type: string
+    DropTransactionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        transactions:
+          type: array
+          items:
+            type: string
+    UnsignedMessage:
+      type: object
+      properties:
+        content:
+          type: string
+        bip44addressIndex:
+          type: number
+        bip44change:
+          type: number
+        derivationPath:
+          type: array
+          items:
+            type: number
+      required:
+        - content
+    SignedMessage:
+      type: object
+      properties:
+        content:
+          type: string
+        algorithm:
+          type: string
+          enum:
+            - MPC_ECDSA_SECP256K1
+            - MPC_ECDSA_SECP256R1
+            - MPC_EDDSA_ED25519
+        derivationPath:
+          type: array
+          items:
+            type: number
+        signature:
+          type: object
+          properties:
+            fullSig:
+              type: string
+            r:
+              type: string
+            s:
+              type: string
+            v:
+              type: number
+        publicKey:
+          type: string
+    PublicKeyInformation:
+      type: object
+      properties:
+        algorithm:
+          type: string
+        derivationPath:
+          type: array
+          items:
+            type: number
+        publicKey:
+          type: string

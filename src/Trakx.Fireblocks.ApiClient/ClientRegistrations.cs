@@ -15,7 +15,7 @@ namespace Trakx.Fireblocks.ApiClient
         {
             var delay = Backoff.DecorrelatedJitterBackoffV2(medianFirstRetryDelay: TimeSpan.FromMilliseconds(100), retryCount: 10, fastFirst: true);
                                     
-            services.AddHttpClient<IMarketDataClient, MarketDataClient>()
+            services.AddHttpClient<IFireblocksClient, FireblocksClient>()
                 .AddPolicyHandler((s, request) => 
                     Policy<HttpResponseMessage>
                     .Handle<ApiException>()
@@ -24,25 +24,10 @@ namespace Trakx.Fireblocks.ApiClient
                     .WaitAndRetryAsync(delay,
                         onRetry: (result, timeSpan, retryCount, context) =>
                         {
-                            var logger = Log.Logger.ForContext<MarketDataClient>();
+                            var logger = Log.Logger.ForContext<FireblocksClient>();
                             LogFailure(logger, result, timeSpan, retryCount, context);
                         })
-                    .WithPolicyKey("MarketDataClient"));
-
-                                
-            services.AddHttpClient<IAccountsClient, AccountsClient>()
-                .AddPolicyHandler((s, request) => 
-                    Policy<HttpResponseMessage>
-                    .Handle<ApiException>()
-                    .Or<HttpRequestException>()
-                    .OrTransientHttpStatusCode()
-                    .WaitAndRetryAsync(delay,
-                        onRetry: (result, timeSpan, retryCount, context) =>
-                        {
-                            var logger = Log.Logger.ForContext<AccountsClient>();
-                            LogFailure(logger, result, timeSpan, retryCount, context);
-                        })
-                    .WithPolicyKey("AccountsClient"));
+                    .WithPolicyKey("FireblocksClient"));
 
         }
     }

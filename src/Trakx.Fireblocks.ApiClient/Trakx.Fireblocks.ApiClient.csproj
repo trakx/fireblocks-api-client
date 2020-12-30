@@ -2,29 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <GenerateApiClient>True</GenerateApiClient>
+    <GenerateApiClient>False</GenerateApiClient>
   </PropertyGroup>
 
   <Import Project="../Common.Projects.props" />
   <Import Project="../Packable.Projects.props" />
 
   <ItemGroup>
-    <None Include="ApiClients.Partials.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ApiClients.Partials.tt</DependentUpon>
-    </None>
-    <None Include="ClientRegistrations.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ClientRegistrations.tt</DependentUpon>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
     <PackageReference Include="Polly.Contrib.WaitAndRetry" Version="1.1.1" />
+    <PackageReference Include="Trakx.Utils" Version="0.1.4" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
     <PackageReference Include="NSwag.MSBuild" Version="13.9.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

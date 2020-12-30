@@ -9,10 +9,10 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
     [Collection(nameof(ApiTestCollection))]
     public class FireblocksClientTestsBase
     {
-        protected ServiceProvider ServiceProvider;
+        protected readonly ServiceProvider ServiceProvider;
         protected ILogger Logger;
 
-        public FireblocksClientTestsBase(FireblocksApiFixture apiFixture, ITestOutputHelper output)
+        protected FireblocksClientTestsBase(FireblocksApiFixture apiFixture, ITestOutputHelper output)
         {
             Logger = new LoggerConfiguration().WriteTo.TestOutput(output).CreateLogger();
 
@@ -30,15 +30,14 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
 
     public class FireblocksApiFixture : IDisposable
     {
-        public ServiceProvider ServiceProvider;
+        public readonly ServiceProvider ServiceProvider;
 
         public FireblocksApiFixture()
         {
-            var configuration = new FireblocksApiConfiguration()
+            var configuration = new FireblocksApiConfiguration
             {
-                ApiKey = Secrets.FireblocksApiKey,
-                ApiSecret = Secrets.FireblocksApiSecret,
-                BaseUrl = "https://api.fireblocks.io"
+                ApiPubKey = Secrets.FireblocksApiKey,
+                ApiPrivateKey = Secrets.FireblocksApiSecret
             };
 
             var serviceCollection = new ServiceCollection();

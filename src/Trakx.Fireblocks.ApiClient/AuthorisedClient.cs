@@ -1,16 +1,17 @@
-﻿using Trakx.Fireblocks.ApiClient.Utils;
+﻿using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Trakx.Utils.Api;
 
 namespace Trakx.Fireblocks.ApiClient
 {
     internal abstract class AuthorisedClient
     {
         protected readonly ICredentialsProvider CredentialProvider;
-        protected string BaseUrl { get; }
 
-        protected AuthorisedClient(ClientConfigurator clientConfigurator) : base(clientConfigurator)
+        protected AuthorisedClient(ClientConfigurator clientConfigurator)
         {
-            CredentialProvider = clientConfigurator.GetCredentialProvider(GetType());
-            BaseUrl = clientConfigurator.ApiConfiguration.BaseUrl;
+            CredentialProvider = clientConfigurator.CredentialsProvider;
         }
     }
 }

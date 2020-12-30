@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Polly;
 using Serilog;
 using Trakx.Fireblocks.ApiClient.Utils;
+using Trakx.Utils.Api;
 
 namespace Trakx.Fireblocks.ApiClient
 {
@@ -27,7 +28,7 @@ namespace Trakx.Fireblocks.ApiClient
         {
             var options = Options.Create(apiConfiguration);
             services.AddSingleton(options);
-            
+
             AddCommonDependencies(services);
 
             return services;
@@ -35,9 +36,11 @@ namespace Trakx.Fireblocks.ApiClient
 
         private static void AddCommonDependencies(IServiceCollection services)
         {
-            services.AddSingleton(s => new ClientConfigurator(s));
-            services.AddSingleton<ICredentialsProvider, ApiKeyCredentialsProvider>();
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+            services.AddSingleton<IBearerCredentialsProvider, BearerCredentialsProvider>();
+            services.AddSingleton<ICredentialsProvider, ApiKeyCredentialsProvider>();
+
+            services.AddSingleton<ClientConfigurator>();
             AddClients(services);
         }
 

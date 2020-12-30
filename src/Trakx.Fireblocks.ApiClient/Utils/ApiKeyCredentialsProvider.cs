@@ -1,35 +1,33 @@
 ﻿using System;
 using System.Globalization;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using Microsoft.Extensions.Options;
 using Serilog;
+using Trakx.Utils.Api;
 
 namespace Trakx.Fireblocks.ApiClient.Utils
 {
     public class ApiKeyCredentialsProvider : ICredentialsProvider, IDisposable
     {
-        internal const string ApiKeyHeader = "FIREBLOCKS-API-KEY";
-        internal const string ApiNonceHeader = "FIREBLOCKS-API-NONCE";
-        internal const string ApiSignatureHeader = "FIREBLOCKS-API-SIGNATURE";
+        private const string ApiKeyHeader = "X-API-Key";
+        private const string JwtScheme = "Bearer";
 
         private readonly FireblocksApiConfiguration _configuration;
-        private readonly IDateTimeProvider _dateTimeProvider;
+        private readonly IBearerCredentialsProvider _bearerCredentialsProvider;
         private readonly CancellationTokenSource _tokenSource;
-        private readonly byte[] _encodingSecret;
 
-        private static readonly ILogger Logger = Log.Logger.ForContext<MarketDataClient>();
+        private static readonly ILogger Logger = Log.Logger.ForContext<ApiKeyCredentialsProvider>();
 
-        public ApiKeyCredentialsProvider(IOptions<FireblocksApiConfiguration> configuration, 
-            IDateTimeProvider dateTimeProvider)
+        public ApiKeyCredentialsProvider(IOptions<FireblocksApiConfiguration> configuration,IBearerCredentialsProvider bearerCredentialsProvider)
         {
             _configuration = configuration.Value;
-            _dateTimeProvider = dateTimeProvider;
+            _bearerCredentialsProvider = bearerCredentialsProvider;
 
             _tokenSource = new CancellationTokenSource();
-            _encodingSecret = Convert.FromBase64String(_configuration.ApiSecret);
         }
 
         
@@ -38,27 +36,12 @@ namespace Trakx.Fireblocks.ApiClient.Utils
         /// <inheritdoc />
         public void AddCredentials(HttpRequestMessage msg)
         {
-            var path = msg.RequestUri!.AbsolutePath;
-            var method = msg.Method.Method.ToUpperInvariant();
-            var nonce = GetNonce();
-            var body = msg.Content?.ReadAsStringAsync().GetAwaiter().GetResult() ?? string.Empty;
-
-            var prehashString = path + method + nonce + body;
-            Logger.Verbose("PreHash string is {prehashString}", prehashString);
-
-            var devPrefix = msg.RequestUri.Host.Contains("dev-api") ? "DEV-" : string.Empty;
-
-            msg.Headers.Add(devPrefix + ApiKeyHeader, _configuration.ApiKey);
-            msg.Headers.Add(devPrefix + ApiNonceHeader, nonce);
-            msg.Headers.Add(devPrefix + ApiSignatureHeader, GetSignature(prehashString));
+            var token = _bearerCredentialsProvider.GenerateJwtToken(msg);
+            msg.Headers.Authorization = new AuthenticationHeaderValue(JwtScheme, token);
+            msg.Headers.Add(ApiKeyHeader,_configuration.ApiPubKey);
             Logger.Verbose("Headers added");
         }
         #endregion
-
-        private string GetNonce() => _dateTimeProvider.UtcNowAsOffset.ToUnixTimeMilliseconds()
-            .ToString(CultureInfo.InvariantCulture);
-        private string GetSignature(string preHash) => Convert.ToBase64String(new HMACSHA256(_encodingSecret)
-            .ComputeHash(Encoding.UTF8.GetBytes(preHash)));
         
         #region IDisposable
 

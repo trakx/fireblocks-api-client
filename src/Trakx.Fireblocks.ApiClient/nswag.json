@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "https://api.fireblocks.io/docs/v1/swagger",
+      "url": "openApi3.yaml",
       "output": null
     }
   },
@@ -24,7 +24,7 @@
       "httpClientType": "System.Net.Http.HttpClient",
       "useHttpRequestMessageCreationMethod": false,
       "useBaseUrl": true,
-      "generateBaseUrlProperty": false,
+      "generateBaseUrlProperty": true,
       "generateSyncMethods": false,
       "exposeJsonSerializerSettings": false,
       "clientClassAccessModifier": "internal",
@@ -38,7 +38,7 @@
       "useRequestAndResponseSerializationSettings": false,
       "serializeTypeInformation": false,
       "queryNullValue": "null",
-      "className": "{controller}Client",
+      "className": "{controller}FireblocksClient",
       "operationGenerationMode": "MultipleClientsFromFirstTagAndOperationId",
       "additionalNamespaceUsages": [
         "Microsoft.AspNetCore.Mvc",

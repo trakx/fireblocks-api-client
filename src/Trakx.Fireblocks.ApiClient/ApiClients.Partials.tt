@@ -8,7 +8,7 @@
 namespace Trakx.Fireblocks.ApiClient
 {
 <# 
-var clientNames = new [] { /*"ExchangesClient", "MarketDataClient",*/ "AccountsClient" };
+var clientNames = new [] { "FireblocksClient" };
 
 foreach(var name in clientNames)
 {
