@@ -22,9 +22,30 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+
     - name: Install dependencies
       run: dotnet restore ${{env.SOLUTION_PATH}}
+
     - name: Build
-      run: dotnet build ${{env.SOLUTION_PATH}} --configuration Release --no-restore
-    - name: Test
-      run: dotnet test ${{env.SOLUTION_PATH}} --no-restore --logger GitHubActions --verbosity normal
+      run: |
+        dotnet build ${{env.SOLUTION_PATH}} --configuration Debug --no-restore
+
+    - name: Test & Coverage
+      run: |
+        for f in ./src/*.Tests/*.Tests.csproj; do echo "testing project $f" && \
+        dotnet test $f --configuration Debug --no-restore --logger GitHubActions --verbosity normal\
+            /p:CollectCoverage=true \
+            /p:CoverletOutputFormat=opencover \
+            /p:UserSourceLink=true \
+            /p:ExcludeByAttribute=\"Obsolete,GeneratedCodeAttribute,CompilerGeneratedAttribute\" \
+            /p:Include=\"[Trakx.*]*\"; \
+        done
+    - name: Publish Coverage
+      env: 
+        CODACY_PROJECT_TOKEN: ${{secrets.CODACY_TOKEN}}
+      run: |
+        for f in ./src/*.Tests/coverage.opencover.xml; do echo "sending coverage report $f" && \
+            bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l csharp -r $f --partial --commit-uuid ${{github.sha}}; \
+        done
+        bash <(curl -Ls https://coverage.codacy.com/get.sh) final --commit-uuid ${{github.sha}}
+

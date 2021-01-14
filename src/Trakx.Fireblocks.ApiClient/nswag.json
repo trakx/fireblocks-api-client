@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "https://api.fireblocks.io/docs/v1/swagger",
+      "url": "openApi3.yaml",
       "output": null
     }
   },

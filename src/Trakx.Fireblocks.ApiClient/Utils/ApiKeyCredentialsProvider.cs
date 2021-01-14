@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using Microsoft.Extensions.Options;
 using Serilog;
+using Trakx.Utils.Apis;
+using Trakx.Utils.DateTimeHelpers;
 
 namespace Trakx.Fireblocks.ApiClient.Utils
 {
@@ -20,7 +22,7 @@ namespace Trakx.Fireblocks.ApiClient.Utils
         private readonly CancellationTokenSource _tokenSource;
         private readonly byte[] _encodingSecret;
 
-        private static readonly ILogger Logger = Log.Logger.ForContext<MarketDataClient>();
+        private static readonly ILogger Logger = Log.Logger.ForContext<ApiKeyCredentialsProvider>();
 
         public ApiKeyCredentialsProvider(IOptions<FireblocksApiConfiguration> configuration, 
             IDateTimeProvider dateTimeProvider)

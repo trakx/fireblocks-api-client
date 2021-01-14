@@ -1,4 +1,4 @@
-﻿using Trakx.Fireblocks.ApiClient.Utils;
+﻿using Trakx.Utils.Apis;
 
 namespace Trakx.Fireblocks.ApiClient
 {
@@ -7,10 +7,10 @@ namespace Trakx.Fireblocks.ApiClient
         protected readonly ICredentialsProvider CredentialProvider;
         protected string BaseUrl { get; }
 
-        protected AuthorisedClient(ClientConfigurator clientConfigurator) : base(clientConfigurator)
+        protected AuthorisedClient(ClientConfigurator clientConfigurator)
         {
-            CredentialProvider = clientConfigurator.GetCredentialProvider(GetType());
             BaseUrl = clientConfigurator.ApiConfiguration.BaseUrl;
+            CredentialProvider = clientConfigurator.GetCredentialProvider(GetType());
         }
     }
 }
