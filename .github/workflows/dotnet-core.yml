@@ -23,9 +23,6 @@ jobs:
       with:
         dotnet-version: 5.0.x
 
-    - name: Install dependencies
-      run: dotnet restore ${{env.SOLUTION_PATH}}
-
     - name: Add github nuget source
       run: dotnet nuget add source "https://nuget.pkg.github.com/trakx/index.json" --name "github" --username "trakx-bot" --password ${{secrets.TRAKX_BOT_READONLY_PAT}} --store-password-in-clear-text
     
