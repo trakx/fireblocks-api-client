@@ -26,8 +26,18 @@ jobs:
     - name: Install dependencies
       run: dotnet restore ${{env.SOLUTION_PATH}}
 
+    - name: Add github nuget source
+      run: dotnet nuget add source "https://nuget.pkg.github.com/trakx/index.json" --name "github" --username "trakx-bot" --password ${{secrets.TRAKX_BOT_READONLY_PAT}} --store-password-in-clear-text
+    
+    - name: Install dependencies
+      run: dotnet restore ${{env.SOLUTION_PATH}}
+    
+    - name: Remove github source    
+      run: dotnet nuget remove source "github"
+
     - name: Build
       run: |
+        dotnet build ${{env.SOLUTION_PATH}} --configuration Release --no-restore
         dotnet build ${{env.SOLUTION_PATH}} --configuration Debug --no-restore
 
     - name: Test & Coverage
@@ -40,6 +50,7 @@ jobs:
             /p:ExcludeByAttribute=\"Obsolete,GeneratedCodeAttribute,CompilerGeneratedAttribute\" \
             /p:Include=\"[Trakx.*]*\"; \
         done
+        #dotnet test ${{env.SOLUTION_PATH}} --no-restore --logger GitHubActions --verbosity normal
     - name: Publish Coverage
       env: 
         CODACY_PROJECT_TOKEN: ${{secrets.CODACY_TOKEN}}
