@@ -38,7 +38,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
         {
             var directory = GetAssemblyDirectory();
             
-            var openApiPath = Path.Combine(directory?.Parent?.Parent?.Parent?.Parent?.ToString() ?? "", "Trakx.Fireblocks.ApiClient","OpenApi3.yaml");
+            var openApiPath = Path.Combine(directory?.Parent?.Parent?.Parent?.Parent?.ToString() ?? "", "Trakx.Fireblocks.ApiClient","openApi3.yaml");
             return File.ReadAllText(openApiPath);
         }
 
