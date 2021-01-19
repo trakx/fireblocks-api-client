@@ -35,7 +35,7 @@ namespace Trakx.Fireblocks.ApiClient.Utils
             var expirationTimestamp = issuedTimestamp + 20;
             var body = msg.Content?.ReadAsStringAsync().GetAwaiter().GetResult() ?? string.Empty;
             var hashBody = GetSignature(body);
-            return new JwtPayload()
+            return new JwtPayload
             {
                 {"uri",msg.RequestUri!.AbsolutePath },
                 {"nonce", nonce},
