@@ -2040,9 +2040,9 @@ namespace Trakx.Fireblocks.ApiClient
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                    }
                     }
                     finally
                     {
@@ -2094,7 +2094,7 @@ namespace Trakx.Fireblocks.ApiClient
                         {
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
-                        }
+            }
     
                         ProcessResponse(client_, response_);
     
@@ -2102,7 +2102,7 @@ namespace Trakx.Fireblocks.ApiClient
                         if (status_ == 201)
                         {
                             return new Response(status_, headers_);
-                        }
+        }
                         else
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Error>(response_, headers_).ConfigureAwait(false);
@@ -2136,7 +2136,7 @@ namespace Trakx.Fireblocks.ApiClient
         {
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
-    
+        
             if (body == null)
                 throw new System.ArgumentNullException("body");
     
@@ -2147,9 +2147,9 @@ namespace Trakx.Fireblocks.ApiClient
             var client_ = _httpClient;
             var disposeClient_ = false;
             try
-            {
+        {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
+            {
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -2169,13 +2169,13 @@ namespace Trakx.Fireblocks.ApiClient
                         {
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
-                        }
-    
+            }
+        
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
-                        {
+            {
                             return new Response(status_, headers_);
                         }
                         else
@@ -2223,8 +2223,8 @@ namespace Trakx.Fireblocks.ApiClient
     
             var client_ = _httpClient;
             var disposeClient_ = false;
-            try
-            {
+                try
+                {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
@@ -2244,22 +2244,22 @@ namespace Trakx.Fireblocks.ApiClient
                         {
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
-                        }
+                }
     
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
-                        {
+                {
                             var objectResponse_ = await ReadObjectResponseAsync<WalletAsset>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
+                }
                             return new Response<WalletAsset>(status_, headers_, objectResponse_.Object);
-                        }
-                        else
-                        {
+            }
+            else
+            {
                             var objectResponse_ = await ReadObjectResponseAsync<Error>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
@@ -2303,10 +2303,10 @@ namespace Trakx.Fireblocks.ApiClient
     
             var client_ = _httpClient;
             var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                try
                 {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                    {
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -2327,7 +2327,7 @@ namespace Trakx.Fireblocks.ApiClient
                         {
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
-                        }
+                    }
     
                         ProcessResponse(client_, response_);
     
@@ -2338,19 +2338,19 @@ namespace Trakx.Fireblocks.ApiClient
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
+                }
                             return new Response<WalletAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
-                        {
+                {
                             var objectResponse_ = await ReadObjectResponseAsync<Error>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
+                }
                             throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                    }
+            }
+        }
                     finally
                     {
                         if (disposeResponse_)
@@ -2406,20 +2406,20 @@ namespace Trakx.Fireblocks.ApiClient
                         {
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
-                        }
-    
+            }
+        
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
-                        {
+            {
                             return new Response(status_, headers_);
                         }
                         else
-                        {
+                {
                             var objectResponse_ = await ReadObjectResponseAsync<Error>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
-                            {
+                    {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
@@ -2433,11 +2433,11 @@ namespace Trakx.Fireblocks.ApiClient
                 }
             }
             finally
-            {
+                        {
                 if (disposeClient_)
                     client_.Dispose();
             }
-        }
+                        }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Gets a list of external wallets under the tenant</summary>
@@ -2471,8 +2471,8 @@ namespace Trakx.Fireblocks.ApiClient
                         {
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
-                        }
-    
+                    }
+        
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
@@ -2493,10 +2493,10 @@ namespace Trakx.Fireblocks.ApiClient
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                    }
+                }
+            }
                     finally
-                    {
+            {
                         if (disposeResponse_)
                             response_.Dispose();
                     }
@@ -2507,7 +2507,7 @@ namespace Trakx.Fireblocks.ApiClient
                 if (disposeClient_)
                     client_.Dispose();
             }
-        }
+            }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Creates a new external wallet</summary>
@@ -2541,11 +2541,11 @@ namespace Trakx.Fireblocks.ApiClient
                     {
                         var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
-                        {
+            {
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
-                        }
-    
+            }
+        
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
@@ -2619,7 +2619,7 @@ namespace Trakx.Fireblocks.ApiClient
                         {
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
-                        }
+    }
     
                         ProcessResponse(client_, response_);
     
@@ -2651,7 +2651,7 @@ namespace Trakx.Fireblocks.ApiClient
                 }
             }
             finally
-            {
+    {
                 if (disposeClient_)
                     client_.Dispose();
             }
@@ -2879,7 +2879,7 @@ namespace Trakx.Fireblocks.ApiClient
                 if (disposeClient_)
                     client_.Dispose();
             }
-        }
+    }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Adds an asset to an existing external wallet</summary>
@@ -2903,7 +2903,7 @@ namespace Trakx.Fireblocks.ApiClient
             var client_ = _httpClient;
             var disposeClient_ = false;
             try
-            {
+    {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
@@ -2920,24 +2920,24 @@ namespace Trakx.Fireblocks.ApiClient
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
                     try
-                    {
+        {
                         var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
-                        }
+        }
     
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
-                        {
+        {
                             var objectResponse_ = await ReadObjectResponseAsync<ExternalWalletAsset>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
+        }
                             return new Response<ExternalWalletAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
@@ -3090,9 +3090,9 @@ namespace Trakx.Fireblocks.ApiClient
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                    }
                     }
                     finally
                     {
@@ -3165,9 +3165,9 @@ namespace Trakx.Fireblocks.ApiClient
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                    }
                     }
                     finally
                     {
@@ -5961,10 +5961,12 @@ namespace Trakx.Fireblocks.ApiClient
     
     
     }
-    
+
+    /// <summary>The account object contains information about an exchange account that you have linked to your Fireblocks account.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.1.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class TransactionResponse 
     {
+        /// <summary>The unique identifier of the strategy</summary>
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Id { get; set; }
     
@@ -6564,6 +6566,7 @@ namespace Trakx.Fireblocks.ApiClient
     
     }
     
+    /// <summary>A unique identifier for the exchange that is used with other Fireblocks endpoints. This is typically the lowercase name of the exchange without spaces.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.1.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum FiatAccountType
     {
@@ -6618,6 +6621,7 @@ namespace Trakx.Fireblocks.ApiClient
     
     }
     
+    /// <summary>An Exchange API Error object represents an issue with user exchange api keys.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.1.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class Error 
     {
@@ -7199,6 +7203,7 @@ namespace Trakx.Fireblocks.ApiClient
     
     }
     
+    /// <summary>The ticker type contains public information about a particular asset. The symbol depends on the exchange, so it can vary from exchange to exchange. The price is calculated by taking the average of the latest bid and latest ask.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.1.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class Body2 
     {
@@ -7295,6 +7300,9 @@ namespace Trakx.Fireblocks.ApiClient
             set { _additionalProperties = value; }
         }
     
+        /// <summary>The latest price in Bitcoin</summary>
+        [Newtonsoft.Json.JsonProperty("priceBtc", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? PriceBtc { get; set; }
     
     }
     
@@ -7317,6 +7325,7 @@ namespace Trakx.Fireblocks.ApiClient
     
     }
     
+    /// <summary>The user type contains information about a particular user. Users can be enabled and disabled at any time. Trading will continue to work until the expiration date, even if the user is disabled.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.1.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class Body8 
     {
@@ -7328,11 +7337,14 @@ namespace Trakx.Fireblocks.ApiClient
     
         [Newtonsoft.Json.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
+    {
             get { return _additionalProperties; }
             set { _additionalProperties = value; }
         }
     
+        /// <summary>True if the user is currently enabled.</summary>
+        [Newtonsoft.Json.JsonProperty("isEnabled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEnabled { get; set; }
     
     }
     
@@ -7402,6 +7414,7 @@ namespace Trakx.Fireblocks.ApiClient
     
     }
     
+    /// <summary>The user type contains information about a particular user. Users can be enabled and disabled at any time. Trading will continue to work until the expiration date, even if the user is disabled.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.1.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class Body12 
     {
@@ -7444,6 +7457,7 @@ namespace Trakx.Fireblocks.ApiClient
     
     }
     
+    /// <summary>The user type contains information about a particular user. Users can be enabled and disabled at any time. Trading will continue to work until the expiration date, even if the user is disabled.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.1.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class Body14 
     {
@@ -7468,6 +7482,7 @@ namespace Trakx.Fireblocks.ApiClient
     
     }
     
+    /// <summary>The exchange info type contains basic information about a particular exchange.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.1.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class Body15 
     {

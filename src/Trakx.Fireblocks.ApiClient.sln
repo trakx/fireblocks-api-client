@@ -10,9 +10,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{F9183CBB-5B9E-4E27-A07E-261D68E1A66A}"
 	ProjectSection(SolutionItems) = preProject
 		.env = .env
+		..\.gitattributes = ..\.gitattributes
+		..\.gitignore = ..\.gitignore
 		Common.Projects.props = Common.Projects.props
+		..\LICENSE = ..\LICENSE
 		Packable.Projects.props = Packable.Projects.props
 		package-icon.png = package-icon.png
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{02EBA6A7-CCC3-4919-A39B-8C9053F64C27}"
