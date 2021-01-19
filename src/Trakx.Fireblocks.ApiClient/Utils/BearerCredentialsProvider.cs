@@ -30,37 +30,35 @@ namespace Trakx.Fireblocks.ApiClient.Utils
         }
 
 
-        private IEnumerable<Claim> GetClaims(HttpRequestMessage msg)
+        private JwtPayload GetPayload(HttpRequestMessage msg)
         {
             var nonce = GetNonce();
             var issuedTimestamp = GetIssuedTimestamp();
-            var issuedTimestampString = issuedTimestamp.ToString(CultureInfo.InvariantCulture);
-            var expirationTimestamp = (issuedTimestamp + 20).ToString(CultureInfo.InvariantCulture);
+            var expirationTimestamp = issuedTimestamp + 20;
             var body = msg.Content?.ReadAsStringAsync().GetAwaiter().GetResult() ?? string.Empty;
             var hashBody = GetSignature(body);
-            return new List<Claim>
+            return new JwtPayload()
             {
-                new Claim("uri", $"{msg.RequestUri!.AbsolutePath}"),
-                new Claim("nonce", $"{nonce}"),
-                new Claim("iat", $"{issuedTimestampString}"),
-                new Claim("exp", $"{expirationTimestamp}"),
-                new Claim("sub", $"{_fireblocksConfiguration.ApiPubKey}"),
-                new Claim("bodyHash", $"{hashBody}")
+                {"uri",msg.RequestUri!.AbsolutePath },
+                {"nonce", nonce},
+                { "iat", issuedTimestamp},
+                { "exp", expirationTimestamp},
+                { "sub", _fireblocksConfiguration.ApiPubKey},
+                { "bodyHash", hashBody}
             };
         }
 
 
         public string GenerateJwtToken(HttpRequestMessage msg)
         {
-            var claims = GetClaims(msg);
-            var token = new JwtSecurityToken(new JwtHeader(_signingCredentials), new JwtPayload(claims));
+            var payload = GetPayload(msg);
+            var token = new JwtSecurityToken(new JwtHeader(_signingCredentials), payload);
 
             var sTokenHandler = new JwtSecurityTokenHandler();
             return sTokenHandler.WriteToken(token);
         }
 
-        private string GetNonce() => _dateTimeProvider.UtcNowAsOffset.ToUnixTimeMilliseconds()
-            .ToString(CultureInfo.InvariantCulture);
+        private long GetNonce() => _dateTimeProvider.UtcNowAsOffset.ToUnixTimeMilliseconds();
 
         private long GetIssuedTimestamp() => _dateTimeProvider.UtcNowAsOffset.ToUnixTimeSeconds();
 

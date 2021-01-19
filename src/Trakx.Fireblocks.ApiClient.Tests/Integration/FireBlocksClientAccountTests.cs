@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,10 +17,11 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
         }
 
         [Fact]
-        public async Task Exchange_accountsAllAsync_should_return_all_accounts()
+        public async Task AccountsAllAsync_should_return_all_accounts()
         {
-            var response = await _fireblocksClient.Exchange_accountsAllAsync();
+            var response = await _fireblocksClient.AccountsAllAsync();
             response.Result.Should().NotBeNullOrEmpty();
+            response.Result[0].Assets.Should().NotBeNullOrEmpty();
         }
     }
 }
