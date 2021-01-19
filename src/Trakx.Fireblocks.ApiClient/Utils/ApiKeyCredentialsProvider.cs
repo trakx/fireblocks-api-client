@@ -11,8 +11,8 @@ namespace Trakx.Fireblocks.ApiClient.Utils
 {
     public class ApiKeyCredentialsProvider : ICredentialsProvider, IDisposable
     {
-        private const string ApiKeyHeader = "X-API-Key";
-        private const string JwtScheme = "Bearer";
+        public const string ApiKeyHeader = "X-API-Key";
+        public const string JwtScheme = "Bearer";
 
         private readonly FireblocksApiConfiguration _configuration;
         private readonly IBearerCredentialsProvider _bearerCredentialsProvider;
@@ -20,7 +20,7 @@ namespace Trakx.Fireblocks.ApiClient.Utils
 
         private static readonly ILogger Logger = Log.Logger.ForContext<ApiKeyCredentialsProvider>();
 
-        public ApiKeyCredentialsProvider(IOptions<FireblocksApiConfiguration> configuration,IBearerCredentialsProvider bearerCredentialsProvider)
+        public ApiKeyCredentialsProvider(IOptions<FireblocksApiConfiguration> configuration, IBearerCredentialsProvider bearerCredentialsProvider)
         {
             _configuration = configuration.Value;
             _bearerCredentialsProvider = bearerCredentialsProvider;
@@ -28,7 +28,7 @@ namespace Trakx.Fireblocks.ApiClient.Utils
             _tokenSource = new CancellationTokenSource();
         }
 
-        
+
         #region Implementation of ICredentialsProvider
 
         /// <inheritdoc />
@@ -36,11 +36,11 @@ namespace Trakx.Fireblocks.ApiClient.Utils
         {
             var token = _bearerCredentialsProvider.GenerateJwtToken(msg);
             msg.Headers.Authorization = new AuthenticationHeaderValue(JwtScheme, token);
-            msg.Headers.Add(ApiKeyHeader,_configuration.ApiPubKey);
+            msg.Headers.Add(ApiKeyHeader, _configuration.ApiPubKey);
             Logger.Verbose("Headers added");
         }
         #endregion
-        
+
         #region IDisposable
 
         protected virtual void Dispose(bool disposing)

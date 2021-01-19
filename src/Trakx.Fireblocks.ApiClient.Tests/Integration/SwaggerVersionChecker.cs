@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Flurl.Http;
+using Trakx.Utils.Extensions;
 using Xunit;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration
@@ -31,23 +32,18 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
 
             var isEqual = string.Equals(fireblocksRawOpenApi, currentRawOpenApi, StringComparison.OrdinalIgnoreCase);
             isEqual.Should().BeTrue();
+            _fireblocksClient.Dispose();
         }
 
 
         private static string GetCurrentOpenApi()
         {
-            var directory = GetAssemblyDirectory();
-            
-            var openApiPath = Path.Combine(directory?.Parent?.Parent?.Parent?.Parent?.ToString() ?? "", "Trakx.Fireblocks.ApiClient","openApi3.yaml");
+            var isRootDirectory = DirectoryInfoExtensions.TryWalkBackToRepositoryRoot(null, out var rootDirectory);
+            if (!isRootDirectory || rootDirectory == null)
+                return "";
+
+            var openApiPath = Path.Combine(rootDirectory.ToString(), "src", "Trakx.Fireblocks.ApiClient", "openApi3.yaml");
             return File.ReadAllText(openApiPath);
         }
-
-        private static DirectoryInfo? GetAssemblyDirectory()
-        {
-            var codeBase = Assembly.GetExecutingAssembly().Location;
-            return new DirectoryInfo(codeBase).Parent;
-        }
     }
-
-
 }

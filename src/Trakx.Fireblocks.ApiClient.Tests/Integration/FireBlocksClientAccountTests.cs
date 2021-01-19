@@ -22,6 +22,8 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             var response = await _fireblocksClient.AccountsAllAsync();
             response.Result.Should().NotBeNullOrEmpty();
             response.Result[0].Assets.Should().NotBeNullOrEmpty();
+            response.Result[0].Assets[1].Id.Should().Be("ETH_TEST");
+            Convert.ToDecimal(response.Result[0].Assets[1].Total).Should().BeGreaterOrEqualTo(0.1m);
         }
     }
 }

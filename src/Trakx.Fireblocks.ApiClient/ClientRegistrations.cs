@@ -13,7 +13,7 @@ namespace Trakx.Fireblocks.ApiClient
     {
         private static void AddClients(this IServiceCollection services)
         {
-            var delay = Backoff.DecorrelatedJitterBackoffV2(medianFirstRetryDelay: TimeSpan.FromMilliseconds(100), retryCount: 10, fastFirst: true);
+            var delay = Backoff.DecorrelatedJitterBackoffV2(medianFirstRetryDelay: TimeSpan.FromMilliseconds(100), retryCount: 2, fastFirst: true);
                                     
             services.AddHttpClient<IFireblocksClient, FireblocksClient>()
                 .AddPolicyHandler((s, request) => 

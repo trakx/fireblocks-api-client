@@ -37,7 +37,7 @@ namespace Trakx.Fireblocks.ApiClient.Utils
             var hashBody = GetSignature(body);
             return new JwtPayload
             {
-                {"uri",msg.RequestUri!.AbsolutePath },
+                {"uri", msg.RequestUri!.AbsolutePath},
                 {"nonce", nonce},
                 { "iat", issuedTimestamp},
                 { "exp", expirationTimestamp},
