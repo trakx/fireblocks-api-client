@@ -1,7 +1,7 @@
 ﻿openapi: 3.0.0
 info:
   title: Fireblocks API
-  version: "1.4.0"
+  version: "1.5.0"
 servers:
   - url: 'https://api.fireblocks.io/v1'
 paths:
@@ -882,6 +882,35 @@ paths:
                 $ref: '#/components/schemas/ExchangeAccount'
         default:
           $ref: '#/components/responses/Error'
+  '/exchange_accounts/{exchangeAccountId}/internal_transfer':
+    post:
+      summary: Transfers funds between trading accounts under the same exchange account
+      parameters:
+        - in: path
+          name: exchangeAccountId
+          required: true
+          description: The ID of the exchange account to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: Transfer succeeded
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                asset:
+                  type: string
+                amount:
+                  type: string
+                sourceType:
+                  $ref: '#/components/schemas/TradingAccountType'
+                destType:
+                  $ref: '#/components/schemas/TradingAccountType'
   '/exchange_accounts/{exchangeAccountId}/{assetId}':
     get:
       summary: Returns a single asset within an exchange account
@@ -909,74 +938,6 @@ paths:
                 $ref: '#/components/schemas/ExchangeAsset'
         default:
           $ref: '#/components/responses/Error'
-  '/exchange_accounts/{exchangeAccountId}/{assetId}/transfer_to_subaccount':
-    post:
-      summary: Transfer to a subaccount. Only allowed on an exchange main account
-      parameters:
-        - in: path
-          name: exchangeAccountId
-          required: true
-          description: The ID of the exchange account to return
-          schema:
-            type: string
-            minimum: 1
-        - in: path
-          name: assetId
-          required: true
-          description: The ID of the asset to return
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '201':
-          description: Transfer succeeded
-        default:
-          $ref: '#/components/responses/Error'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                subaccountId:
-                  type: string
-                amount:
-                  oneOf:
-                    - type: number
-                    - type: string
-  '/exchange_accounts/{exchangeAccountId}/{assetId}/transfer_from_subaccount':
-    post:
-      summary: Transfer from a subaccount. Only allowed on an exchange main account
-      parameters:
-        - in: path
-          name: exchangeAccountId
-          required: true
-          description: The ID of the exchange account to return
-          schema:
-            type: string
-            minimum: 1
-        - in: path
-          name: assetId
-          required: true
-          description: The ID of the asset to return
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '201':
-          description: Transfer succeeded
-        default:
-          $ref: '#/components/responses/Error'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                subaccountId:
-                  type: string
-                amount:
-                  oneOf:
-                    - type: number
-                    - type: string
   # FIAT ACCOUNTS
   /fiat_accounts:
     get:
@@ -1295,6 +1256,24 @@ paths:
                 $ref: '#/components/schemas/CancelTransactionResponse'
         default:
           $ref: '#/components/responses/Error'
+  '/transactions/{txId}/unfreeze':
+    post:
+      summary: Unfreezes a transaction by ID
+      parameters:
+        - in: path
+          name: txId
+          required: true
+          description: The ID of the transaction to unfreeze
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: Unfreeze response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UnfreezeTransactionResponse'
   # TXHASH
   '/txHash/{txHash}/set_confirmation_threshold':
     post:
@@ -1634,6 +1613,21 @@ components:
           type: string
         lockedAmount:
           type: string
+        total:
+          type: string
+        available:
+          type: string
+    ExchangeTradingAccount:
+      type: object
+      properties:
+        type:
+          type: string
+        name:
+          type: string
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExchangeAsset'
     FiatAsset:
       type: object
       properties:
@@ -1763,9 +1757,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExchangeAsset'
+        tradingAccounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExchangeTradingAccount'
         isSubaccount:
           description: True if the account is a subaccount in an exchange
           type: boolean
+        mainAccountId:
+          description: if the account is a sub-account, the ID of the main account
+          type: string
     FiatAccount:
       type: object
       properties:
@@ -1822,6 +1823,11 @@ components:
         status:
           type: string
     CancelTransactionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    UnfreezeTransactionResponse:
       type: object
       properties:
         success:
@@ -1970,6 +1976,21 @@ components:
         extraParameters:
           type: object
           properties: {}
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionResponseDestination'
+    TransactionResponseDestination:
+      type: object
+      properties:
+        amount:
+          type: string
+        amountUSD:
+          type: string
+        amlScreeningResult:
+          $ref: '#/components/schemas/AmlScreeningResult'
+        destination:
+          $ref: '#/components/schemas/TransferPeerPathResponse'
     NetworkRecord:
       type: object
       properties:
@@ -2167,6 +2188,17 @@ components:
           $ref: '#/components/schemas/TransactionOperation'
         customerRefId:
           type: string
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionRequestDestination'
+    TransactionRequestDestination:
+      type: object
+      properties:
+        amount:
+          type: string
+        destination:
+          $ref: '#/components/schemas/DestinationTransferPeerPath'
     ExchangeType:
       type: string
       enum:
@@ -2515,3 +2547,21 @@ components:
             type: number
         publicKey:
           type: string
+    TradingAccountType:
+      type: string
+      enum:
+        - FUNDABLE
+        - SPOT
+        - FUNDING
+        - FUTURES
+        - OPTIONS
+        - MARGIN
+        - MARGIN_CROSS
+        - MARGIN_ISOLATED
+        - EXCHANGE
+        - COIN_MARGINED_SWAP
+        - USDT_MARGINED_SWAP_CROSS
+        - USDT_MARGINED_SWAP_ISOLATED
+        - USDT_FUTURES
+        - COIN_FUTURES
+
