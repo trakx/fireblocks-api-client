@@ -5,8 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Polly;
 using Serilog;
+using Trakx.Utils.Apis;
+using Trakx.Utils.DateTimeHelpers;
 using Trakx.Fireblocks.ApiClient.Utils;
-using Trakx.Utils.Api;
 
 namespace Trakx.Fireblocks.ApiClient
 {

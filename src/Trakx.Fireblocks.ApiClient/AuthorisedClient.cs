@@ -1,7 +1,4 @@
-﻿using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Trakx.Utils.Api;
+﻿using Trakx.Utils.Apis;
 
 namespace Trakx.Fireblocks.ApiClient
 {

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
-using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Trakx.Utils.Api;
+using Trakx.Utils.DateTimeHelpers;
+using Trakx.Utils.Extensions;
 
 namespace Trakx.Fireblocks.ApiClient.Utils
 {

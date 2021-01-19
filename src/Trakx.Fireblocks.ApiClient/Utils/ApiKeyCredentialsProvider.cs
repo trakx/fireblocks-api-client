@@ -2,12 +2,10 @@
 using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading;
 using Microsoft.Extensions.Options;
 using Serilog;
-using Trakx.Utils.Api;
+using Trakx.Utils.Apis;
 
 namespace Trakx.Fireblocks.ApiClient.Utils
 {
