@@ -11,8 +11,8 @@ namespace Trakx.Fireblocks.ApiClient.Utils
 {
     public class ApiKeyCredentialsProvider : ICredentialsProvider, IDisposable
     {
-        public const string ApiKeyHeader = "X-API-Key";
-        public const string JwtScheme = "Bearer";
+        internal const string ApiKeyHeader ="X-API-Key";
+        internal const string JwtScheme = "Bearer";
 
         private readonly FireblocksApiConfiguration _configuration;
         private readonly IBearerCredentialsProvider _bearerCredentialsProvider;

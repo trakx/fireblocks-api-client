@@ -17,13 +17,13 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Unit
     {
         private readonly ApiKeyCredentialsProvider _provider;
         private readonly FireblocksApiConfiguration _configuration;
-        private readonly DateTimeOffset nonce;
+        private readonly DateTimeOffset _nonce;
 
         public ApiKeyCredentialsProviderTests()
         {
             var dateTimeProvider = Substitute.For<IDateTimeProvider>();
-            nonce = DateTimeOffset.FromUnixTimeMilliseconds(12345678789);
-            dateTimeProvider.UtcNowAsOffset.ReturnsForAnyArgs(nonce);
+            _nonce = DateTimeOffset.FromUnixTimeMilliseconds(12345678789);
+            dateTimeProvider.UtcNowAsOffset.ReturnsForAnyArgs(_nonce);
             _configuration = new FireblocksApiConfiguration
             {
                 ApiPrivateKey = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCVicoa9GJwj4wQZgwuDvFoomBp+fOYG+w5qPO3VfnOadu34N0jIlcOOYuK3v/3TySg4yUiBJ07W6mq8A4Wt8fRwOcBy9DlIA3nFqctLw00zykNKv5gEzUPN5yIhG5qXnU33HOK1zPCvKF3wF5Mxz9z5rsv6v+ZqZRkTG4Vk7YrU8M2NxsEdx+bD5CcH49ME12hjiE3cL8xCOQq+EIJ6pV+154bMTXbwTihZABW0VobLLr5syimrViUHdBG2Syrcd7M2JiucnfVm1YDSHPFq0kUzj9I4Ja+2ikLevFcSbdVNW6UyI0bvHR4WOFBBbpD1wP0YxrZlxjs+tIuZqMC00l5AgMBAAECggEANURk8t8U5cWsffbr5cg65CvbLkT0Kb3gktWFI0yD9KwusTxvaWGFIzMKawhuo3jUsl7XTlvYalmHgbWLPzpt+mC9qR0iJ0wYx7WBDY5SJPqaQ++Jt02APBByOQr7jfZhyOlFWzK3ZGnvFoo2zSC4kJ+jFDmgnOsUSfoTyKnaXWoomIhDBy+2RXT1QKccxICZnYWt+jAdOELlg9jv8zYkSZwr9UicuLrVVed/lxYVM/Vuo9xwDc2ZSKP6dUl+T/gZeo3O94VrdzV2rmItEaN5xaWZCPtvLcs2amvNlOI/97CuzoqY6of3d/ilMARJha1tDl6Kp2D8v8HWyOc/SBQnNQKBgQDHGEVeEDpDyC739E9UCaNHxpBt4x6MOEm+VryO/QJ8crBvHYat33HU4wFEXb73znE+EeN5rXdFXGsbFbd+wHquLwAxDi9TZWQl9/uMmnYJ0kXk/DmxgIItxX4ghaitxUrvb9f98DcxcEZLiI3WeuerbN/3XW8xaaFmCbrwZ9CKzwKBgQDAR3lQndcDT20P8oU4RSGlCVRyVe6c5gmZGEs6uv1xbLxvT+eLsDYZ97p6dLo28J9XvRvooTlrMdmwzXk8YeAzS8uDm4VPnYcTZxveimW76JBfUMJO/yG1cj5kYK5icRsD+Or+l/P+93Js64VDJ/dl0oNFG4GHEgVRk1mBgeTZNwKBgH49aoaZPYiLHxUD6WT883Zodl3m/BCnBENXVhpIXVIxmqPqEeKf4tq80ana02LnmLBlwVn+3rixQAydeYs6Ws+lZ7azKtjzWkwk8HCX5C6YEM+ACsj9Fg4VwsK2XV1J0xj9TvRqY2TKrxfnzx/nMIxm7aA4s2+ebcN4eftDqFzLAoGBALh7GwNlHWmYqBxX5MezVG+C/xngJts0vtq7e1pzFD3iRP1Lne3heFb731gkbJHP1iIZWBCft3aI0sOWsQ5lHfY5b57q9UII8xODpzKieK+MmBBLbNLcaNwtK32lYUskF/Z8ugLhigIEKi4k3qwrSWvRSY9hr6oHeUDmbkcaeJaLAoGAAhGsxg0jEayuP5PNXUDyGPcBbidfCOSMTLT06N/sDjwubBU+gNbgkR/X5aORXPqp/vbmoABcW49mVaMmEWSQBNX93O29WCadelth3Cchs6AeZ2ciSIPQk9JGmsLNdZISjQua6cAN0uDgAsqUV8DgnXxKOGvFyCUg55+HkGiCVVI=",
@@ -77,11 +77,11 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Unit
         private void ValidatePayload(JwtSecurityToken retrievedToken)
         {
             var payload = retrievedToken.Payload;
-            payload.Iat.Should().Be(Convert.ToInt32(nonce.ToUnixTimeSeconds()));
-            payload.Exp.Should().Be(Convert.ToInt32(nonce.ToUnixTimeSeconds()) + 20);
+            payload.Iat.Should().Be(Convert.ToInt32(_nonce.ToUnixTimeSeconds()));
+            payload.Exp.Should().Be(Convert.ToInt32(_nonce.ToUnixTimeSeconds()) + 20);
             payload.Sub.Should().Be(_configuration.ApiPubKey);
             payload.TryGetValue("nonce", out var retrievedNonce);
-            retrievedNonce.Should().Be(nonce.ToUnixTimeMilliseconds());
+            retrievedNonce.Should().Be(_nonce.ToUnixTimeMilliseconds());
         }
 
         private TokenValidationParameters GetValidationParameters()
