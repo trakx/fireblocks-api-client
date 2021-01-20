@@ -36,8 +36,8 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
         {
             var configuration = new FireblocksApiConfiguration
             {
-                ApiPubKey = Secrets.FireblocksApiKey,
-                ApiPrivateKey = Secrets.FireblocksApiSecret
+                ApiPubKey = new Secrets().ApiPubKey,
+                ApiPrivateKey = new Secrets().ApiPrivateKey
             };
 
             var serviceCollection = new ServiceCollection();

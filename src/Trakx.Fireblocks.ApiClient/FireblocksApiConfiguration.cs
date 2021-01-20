@@ -5,10 +5,10 @@ namespace Trakx.Fireblocks.ApiClient
     public class FireblocksApiConfiguration
     {
 #nullable disable
-        [SecretEnvironmentVariable("FireblocksApiConfiguration__ApiSecret")]
+        [SecretEnvironmentVariable]
         public string ApiPubKey { get; set; }
 
-        [SecretEnvironmentVariable("FireblocksApiConfiguration__ApiKey")]
+        [SecretEnvironmentVariable]
         public string ApiPrivateKey { get; set; }
 #nullable restore
     }

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -63,6 +60,20 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Unit
             ValidatePayload(token);
         }
 
+        [Fact]
+        public void Bearer_signature_should_depends_on_message_content()
+        {
+            var messageOne = new HttpRequestMessage { RequestUri = new Uri("https://test.com/test1/validate"), Content = new StringContent("body one")};
+            _provider.AddCredentials(messageOne);
+            var retrievedRawJwtOne = messageOne.Headers.Authorization?.Parameter;
+
+            var messageTwo = new HttpRequestMessage { RequestUri = new Uri("https://test.com/test1/validate"), Content = new StringContent("body two") };
+            _provider.AddCredentials(messageTwo);
+            var retrievedRawJwtTwo = messageTwo.Headers.Authorization?.Parameter;
+
+            retrievedRawJwtTwo.Should().NotBeEquivalentTo(retrievedRawJwtOne);
+        }
+        
         private void ValidatePayload(JwtSecurityToken retrievedToken)
         {
             var payload = retrievedToken.Payload;

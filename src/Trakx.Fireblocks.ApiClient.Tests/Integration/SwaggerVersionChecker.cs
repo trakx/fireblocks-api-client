@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration
 {
-    public class SwaggerVersionChecker
+    public class SwaggerVersionChecker : IDisposable
     {
         private readonly IFlurlClient _fireblocksClient;
 
@@ -32,7 +32,6 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
 
             var isEqual = string.Equals(fireblocksRawOpenApi, currentRawOpenApi, StringComparison.OrdinalIgnoreCase);
             isEqual.Should().BeTrue();
-            _fireblocksClient.Dispose();
         }
 
 
@@ -44,6 +43,11 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
 
             var openApiPath = Path.Combine(rootDirectory.ToString(), "src", "Trakx.Fireblocks.ApiClient", "openApi3.yaml");
             return File.ReadAllText(openApiPath);
+        }
+
+        public void Dispose()
+        {
+            _fireblocksClient.Dispose();
         }
     }
 }
