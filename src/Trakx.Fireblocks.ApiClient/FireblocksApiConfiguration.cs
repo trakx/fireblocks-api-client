@@ -2,14 +2,14 @@
 
 namespace Trakx.Fireblocks.ApiClient
 {
-    public class FireblocksApiConfiguration
+    public record FireblocksApiConfiguration
     {
 #nullable disable
         [SecretEnvironmentVariable]
-        public string ApiPubKey { get; set; }
+        public string ApiPubKey { get; init; }
 
         [SecretEnvironmentVariable]
-        public string ApiPrivateKey { get; set; }
+        public string ApiPrivateKey { get; init; }
 #nullable restore
     }
 }

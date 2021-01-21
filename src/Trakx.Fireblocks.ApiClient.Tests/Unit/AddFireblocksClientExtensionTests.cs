@@ -5,9 +5,9 @@ using Xunit.Abstractions;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Unit
 {
-    public class AddFireblocksClientExtensionTests : FakeConfigurationTestsBase
+    public class AddFireblocksClientExtensionTests : CredentialsTestsBase
     {
-        public AddFireblocksClientExtensionTests(FakedRsaKeyFixture fixture, ITestOutputHelper output) 
+        public AddFireblocksClientExtensionTests(RsaKeyFixture fixture, ITestOutputHelper output) 
             : base(fixture, output)
         { }
 
