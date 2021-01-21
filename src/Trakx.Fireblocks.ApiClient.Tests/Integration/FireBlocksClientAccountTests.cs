@@ -9,11 +9,11 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
 {
     public class FireBlocksClientAccountTests : FireblocksClientTestsBase
     {
-        private readonly IFireblocksClient _fireblocksClient;
+        private readonly IVaultClient _fireblocksClient;
 
         public FireBlocksClientAccountTests(FireblocksApiFixture apiFixture, ITestOutputHelper output) : base(apiFixture, output)
         {
-            _fireblocksClient = ServiceProvider.GetRequiredService<IFireblocksClient>();
+            _fireblocksClient = ServiceProvider.GetRequiredService<IVaultClient>();
         }
 
         [Fact]

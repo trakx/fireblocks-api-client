@@ -25,11 +25,13 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
         {
             var apiResponse = await _fireblocksClient.Request("docs", "v1", "swagger").SendAsync(HttpMethod.Get);
             var fireblocksOpenApi = await apiResponse.GetStringAsync();
-            var currentOpenApi = GetCurrentOpenApi();
+            var modifiedOpenApi = GetCurrentOpenApi();
 
             var fireblocksRawOpenApi = Regex.Replace(fireblocksOpenApi, @"\s+", string.Empty);
-            var currentRawOpenApi = Regex.Replace(currentOpenApi, @"\s+", string.Empty);
+            var unmodifiedOpenAPi = Regex.Replace(modifiedOpenApi, @"tags\: \[[A-Za-z]{2,}\]", string.Empty);
+            var currentRawOpenApi = Regex.Replace(unmodifiedOpenAPi, @"\s+", string.Empty);
 
+            fireblocksRawOpenApi.Should().Be(currentRawOpenApi);
             var isEqual = string.Equals(fireblocksRawOpenApi, currentRawOpenApi, StringComparison.OrdinalIgnoreCase);
             isEqual.Should().BeTrue();
         }

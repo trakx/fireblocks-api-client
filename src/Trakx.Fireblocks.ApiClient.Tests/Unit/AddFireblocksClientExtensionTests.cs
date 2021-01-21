@@ -18,7 +18,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Unit
             serviceCollection.AddFireblocksClient(Configuration);
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            var client = serviceProvider.GetRequiredService<IFireblocksClient>();
+            var client = serviceProvider.GetRequiredService<IExchangeAccountsClient>();
             client.Should().NotBeNull();
         }
     }

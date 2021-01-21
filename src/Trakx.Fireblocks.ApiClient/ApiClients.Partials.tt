@@ -9,12 +9,14 @@
 namespace Trakx.Fireblocks.ApiClient
 {
 <# 
-var clientNames = new [] { "FireblocksClient" };
+var clientNames = new [] { "Vault", "InternalWallets", "ExternalWallets", 
+"ExchangeAccounts", "FiatAccounts", "Transactions", "SupportedAssets", 
+"NetworkConnections", "TransferTickets", "Fee" };
 
 foreach(var name in clientNames)
 {
 #>
-    internal partial class <#= name #>
+    internal partial class <#= name #>Client
     {
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
         {

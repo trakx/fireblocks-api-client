@@ -38,7 +38,7 @@
       "useRequestAndResponseSerializationSettings": false,
       "serializeTypeInformation": false,
       "queryNullValue": "null",
-      "className": "{controller}FireblocksClient",
+      "className": "{controller}Client",
       "operationGenerationMode": "MultipleClientsFromFirstTagAndOperationId",
       "additionalNamespaceUsages": [
         "Microsoft.AspNetCore.Mvc",
