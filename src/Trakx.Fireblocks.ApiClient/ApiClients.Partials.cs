@@ -1,4 +1,6 @@
-﻿namespace Trakx.Fireblocks.ApiClient
+﻿#pragma warning disable S1172, IDE0060 // Unused method parameters should be removed
+
+namespace Trakx.Fireblocks.ApiClient
 {
     internal partial class FireblocksClient
     {
@@ -7,4 +9,5 @@
             CredentialProvider.AddCredentials(request);
         }
     }
+
 }

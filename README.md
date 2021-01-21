@@ -4,3 +4,20 @@
 
 # fireblocks-api-client
 C# implementation of a Fireblocks api client
+
+## Creating your local .env file
+
+In order to be able to run some integration tests, you should create a `.env` file in the `src` folder with the following variables:
+
+```secretsEnvVariables
+FireblocksApiConfiguration__ApiPrivateKey=********
+FireblocksApiConfiguration__ApiPrivateKey=********
+FireblocksApiConfiguration__ApiPrivateKey=********
+FireblocksApiConfiguration__ApiPrivateKey=********
+FireblocksApiConfiguration__ApiPrivateKey=********
+FireblocksApiConfiguration__ApiPrivateKey=********
+FireblocksApiConfiguration__ApiPrivateKey=********
+FireblocksApiConfiguration__ApiPrivateKey=********
+FireblocksApiConfiguration__ApiPrivateKey=********
+FireblocksApiConfiguration__ApiPubKey=********
+```
