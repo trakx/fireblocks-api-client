@@ -19,7 +19,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Unit
         public ApiKeyCredentialsProviderTests()
         {
             var options = Substitute.For<IOptions<FireblocksApiConfiguration>>();
-            options.Value.ReturnsForAnyArgs(new FireblocksApiConfiguration() {ApiPubKey = "pubKey"});
+            options.Value.ReturnsForAnyArgs(new FireblocksApiConfiguration {ApiPubKey = "pubKey"});
             _bearerCredentials = Substitute.For<IBearerCredentialsProvider>();
             _provider = new ApiKeyCredentialsProvider(options, _bearerCredentials);
         }
