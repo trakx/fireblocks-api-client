@@ -13,12 +13,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.2" />
     <PackageReference Include="Polly.Contrib.WaitAndRetry" Version="1.1.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
-    <PackageReference Include="NSwag.MSBuild" Version="13.9.4">
+    <PackageReference Include="NSwag.MSBuild" Version="13.10.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Serilog" Version="2.10.0" />
-    <PackageReference Include="Trakx.Utils" Version="0.1.13" />
+    <PackageReference Include="Trakx.Utils" Version="0.1.14" />
   </ItemGroup>
 
   <ItemGroup>

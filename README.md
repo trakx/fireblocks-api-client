@@ -11,13 +11,5 @@ In order to be able to run some integration tests, you should create a `.env` fi
 
 ```secretsEnvVariables
 FireblocksApiConfiguration__ApiPrivateKey=********
-FireblocksApiConfiguration__ApiPrivateKey=********
-FireblocksApiConfiguration__ApiPrivateKey=********
-FireblocksApiConfiguration__ApiPrivateKey=********
-FireblocksApiConfiguration__ApiPrivateKey=********
-FireblocksApiConfiguration__ApiPrivateKey=********
-FireblocksApiConfiguration__ApiPrivateKey=********
-FireblocksApiConfiguration__ApiPrivateKey=********
-FireblocksApiConfiguration__ApiPrivateKey=********
 FireblocksApiConfiguration__ApiPubKey=********
 ```
