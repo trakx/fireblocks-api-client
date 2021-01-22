@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Trakx.Utils.Attributes;
 
 namespace Trakx.Fireblocks.ApiClient
 {
-    public class FireblocksApiConfiguration
+    public record FireblocksApiConfiguration
     {
 #nullable disable
-        public string BaseUrl { get; set; }
-        public string ApiKey { get; set; }
-        public string ApiSecret { get; set; }
-        public List<string> FavouriteExchanges { get; set; }
+        [SecretEnvironmentVariable]
+        public string ApiPubKey { get; init; }
+
+        [SecretEnvironmentVariable]
+        public string ApiPrivateKey { get; init; }
 #nullable restore
     }
 }

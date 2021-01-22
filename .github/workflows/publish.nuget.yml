@@ -16,8 +16,8 @@ env:
   PACKAGE_NAME: Trakx.Fireblocks.ApiClient
   PROJECT_PATH: "src/Trakx.Fireblocks.ApiClient/Trakx.Fireblocks.ApiClient.csproj"
   TEST_PROJECT_PATH: "src/Trakx.Fireblocks.ApiClient.Tests/Trakx.Fireblocks.ApiClient.Tests.csproj"
-  FireblocksApiConfiguration__ApiKey: ${{secrets.FIREBLOCKS_API_KEY}}
-  FireblocksApiConfiguration__ApiSecret: ${{secrets.FIREBLOCKS_API_SECRET}}
+  FireblocksApiConfiguration__ApiPubKey: ${{secrets.FIREBLOCKS_API_KEY}}
+  FireblocksApiConfiguration__ApiPrivateKey: ${{secrets.FIREBLOCKS_API_SECRET}}
 
 jobs:
   

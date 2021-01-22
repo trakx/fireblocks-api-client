@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -9,20 +9,24 @@
 
   <ItemGroup>
 
-    <PackageReference Include="coverlet.msbuild" Version="3.0.0">
+    <PackageReference Include="coverlet.msbuild" Version="3.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="coverlet.collector" Version="3.0.0">
+    <PackageReference Include="coverlet.collector" Version="3.0.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="DotNetEnv" Version="2.0.0" />
+    <PackageReference Include="Trakx.Utils.Testing" Version="0.1.14" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Flurl" Version="3.0.1" />
+    <PackageReference Include="Flurl.Http" Version="3.0.1" />
     <PackageReference Include="GitHubActionsTestLogger" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     <PackageReference Include="Serilog.Sinks.XUnit" Version="2.0.4" />
+    <PackageReference Include="NSubstitute" Version="4.2.2" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>

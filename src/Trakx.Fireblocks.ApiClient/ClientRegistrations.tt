@@ -19,12 +19,15 @@ namespace Trakx.Fireblocks.ApiClient
     {
         private static void AddClients(this IServiceCollection services)
         {
-            var delay = Backoff.DecorrelatedJitterBackoffV2(medianFirstRetryDelay: TimeSpan.FromMilliseconds(100), retryCount: 10, fastFirst: true);
+            var delay = Backoff.DecorrelatedJitterBackoffV2(medianFirstRetryDelay: TimeSpan.FromMilliseconds(100), retryCount: 2, fastFirst: true);
             <# 
-            var clientNames = new [] { /*"ExchangesClient",*/ "MarketDataClient", "AccountsClient" };
+            var clientNames = new [] { "Vault", "InternalWallets", "ExternalWallets", 
+                "ExchangeAccounts", "FiatAccounts", "Transactions", "SupportedAssets", 
+                "NetworkConnections", "TransferTickets", "Fee" };
 
-            foreach(var name in clientNames)
+            foreach(var clientName in clientNames)
             {
+                var name = clientName + "Client";
             #>
                         
             services.AddHttpClient<I<#= name #>, <#= name #>>()

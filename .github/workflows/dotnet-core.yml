@@ -8,8 +8,8 @@ on:
     
 env:
   SOLUTION_PATH: "src/Trakx.Fireblocks.ApiClient.sln"
-  FireblocksApiConfiguration__ApiKey: ${{secrets.FIREBLOCKS_API_KEY}}
-  FireblocksApiConfiguration__ApiSecret: ${{secrets.FIREBLOCKS_API_SECRET}}
+  FireblocksApiConfiguration__ApiPubKey: ${{secrets.FIREBLOCKS_API_KEY}}
+  FireblocksApiConfiguration__ApiPrivateKey: ${{secrets.FIREBLOCKS_API_SECRET}}
   
 jobs:
   build:
