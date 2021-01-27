@@ -8,7 +8,6 @@ paths:
   #  VAULT
   '/vault/accounts':
     get:
-      tags: [Vault]
       summary: Returns all accounts of the active Vault
       responses:
         '200':
@@ -22,7 +21,6 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [Vault]
       summary: Creates a new vault account
       requestBody:
         required: true
@@ -56,7 +54,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}':
     get:
-      tags: [Vault]
       summary: Returns a Fireblock Vault account by ID
       parameters:
         - in: path
@@ -77,7 +74,6 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     put:
-      tags: [Vault]
       summary: Edit a Fireblock Vault account
       parameters:
         - in: path
@@ -103,7 +99,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/hide':
     post:
-      tags: [Vault]
       summary: Hides a vault account on Fireblocks console
       parameters:
         - in: path
@@ -120,7 +115,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/unhide':
     post:
-      tags: [Vault]
       summary: Reveals a hidden vault account on Fireblocks console
       parameters:
         - in: path
@@ -137,7 +131,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/set_customer_ref_id':
     post:
-      tags: [Vault]
       summary: Sets a reference customer ID for AML
       parameters:
         - in: path
@@ -163,7 +156,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/set_auto_fuel':
     post:
-      tags: [Vault]
       summary: Sets the autoFuel property of the vault account to true or false
       parameters:
         - in: path
@@ -189,7 +181,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}':
     get:
-      tags: [Vault]
       summary: Returns a wallet of a specific asset inside a Fireblocks Vault account
       parameters:
         - in: path
@@ -215,7 +206,6 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [Vault]
       summary: Creates a new wallet in a Vault account
       parameters:
         - in: path
@@ -251,7 +241,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/addresses':
     get:
-      tags: [Vault]
       summary: Returns all addresses generated for a Vault wallet
       parameters:
         - in: path
@@ -279,7 +268,6 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [Vault]
       summary: Generate a new deposit address for a Vault wallet
       requestBody:
         required: false
@@ -319,7 +307,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}':
     put:
-      tags: [Vault]
       summary: Update the description of an existing address within a vault wallet
       requestBody:
         required: false
@@ -358,7 +345,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}/set_customer_ref_id':
     post:
-      tags: [Vault]
       summary: Sets a reference customer ID for AML
       parameters:
         - in: path
@@ -397,7 +383,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}/create_legacy':
     post:
-      tags: [Vault]
       summary: Translates an existing segwit address to the legacy format
       parameters:
         - in: path
@@ -431,7 +416,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/public_key_info/':
     get:
-      tags: [Vault]
       summary: Gets the public key information based on derivationPath and signing algorithm
       parameters:
         - in: query
@@ -459,7 +443,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/{change}/{addressIndex}/public_key_info':
     get:
-      tags: [Vault]
       summary: Gets the public key information for vault account
       parameters:
         - in: path
@@ -499,7 +482,6 @@ paths:
   #  INTERNAL WALLETS
   /internal_wallets:
     get:
-      tags: [InternalWallets]
       summary: Gets a list of internal wallets
       responses:
         '200':
@@ -513,7 +495,6 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [InternalWallets]
       summary: Creates a new internal wallet
       responses:
         '200':
@@ -538,7 +519,6 @@ paths:
                   type: string
   '/internal_wallets/{walletId}':
     get:
-      tags: [InternalWallets]
       summary: Returns an internal wallet by ID
       parameters:
         - in: path
@@ -558,7 +538,6 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     delete:
-      tags: [InternalWallets]
       summary: Deletes an internal wallet by ID
       parameters:
         - in: path
@@ -575,7 +554,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/internal_wallets/{walletId}/set_customer_ref_id':
     post:
-      tags: [InternalWallets]
       summary: Sets a reference customer ID for AML
       parameters:
         - in: path
@@ -601,7 +579,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/internal_wallets/{walletId}/{assetId}':
     get:
-      tags: [InternalWallets]
       summary: Returns an internal wallet asset by ID
       parameters:
         - in: path
@@ -628,7 +605,6 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [InternalWallets]
       summary: Create asset to an existing internal wallet
       parameters:
         - in: path
@@ -666,7 +642,6 @@ paths:
               required:
                 - address
     delete:
-      tags: [InternalWallets]
       summary: Deletes an internal wallet asset by ID
       parameters:
         - in: path
@@ -691,7 +666,6 @@ paths:
   # EXTERNAL WALLETS
   /external_wallets:
     get:
-      tags: [ExternalWallets]
       summary: Gets a list of external wallets under the tenant
       responses:
         '200':
@@ -705,7 +679,6 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [ExternalWallets]
       summary: Creates a new external wallet
       responses:
         '200':
@@ -730,7 +703,6 @@ paths:
                   type: string
   '/external_wallets/{walletId}':
     get:
-      tags: [ExternalWallets]
       summary: Returns an external wallet by ID
       parameters:
         - in: path
@@ -750,7 +722,6 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     delete:
-      tags: [ExternalWallets]
       summary: Deletes an external wallet by ID
       parameters:
         - in: path
@@ -767,7 +738,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/external_wallets/{walletId}/set_customer_ref_id':
     post:
-      tags: [ExternalWallets]
       summary: Sets a reference customer ID for AML
       parameters:
         - in: path
@@ -793,7 +763,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/external_wallets/{walletId}/{assetId}':
     get:
-      tags: [ExternalWallets]
       summary: Returns an external wallet asset by ID
       parameters:
         - in: path
@@ -820,7 +789,6 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [ExternalWallets]
       summary: Adds an asset to an existing external wallet
       parameters:
         - in: path
@@ -858,7 +826,6 @@ paths:
               required:
                 - address
     delete:
-      tags: [ExternalWallets]
       summary: Deletes an external wallet asset by ID
       parameters:
         - in: path
@@ -883,7 +850,6 @@ paths:
   # EXCHANGE ACCOUNTS
   /exchange_accounts:
     get:
-      tags: [ExchangeAccounts]
       summary: Returns all exchange accounts
       responses:
         '200':
@@ -898,7 +864,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/exchange_accounts/{exchangeAccountId}':
     get:
-      tags: [ExchangeAccounts]
       summary: Returns an exchange account by ID
       parameters:
         - in: path
@@ -919,7 +884,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/exchange_accounts/{exchangeAccountId}/internal_transfer':
     post:
-      tags: [ExchangeAccounts]
       summary: Transfers funds between trading accounts under the same exchange account
       parameters:
         - in: path
@@ -949,7 +913,6 @@ paths:
                   $ref: '#/components/schemas/TradingAccountType'
   '/exchange_accounts/{exchangeAccountId}/{assetId}':
     get:
-      tags: [ExchangeAccounts]
       summary: Returns a single asset within an exchange account
       parameters:
         - in: path
@@ -978,7 +941,6 @@ paths:
   # FIAT ACCOUNTS
   /fiat_accounts:
     get:
-      tags: [FiatAccounts]
       summary: Returns all fiat accounts
       responses:
         '200':
@@ -993,7 +955,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/fiat_accounts/{accountId}':
     get:
-      tags: [FiatAccounts]
       summary: Returns a fiat account by ID
       parameters:
         - in: path
@@ -1014,7 +975,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/fiat_accounts/{accountId}/redeem_to_linked_dda':
     post:
-      tags: [FiatAccounts]
       summary: Redeem funds to DDA
       parameters:
         - in: path
@@ -1038,7 +998,6 @@ paths:
                   type: number
   '/fiat_accounts/{accountId}/deposit_from_linked_dda':
     post:
-      tags: [FiatAccounts]
       summary: Deposit funds from DDA
       parameters:
         - in: path
@@ -1063,7 +1022,6 @@ paths:
   # TRANSACTIONS
   /transactions:
     get:
-      tags: [Transactions]
       summary: Gets a list of transactions under the tenant
       parameters:
         - in: query
@@ -1175,7 +1133,6 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [Transactions]
       summary: Creates a new transaction
       responses:
         '200':
@@ -1193,7 +1150,6 @@ paths:
               $ref: '#/components/schemas/TransactionRequest'
   '/transactions/estimate_fee':
     post:
-      tags: [Transactions]
       summary: >-
         Estimates the transaction fee for a given transaction request
       requestBody:
@@ -1212,7 +1168,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/transactions/{txId}':
     get:
-      tags: [Transactions]
       summary: Returns a transaction by ID
       parameters:
         - in: path
@@ -1233,7 +1188,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/transactions/{txId}/set_confirmation_threshold':
     post:
-      tags: [Transactions]
       summary: Overrides the required number of confirmations for a transaction completion by transaction ID
       requestBody:
         content:
@@ -1259,7 +1213,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/transactions/{txId}/drop':
     post:
-      tags: [Transactions]
       summary: Drop ETH based transaction by ID
       requestBody:
         content:
@@ -1285,7 +1238,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/transactions/{txId}/cancel':
     post:
-      tags: [Transactions]
       summary: Cancels a transaction by ID
       parameters:
         - in: path
@@ -1304,29 +1256,27 @@ paths:
                 $ref: '#/components/schemas/CancelTransactionResponse'
         default:
           $ref: '#/components/responses/Error'
-  '/transactions/{txId}/unfreeze':
-    post:
-      tags: [Transactions]
-      summary: Unfreezes a transaction by ID
-      parameters:
-        - in: path
-          name: txId
-          required: true
-          description: The ID of the transaction to unfreeze
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '200':
-          description: Unfreeze response
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/UnfreezeTransactionResponse'
+  # '/transactions/{txId}/unfreeze':
+  #   post:
+  #     summary: Unfreezes a transaction by ID
+  #     parameters:
+  #       - in: path
+  #         name: txId
+  #         required: true
+  #         description: The ID of the transaction to unfreeze
+  #         schema:
+  #           type: string
+  #           minimum: 1
+  #     responses:
+  #       '200':
+  #         description: Unfreeze response
+  #         content:
+  #           '*/*':
+  #             schema:
+  #               $ref: '#/components/schemas/UnfreezeTransactionResponse'
   # TXHASH
   '/txHash/{txHash}/set_confirmation_threshold':
     post:
-      tags: [Transactions]
       summary: Overrides the required number of confirmations for a transaction completion by its TxHash
       requestBody:
         content:
@@ -1353,7 +1303,6 @@ paths:
   # SUPPORTED ASSETS
   '/supported_assets':
     get:
-      tags: [SupportedAssets]
       summary: Returns all asset types supported by Fireblocks
       responses:
         '200':
@@ -1369,7 +1318,6 @@ paths:
   # NETWORK CONNECTIONS
   '/network_connections':
     get:
-      tags: [NetworkConnections]
       summary: Returns all network connections
       responses:
         '200':
@@ -1384,7 +1332,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/network_connections/{connectionId}':
     get:
-      tags: [NetworkConnections]
       summary: Gets a network connection by ID
       parameters:
         - in: path
@@ -1406,7 +1353,6 @@ paths:
   # TRANSFER TICKETS
   '/transfer_tickets':
     get:
-      tags: [TransferTickets]
       summary: Gets a list of transfer tickets
       responses:
         '200':
@@ -1420,7 +1366,6 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [TransferTickets]
       summary: Creates a new transfer ticket
       responses:
         '200':
@@ -1448,7 +1393,6 @@ paths:
                 - terms
   '/transfer_tickets/{ticketId}':
     get:
-      tags: [TransferTickets]
       summary: Get a specific ticket by ticket ID
       parameters:
         - in: path
@@ -1469,7 +1413,6 @@ paths:
           $ref: '#/components/responses/Error'
   /transfer_tickets/{ticketId}/cancel:
     post:
-      tags: [TransferTickets]
       summary: Cancel a transfer request
       parameters:
         - in: path
@@ -1486,7 +1429,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/transfer_tickets/{ticketId}/{termId}':
     get:
-      tags: [TransferTickets]
       summary: Get a term by ticket ID and term ID
       parameters:
         - in: path
@@ -1514,7 +1456,6 @@ paths:
           $ref: '#/components/responses/Error'
   /transfer_tickets/{ticketId}/{termId}/transfer:
     post:
-      tags: [TransferTickets]
       summary: Triggers a transfer for a term in ticket
       parameters:
         - in: path
@@ -1546,7 +1487,6 @@ paths:
   # ESTIMATE NETWORK FEE
   '/estimate_network_fee':
     get:
-      tags: [Fee]
       summary: >-
         Estimates the required fee for a given asset.
         For UTXO based assets, the response will contain the suggested fee per byte,
@@ -1570,7 +1510,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/gas_station':
     get:
-      tags: [Fee]
       summary: >-
         Returns a summary of Gas Station configuration and balances
       responses:
@@ -1584,7 +1523,6 @@ paths:
           $ref: '#/components/responses/Error'
   '/gas_station/configuration':
     put:
-      tags: [Fee]
       summary: >-
         Sets Gas Station configuration
       requestBody:
@@ -2626,4 +2564,3 @@ components:
         - USDT_MARGINED_SWAP_ISOLATED
         - USDT_FUTURES
         - COIN_FUTURES
-

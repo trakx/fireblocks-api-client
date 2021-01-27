@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <GenerateApiClient>True</GenerateApiClient>
+    <GenerateApiClient>False</GenerateApiClient>
   </PropertyGroup>
 
   <Import Project="../Common.Projects.props" />
