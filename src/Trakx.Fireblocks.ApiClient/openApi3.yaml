@@ -496,6 +496,32 @@ paths:
                 $ref: '#/components/schemas/PublicKeyInformation'
         default:
           $ref: '#/components/responses/Error'
+  '/vault/assets':
+    get:
+      tags: [Vault]
+      summary: Gets the assets amount summary for all \ filtered accounts. 
+      parameters:
+        - in: query
+          name: namePrefix
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: nameSuffix
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Amount by asset
+          content:
+            '*/*':
+              schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/VaultAsset'
+        default:
+          $ref: '#/components/responses/Error'
   #  INTERNAL WALLETS
   /internal_wallets:
     get:
@@ -1304,25 +1330,24 @@ paths:
                 $ref: '#/components/schemas/CancelTransactionResponse'
         default:
           $ref: '#/components/responses/Error'
-  '/transactions/{txId}/unfreeze':
-    post:
-      tags: [Transactions]
-      summary: Unfreezes a transaction by ID
-      parameters:
-        - in: path
-          name: txId
-          required: true
-          description: The ID of the transaction to unfreeze
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '200':
-          description: Unfreeze response
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/UnfreezeTransactionResponse'
+  # '/transactions/{txId}/unfreeze':
+  #   post:
+  #     summary: Unfreezes a transaction by ID
+  #     parameters:
+  #       - in: path
+  #         name: txId
+  #         required: true
+  #         description: The ID of the transaction to unfreeze
+  #         schema:
+  #           type: string
+  #           minimum: 1
+  #     responses:
+  #       '200':
+  #         description: Unfreeze response
+  #         content:
+  #           '*/*':
+  #             schema:
+  #               $ref: '#/components/schemas/UnfreezeTransactionResponse'
   # TXHASH
   '/txHash/{txHash}/set_confirmation_threshold':
     post:
@@ -2626,4 +2651,3 @@ components:
         - USDT_MARGINED_SWAP_ISOLATED
         - USDT_FUTURES
         - COIN_FUTURES
-

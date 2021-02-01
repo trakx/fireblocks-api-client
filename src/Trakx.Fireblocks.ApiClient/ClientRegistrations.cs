@@ -6,7 +6,6 @@ using Polly.Contrib.WaitAndRetry;
 using Polly.Extensions.Http;
 using Serilog;
 
-
 namespace Trakx.Fireblocks.ApiClient
 {
     public static partial class AddFireblocksClientExtension
@@ -15,7 +14,7 @@ namespace Trakx.Fireblocks.ApiClient
         {
             var delay = Backoff.DecorrelatedJitterBackoffV2(medianFirstRetryDelay: TimeSpan.FromMilliseconds(100), retryCount: 2, fastFirst: true);
                                     
-            services.AddHttpClient<IVaultClient, VaultClient>()
+            services.AddHttpClient<IVaultClient, VaultClient>("Trakx.Fireblocks.ApiClient.VaultClient")
                 .AddPolicyHandler((s, request) => 
                     Policy<HttpResponseMessage>
                     .Handle<ApiException>()
@@ -30,7 +29,7 @@ namespace Trakx.Fireblocks.ApiClient
                     .WithPolicyKey("VaultClient"));
 
                                 
-            services.AddHttpClient<IInternalWalletsClient, InternalWalletsClient>()
+            services.AddHttpClient<IInternalWalletsClient, InternalWalletsClient>("Trakx.Fireblocks.ApiClient.InternalWalletsClient")
                 .AddPolicyHandler((s, request) => 
                     Policy<HttpResponseMessage>
                     .Handle<ApiException>()
@@ -45,7 +44,7 @@ namespace Trakx.Fireblocks.ApiClient
                     .WithPolicyKey("InternalWalletsClient"));
 
                                 
-            services.AddHttpClient<IExternalWalletsClient, ExternalWalletsClient>()
+            services.AddHttpClient<IExternalWalletsClient, ExternalWalletsClient>("Trakx.Fireblocks.ApiClient.ExternalWalletsClient")
                 .AddPolicyHandler((s, request) => 
                     Policy<HttpResponseMessage>
                     .Handle<ApiException>()
@@ -60,7 +59,7 @@ namespace Trakx.Fireblocks.ApiClient
                     .WithPolicyKey("ExternalWalletsClient"));
 
                                 
-            services.AddHttpClient<IExchangeAccountsClient, ExchangeAccountsClient>()
+            services.AddHttpClient<IExchangeAccountsClient, ExchangeAccountsClient>("Trakx.Fireblocks.ApiClient.ExchangeAccountsClient")
                 .AddPolicyHandler((s, request) => 
                     Policy<HttpResponseMessage>
                     .Handle<ApiException>()
@@ -75,7 +74,7 @@ namespace Trakx.Fireblocks.ApiClient
                     .WithPolicyKey("ExchangeAccountsClient"));
 
                                 
-            services.AddHttpClient<IFiatAccountsClient, FiatAccountsClient>()
+            services.AddHttpClient<IFiatAccountsClient, FiatAccountsClient>("Trakx.Fireblocks.ApiClient.FiatAccountsClient")
                 .AddPolicyHandler((s, request) => 
                     Policy<HttpResponseMessage>
                     .Handle<ApiException>()
@@ -90,7 +89,7 @@ namespace Trakx.Fireblocks.ApiClient
                     .WithPolicyKey("FiatAccountsClient"));
 
                                 
-            services.AddHttpClient<ITransactionsClient, TransactionsClient>()
+            services.AddHttpClient<ITransactionsClient, TransactionsClient>("Trakx.Fireblocks.ApiClient.TransactionsClient")
                 .AddPolicyHandler((s, request) => 
                     Policy<HttpResponseMessage>
                     .Handle<ApiException>()
@@ -105,7 +104,7 @@ namespace Trakx.Fireblocks.ApiClient
                     .WithPolicyKey("TransactionsClient"));
 
                                 
-            services.AddHttpClient<ISupportedAssetsClient, SupportedAssetsClient>()
+            services.AddHttpClient<ISupportedAssetsClient, SupportedAssetsClient>("Trakx.Fireblocks.ApiClient.SupportedAssetsClient")
                 .AddPolicyHandler((s, request) => 
                     Policy<HttpResponseMessage>
                     .Handle<ApiException>()
@@ -120,7 +119,7 @@ namespace Trakx.Fireblocks.ApiClient
                     .WithPolicyKey("SupportedAssetsClient"));
 
                                 
-            services.AddHttpClient<INetworkConnectionsClient, NetworkConnectionsClient>()
+            services.AddHttpClient<INetworkConnectionsClient, NetworkConnectionsClient>("Trakx.Fireblocks.ApiClient.NetworkConnectionsClient")
                 .AddPolicyHandler((s, request) => 
                     Policy<HttpResponseMessage>
                     .Handle<ApiException>()
@@ -135,7 +134,7 @@ namespace Trakx.Fireblocks.ApiClient
                     .WithPolicyKey("NetworkConnectionsClient"));
 
                                 
-            services.AddHttpClient<ITransferTicketsClient, TransferTicketsClient>()
+            services.AddHttpClient<ITransferTicketsClient, TransferTicketsClient>("Trakx.Fireblocks.ApiClient.TransferTicketsClient")
                 .AddPolicyHandler((s, request) => 
                     Policy<HttpResponseMessage>
                     .Handle<ApiException>()
@@ -150,7 +149,7 @@ namespace Trakx.Fireblocks.ApiClient
                     .WithPolicyKey("TransferTicketsClient"));
 
                                 
-            services.AddHttpClient<IFeeClient, FeeClient>()
+            services.AddHttpClient<IFeeClient, FeeClient>("Trakx.Fireblocks.ApiClient.FeeClient")
                 .AddPolicyHandler((s, request) => 
                     Policy<HttpResponseMessage>
                     .Handle<ApiException>()

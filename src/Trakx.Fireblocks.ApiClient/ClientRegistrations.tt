@@ -11,9 +11,9 @@ using Polly;
 using Polly.Contrib.WaitAndRetry;
 using Polly.Extensions.Http;
 using Serilog;
+<# var nameSpace = "Trakx.Fireblocks.ApiClient"; #>
 
-
-namespace Trakx.Fireblocks.ApiClient
+namespace <#= nameSpace #>
 {
     public static partial class AddFireblocksClientExtension
     {
@@ -30,7 +30,7 @@ namespace Trakx.Fireblocks.ApiClient
                 var name = clientName + "Client";
             #>
                         
-            services.AddHttpClient<I<#= name #>, <#= name #>>()
+            services.AddHttpClient<I<#= name #>, <#= name #>>("<#= nameSpace #>.<#= name #>")
                 .AddPolicyHandler((s, request) => 
                     Policy<HttpResponseMessage>
                     .Handle<ApiException>()
