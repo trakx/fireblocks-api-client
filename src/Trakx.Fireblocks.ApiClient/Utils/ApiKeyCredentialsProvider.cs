@@ -8,7 +8,9 @@ using Trakx.Utils.Apis;
 
 namespace Trakx.Fireblocks.ApiClient.Utils
 {
-    public class ApiKeyCredentialsProvider : ICredentialsProvider, IDisposable
+    public interface IFireblocksCredentialsProvider : ICredentialsProvider { };
+
+    public class ApiKeyCredentialsProvider : IFireblocksCredentialsProvider, IDisposable
     {
         internal const string ApiKeyHeader ="X-API-Key";
         internal const string JwtScheme = "Bearer";

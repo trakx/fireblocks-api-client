@@ -39,7 +39,7 @@ namespace Trakx.Fireblocks.ApiClient
         {
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
             services.AddSingleton<IBearerCredentialsProvider, BearerCredentialsProvider>();
-            services.AddSingleton<ICredentialsProvider, ApiKeyCredentialsProvider>();
+            services.AddSingleton<IFireblocksCredentialsProvider, ApiKeyCredentialsProvider>();
 
             services.AddSingleton<ClientConfigurator>();
             AddClients(services);
