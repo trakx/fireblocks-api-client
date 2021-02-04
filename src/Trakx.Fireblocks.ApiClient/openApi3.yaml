@@ -1171,6 +1171,7 @@ paths:
               - FIAT_ACCOUNT
               - NETWORK_CONNECTION
               - COMPOUND
+              - ONE_TIME_ADDRESS
         - in: query
           name: destId
           description: The destination ID of the transaction
@@ -1891,6 +1892,7 @@ components:
             - FIAT_ACCOUNT
             - COMPOUND
             - GAS_STATION
+            - ONE_TIME_ADDRESS
         id:
           type: string
       required:

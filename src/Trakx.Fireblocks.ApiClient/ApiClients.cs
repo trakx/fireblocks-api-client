@@ -9060,6 +9060,9 @@ namespace Trakx.Fireblocks.ApiClient
         [System.Runtime.Serialization.EnumMember(Value = @"COMPOUND")]
         COMPOUND = 6,
     
+        [System.Runtime.Serialization.EnumMember(Value = @"ONE_TIME_ADDRESS")]
+        ONE_TIME_ADDRESS = 7,
+    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.3.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -9142,6 +9145,9 @@ namespace Trakx.Fireblocks.ApiClient
     
         [System.Runtime.Serialization.EnumMember(Value = @"GAS_STATION")]
         GAS_STATION = 7,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"ONE_TIME_ADDRESS")]
+        ONE_TIME_ADDRESS = 8,
     
     }
     

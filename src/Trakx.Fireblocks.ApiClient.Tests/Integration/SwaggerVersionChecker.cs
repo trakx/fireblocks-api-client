@@ -28,7 +28,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             var modifiedOpenApi = GetCurrentOpenApi();
 
             var fireblocksRawOpenApi = Regex.Replace(fireblocksOpenApi, @"\s+", string.Empty);
-            var unmodifiedOpenAPi = Regex.Replace(modifiedOpenApi, @"tags\: \[[A-Za-z]{2,}\]", string.Empty);
+            var unmodifiedOpenAPi = Regex.Replace(modifiedOpenApi, @"tags\: \[[A-Za-z]{2,}\](\r?\n)", string.Empty);
             var currentRawOpenApi = Regex.Replace(unmodifiedOpenAPi, @"\s+", string.Empty);
 
             fireblocksRawOpenApi.Should().Be(currentRawOpenApi);
