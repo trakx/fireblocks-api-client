@@ -9,16 +9,27 @@ paths:
   '/vault/accounts':
     get:
       tags: [Vault]
-      summary: Returns all accounts of the active Vault
+      summary: Retrieves all vault accounts for the specified filter.
+      parameters:
+        - in: query
+          name: namePrefix
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: nameSuffix
+          required: false
+          schema:
+            type: string
       responses:
         '200':
-          description: A list of Vault accounts
+          description: A list of vault accounts
           content:
             '*/*':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/VaultAccount'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/VaultAccount'
         default:
           $ref: '#/components/responses/Error'
     post:
@@ -499,15 +510,15 @@ paths:
   '/vault/assets':
     get:
       tags: [Vault]
-      summary: Gets the assets amount summary for all \ filtered accounts. 
+      summary: Gets the assets amount summary for all \ filtered accounts.
       parameters:
         - in: query
-          name: namePrefix
+          name: accountNamePrefix
           required: false
           schema:
             type: string
         - in: query
-          name: nameSuffix
+          name: accountNameSuffix
           required: false
           schema:
             type: string
@@ -520,6 +531,25 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/VaultAsset'
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/assets/{assetId}':
+    get:
+      tags: [Vault]
+      summary: Gets vault balance summary by asset.
+      parameters:
+        - in: path
+          name: assetId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Vault amount by asset
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VaultAsset'
         default:
           $ref: '#/components/responses/Error'
   #  INTERNAL WALLETS
@@ -1331,6 +1361,32 @@ paths:
                 $ref: '#/components/schemas/CancelTransactionResponse'
         default:
           $ref: '#/components/responses/Error'
+  '/transactions/validate_address/{assetId}/{address}':
+    get:
+      tags: [Transactions]
+      summary: Check if given address is valid
+      parameters:
+        - in: path
+          name: assetId
+          required: true
+          description: The asset of the address
+          schema:
+            type: string
+        - in: path
+          name: address
+          required: true
+          description: The address to validate
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An Transaction object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ValidateAddressResponse'
+        default:
+          $ref: '#/components/responses/Error'
   # '/transactions/{txId}/unfreeze':
   #   post:
   #     summary: Unfreezes a transaction by ID
@@ -1727,6 +1783,12 @@ components:
       type: object
       properties:
         id:
+          type: string
+        address:
+          type: string
+        legacyAddress:
+          type: string
+        tag:
           type: string
         eosAccountName:
           type: string
@@ -2653,3 +2715,12 @@ components:
         - USDT_MARGINED_SWAP_ISOLATED
         - USDT_FUTURES
         - COIN_FUTURES
+    ValidateAddressResponse:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+        isActive:
+          type: boolean
+        requiresTag:
+          type: boolean
