@@ -7,6 +7,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 
+#pragma warning disable CS0618
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
 #pragma warning disable 114 // Disable "CS0114 '{derivedDto}.RaisePropertyChanged(String)' hides inherited member 'dtoBase.RaisePropertyChanged(String)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword."
 #pragma warning disable 472 // Disable "CS0472 The result of the expression is always 'false' since a value of type 'Int32' is never equal to 'null' of type 'Int32?'
@@ -228,7 +229,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -306,7 +307,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -383,7 +384,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -465,7 +466,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -537,7 +538,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -609,7 +610,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -686,7 +687,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -763,7 +764,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -840,7 +841,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -928,7 +929,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -1010,7 +1011,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -1098,7 +1099,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -1190,7 +1191,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -1277,7 +1278,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -1360,7 +1361,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -1445,7 +1446,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -1538,7 +1539,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -1619,7 +1620,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -1695,7 +1696,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -1966,7 +1967,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -2044,7 +2045,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -2121,7 +2122,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -2197,7 +2198,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -2274,7 +2275,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -2351,7 +2352,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -2439,7 +2440,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -2520,7 +2521,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -2786,7 +2787,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -2864,7 +2865,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -2941,7 +2942,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -3017,7 +3018,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -3094,7 +3095,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -3171,7 +3172,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -3259,7 +3260,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -3340,7 +3341,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -3577,7 +3578,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -3654,7 +3655,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -3736,7 +3737,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -3813,7 +3814,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -4054,7 +4055,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -4131,7 +4132,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -4213,7 +4214,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -4290,7 +4291,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -4627,7 +4628,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -4705,7 +4706,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -4783,7 +4784,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -4860,7 +4861,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -4943,7 +4944,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -5026,7 +5027,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -5104,7 +5105,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -5186,7 +5187,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -5269,7 +5270,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -5489,7 +5490,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -5716,7 +5717,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -5793,7 +5794,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -6049,7 +6050,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -6127,7 +6128,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -6204,7 +6205,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -6281,7 +6282,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -6358,7 +6359,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -6445,7 +6446,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -6679,7 +6680,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -6751,7 +6752,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -6828,7 +6829,7 @@ namespace Trakx.Fireblocks.ApiClient
     
                     PrepareRequest(client_, request_, url_);
     
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                     var disposeResponse_ = true;
                     try
                     {
@@ -6974,29 +6975,29 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class WalletAsset 
+    public partial record WalletAsset 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
     
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Balance { get; set; }
+        public string Balance { get; init; }
     
         [Newtonsoft.Json.JsonProperty("lockedAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LockedAmount { get; set; }
+        public string LockedAmount { get; init; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ConfigChangeRequestStatus Status { get; set; }
     
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Address { get; set; }
+        public string Address { get; init; }
     
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
     
         [Newtonsoft.Json.JsonProperty("activationTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ActivationTime { get; set; }
+        public string ActivationTime { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7011,23 +7012,23 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ExternalWalletAsset 
+    public partial record ExternalWalletAsset 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ConfigChangeRequestStatus Status { get; set; }
     
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Address { get; set; }
+        public string Address { get; init; }
     
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
     
         [Newtonsoft.Json.JsonProperty("activationTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ActivationTime { get; set; }
+        public string ActivationTime { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7042,22 +7043,22 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ExchangeAsset 
+    public partial record ExchangeAsset 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
     
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Balance { get; set; }
+        public string Balance { get; init; }
     
         [Newtonsoft.Json.JsonProperty("lockedAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LockedAmount { get; set; }
+        public string LockedAmount { get; init; }
     
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Total { get; set; }
+        public string Total { get; init; }
     
         [Newtonsoft.Json.JsonProperty("available", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Available { get; set; }
+        public string Available { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7072,16 +7073,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ExchangeTradingAccount 
+    public partial record ExchangeTradingAccount 
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Type { get; set; }
+        public string Type { get; init; }
     
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
     
         [Newtonsoft.Json.JsonProperty("assets", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<ExchangeAsset> Assets { get; set; }
+        public System.Collections.Generic.List<ExchangeAsset> Assets { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7096,13 +7097,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class FiatAsset 
+    public partial record FiatAsset 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
     
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Balance { get; set; }
+        public string Balance { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7117,22 +7118,22 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CreateVaultAssetResponse 
+    public partial record CreateVaultAssetResponse 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
     
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Address { get; set; }
+        public string Address { get; init; }
     
         [Newtonsoft.Json.JsonProperty("legacyAddress", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LegacyAddress { get; set; }
+        public string LegacyAddress { get; init; }
     
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
     
         [Newtonsoft.Json.JsonProperty("eosAccountName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string EosAccountName { get; set; }
+        public string EosAccountName { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7147,14 +7148,14 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class VaultAsset 
+    public partial record VaultAsset 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
     
         /// <summary>The total wallet balance. In EOS this value includes the network balance, self staking and pending refund. For all other coins it is the balance as it appears on the blockchain.</summary>
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Total { get; set; }
+        public string Total { get; init; }
     
         /// <summary>Deprecated - replaced by "total"</summary>
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -7163,37 +7164,37 @@ namespace Trakx.Fireblocks.ApiClient
     
         /// <summary>Funds available for transfer. Equals the blockchain balance minus any locked amounts</summary>
         [Newtonsoft.Json.JsonProperty("available", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Available { get; set; }
+        public string Available { get; init; }
     
         /// <summary>The cumulative balance of all transactions pending to be cleared</summary>
         [Newtonsoft.Json.JsonProperty("pending", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Pending { get; set; }
+        public string Pending { get; init; }
     
         /// <summary>The cumulative frozen balance</summary>
         [Newtonsoft.Json.JsonProperty("frozen", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Frozen { get; set; }
+        public string Frozen { get; init; }
     
         /// <summary>Funds in outgoing transactions that are not yet published to the network</summary>
         [Newtonsoft.Json.JsonProperty("lockedAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LockedAmount { get; set; }
+        public string LockedAmount { get; init; }
     
         [Newtonsoft.Json.JsonProperty("totalStakedCPU", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TotalStakedCPU { get; set; }
+        public string TotalStakedCPU { get; init; }
     
         [Newtonsoft.Json.JsonProperty("totalStakedNetwork", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TotalStakedNetwork { get; set; }
+        public string TotalStakedNetwork { get; init; }
     
         [Newtonsoft.Json.JsonProperty("selfStakedCPU", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SelfStakedCPU { get; set; }
+        public string SelfStakedCPU { get; init; }
     
         [Newtonsoft.Json.JsonProperty("selfStakedNetwork", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SelfStakedNetwork { get; set; }
+        public string SelfStakedNetwork { get; init; }
     
         [Newtonsoft.Json.JsonProperty("pendingRefundCPU", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PendingRefundCPU { get; set; }
+        public string PendingRefundCPU { get; init; }
     
         [Newtonsoft.Json.JsonProperty("pendingRefundNetwork", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PendingRefundNetwork { get; set; }
+        public string PendingRefundNetwork { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7208,25 +7209,25 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class VaultWalletAddress 
+    public partial record VaultWalletAddress 
     {
         [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AssetId { get; set; }
+        public string AssetId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Address { get; set; }
+        public string Address { get; init; }
     
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Description { get; set; }
+        public string Description { get; init; }
     
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
     
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Type { get; set; }
+        public string Type { get; init; }
     
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("addressFormat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -7245,16 +7246,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CreateAddressResponse 
+    public partial record CreateAddressResponse 
     {
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Address { get; set; }
+        public string Address { get; init; }
     
         [Newtonsoft.Json.JsonProperty("legacyAddress", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LegacyAddress { get; set; }
+        public string LegacyAddress { get; init; }
     
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7269,25 +7270,25 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class VaultAccount 
+    public partial record VaultAccount 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
     
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
     
         [Newtonsoft.Json.JsonProperty("assets", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<VaultAsset> Assets { get; set; }
+        public System.Collections.Generic.List<VaultAsset> Assets { get; init; }
     
         [Newtonsoft.Json.JsonProperty("hiddenOnUI", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool HiddenOnUI { get; set; }
+        public bool HiddenOnUI { get; init; }
     
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("autoFuel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool AutoFuel { get; set; }
+        public bool AutoFuel { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7302,7 +7303,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class UnmanagedWallet 
+    public partial record UnmanagedWallet 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -7313,10 +7314,10 @@ namespace Trakx.Fireblocks.ApiClient
         public string Name { get; set; }
     
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("assets", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<WalletAsset> Assets { get; set; }
+        public System.Collections.Generic.List<WalletAsset> Assets { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7331,10 +7332,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ExchangeAccount 
+    public partial record ExchangeAccount 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
     
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -7342,24 +7343,24 @@ namespace Trakx.Fireblocks.ApiClient
     
         /// <summary>Display name of the exchange account</summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Status { get; set; }
+        public string Status { get; init; }
     
         [Newtonsoft.Json.JsonProperty("assets", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<ExchangeAsset> Assets { get; set; }
+        public System.Collections.Generic.List<ExchangeAsset> Assets { get; init; }
     
         [Newtonsoft.Json.JsonProperty("tradingAccounts", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<ExchangeTradingAccount> TradingAccounts { get; set; }
+        public System.Collections.Generic.List<ExchangeTradingAccount> TradingAccounts { get; init; }
     
         /// <summary>True if the account is a subaccount in an exchange</summary>
         [Newtonsoft.Json.JsonProperty("isSubaccount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsSubaccount { get; set; }
+        public bool IsSubaccount { get; init; }
     
         /// <summary>if the account is a sub-account, the ID of the main account</summary>
         [Newtonsoft.Json.JsonProperty("mainAccountId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MainAccountId { get; set; }
+        public string MainAccountId { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7374,10 +7375,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class FiatAccount 
+    public partial record FiatAccount 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
     
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -7385,10 +7386,10 @@ namespace Trakx.Fireblocks.ApiClient
     
         /// <summary>Display name of the fiat account</summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
     
         [Newtonsoft.Json.JsonProperty("assets", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<FiatAsset> Assets { get; set; }
+        public System.Collections.Generic.List<FiatAsset> Assets { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7403,14 +7404,14 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class OneTimeAddress 
+    public partial record OneTimeAddress 
     {
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Address { get; set; }
     
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7425,7 +7426,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class TransferPeerPath 
+    public partial record TransferPeerPath 
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -7433,7 +7434,7 @@ namespace Trakx.Fireblocks.ApiClient
         public TransferPeerPathType Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7448,10 +7449,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class DestinationTransferPeerPath : TransferPeerPath
+    public partial record DestinationTransferPeerPath : TransferPeerPath
     {
         [Newtonsoft.Json.JsonProperty("oneTimeAddress", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public OneTimeAddress OneTimeAddress { get; set; }
+        public OneTimeAddress OneTimeAddress { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7466,13 +7467,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CreateTransactionResponse 
+    public partial record CreateTransactionResponse 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Status { get; set; }
+        public string Status { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7487,10 +7488,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CancelTransactionResponse 
+    public partial record CancelTransactionResponse 
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Success { get; set; }
+        public bool Success { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7505,10 +7506,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class UnfreezeTransactionResponse 
+    public partial record UnfreezeTransactionResponse 
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Success { get; set; }
+        public bool Success { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7523,13 +7524,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class AmlScreeningResult 
+    public partial record AmlScreeningResult 
     {
         [Newtonsoft.Json.JsonProperty("provider", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Provider { get; set; }
+        public string Provider { get; init; }
     
         [Newtonsoft.Json.JsonProperty("payload", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object Payload { get; set; }
+        public object Payload { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7544,13 +7545,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class FeeInfo 
+    public partial record FeeInfo 
     {
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkFee { get; set; }
+        public string NetworkFee { get; init; }
     
         [Newtonsoft.Json.JsonProperty("serviceFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ServiceFee { get; set; }
+        public string ServiceFee { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7565,19 +7566,19 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class AmountInfo 
+    public partial record AmountInfo 
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
     
         [Newtonsoft.Json.JsonProperty("requestedAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string RequestedAmount { get; set; }
+        public string RequestedAmount { get; init; }
     
         [Newtonsoft.Json.JsonProperty("netAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetAmount { get; set; }
+        public string NetAmount { get; init; }
     
         [Newtonsoft.Json.JsonProperty("amountUSD", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AmountUSD { get; set; }
+        public string AmountUSD { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7592,13 +7593,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class TransferPeerPathResponse : TransferPeerPath
+    public partial record TransferPeerPathResponse : TransferPeerPath
     {
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
     
         [Newtonsoft.Json.JsonProperty("subType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SubType { get; set; }
+        public string SubType { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7613,39 +7614,39 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class TransactionResponse 
+    public partial record TransactionResponse 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
     
         [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AssetId { get; set; }
+        public string AssetId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("source", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPathResponse Source { get; set; }
+        public TransferPeerPathResponse Source { get; init; }
     
         [Newtonsoft.Json.JsonProperty("destination", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPathResponse Destination { get; set; }
+        public TransferPeerPathResponse Destination { get; init; }
     
         /// <summary>The amount requested by the user</summary>
         [Newtonsoft.Json.JsonProperty("requestedAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double RequestedAmount { get; set; }
+        public double RequestedAmount { get; init; }
     
         /// <summary>If the transfer is a withdrawal from an exchange, the actual amount that was requested to be transferred. Otherwise, the requested amount</summary>
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Amount { get; set; }
+        public double Amount { get; init; }
     
         /// <summary>The net amount of the transaction, after fee deduction</summary>
         [Newtonsoft.Json.JsonProperty("netAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NetAmount { get; set; }
+        public double NetAmount { get; init; }
     
         /// <summary>The USD value of the requested amount</summary>
         [Newtonsoft.Json.JsonProperty("amountUSD", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double AmountUSD { get; set; }
+        public double AmountUSD { get; init; }
     
         /// <summary>The total fee deducted by the exchange from the actual requested amount (serviceFee = amount - netAmount)</summary>
         [Newtonsoft.Json.JsonProperty("serviceFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double ServiceFee { get; set; }
+        public double ServiceFee { get; init; }
     
         /// <summary>Deprecated - replaced by "networkFee"</summary>
         [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -7654,90 +7655,90 @@ namespace Trakx.Fireblocks.ApiClient
     
         /// <summary>The fee paid to the network</summary>
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NetworkFee { get; set; }
+        public double NetworkFee { get; init; }
     
         /// <summary>Unix timestamp</summary>
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double CreatedAt { get; set; }
+        public double CreatedAt { get; init; }
     
         /// <summary>Unix timestamp</summary>
         [Newtonsoft.Json.JsonProperty("lastUpdated", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double LastUpdated { get; set; }
+        public double LastUpdated { get; init; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransactionResponseStatus Status { get; set; }
     
         [Newtonsoft.Json.JsonProperty("txHash", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TxHash { get; set; }
+        public string TxHash { get; init; }
     
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
     
         [Newtonsoft.Json.JsonProperty("subStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransactionSubStatus SubStatus { get; set; }
     
         [Newtonsoft.Json.JsonProperty("destinationAddress", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DestinationAddress { get; set; }
+        public string DestinationAddress { get; init; }
     
         [Newtonsoft.Json.JsonProperty("destinationAddressDescription", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DestinationAddressDescription { get; set; }
+        public string DestinationAddressDescription { get; init; }
     
         [Newtonsoft.Json.JsonProperty("destinationTag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DestinationTag { get; set; }
+        public string DestinationTag { get; init; }
     
         [Newtonsoft.Json.JsonProperty("signedBy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<string> SignedBy { get; set; }
+        public System.Collections.Generic.List<string> SignedBy { get; init; }
     
         [Newtonsoft.Json.JsonProperty("createdBy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get; init; }
     
         [Newtonsoft.Json.JsonProperty("rejectedBy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string RejectedBy { get; set; }
+        public string RejectedBy { get; init; }
     
         [Newtonsoft.Json.JsonProperty("addressType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AddressType { get; set; }
+        public string AddressType { get; init; }
     
         [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Note { get; set; }
+        public string Note { get; init; }
     
         [Newtonsoft.Json.JsonProperty("exchangeTxId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ExchangeTxId { get; set; }
+        public string ExchangeTxId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("feeCurrency", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FeeCurrency { get; set; }
+        public string FeeCurrency { get; init; }
     
         [Newtonsoft.Json.JsonProperty("operation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransactionOperation Operation { get; set; }
     
         [Newtonsoft.Json.JsonProperty("networkRecords", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<NetworkRecord> NetworkRecords { get; set; }
+        public System.Collections.Generic.List<NetworkRecord> NetworkRecords { get; init; }
     
         [Newtonsoft.Json.JsonProperty("amlScreeningResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public AmlScreeningResult AmlScreeningResult { get; set; }
+        public AmlScreeningResult AmlScreeningResult { get; init; }
     
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("numOfConfirmations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NumOfConfirmations { get; set; }
+        public double NumOfConfirmations { get; init; }
     
         [Newtonsoft.Json.JsonProperty("amountInfo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public AmountInfo AmountInfo { get; set; }
+        public AmountInfo AmountInfo { get; init; }
     
         [Newtonsoft.Json.JsonProperty("feeInfo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FeeInfo FeeInfo { get; set; }
+        public FeeInfo FeeInfo { get; init; }
     
         [Newtonsoft.Json.JsonProperty("signedMessages", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<SignedMessage> SignedMessages { get; set; }
+        public System.Collections.Generic.List<SignedMessage> SignedMessages { get; init; }
     
         [Newtonsoft.Json.JsonProperty("extraParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object ExtraParameters { get; set; }
+        public object ExtraParameters { get; init; }
     
         [Newtonsoft.Json.JsonProperty("destinations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<TransactionResponseDestination> Destinations { get; set; }
+        public System.Collections.Generic.List<TransactionResponseDestination> Destinations { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7752,19 +7753,19 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class TransactionResponseDestination 
+    public partial record TransactionResponseDestination 
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
     
         [Newtonsoft.Json.JsonProperty("amountUSD", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AmountUSD { get; set; }
+        public string AmountUSD { get; init; }
     
         [Newtonsoft.Json.JsonProperty("amlScreeningResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public AmlScreeningResult AmlScreeningResult { get; set; }
+        public AmlScreeningResult AmlScreeningResult { get; init; }
     
         [Newtonsoft.Json.JsonProperty("destination", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPathResponse Destination { get; set; }
+        public TransferPeerPathResponse Destination { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7779,36 +7780,36 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class NetworkRecord 
+    public partial record NetworkRecord 
     {
         [Newtonsoft.Json.JsonProperty("source", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPathResponse Source { get; set; }
+        public TransferPeerPathResponse Source { get; init; }
     
         [Newtonsoft.Json.JsonProperty("destination", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPathResponse Destination { get; set; }
+        public TransferPeerPathResponse Destination { get; init; }
     
         [Newtonsoft.Json.JsonProperty("txHash", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TxHash { get; set; }
+        public string TxHash { get; init; }
     
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkFee { get; set; }
+        public string NetworkFee { get; init; }
     
         [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AssetId { get; set; }
+        public string AssetId { get; init; }
     
         /// <summary>The net amount of the transaction, after fee deduction</summary>
         [Newtonsoft.Json.JsonProperty("netAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetAmount { get; set; }
+        public string NetAmount { get; init; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public NetworkRecordStatus Status { get; set; }
     
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Type { get; set; }
+        public string Type { get; init; }
     
         [Newtonsoft.Json.JsonProperty("destinationAddress", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DestinationAddress { get; set; }
+        public string DestinationAddress { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7823,7 +7824,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class AssetTypeResponse 
+    public partial record AssetTypeResponse 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -7839,7 +7840,7 @@ namespace Trakx.Fireblocks.ApiClient
         public AssetTypeResponseType Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("contractAddress", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ContractAddress { get; set; }
+        public string ContractAddress { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7854,7 +7855,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class NetworkConnectionResponse 
+    public partial record NetworkConnectionResponse 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -7881,7 +7882,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class EstimatedTransactionFeeResponse 
+    public partial record EstimatedTransactionFeeResponse 
     {
         [Newtonsoft.Json.JsonProperty("low", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -7908,7 +7909,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class EstimatedNetworkFeeResponse 
+    public partial record EstimatedNetworkFeeResponse 
     {
         [Newtonsoft.Json.JsonProperty("low", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -7935,13 +7936,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class GasStationPropertiesResponse 
+    public partial record GasStationPropertiesResponse 
     {
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object Balance { get; set; }
+        public object Balance { get; init; }
     
         [Newtonsoft.Json.JsonProperty("configuration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public GasStationConfiguration Configuration { get; set; }
+        public GasStationConfiguration Configuration { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7956,19 +7957,19 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class TransactionFee 
+    public partial record TransactionFee 
     {
         [Newtonsoft.Json.JsonProperty("feePerByte", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FeePerByte { get; set; }
+        public string FeePerByte { get; init; }
     
         [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasPrice { get; set; }
+        public string GasPrice { get; init; }
     
         [Newtonsoft.Json.JsonProperty("gasLimit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasLimit { get; set; }
+        public string GasLimit { get; init; }
     
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkFee { get; set; }
+        public string NetworkFee { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -7983,16 +7984,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class NetworkFee 
+    public partial record NetworkFee 
     {
         [Newtonsoft.Json.JsonProperty("feePerByte", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FeePerByte { get; set; }
+        public string FeePerByte { get; init; }
     
         [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasPrice { get; set; }
+        public string GasPrice { get; init; }
     
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkFee1 { get; set; }
+        public string NetworkFee1 { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8007,16 +8008,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class GasStationConfiguration 
+    public partial record GasStationConfiguration 
     {
         [Newtonsoft.Json.JsonProperty("gasThreshold", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasThreshold { get; set; }
+        public string GasThreshold { get; init; }
     
         [Newtonsoft.Json.JsonProperty("gasCap", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasCap { get; set; }
+        public string GasCap { get; init; }
     
         [Newtonsoft.Json.JsonProperty("maxGasPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MaxGasPrice { get; set; }
+        public string MaxGasPrice { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8031,13 +8032,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Channel 
+    public partial record Channel 
     {
         [Newtonsoft.Json.JsonProperty("networkId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkId { get; set; }
+        public string NetworkId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8052,69 +8053,69 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class TransactionRequest 
+    public partial record TransactionRequest 
     {
         [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AssetId { get; set; }
+        public string AssetId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("source", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPath Source { get; set; }
+        public TransferPeerPath Source { get; init; }
     
         [Newtonsoft.Json.JsonProperty("destination", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public DestinationTransferPeerPath Destination { get; set; }
+        public DestinationTransferPeerPath Destination { get; init; }
     
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Amount { get; set; }
+        public double Amount { get; init; }
     
         /// <summary>- For BTC based assets, the fee per bytes in the asset's smallest unit (Satoshi/Latoshi etc.)
         /// - For XRP, the fee for the transaction</summary>
         [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Fee { get; set; }
+        public double Fee { get; init; }
     
         [Newtonsoft.Json.JsonProperty("feeLevel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransactionRequestFeeLevel FeeLevel { get; set; }
     
         [Newtonsoft.Json.JsonProperty("failOnLowFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool FailOnLowFee { get; set; }
+        public bool FailOnLowFee { get; init; }
     
         [Newtonsoft.Json.JsonProperty("maxFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MaxFee { get; set; }
+        public string MaxFee { get; init; }
     
         /// <summary>For ETH based asset only. this will be used instead of the fee property. Value is in gwei</summary>
         [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double GasPrice { get; set; }
+        public double GasPrice { get; init; }
     
         [Newtonsoft.Json.JsonProperty("gasLimit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double GasLimit { get; set; }
+        public double GasLimit { get; init; }
     
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NetworkFee { get; set; }
+        public double NetworkFee { get; init; }
     
         [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Note { get; set; }
+        public string Note { get; init; }
     
         [Newtonsoft.Json.JsonProperty("autoStaking", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool AutoStaking { get; set; }
+        public bool AutoStaking { get; init; }
     
         [Newtonsoft.Json.JsonProperty("networkStaking", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NetworkStaking { get; set; }
+        public double NetworkStaking { get; init; }
     
         [Newtonsoft.Json.JsonProperty("cpuStaking", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double CpuStaking { get; set; }
+        public double CpuStaking { get; init; }
     
         [Newtonsoft.Json.JsonProperty("extraParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object ExtraParameters { get; set; }
+        public object ExtraParameters { get; init; }
     
         [Newtonsoft.Json.JsonProperty("operation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransactionOperation Operation { get; set; }
     
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("destinations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<TransactionRequestDestination> Destinations { get; set; }
+        public System.Collections.Generic.List<TransactionRequestDestination> Destinations { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8129,13 +8130,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class TransactionRequestDestination 
+    public partial record TransactionRequestDestination 
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
     
         [Newtonsoft.Json.JsonProperty("destination", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public DestinationTransferPeerPath Destination { get; set; }
+        public DestinationTransferPeerPath Destination { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8167,50 +8168,53 @@ namespace Trakx.Fireblocks.ApiClient
         [System.Runtime.Serialization.EnumMember(Value = @"BITMEX")]
         BITMEX = 4,
     
+        [System.Runtime.Serialization.EnumMember(Value = @"FTX")]
+        FTX = 5,
+    
         [System.Runtime.Serialization.EnumMember(Value = @"KRAKEN")]
-        KRAKEN = 5,
+        KRAKEN = 6,
     
         [System.Runtime.Serialization.EnumMember(Value = @"GEMINI")]
-        GEMINI = 6,
+        GEMINI = 7,
     
         [System.Runtime.Serialization.EnumMember(Value = @"BITFINEX")]
-        BITFINEX = 7,
+        BITFINEX = 8,
     
         [System.Runtime.Serialization.EnumMember(Value = @"BITSTAMP")]
-        BITSTAMP = 8,
+        BITSTAMP = 9,
     
         [System.Runtime.Serialization.EnumMember(Value = @"POLONIEX")]
-        POLONIEX = 9,
+        POLONIEX = 10,
     
         [System.Runtime.Serialization.EnumMember(Value = @"DERIBIT")]
-        DERIBIT = 10,
+        DERIBIT = 11,
     
         [System.Runtime.Serialization.EnumMember(Value = @"LIQUID")]
-        LIQUID = 11,
+        LIQUID = 12,
     
         [System.Runtime.Serialization.EnumMember(Value = @"HUOBI")]
-        HUOBI = 12,
+        HUOBI = 13,
     
         [System.Runtime.Serialization.EnumMember(Value = @"BITHUMB")]
-        BITHUMB = 13,
+        BITHUMB = 14,
     
         [System.Runtime.Serialization.EnumMember(Value = @"OKEX")]
-        OKEX = 14,
+        OKEX = 15,
     
         [System.Runtime.Serialization.EnumMember(Value = @"OKCOIN")]
-        OKCOIN = 15,
+        OKCOIN = 16,
     
         [System.Runtime.Serialization.EnumMember(Value = @"HITBTC")]
-        HITBTC = 16,
+        HITBTC = 17,
     
         [System.Runtime.Serialization.EnumMember(Value = @"KORBIT")]
-        KORBIT = 17,
+        KORBIT = 18,
     
         [System.Runtime.Serialization.EnumMember(Value = @"SEEDCX")]
-        SEEDCX = 18,
+        SEEDCX = 19,
     
         [System.Runtime.Serialization.EnumMember(Value = @"BITSO")]
-        BITSO = 19,
+        BITSO = 20,
     
     }
     
@@ -8269,13 +8273,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Error 
+    public partial record Error 
     {
         [Newtonsoft.Json.JsonProperty("error", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Error1 { get; set; }
+        public string Error1 { get; init; }
     
         [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Code { get; set; }
+        public double Code { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8480,35 +8484,35 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class TransferTicketTermResponse 
+    public partial record TransferTicketTermResponse 
     {
         [Newtonsoft.Json.JsonProperty("termId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TermId { get; set; }
+        public string TermId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("networkConnectionId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkConnectionId { get; set; }
+        public string NetworkConnectionId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("outgoing", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Outgoing { get; set; }
+        public bool Outgoing { get; init; }
     
         [Newtonsoft.Json.JsonProperty("asset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Asset { get; set; }
+        public string Asset { get; init; }
     
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
     
         [Newtonsoft.Json.JsonProperty("txIds", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<string> TxIds { get; set; }
+        public System.Collections.Generic.List<string> TxIds { get; init; }
     
         [Newtonsoft.Json.JsonProperty("operation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Operation { get; set; }
+        public string Operation { get; init; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransferTicketTermResponseStatus Status { get; set; }
     
         [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Note { get; set; }
+        public string Note { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8523,10 +8527,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CreateTransferTicketResponse 
+    public partial record CreateTransferTicketResponse 
     {
         [Newtonsoft.Json.JsonProperty("ticketId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TicketId { get; set; }
+        public string TicketId { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8541,23 +8545,23 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class TransferTicketResponse 
+    public partial record TransferTicketResponse 
     {
         [Newtonsoft.Json.JsonProperty("ticketId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TicketId { get; set; }
+        public string TicketId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("externalTicketId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ExternalTicketId { get; set; }
+        public string ExternalTicketId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Description { get; set; }
+        public string Description { get; init; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransferTicketResponseStatus Status { get; set; }
     
         [Newtonsoft.Json.JsonProperty("terms", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<TransferTicketTermResponse> Terms { get; set; }
+        public System.Collections.Generic.List<TransferTicketTermResponse> Terms { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8572,25 +8576,25 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Term 
+    public partial record Term 
     {
         [Newtonsoft.Json.JsonProperty("networkConnectionId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkConnectionId { get; set; }
+        public string NetworkConnectionId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("outgoing", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Outgoing { get; set; }
+        public bool Outgoing { get; init; }
     
         [Newtonsoft.Json.JsonProperty("asset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Asset { get; set; }
+        public string Asset { get; init; }
     
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
     
         [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Note { get; set; }
+        public string Note { get; init; }
     
         [Newtonsoft.Json.JsonProperty("operation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Operation { get; set; }
+        public string Operation { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8605,10 +8609,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class SetConfirmationsThresholdRequest 
+    public partial record SetConfirmationsThresholdRequest 
     {
         [Newtonsoft.Json.JsonProperty("numOfConfirmations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NumOfConfirmations { get; set; }
+        public double NumOfConfirmations { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8623,13 +8627,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class SetConfirmationsThresholdResponse 
+    public partial record SetConfirmationsThresholdResponse 
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Success { get; set; }
+        public bool Success { get; init; }
     
         [Newtonsoft.Json.JsonProperty("transactions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<string> Transactions { get; set; }
+        public System.Collections.Generic.List<string> Transactions { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8644,16 +8648,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class DropTransactionRequest 
+    public partial record DropTransactionRequest 
     {
         [Newtonsoft.Json.JsonProperty("txId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TxId { get; set; }
+        public string TxId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("feeLevel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FeeLevel { get; set; }
+        public string FeeLevel { get; init; }
     
         [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasPrice { get; set; }
+        public string GasPrice { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8668,13 +8672,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class DropTransactionResponse 
+    public partial record DropTransactionResponse 
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Success { get; set; }
+        public bool Success { get; init; }
     
         [Newtonsoft.Json.JsonProperty("transactions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<string> Transactions { get; set; }
+        public System.Collections.Generic.List<string> Transactions { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8689,20 +8693,20 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class UnsignedMessage 
+    public partial record UnsignedMessage 
     {
         [Newtonsoft.Json.JsonProperty("content", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Content { get; set; }
     
         [Newtonsoft.Json.JsonProperty("bip44addressIndex", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Bip44addressIndex { get; set; }
+        public double Bip44addressIndex { get; init; }
     
         [Newtonsoft.Json.JsonProperty("bip44change", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Bip44change { get; set; }
+        public double Bip44change { get; init; }
     
         [Newtonsoft.Json.JsonProperty("derivationPath", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<double> DerivationPath { get; set; }
+        public System.Collections.Generic.List<double> DerivationPath { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8717,23 +8721,23 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class SignedMessage 
+    public partial record SignedMessage 
     {
         [Newtonsoft.Json.JsonProperty("content", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Content { get; set; }
+        public string Content { get; init; }
     
         [Newtonsoft.Json.JsonProperty("algorithm", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public SignedMessageAlgorithm Algorithm { get; set; }
     
         [Newtonsoft.Json.JsonProperty("derivationPath", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<double> DerivationPath { get; set; }
+        public System.Collections.Generic.List<double> DerivationPath { get; init; }
     
         [Newtonsoft.Json.JsonProperty("signature", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Signature Signature { get; set; }
+        public Signature Signature { get; init; }
     
         [Newtonsoft.Json.JsonProperty("publicKey", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PublicKey { get; set; }
+        public string PublicKey { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8748,16 +8752,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class PublicKeyInformation 
+    public partial record PublicKeyInformation 
     {
         [Newtonsoft.Json.JsonProperty("algorithm", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Algorithm { get; set; }
+        public string Algorithm { get; init; }
     
         [Newtonsoft.Json.JsonProperty("derivationPath", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<double> DerivationPath { get; set; }
+        public System.Collections.Generic.List<double> DerivationPath { get; init; }
     
         [Newtonsoft.Json.JsonProperty("publicKey", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PublicKey { get; set; }
+        public string PublicKey { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8819,16 +8823,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ValidateAddressResponse 
+    public partial record ValidateAddressResponse 
     {
         [Newtonsoft.Json.JsonProperty("isValid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsValid { get; set; }
+        public bool IsValid { get; init; }
     
         [Newtonsoft.Json.JsonProperty("isActive", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; init; }
     
         [Newtonsoft.Json.JsonProperty("requiresTag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool RequiresTag { get; set; }
+        public bool RequiresTag { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8843,23 +8847,23 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body 
+    public partial record Body 
     {
         /// <summary>Account Name</summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
     
         /// <summary>Optional - if true, the created account and all related transactions will not be shown on Fireblocks console</summary>
         [Newtonsoft.Json.JsonProperty("hiddenOnUI", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool HiddenOnUI { get; set; }
+        public bool HiddenOnUI { get; init; }
     
         /// <summary>Optional - Sets a customer reference ID</summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         /// <summary>Optional - Sets the autoFuel property of the vault account</summary>
         [Newtonsoft.Json.JsonProperty("autoFuel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool AutoFuel { get; set; }
+        public bool AutoFuel { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8874,11 +8878,11 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body2 
+    public partial record Body2 
     {
         /// <summary>Account Name</summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8893,11 +8897,11 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body3 
+    public partial record Body3 
     {
         /// <summary>Customer reference ID</summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8912,11 +8916,11 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body4 
+    public partial record Body4 
     {
         /// <summary>Auto Fuel</summary>
         [Newtonsoft.Json.JsonProperty("autoFuel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool AutoFuel { get; set; }
+        public bool AutoFuel { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8931,11 +8935,11 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body5 
+    public partial record Body5 
     {
         /// <summary>Optional - when creating an EOS wallet, the account name. If not provided, a random name will be generated</summary>
         [Newtonsoft.Json.JsonProperty("eosAccountName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string EosAccountName { get; set; }
+        public string EosAccountName { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8950,15 +8954,15 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body6 
+    public partial record Body6 
     {
         /// <summary>(Optional) Attach a description to the new address</summary>
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Description { get; set; }
+        public string Description { get; init; }
     
         /// <summary>Optional - Sets a customer reference ID</summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8973,11 +8977,11 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body7 
+    public partial record Body7 
     {
         /// <summary>The address description</summary>
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Description { get; set; }
+        public string Description { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8992,11 +8996,11 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body8 
+    public partial record Body8 
     {
         /// <summary>Customer reference ID</summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9011,15 +9015,15 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body9 
+    public partial record Body9 
     {
         /// <summary>the wallet's display name</summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
     
         /// <summary>Optional - Sets a customer reference ID</summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9034,11 +9038,11 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body10 
+    public partial record Body10 
     {
         /// <summary>Customer reference ID</summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9053,7 +9057,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body11 
+    public partial record Body11 
     {
         /// <summary>The wallet's address or, for EOS wallets, the account name</summary>
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Always)]
@@ -9062,7 +9066,7 @@ namespace Trakx.Fireblocks.ApiClient
     
         /// <summary>for XRP wallets, the destination tag. For EOS, the memo</summary>
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9077,15 +9081,15 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body12 
+    public partial record Body12 
     {
         /// <summary>the wallet's display name</summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
     
         /// <summary>Optional - Sets a customer reference ID</summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9100,11 +9104,11 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body13 
+    public partial record Body13 
     {
         /// <summary>Customer reference ID</summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9119,7 +9123,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body14 
+    public partial record Body14 
     {
         /// <summary>The wallet's address (or xpub) of the wallet</summary>
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Always)]
@@ -9128,7 +9132,7 @@ namespace Trakx.Fireblocks.ApiClient
     
         /// <summary>The destination tag, for XRP wallets</summary>
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9143,13 +9147,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body15 
+    public partial record Body15 
     {
         [Newtonsoft.Json.JsonProperty("asset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Asset { get; set; }
+        public string Asset { get; init; }
     
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
     
         [Newtonsoft.Json.JsonProperty("sourceType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -9172,10 +9176,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body16 
+    public partial record Body16 
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Amount { get; set; }
+        public double Amount { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9190,10 +9194,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body17 
+    public partial record Body17 
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Amount { get; set; }
+        public double Amount { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9280,17 +9284,17 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body18 
+    public partial record Body18 
     {
         [Newtonsoft.Json.JsonProperty("terms", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.List<Term> Terms { get; set; } = new System.Collections.Generic.List<Term>();
     
         [Newtonsoft.Json.JsonProperty("externalTicketId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ExternalTicketId { get; set; }
+        public string ExternalTicketId { get; init; }
     
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Description { get; set; }
+        public string Description { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9305,10 +9309,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Body19 
+    public partial record Body19 
     {
         [Newtonsoft.Json.JsonProperty("source", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPath Source { get; set; }
+        public TransferPeerPath Source { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9515,19 +9519,19 @@ namespace Trakx.Fireblocks.ApiClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Signature 
+    public partial record Signature 
     {
         [Newtonsoft.Json.JsonProperty("fullSig", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FullSig { get; set; }
+        public string FullSig { get; init; }
     
         [Newtonsoft.Json.JsonProperty("r", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string R { get; set; }
+        public string R { get; init; }
     
         [Newtonsoft.Json.JsonProperty("s", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string S { get; set; }
+        public string S { get; init; }
     
         [Newtonsoft.Json.JsonProperty("v", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double V { get; set; }
+        public double V { get; init; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     

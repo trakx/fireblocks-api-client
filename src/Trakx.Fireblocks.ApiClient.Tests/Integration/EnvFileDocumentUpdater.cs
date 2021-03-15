@@ -7,5 +7,4 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
     {
         public EnvFileDocumentUpdater(ITestOutputHelper output) : base(output) { }
     }
-
 }

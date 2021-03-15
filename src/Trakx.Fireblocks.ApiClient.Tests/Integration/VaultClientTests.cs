@@ -7,11 +7,11 @@ using Xunit.Abstractions;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration
 {
-    public class FireBlocksVaultClientTests : FireblocksClientTestsBase
+    public class VaultClientTests : FireblocksClientTestsBase
     {
         private readonly IVaultClient _fireblocksClient;
 
-        public FireBlocksVaultClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output) : base(apiFixture, output)
+        public VaultClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output) : base(apiFixture, output)
         {
             _fireblocksClient = ServiceProvider.GetRequiredService<IVaultClient>();
         }

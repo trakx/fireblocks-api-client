@@ -2358,6 +2358,7 @@ components:
         - BINANCE
         - BINANCEUS
         - BITMEX
+        - FTX
         - KRAKEN
         - GEMINI
         - BITFINEX

@@ -30,10 +30,9 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             var fireblocksRawOpenApi = Regex.Replace(fireblocksOpenApi, @"\s+", string.Empty);
             var unmodifiedOpenAPi = Regex.Replace(modifiedOpenApi, @"tags\: \[[A-Za-z]{2,}\](\r?\n)", string.Empty);
             var currentRawOpenApi = Regex.Replace(unmodifiedOpenAPi, @"\s+", string.Empty);
+            currentRawOpenApi = Regex.Replace(currentRawOpenApi, "-FTX", string.Empty);
 
             fireblocksRawOpenApi.Should().Be(currentRawOpenApi);
-            var isEqual = string.Equals(fireblocksRawOpenApi, currentRawOpenApi, StringComparison.OrdinalIgnoreCase);
-            isEqual.Should().BeTrue();
         }
 
 
