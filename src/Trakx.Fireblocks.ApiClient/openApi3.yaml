@@ -21,15 +21,20 @@ paths:
           required: false
           schema:
             type: string
+        - in: query
+          name: minAmountThreshold
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: A list of vault accounts
           content:
             '*/*':
               schema:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/VaultAccount'
+                type: array
+                items:
+                  $ref: '#/components/schemas/VaultAccount'
         default:
           $ref: '#/components/responses/Error'
     post:
@@ -146,6 +151,72 @@ paths:
           description: OK
         default:
           $ref: '#/components/responses/Error'
+  /vault/accounts/{vaultAccountId}/{assetId}/lock_allocation:
+    post:
+      tags: [Vault]
+      summary: Allocate funds to private ledger
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: The vault account to allocate funds in
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: assetId
+          required: true
+          description: The allocation asset id
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A transaction object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateTransactionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllocateFundsRequest'
+  /vault/accounts/{vaultAccountId}/{assetId}/release_allocation:
+    post:
+      tags: [Vault]
+      summary: Deallocate funds from private ledger
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: The vault account to allocate funds in
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: assetId
+          required: true
+          description: The allocation asset id
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A transaction object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateTransactionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeallocateFundsRequest'
   '/vault/accounts/{vaultAccountId}/set_customer_ref_id':
     post:
       tags: [Vault]
@@ -440,6 +511,35 @@ paths:
                 $ref: '#/components/schemas/CreateAddressResponse'
         default:
           $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/{assetId}/unspent_inputs':
+    get:
+      tags: [Vault]
+      summary: Gets UTXO unspent inputs information
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: >-
+            The ID of the vault account
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of Unspent information per input
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/unspentInputsData'
+        default:
+          $ref: '#/components/responses/Error'
   '/vault/public_key_info/':
     get:
       tags: [Vault]
@@ -528,9 +628,9 @@ paths:
           content:
             '*/*':
               schema:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/VaultAsset'
+                type: array
+                items:
+                  $ref: '#/components/schemas/VaultAsset'
         default:
           $ref: '#/components/responses/Error'
   '/vault/assets/{assetId}':
@@ -1361,6 +1461,43 @@ paths:
                 $ref: '#/components/schemas/CancelTransactionResponse'
         default:
           $ref: '#/components/responses/Error'
+  '/transactions/{txId}/freeze':
+    post:
+      tags: [Transactions]
+      summary: Freezes a transaction by ID
+      parameters:
+        - in: path
+          name: txId
+          required: true
+          description: The ID of the transaction to freeze
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: freeze response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/FreezeTransactionResponse'
+  '/transactions/{txId}/unfreeze':
+    post:
+      summary: Unfreezes a transaction by ID
+      parameters:
+        - in: path
+          name: txId
+          required: true
+          description: The ID of the transaction to unfreeze
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: Unfreeze response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UnfreezeTransactionResponse'
   '/transactions/validate_address/{assetId}/{address}':
     get:
       tags: [Transactions]
@@ -1387,24 +1524,6 @@ paths:
                 $ref: '#/components/schemas/ValidateAddressResponse'
         default:
           $ref: '#/components/responses/Error'
-  # '/transactions/{txId}/unfreeze':
-  #   post:
-  #     summary: Unfreezes a transaction by ID
-  #     parameters:
-  #       - in: path
-  #         name: txId
-  #         required: true
-  #         description: The ID of the transaction to unfreeze
-  #         schema:
-  #           type: string
-  #           minimum: 1
-  #     responses:
-  #       '200':
-  #         description: Unfreeze response
-  #         content:
-  #           '*/*':
-  #             schema:
-  #               $ref: '#/components/schemas/UnfreezeTransactionResponse'
   # TXHASH
   '/txHash/{txHash}/set_confirmation_threshold':
     post:
@@ -1792,6 +1911,23 @@ components:
           type: string
         eosAccountName:
           type: string
+    AllocatedBalance:
+      type: object
+      properties:
+        allocationId:
+          type: string
+        thirdPartyAccountId:
+          type: string
+        total:
+          type: string
+        available:
+          type: string
+        pending:
+          type: string
+        frozen:
+          type: string
+        locked:
+          type: string
     VaultAsset:
       type: object
       properties:
@@ -1828,6 +1964,10 @@ components:
           type: string
         pendingRefundNetwork:
           type: string
+        allocatedBalances:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllocatedBalance'
     VaultWalletAddress:
       type: object
       properties:
@@ -1983,6 +2123,11 @@ components:
       properties:
         success:
           type: boolean
+    FreezeTransactionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
     AmlScreeningResult:
       type: object
       properties:
@@ -2016,6 +2161,14 @@ components:
             name:
               type: string
             subType:
+              type: string
+            virtualType:
+              type: string
+              enum:
+                - OFF_EXCHANGE
+                - DEFAULT
+                - UNKNOWN
+            virtualId:
               type: string
     TransactionResponse:
       type: object
@@ -2158,17 +2311,13 @@ components:
         netAmount:
           description: The net amount of the transaction, after fee deduction
           type: string
-        status:
-          type: string
-          enum:
-            - DROPPED
-            - CONFIRMED
-            - CONFIRMING
-            - FAILED
-            - BROADCASTING
+        isDropped:
+          type: boolean
         type:
           type: string
         destinationAddress:
+          type: string
+        amountUSD:
           type: string
     AssetTypeResponse:
       type: object
@@ -2358,7 +2507,6 @@ components:
         - BINANCE
         - BINANCEUS
         - BITMEX
-        - FTX
         - KRAKEN
         - GEMINI
         - BITFINEX
@@ -2396,6 +2544,7 @@ components:
         - REDEEM_FROM_COMPOUND
         - RAW
         - CONTRACT_CALL
+        - INTERNAL_LEDGER_TRANSFER
       default: TRANSFER
     Error:
       type: object
@@ -2725,3 +2874,30 @@ components:
           type: boolean
         requiresTag:
           type: boolean
+    AllocateFundsRequest:
+      type: object
+      properties:
+        allocationId:
+          type: string
+        amount:
+          type: string
+    DeallocateFundsRequest:
+      type: object
+      properties:
+        allocationId:
+          type: string
+        amount:
+          type: string
+    unspentInputsData:
+      type: object
+      properties:
+        input:
+          type: string
+        address:
+          type: string
+        amount:
+          type: string
+        confirmations:
+          type: number
+        status:
+          type: string
