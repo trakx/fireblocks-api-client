@@ -38,6 +38,19 @@ jobs:
         LEVEL=${LEVEL:-patch}
         echo '::set-output name=finalLevel::'$LEVEL
         
+    - name: Set compilation mode
+      id: comp-mode
+      run: |
+        DEBUGGABLE="${{github.event.inputs.debuggable}}"
+        DEBUGGABLE=${DEBUGGABLE:-true}
+        if [ [DEBUGGABLE == f*] -o [DEBUGGABLE == F*] ]; then
+          COMP_MODE=Release
+        else
+          COMP_MODE=Debug
+        fi
+        echo '::set-output name=compilationMode::'$COMP_MODE
+        echo "compilation mode set to ${{steps.comp-mode.outputs.compilationMode}}"
+        
     - name: checkout
       uses: actions/checkout@v2
 
@@ -70,19 +83,6 @@ jobs:
     
     - name: Remove github source
       run: dotnet nuget remove source "github"
-
-    - name: Set compilation mode and package extension
-      id: comp-mode
-      run: |
-        DEBUGGABLE="${{github.event.inputs.debuggable}}"
-        DEBUGGABLE=${DEBUGGABLE:-true}
-        if [ [DEBUGGABLE == f*] -o [DEBUGGABLE == F*] ]; then
-          COMP_MODE=Release
-        else
-          COMP_MODE=Debug
-        fi
-        echo '::set-output name=compilationMode::'$COMP_MODE
-        echo "compilation mode set to ${{steps.comp-mode.outputs.compilationMode}}"
     
     - name: Build
       run: dotnet build ${{env.SOLUTION_PATH}} --configuration ${{steps.comp-mode.outputs.compilationMode}} --no-restore
@@ -100,7 +100,7 @@ jobs:
       run: |
         ls ./nuget/*.nupkg
         for f in ./nuget/*.symbols.nupkg; do echo "pushing $f file.." && dotnet nuget push $f --api-key ${{secrets.GITHUB_TOKEN}} \
-        --source "https://nuget.pkg.github.com/trakx/index.json"; done
+          --source "https://nuget.pkg.github.com/trakx/index.json"; done
 
     - name: push version tag
       uses: anothrNick/github-tag-action@1.26.0
