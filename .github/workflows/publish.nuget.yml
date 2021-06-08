@@ -7,6 +7,10 @@ on:
         description: 'Level of the semver (major.minor.patch) to be increased to get the new package version.'
         required: true
         default: 'patch'
+      debuggable:
+        description: 'Set to false if you want a non debuggable (Release) package.'
+        required: true
+        default: 'true'
   push:
     branches: 
       - master
@@ -66,19 +70,34 @@ jobs:
     
     - name: Remove github source
       run: dotnet nuget remove source "github"
+
+    - name: Set compilation mode and package extension
+      id: comp-mode
+      run: |
+        DEBUGGABLE="${{github.event.inputs.debuggable}}"
+        DEBUGGABLE=${DEBUGGABLE:-true}
+        if [ [DEBUGGABLE == f*] -o [DEBUGGABLE == F*] ]; then
+          COMP_MODE=Release
+        else
+          COMP_MODE=Debug
+        fi
+        echo '::set-output name=finalLevel::'$COMP_MODE
     
     - name: Build
-      run: dotnet build ${{env.SOLUTION_PATH}} --configuration Release --no-restore
+      run: dotnet build ${{env.SOLUTION_PATH}} --configuration $COMP_MODE --no-restore
     
     - name: Test
       run: dotnet test ${{env.SOLUTION_PATH}} --no-restore --verbosity normal
 
     - name: Package
-      run: dotnet pack ${{env.PROJECT_PATH}} --no-build --configuration Release --output ./nuget/ -p:PackageVersion=${{ steps.bumpSemver.outputs.new_tag }}
+      run: dotnet pack ${{env.PROJECT_PATH}} --no-build --configuration $COMP_MODE --output ./nuget/ -p:PackageVersion=${{ steps.bumpSemver.outputs.new_tag }}
 
     - name: Publish
       # https://github.com/NuGet/Home/issues/8580
-      run: dotnet nuget push ./nuget/*.nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/trakx/index.json"
+      run: |
+        ls ./nuget/*.nupkg
+        for f in ./nuget/*.symbols.nupkg; do echo "pushing $f file.." && dotnet nuget push $f --api-key ${{secrets.GITHUB_TOKEN}} \
+        --source "https://nuget.pkg.github.com/trakx/index.json" --include-symbols --include-source; done
 
     - name: push version tag
       uses: anothrNick/github-tag-action@1.26.0
