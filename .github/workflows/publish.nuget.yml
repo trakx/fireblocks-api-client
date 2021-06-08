@@ -17,9 +17,7 @@ on:
 
 env:
   SOLUTION_PATH: "src/Trakx.Fireblocks.ApiClient.sln"
-  PACKAGE_NAME: Trakx.Fireblocks.ApiClient
   PROJECT_PATH: "src/Trakx.Fireblocks.ApiClient/Trakx.Fireblocks.ApiClient.csproj"
-  TEST_PROJECT_PATH: "src/Trakx.Fireblocks.ApiClient.Tests/Trakx.Fireblocks.ApiClient.Tests.csproj"
   FireblocksApiConfiguration__ApiPubKey: ${{secrets.FIREBLOCKS_API_KEY}}
   FireblocksApiConfiguration__ApiPrivateKey: ${{secrets.FIREBLOCKS_API_SECRET}}
 
@@ -93,7 +91,7 @@ jobs:
     - name: Package
       run: |
         dotnet pack ${{env.PROJECT_PATH}} --no-build --configuration ${{ steps.comp-mode.outputs.compilationMode }} \
-          --output ./nuget/ -p:PackageVersion=${{ steps.bumpSemver.outputs.new_tag }}--include-symbols --include-source
+          --output ./nuget/ -p:PackageVersion=${{ steps.bumpSemver.outputs.new_tag }} --include-symbols --include-source
 
     - name: Publish
       # https://github.com/NuGet/Home/issues/8580
