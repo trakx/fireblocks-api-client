@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Trakx.Utils.Apis;
@@ -40,6 +41,13 @@ namespace Trakx.Fireblocks.ApiClient.Utils
             msg.Headers.Add(ApiKeyHeader, _configuration.ApiPubKey);
             Logger.Verbose("Headers added");
         }
+
+        public Task AddCredentialsAsync(HttpRequestMessage msg)
+        {
+            AddCredentials(msg);
+            return Task.CompletedTask;
+        }
+
         #endregion
 
         #region IDisposable
