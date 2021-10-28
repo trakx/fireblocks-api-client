@@ -1221,6 +1221,7 @@ paths:
     get:
       tags: [Transactions]
       summary: Gets a list of transactions under the tenant
+      operationId: getTransactions
       parameters:
         - in: query
           name: before
@@ -1334,6 +1335,7 @@ paths:
     post:
       tags: [Transactions]
       summary: Creates a new transaction
+      operationId: createTransaction
       responses:
         '200':
           description: A transaction object
@@ -1371,6 +1373,7 @@ paths:
     get:
       tags: [Transactions]
       summary: Returns a transaction by ID
+      operationId: getTransaction
       parameters:
         - in: path
           name: txId
@@ -1392,6 +1395,7 @@ paths:
     post:
       tags: [Transactions]
       summary: Overrides the required number of confirmations for a transaction completion by transaction ID
+      operationId: setConfirmationThreshold
       requestBody:
         content:
           application/json:
@@ -1418,6 +1422,7 @@ paths:
     post:
       tags: [Transactions]
       summary: Drop ETH based transaction by ID
+      operationId: dropEthByTransactionId
       requestBody:
         content:
           application/json:
@@ -1444,6 +1449,7 @@ paths:
     post:
       tags: [Transactions]
       summary: Cancels a transaction by ID
+      operationId: cancelTransaction
       parameters:
         - in: path
           name: txId
@@ -1465,6 +1471,7 @@ paths:
     post:
       tags: [Transactions]
       summary: Freezes a transaction by ID
+      operationId: freezeTransaction
       parameters:
         - in: path
           name: txId
@@ -1483,6 +1490,7 @@ paths:
   '/transactions/{txId}/unfreeze':
     post:
       summary: Unfreezes a transaction by ID
+      operationId: unfreezeTransaction
       parameters:
         - in: path
           name: txId
@@ -1502,6 +1510,7 @@ paths:
     get:
       tags: [Transactions]
       summary: Check if given address is valid
+      operationId: validateAddressByAssetId
       parameters:
         - in: path
           name: assetId
@@ -1556,6 +1565,7 @@ paths:
     get:
       tags: [SupportedAssets]
       summary: Returns all asset types supported by Fireblocks
+      operationId: getSupportedAssets
       responses:
         '200':
           description: A Transaction object
@@ -1572,6 +1582,7 @@ paths:
     get:
       tags: [NetworkConnections]
       summary: Returns all network connections
+      operationId: getNetworkConnections
       responses:
         '200':
           description: A list of network connections
@@ -1587,6 +1598,7 @@ paths:
     get:
       tags: [NetworkConnections]
       summary: Gets a network connection by ID
+      operationId: getNetworkConnection
       parameters:
         - in: path
           name: connectionId
@@ -1609,6 +1621,7 @@ paths:
     get:
       tags: [TransferTickets]
       summary: Gets a list of transfer tickets
+      operationId: getTransferTickets
       responses:
         '200':
           description: A list of transafer tickets
@@ -1623,6 +1636,7 @@ paths:
     post:
       tags: [TransferTickets]
       summary: Creates a new transfer ticket
+      operationId: createTransferTicket
       responses:
         '200':
           description: A transfer object with ticket id
@@ -1651,6 +1665,7 @@ paths:
     get:
       tags: [TransferTickets]
       summary: Get a specific ticket by ticket ID
+      operationId: getTransferTicket
       parameters:
         - in: path
           name: ticketId
@@ -1672,6 +1687,7 @@ paths:
     post:
       tags: [TransferTickets]
       summary: Cancel a transfer request
+      operationId: cancelTransferTicket
       parameters:
         - in: path
           name: ticketId
@@ -2095,6 +2111,7 @@ components:
             - COMPOUND
             - GAS_STATION
             - ONE_TIME_ADDRESS
+            - UNKNOWN
         id:
           type: string
       required:
@@ -2152,7 +2169,9 @@ components:
         netAmount:
           type: string
         amountUSD:
-          type: string
+          type:
+            - 'null'
+            - number
     TransferPeerPathResponse:
       allOf:
         - $ref: '#/components/schemas/TransferPeerPath'
@@ -2192,7 +2211,9 @@ components:
           type: number
         amountUSD:
           description: The USD value of the requested amount
-          type: number
+          type:
+          - 'null'
+          - number
         serviceFee:
           description: The total fee deducted by the exchange from the actual requested amount (serviceFee = amount - netAmount)
           type: number
@@ -2290,7 +2311,9 @@ components:
         amount:
           type: string
         amountUSD:
-          type: string
+          type:
+            - 'null'
+            - string
         amlScreeningResult:
           $ref: '#/components/schemas/AmlScreeningResult'
         destination:
@@ -2318,7 +2341,9 @@ components:
         destinationAddress:
           type: string
         amountUSD:
-          type: string
+          type:
+            - 'null'
+            - string
     AssetTypeResponse:
       type: object
       properties:

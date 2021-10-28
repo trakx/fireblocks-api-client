@@ -13,3 +13,9 @@ In order to be able to run some integration tests, you should create a `.env` fi
 FireblocksApiConfiguration__ApiPrivateKey=********
 FireblocksApiConfiguration__ApiPubKey=********
 ```
+
+## Running nswag tool to refresh cs client files
+```
+cd src/Trakx.Fireblocks.ApiClient
+nswag run nswag.json /variables:Configuration=Debug /runtime:Net50
+```
