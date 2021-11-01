@@ -26,6 +26,11 @@ paths:
           required: false
           schema:
             type: string
+        - in: query
+          name: assetId
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: A list of vault accounts
@@ -1256,7 +1261,6 @@ paths:
             enum:
               - createdAt
               - lastUpdated
-            default: createdAt
         - in: query
           name: limit
           description: >-
@@ -1282,6 +1286,7 @@ paths:
               - COMPOUND
               - UNKNOWN
               - GAS_STATION
+              - OEC_PARTNER
         - in: query
           name: sourceId
           description: The source ID of the transaction
@@ -1303,6 +1308,7 @@ paths:
               - NETWORK_CONNECTION
               - COMPOUND
               - ONE_TIME_ADDRESS
+              - OEC_PARTNER
         - in: query
           name: destId
           description: The destination ID of the transaction
@@ -1379,6 +1385,27 @@ paths:
           name: txId
           required: true
           description: The ID of the transaction to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: An Transaction object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/transactions/external_tx_id/{externalTxId}/':
+    get:
+      tags: [Transactions]
+      summary: Returns transaction by external transaction ID
+      parameters:
+        - in: path
+          name: externalTxId
+          required: true
+          description: The external ID of the transaction to return
           schema:
             type: string
             minimum: 1
@@ -1489,6 +1516,7 @@ paths:
                 $ref: '#/components/schemas/FreezeTransactionResponse'
   '/transactions/{txId}/unfreeze':
     post:
+      tags: [Transactions]
       summary: Unfreezes a transaction by ID
       operationId: unfreezeTransaction
       parameters:
@@ -1815,6 +1843,90 @@ paths:
           description: OK
         default:
           $ref: '#/components/responses/Error'
+  # WEBHOOKS
+  '/webhooks/resend':
+    post:
+      tags: [Webhooks]
+      summary: Resend failed webhooks
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResendWebhooksResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  # USERS
+  '/users':
+    get:
+      tags: [Users]
+      summary: >-
+        Returns a list of users
+      operationId: getUsers
+      responses:
+        '200':
+          description: List of users
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetUsersResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  # OFF EXCHANGE
+  '/off_exchange_accounts':
+    get:
+      tags: [OffExchangeAccounts]
+      summary: Get off exchanges
+      responses:
+        '200':
+          description: A list of off exchange entities
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OffExchangeEntityResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/off_exchange_accounts/{virtualAccountId}':
+    get:
+      tags: [OffExchangeAccounts]
+      summary: Get off exchange by it's ID
+      parameters:
+        - in: path
+          name: virtualAccountId
+          required: true
+          description: The ID of the off exchange entity
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: An off exchange entity
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OffExchangeEntityResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/off_exchange_accounts/{virtualAccountId}/settle':
+    post:
+      tags: [OffExchangeAccounts]
+      summary: Settle an off exchange entity
+      parameters:
+        - in: path
+          name: virtualAccountId
+          required: true
+          description: The ID of the off exchange entity
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A settle succeeded
+        default:
+          $ref: '#/components/responses/Error'
 security:
   - bearerTokenAuth: [ ]
   - ApiKeyAuth: [ ]
@@ -1923,6 +2035,8 @@ components:
           type: string
         legacyAddress:
           type: string
+        enterpriseAddress:
+          type: string
         tag:
           type: string
         eosAccountName:
@@ -1934,6 +2048,10 @@ components:
           type: string
         thirdPartyAccountId:
           type: string
+        affiliation:
+          type: string
+        virtualType:
+          type: string
         total:
           type: string
         available:
@@ -1943,6 +2061,8 @@ components:
         frozen:
           type: string
         locked:
+          type: string
+        staked:
           type: string
     VaultAsset:
       type: object
@@ -1968,6 +2088,9 @@ components:
         lockedAmount:
           description: Funds in outgoing transactions that are not yet published to the network
           type: string
+        staked:
+          description: Staked balance
+          type: string
         totalStakedCPU:
           type: string
         totalStakedNetwork:
@@ -1979,6 +2102,10 @@ components:
         pendingRefundCPU:
           type: string
         pendingRefundNetwork:
+          type: string
+        blockHeight:
+          type: string
+        blockHash:
           type: string
         allocatedBalances:
           type: array
@@ -2004,12 +2131,18 @@ components:
           enum:
             - SEGWIT
             - LEGACY
+        legacyAddress:
+          type: string
+        enterpriseAddress:
+          type: string
     CreateAddressResponse:
       type: object
       properties:
         address:
           type: string
         legacyAddress:
+          type: string
+        enterpriseAddress:
           type: string
         tag:
           type: string
@@ -2159,6 +2292,41 @@ components:
           type: string
         serviceFee:
           type: string
+    BlockInfo:
+      type: object
+      properties:
+        blockHeight:
+          type: string
+        blockHash:
+          type: string
+    AuthorizationInfo:
+      type: object
+      properties:
+        allowOperatorAsAuthorizer:
+          type: boolean
+        logic:
+          type: string
+          enum:
+            - AND
+            - OR
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationGroups'
+    AuthorizationGroups:
+      type: object
+      properties:
+        th:
+          type: number
+        users:
+          type: object
+          additionalProperties:
+            type: string
+            enum:
+              - PENDING_AUTHORIZATION
+              - APPROVED
+              - REJECTED
+              - NA
     AmountInfo:
       type: object
       properties:
@@ -2169,9 +2337,7 @@ components:
         netAmount:
           type: string
         amountUSD:
-          type:
-            - 'null'
-            - number
+          type: string
     TransferPeerPathResponse:
       allOf:
         - $ref: '#/components/schemas/TransferPeerPath'
@@ -2211,9 +2377,7 @@ components:
           type: number
         amountUSD:
           description: The USD value of the requested amount
-          type:
-          - 'null'
-          - number
+          type: number
         serviceFee:
           description: The total fee deducted by the exchange from the actual requested amount (serviceFee = amount - netAmount)
           type: number
@@ -2258,6 +2422,8 @@ components:
           $ref: '#/components/schemas/TransactionSubStatus'
         destinationAddress:
           type: string
+        sourceAddress:
+          type: string
         destinationAddressDescription:
           type: string
         destinationTag:
@@ -2301,10 +2467,18 @@ components:
         extraParameters:
           type: object
           properties: {}
+        externalTxId:
+          type: string
         destinations:
           type: array
           items:
             $ref: '#/components/schemas/TransactionResponseDestination'
+        blockInfo:
+          $ref: '#/components/schemas/BlockInfo'
+        authorizationInfo:
+          $ref: '#/components/schemas/AuthorizationInfo'
+        index:
+          type: number
     TransactionResponseDestination:
       type: object
       properties:
@@ -2340,10 +2514,14 @@ components:
           type: string
         destinationAddress:
           type: string
+        sourceAddress:
+          type: string
         amountUSD:
           type:
             - 'null'
             - string
+        index:
+          type: number
     AssetTypeResponse:
       type: object
       properties:
@@ -2358,6 +2536,8 @@ components:
             - ETH_CONTRACT
             - FIAT
         contractAddress:
+          type: string
+        nativeAsset:
           type: string
       required:
         - id
@@ -2476,9 +2656,17 @@ components:
             - LOW
             - MEDIUM
             - HIGH
+        priorityFee:
+          description: >-
+            - For ETH based assets only, the fee for eip-1559 transaction pricing mechanism. Value is in gwei.
+          type: string
         failOnLowFee:
           type: boolean
         maxFee:
+          description: >-
+            - For ETH based assets only, must be provided when using the priorityFee parameter. This will be used to limit the fee max possible fee (according to eip-1559). Value is in gwei.
+
+            - For other assets, it fails a transaction when the automatically selected fee is higher than the provided value.
           type: string
         gasPrice:
           description: >-
@@ -2513,10 +2701,16 @@ components:
           $ref: '#/components/schemas/TransactionOperation'
         customerRefId:
           type: string
+        externalTxId:
+          type: string
         destinations:
           type: array
           items:
             $ref: '#/components/schemas/TransactionRequestDestination'
+        treatAsGrossAmount:
+          type: boolean
+        forceSweep:
+          type: boolean
     TransactionRequestDestination:
       type: object
       properties:
@@ -2913,6 +3107,33 @@ components:
           type: string
         amount:
           type: string
+    ResendWebhooksResponse:
+      type: object
+      properties:
+        webhooksCount:
+          type: number
+    OffExchangeEntityResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        vaultAccountId:
+          type: string
+        thirdPartyAccountId:
+          type: string
+        balance:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              total:
+                type: string
+              locked:
+                type: string
+              pending:
+                type: string
+              frozen:
+                type: string
     unspentInputsData:
       type: object
       properties:
@@ -2926,3 +3147,25 @@ components:
           type: number
         status:
           type: string
+    GetUsersResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResponse'
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        role:
+          type: string
+        email:
+          type: string
+        enabled:
+          type: boolean

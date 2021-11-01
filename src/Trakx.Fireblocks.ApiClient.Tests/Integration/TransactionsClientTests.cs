@@ -31,7 +31,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             response.Result.ForEach(f => f.AssetId.Should().Be(assetId));
         }
         
-        [Fact(Skip = "account unable to create transactions yet")]
+        [Fact]
         public async Task TransactionsAllAsync_should_query_ethereum_transactions_when_passing_eth_asset_id()
         {
             var transaction = _mockCreator.GetRandomTransaction();
