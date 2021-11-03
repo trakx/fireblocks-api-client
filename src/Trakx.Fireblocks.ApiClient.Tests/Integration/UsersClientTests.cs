@@ -1,9 +1,6 @@
-using System;
-using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Trakx.Utils.Extensions;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -12,7 +9,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
     public class UsersClientTests : FireblocksClientTestsBase
     {
         
-        private readonly Trakx.Fireblocks.ApiClient.IUsersClient _fireblocksClient;
+        private readonly IUsersClient _fireblocksClient;
         private readonly MockCreator _mockCreator;
         
         public UsersClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output) 
@@ -23,9 +20,10 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
         }
 
         [Fact]
-        public async Task GetUsersAsync_should_query_users()
+        public async Task GetUsersAsync_should_query_all_users()
         {
             var users = await _fireblocksClient.GetUsersAsync();
+            users.Result.Users.Count.Should().BeGreaterOrEqualTo(2);
         }
         
     }

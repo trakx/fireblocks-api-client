@@ -23,11 +23,5 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             response.Result.Count.Should().Be(2);
         }
         
-        [Fact]
-        public async Task Exchange_accountsAllAsync_should_return_all_accounts()
-        {
-            var response = await _client.Exte();
-            response.Result.Count.Should().Be(2);
-        }
     }
 }

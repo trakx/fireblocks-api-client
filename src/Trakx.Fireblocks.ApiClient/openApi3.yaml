@@ -10,6 +10,7 @@ paths:
     get:
       tags: [Vault]
       summary: Retrieves all vault accounts for the specified filter.
+      operationId: getVaultAccounts
       parameters:
         - in: query
           name: namePrefix
@@ -45,6 +46,7 @@ paths:
     post:
       tags: [Vault]
       summary: Creates a new vault account
+      operationId: createVaultAccount
       requestBody:
         required: true
         content:
@@ -79,6 +81,7 @@ paths:
     get:
       tags: [Vault]
       summary: Returns a Fireblock Vault account by ID
+      operationId: getVaultAccountById
       parameters:
         - in: path
           name: vaultAccountId
@@ -100,6 +103,7 @@ paths:
     put:
       tags: [Vault]
       summary: Edit a Fireblock Vault account
+      operationId: updateVaultAccount
       parameters:
         - in: path
           name: vaultAccountId
@@ -854,6 +858,7 @@ paths:
     get:
       tags: [ExternalWallets]
       summary: Gets a list of external wallets under the tenant
+      operationId: getExternalWallets
       responses:
         '200':
           description: A list of external wallets
@@ -868,6 +873,7 @@ paths:
     post:
       tags: [ExternalWallets]
       summary: Creates a new external wallet
+      operationId: createExternalWallet
       responses:
         '200':
           description: A Wallet object
@@ -893,6 +899,7 @@ paths:
     get:
       tags: [ExternalWallets]
       summary: Returns an external wallet by ID
+      operationId: getExternalWallet
       parameters:
         - in: path
           name: walletId
@@ -913,6 +920,7 @@ paths:
     delete:
       tags: [ExternalWallets]
       summary: Deletes an external wallet by ID
+      operationId: deleteExternalWalletById
       parameters:
         - in: path
           name: walletId

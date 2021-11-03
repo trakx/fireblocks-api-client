@@ -4,11 +4,19 @@ namespace Trakx.Fireblocks.ApiClient
 {
     internal abstract class AuthorisedClient
     {
-        protected readonly ICredentialsProvider CredentialProvider;
+#nullable disable
+        public FireblocksApiConfiguration Configuration { get; protected set; }
+#nullable restore
+
+        private string? _baseUrl;
+        protected string BaseUrl => _baseUrl ??= Configuration!.BaseUrl;
+
+        protected readonly ICredentialsProvider? CredentialProvider;
 
         protected AuthorisedClient(ClientConfigurator clientConfigurator)
         {
-            CredentialProvider = clientConfigurator.CredentialsProvider;
+            Configuration = clientConfigurator.Configuration;
+            CredentialProvider = clientConfigurator.GetCredentialsProvider();
         }
     }
 }

@@ -17,13 +17,10 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
         }
 
         [Fact]
-        public async Task AccountsAllAsync_should_return_all_accounts()
+        public async Task GetVaultAccountsAsync_should_return_all_vault_accounts()
         {
-            var response = await _fireblocksClient.AccountsAllAsync();
-            response.Result.Should().NotBeNullOrEmpty();
-            response.Result[0].Assets.Should().NotBeNullOrEmpty();
-            response.Result[0].Assets[1].Id.Should().Be("ETH_TEST");
-            Convert.ToDecimal(response.Result[0].Assets[1].Total).Should().BeGreaterOrEqualTo(0.1m);
+            var response = await _fireblocksClient.GetVaultAccountsAsync();
+            response.Result.Count.Should().BeGreaterOrEqualTo(2);
         }
     }
 }

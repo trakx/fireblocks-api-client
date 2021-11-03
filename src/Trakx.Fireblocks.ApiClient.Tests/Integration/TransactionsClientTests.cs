@@ -1,8 +1,10 @@
 using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Linq;
 using Trakx.Utils.Extensions;
 using Xunit;
 using Xunit.Abstractions;
@@ -24,18 +26,21 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
         [Fact]
         public async Task GetTransactionsAsync_should_query_ethereum_transactions_when_passing_eth_asset_id()
         {
-            var assetId = "ETH";
-            var response = await _fireblocksClient.GetTransactionsAsync(assets: assetId, limit: 2);
-            response.Result.Should().NotBeEmpty();
-            response.Result.ForEach(f => f.AssetId.Should().Be(assetId));
+            var response = await _fireblocksClient.GetTransactionsAsync();
+            response.Result.Count.Should().BeGreaterOrEqualTo(2);
         }
 
         [Fact]
-        public async Task TransactionsAllAsync_should_query_ethereum_transactions_when_passing_eth_asset_id()
+        public async Task CreateTransactionAsync_should_create_a_new_transaction()
         {
             var transaction = _mockCreator.GetRandomTransaction();
-            var response = await _fireblocksClient.CreateTransactionAsync(transaction);
-            response.Result.Status.Should().Be("ok");
+            var createResponse = await _fireblocksClient.CreateTransactionAsync(transaction);
+            var id = createResponse.Result.Id;
+            var getResponse = await _fireblocksClient.GetTransactionAsync(id, CancellationToken.None);
+            var actualTrans = getResponse.Result;
+            actualTrans.AssetId.Should().Be(transaction.AssetId);
+            actualTrans.Amount.Should().Be(transaction.Amount);
+            actualTrans.CustomerRefId.Should().Be(transaction.CustomerRefId);
         }
     }
 }

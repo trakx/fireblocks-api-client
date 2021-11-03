@@ -24,7 +24,7 @@
       "httpClientType": "System.Net.Http.HttpClient",
       "useHttpRequestMessageCreationMethod": false,
       "useBaseUrl": true,
-      "generateBaseUrlProperty": true,
+      "generateBaseUrlProperty": false,
       "generateSyncMethods": false,
       "exposeJsonSerializerSettings": false,
       "clientClassAccessModifier": "internal",

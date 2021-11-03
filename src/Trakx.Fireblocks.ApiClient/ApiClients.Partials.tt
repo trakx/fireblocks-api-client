@@ -11,7 +11,7 @@ namespace Trakx.Fireblocks.ApiClient
 <# 
 var clientNames = new [] { "Vault", "InternalWallets", "ExternalWallets", 
 "ExchangeAccounts", "FiatAccounts", "Transactions", "SupportedAssets", 
-"NetworkConnections", "TransferTickets", "Fee" };
+"NetworkConnections", "TransferTickets", "Fee", "Users" };
 
 foreach(var name in clientNames)
 {
