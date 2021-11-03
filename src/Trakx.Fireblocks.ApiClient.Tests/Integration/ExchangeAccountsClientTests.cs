@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,19 +8,19 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
 {
     public class ExchangeClientTests : FireblocksClientTestsBase
     {
-        private readonly IExchangeAccountsClient _client;
+        private readonly IExchangeAccountsClient _exchangeAccountsClient;
 
-        public ExchangeClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output) : base(apiFixture, output)
+        public ExchangeClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
+            : base(apiFixture, output)
         {
-            _client = ServiceProvider.GetRequiredService<IExchangeAccountsClient>();
+            _exchangeAccountsClient = ServiceProvider.GetRequiredService<IExchangeAccountsClient>();
         }
 
         [Fact]
         public async Task Exchange_accountsAllAsync_should_return_all_accounts()
         {
-            var response = await _client.Exchange_accountsAllAsync();
-            response.Result.Count.Should().Be(2);
+            var response = await _exchangeAccountsClient.Exchange_accountsAllAsync();
+            response.Result.Count.Should().BeGreaterOrEqualTo(2);
         }
-        
     }
 }
