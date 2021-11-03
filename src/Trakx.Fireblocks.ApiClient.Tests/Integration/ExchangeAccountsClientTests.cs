@@ -17,10 +17,17 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
         }
 
         [Fact]
-        public async Task AccountsAllAsync_should_return_all_accounts()
+        public async Task Exchange_accountsAllAsync_should_return_all_accounts()
         {
             var response = await _client.Exchange_accountsAllAsync();
-            response.Result.Should().BeNullOrEmpty();
+            response.Result.Count.Should().Be(2);
+        }
+        
+        [Fact]
+        public async Task Exchange_accountsAllAsync_should_return_all_accounts()
+        {
+            var response = await _client.Exte();
+            response.Result.Count.Should().Be(2);
         }
     }
 }
