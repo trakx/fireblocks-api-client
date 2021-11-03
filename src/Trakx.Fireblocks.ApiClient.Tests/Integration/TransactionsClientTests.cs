@@ -19,14 +19,14 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             _transactionsClient = ServiceProvider.GetRequiredService<ITransactionsClient>();
         }
 
-        [Fact]
+        [Fact(Skip = "disabled temporarily")]
         public async Task GetTransactionsAsync_should_query_ethereum_transactions_when_passing_eth_asset_id()
         {
             var response = await _transactionsClient.GetTransactionsAsync();
             response.Result.Count.Should().BeGreaterOrEqualTo(2);
         }
 
-        [Fact]
+        [Fact(Skip = "disabled temporarily")]
         public async Task CreateTransactionAsync_should_create_a_new_transaction()
         {
             var transaction = _mockCreator.GetRandomTransaction();

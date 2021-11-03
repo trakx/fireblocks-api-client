@@ -27,14 +27,14 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             response.Result.Count.Should().BeGreaterOrEqualTo(2);
         }
 
-        [Fact]
+        [Fact(Skip = "disabled temporarily")]
         public async Task GetExternalWalletAsync_should_return_one_particular_wallet()
         {
             var response = await _externalWalletsClient.GetExternalWalletAsync("001", CancellationToken.None);
             response.Result.Should().NotBeNull();
         }
 
-        [Fact]
+        [Fact(Skip = "disabled temporarily")]
         public async Task CreateExternalWalletAsync_should_add_a_new_wallet_in_fireblocks_database()
         {
             var walletName = _mockCreator.GetRandomString(10);

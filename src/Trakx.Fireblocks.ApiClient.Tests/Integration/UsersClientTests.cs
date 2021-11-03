@@ -19,7 +19,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             _usersClient = ServiceProvider.GetRequiredService<IUsersClient>();
         }
 
-        [Fact]
+        [Fact(Skip = "disabled temporarily")]
         public async Task GetUsersAsync_should_query_all_users()
         {
             var users = await _usersClient.GetUsersAsync();

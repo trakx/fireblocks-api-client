@@ -16,7 +16,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             _exchangeAccountsClient = ServiceProvider.GetRequiredService<IExchangeAccountsClient>();
         }
 
-        [Fact]
+        [Fact(Skip = "disabled temporarily")]
         public async Task Exchange_accountsAllAsync_should_return_all_accounts()
         {
             var response = await _exchangeAccountsClient.Exchange_accountsAllAsync();
