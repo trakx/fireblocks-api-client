@@ -20,7 +20,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             _mockCreator = new MockCreator(output);
         }
 
-        [Fact]
+        [Fact(Skip = "disabled temporarily")]
         public async Task GetExternalWalletsAsync_should_return_all_wallets()
         {
             var response = await _externalWalletsClient.GetExternalWalletsAsync();
