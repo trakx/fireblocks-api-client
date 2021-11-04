@@ -16,7 +16,6 @@ namespace Trakx.Fireblocks.ApiClient.Utils
         private readonly IDateTimeProvider _dateTimeProvider;
         private readonly SigningCredentials _signingCredentials;
         private readonly RSA _rsa;
-        private readonly HMACSHA256 _hmacSha256;
 
         public BearerCredentialsProvider(IOptions<FireblocksApiConfiguration> configuration, IDateTimeProvider dateTimeProvider)
         {
@@ -26,7 +25,6 @@ namespace Trakx.Fireblocks.ApiClient.Utils
             _rsa.ImportPkcs8PrivateKey(Convert.FromBase64String(_fireblocksConfiguration.ApiPrivateKey), out _);
             var securityKey = new RsaSecurityKey(_rsa);
             _signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.RsaSha256);
-            _hmacSha256 = new HMACSHA256(new byte[0]);
         }
 
         private JwtPayload GetPayload(HttpRequestMessage msg)
@@ -61,12 +59,26 @@ namespace Trakx.Fireblocks.ApiClient.Utils
 
         private long GetIssuedTimestamp() => _dateTimeProvider.UtcNowAsOffset.ToUnixTimeSeconds();
 
-        private string GetSignature(string preHash) => _hmacSha256.ComputeHash(Encoding.UTF8.GetBytes(preHash)).ToHexString();
+        private static string ToHexString(byte[] data)
+        {
+            var sBuilder = new StringBuilder();
+            foreach (var t in data)
+            {
+                sBuilder.Append(t.ToString("x2"));
+            }
+
+            return sBuilder.ToString();
+        }
+
+        private string GetSignature(string preHash)
+        {
+            using var sha256 = SHA256.Create();
+            return ToHexString(sha256.ComputeHash(Encoding.UTF8.GetBytes(preHash)));
+        }
 
         public void Dispose()
         {
             _rsa.Dispose();
-            _hmacSha256.Dispose();
         }
     }
 }

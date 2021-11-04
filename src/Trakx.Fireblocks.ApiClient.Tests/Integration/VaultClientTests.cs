@@ -16,7 +16,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             _vaultClient = ServiceProvider.GetRequiredService<IVaultClient>();
         }
 
-        [Fact(Skip = "disabled temporarily")]
+        [Fact]
         public async Task GetVaultAccountsAsync_should_return_all_vault_accounts()
         {
             var response = await _vaultClient.GetVaultAccountsAsync();
