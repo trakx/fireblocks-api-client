@@ -6,11 +6,11 @@ using Xunit.Abstractions;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration
 {
-    public class ExchangeClientTests : FireblocksClientTestsBase
+    public class ExchangeAccountsClientTests : FireblocksClientTestsBase
     {
         private readonly IExchangeAccountsClient _exchangeAccountsClient;
 
-        public ExchangeClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
+        public ExchangeAccountsClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
             : base(apiFixture, output)
         {
             _exchangeAccountsClient = ServiceProvider.GetRequiredService<IExchangeAccountsClient>();
