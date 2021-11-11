@@ -60,7 +60,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             var id = createResponse.Result.Id;
 
             // After write op, fireblocks needs some time to set row status. :(
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
 
             var getResponse = await _transactionsClient.GetTransactionAsync(id, CancellationToken.None);
             var actualTrans = getResponse.Result;
