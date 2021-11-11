@@ -11,12 +11,10 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
     public class TransactionsClientTests : FireblocksClientTestsBase
     {
         private readonly ITransactionsClient _transactionsClient;
-        private readonly MockCreator _mockCreator;
 
         public TransactionsClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
             : base(apiFixture, output)
         {
-            _mockCreator = new MockCreator(output);
             _transactionsClient = ServiceProvider.GetRequiredService<ITransactionsClient>();
         }
 
