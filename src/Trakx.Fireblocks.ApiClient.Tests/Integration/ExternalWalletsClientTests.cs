@@ -20,21 +20,21 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             _mockCreator = new MockCreator(output);
         }
 
-        [Fact(Skip = "disabled temporarily")]
+        [Fact]
         public async Task GetExternalWalletsAsync_should_return_all_wallets()
         {
             var response = await _externalWalletsClient.GetExternalWalletsAsync();
-            response.Result.Count.Should().BeGreaterOrEqualTo(2);
+            response.Result.Should().NotBeEmpty();
         }
 
-        [Fact(Skip = "disabled temporarily")]
+        [Fact]
         public async Task GetExternalWalletAsync_should_return_one_particular_wallet()
         {
-            var response = await _externalWalletsClient.GetExternalWalletAsync("001", CancellationToken.None);
+            var response = await _externalWalletsClient.GetExternalWalletAsync("60af415a-61df-59d5-de2b-580cebc097fc", CancellationToken.None);
             response.Result.Should().NotBeNull();
         }
 
-        [Fact(Skip = "disabled temporarily")]
+        [Fact]
         public async Task CreateExternalWalletAsync_should_add_a_new_wallet_in_fireblocks_database()
         {
             var walletName = _mockCreator.GetRandomString(10);
@@ -45,10 +45,17 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
                 CustomerRefId = refId
             });
             var walletId = response.Result.Id;
+            
+            // After write op, fireblocks needs some time to refresh data :(
+            Thread.Sleep(2000);
+
             var response2 = await _externalWalletsClient.GetExternalWalletAsync(walletId);
             response2.Result.Name.Should().Be(walletName);
-            response2.Result.CustomerRefId.Should().Be(refId);
             await _externalWalletsClient.DeleteExternalWalletByIdAsync(walletId);
+
+            // After write op, fireblocks needs some time to refresh data :(
+            Thread.Sleep(2000);
+
             await new Func<Task>(async () => await _externalWalletsClient.GetExternalWalletAsync(walletId)).Should()
                 .ThrowAsync<ApiException>();
         }

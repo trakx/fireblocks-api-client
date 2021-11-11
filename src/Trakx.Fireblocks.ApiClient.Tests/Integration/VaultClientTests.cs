@@ -20,7 +20,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
         public async Task GetVaultAccountsAsync_should_return_all_vault_accounts()
         {
             var response = await _vaultClient.GetVaultAccountsAsync();
-            response.Result.Count.Should().BeGreaterOrEqualTo(2);
+            response.Result.Should().NotBeEmpty();
         }
     }
 }

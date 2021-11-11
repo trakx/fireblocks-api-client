@@ -16,11 +16,11 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             _exchangeAccountsClient = ServiceProvider.GetRequiredService<IExchangeAccountsClient>();
         }
 
-        [Fact(Skip = "disabled temporarily")]
+        [Fact]
         public async Task Exchange_accountsAllAsync_should_return_all_accounts()
         {
             var response = await _exchangeAccountsClient.Exchange_accountsAllAsync();
-            response.Result.Count.Should().BeGreaterOrEqualTo(2);
+            response.Result.Should().BeEmpty();
         }
     }
 }

@@ -11,49 +11,32 @@ namespace Trakx.Fireblocks.ApiClient.Tests
         {
         }
 
-        public TransactionRequest GetRandomTransaction()
+        public TransactionRequest GetRandomTransaction(bool flag1, bool flag2, bool flag3)
         {
             return new TransactionRequest
             {
-                Amount = GetRandomDecimals(),
-                Destination = new DestinationTransferPeerPath
+                Amount = 0.1,
+                Destination = flag1 ? new DestinationTransferPeerPath
                 {
-                    Id = GetRandomString(10),
+                    Id = "0",
                     Type = TransferPeerPathType.VAULT_ACCOUNT,
-                },
-                Destinations = new()
-                {
-                    new()
-                    {
-                        Amount = GetRandomValue().ToString(CultureInfo.InvariantCulture),
-                        Destination = new DestinationTransferPeerPath
-                        {
-                            Id = GetRandomString(10),
-                            Type = TransferPeerPathType.ONE_TIME_ADDRESS,
-                            OneTimeAddress = new OneTimeAddress
-                            {
-                                Address = GetRandomString(5),
-                                Tag = GetRandomString(5),
-                            },
-                        },
-                    }
-                },
-                Fee = GetRandomDecimals(),
-                Note = GetRandomString(40),
+                } : null,
+                Fee = 0.1,
+                Note = "nonono",
                 Operation = TransactionOperation.SUPPLY_TO_COMPOUND,
-                Source = new TransferPeerPath
+                Source = flag3 ? new TransferPeerPath
                 {
-                    Id = GetRandomString(10),
-                    Type = TransferPeerPathType.FIAT_ACCOUNT
-                },
+                    Id = "0",
+                    Type = TransferPeerPathType.VAULT_ACCOUNT,
+                } : null,
                 AutoStaking = true,
-                AssetId = GetRandomString(3),
+                AssetId = "ETH_TEST",
                 CpuStaking = GetRandomDecimals(),
-                FeeLevel = TransactionRequestFeeLevel.HIGH,
-                GasLimit = GetRandomDecimals(),
-                GasPrice = GetRandomDecimals(),
-                MaxFee = GetRandomValue().ToString(CultureInfo.InvariantCulture),
-                NetworkFee = GetRandomDecimals(),
+                FeeLevel = TransactionRequestFeeLevel.LOW,
+                GasLimit = 0.1,
+                GasPrice = 0.1,
+                MaxFee = "1",
+                NetworkFee = 0.1,
                 NetworkStaking = GetRandomDecimals(),
                 CustomerRefId = GetRandomString(5),
                 FailOnLowFee = true

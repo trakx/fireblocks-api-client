@@ -4953,6 +4953,7 @@ namespace Trakx.Fireblocks.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
+                            var response = response_.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                             var objectResponse_ = await ReadObjectResponseAsync<CreateTransactionResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
@@ -4962,6 +4963,7 @@ namespace Trakx.Fireblocks.ApiClient
                         }
                         else
                         {
+                            var response = response_.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                             var objectResponse_ = await ReadObjectResponseAsync<Error>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
