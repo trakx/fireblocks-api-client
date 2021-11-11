@@ -15,7 +15,7 @@ FireblocksApiConfiguration__ApiPubKey=********
 ```
 
 ## Running nswag tool to refresh cs client files
-```
+```shell
 cd src/Trakx.Fireblocks.ApiClient
 nswag run nswag.json /variables:Configuration=Debug /runtime:Net50
 ```
