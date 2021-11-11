@@ -36,7 +36,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
         {
             var configuration = new FireblocksApiConfiguration
             {
-                BaseUrl = Constants.BaseUrl,
+                BaseUrl = "https://api.fireblocks.io/v1",
                 ApiPubKey = new Secrets().ApiPubKey,
                 ApiPrivateKey = new Secrets().ApiPrivateKey
             };
