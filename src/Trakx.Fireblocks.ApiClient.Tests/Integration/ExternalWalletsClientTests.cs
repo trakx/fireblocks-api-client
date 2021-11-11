@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using Trakx.Utils.Testing;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -13,8 +14,8 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
         private readonly IExternalWalletsClient _externalWalletsClient;
         private readonly MockCreator _mockCreator;
 
-        public ExternalWalletsClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output) : base(apiFixture,
-            output)
+        public ExternalWalletsClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output) 
+            : base(apiFixture, output)
         {
             _externalWalletsClient = ServiceProvider.GetRequiredService<IExternalWalletsClient>();
             _mockCreator = new MockCreator(output);

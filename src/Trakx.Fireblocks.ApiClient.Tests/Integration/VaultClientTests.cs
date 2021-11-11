@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +21,10 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
         public async Task GetVaultAccountsAsync_should_return_all_vault_accounts()
         {
             var response = await _vaultClient.GetVaultAccountsAsync();
-            response.Result.Should().NotBeEmpty();
+            response.Result.Should().NotBeNullOrEmpty();
+            response.Result[0].Assets.Should().NotBeNullOrEmpty();
+            response.Result[0].Assets[1].Id.Should().Be("ETH_TEST");
+            Convert.ToDecimal(response.Result[0].Assets[1].Total).Should().BeGreaterOrEqualTo(0.1m);
         }
     }
 }

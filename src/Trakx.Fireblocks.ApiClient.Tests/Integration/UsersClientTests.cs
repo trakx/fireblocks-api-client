@@ -10,12 +10,10 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
     {
         
         private readonly IUsersClient _usersClient;
-        private readonly MockCreator _mockCreator;
         
         public UsersClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output) 
             : base(apiFixture, output)
         {
-            _mockCreator = new MockCreator(output);
             _usersClient = ServiceProvider.GetRequiredService<IUsersClient>();
         }
 
