@@ -2432,6 +2432,8 @@ components:
           type: string
         subStatus:
           $ref: '#/components/schemas/TransactionSubStatus'
+          nullable: 
+            true
         destinationAddress:
           type: string
         sourceAddress:
