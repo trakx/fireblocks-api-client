@@ -2549,6 +2549,9 @@ components:
             - BASE_ASSET
             - ETH_CONTRACT
             - FIAT
+            - ERC20
+            - BEP20
+            - COMPOUND
         contractAddress:
           type: string
         nativeAsset:
