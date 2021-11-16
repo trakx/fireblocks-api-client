@@ -55,7 +55,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             await _externalWalletsClient.DeleteExternalWalletByIdAsync(walletId);
 
             // After write op, fireblocks needs some time to refresh data :(
-            Thread.Sleep(2000);
+            await Task.Delay(2000);
 
             await new Func<Task>(async () => await _externalWalletsClient.GetExternalWalletAsync(walletId)).Should()
                 .ThrowAsync<ApiException>();
