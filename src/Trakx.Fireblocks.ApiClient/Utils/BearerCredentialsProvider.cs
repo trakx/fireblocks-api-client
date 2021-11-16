@@ -59,21 +59,10 @@ namespace Trakx.Fireblocks.ApiClient.Utils
 
         private long GetIssuedTimestamp() => _dateTimeProvider.UtcNowAsOffset.ToUnixTimeSeconds();
 
-        private static string ToHexString(byte[] data)
-        {
-            var sBuilder = new StringBuilder();
-            foreach (var t in data)
-            {
-                sBuilder.Append(t.ToString("x2"));
-            }
-
-            return sBuilder.ToString();
-        }
-
         private string GetSignature(string preHash)
         {
             using var sha256 = SHA256.Create();
-            return ToHexString(sha256.ComputeHash(Encoding.UTF8.GetBytes(preHash)));
+            return sha256.ComputeHash(Encoding.UTF8.GetBytes(preHash)).ToHexString();
         }
 
         public void Dispose()
