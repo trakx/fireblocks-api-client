@@ -48,7 +48,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             var walletId = response.Result.Id;
             
             // After write op, fireblocks needs some time to refresh data :(
-            Thread.Sleep(2000);
+            await Task.Delay(2000);
 
             var response2 = await _externalWalletsClient.GetExternalWalletAsync(walletId);
             response2.Result.Name.Should().Be(walletName);
