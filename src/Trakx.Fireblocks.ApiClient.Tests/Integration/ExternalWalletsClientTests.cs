@@ -46,16 +46,16 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
                 CustomerRefId = refId
             });
             var walletId = response.Result.Id;
-            
+
             // After write op, fireblocks needs some time to refresh data :(
-            await Task.Delay(2000);
+            await Task.Delay(2000).ConfigureAwait(false);
 
             var response2 = await _externalWalletsClient.GetExternalWalletAsync(walletId);
             response2.Result.Name.Should().Be(walletName);
             await _externalWalletsClient.DeleteExternalWalletByIdAsync(walletId);
 
             // After write op, fireblocks needs some time to refresh data :(
-            await Task.Delay(2000);
+            await Task.Delay(2000).ConfigureAwait(false);
 
             await new Func<Task>(async () => await _externalWalletsClient.GetExternalWalletAsync(walletId)).Should()
                 .ThrowAsync<ApiException>();
