@@ -20,10 +20,10 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Unit
         private readonly DateTimeOffset _nonce;
         private readonly BearerCredentialsProvider _bearerCredentialsProvider;
 
-        public BearerCredentialProviderTests(RsaKeyFixture fixture, ITestOutputHelper output) 
+        public BearerCredentialProviderTests(RsaKeyFixture fixture, ITestOutputHelper output)
             : base(fixture, output)
         {
-            var dateTimeProvider = Substitute.For <IDateTimeProvider>();
+            var dateTimeProvider = Substitute.For<IDateTimeProvider>();
             _nonce = DateTimeOffset.FromUnixTimeMilliseconds(12345678789);
             dateTimeProvider.UtcNowAsOffset.ReturnsForAnyArgs(_nonce);
 
@@ -34,7 +34,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Unit
         [Fact]
         public void Bearer_token_should_have_correct_payload()
         {
-            var message = new HttpRequestMessage { RequestUri = new Uri("https://test.com/test1/validate") };
+            var message = new HttpRequestMessage {RequestUri = new Uri("https://test.com/test1/validate")};
             var messageBody = "this body is taken into account in the signature and payload";
             message.Content = new StringContent(messageBody, Encoding.UTF8);
             _bearerCredentialsProvider.GenerateJwtToken(message);
@@ -56,8 +56,9 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Unit
             payload.TryGetValue("nonce", out var retrievedNonce).Should().BeTrue();
             retrievedNonce.Should().Be(_nonce.ToUnixTimeMilliseconds());
             payload.TryGetValue("bodyHash", out var retrievedBodyHash).Should().BeTrue();
+            using var sha256 = SHA256.Create();
             retrievedBodyHash.Should()
-                .Be(new HMACSHA256(new byte[0]).ComputeHash(Encoding.UTF8.GetBytes(messageBody)).ToHexString());
+                .Be(sha256.ComputeHash(Encoding.UTF8.GetBytes(messageBody)).ToHexString());
         }
 
         private TokenValidationParameters GetValidationParameters()

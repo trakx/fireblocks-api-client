@@ -9,17 +9,18 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
 {
     public class VaultClientTests : FireblocksClientTestsBase
     {
-        private readonly IVaultClient _fireblocksClient;
+        private readonly IVaultClient _vaultClient;
 
-        public VaultClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output) : base(apiFixture, output)
+        public VaultClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output) 
+            : base(apiFixture, output)
         {
-            _fireblocksClient = ServiceProvider.GetRequiredService<IVaultClient>();
+            _vaultClient = ServiceProvider.GetRequiredService<IVaultClient>();
         }
 
         [Fact]
-        public async Task AccountsAllAsync_should_return_all_accounts()
+        public async Task GetVaultAccountsAsync_should_return_all_vault_accounts()
         {
-            var response = await _fireblocksClient.AccountsAllAsync();
+            var response = await _vaultClient.GetVaultAccountsAsync();
             response.Result.Should().NotBeNullOrEmpty();
             response.Result[0].Assets.Should().NotBeNullOrEmpty();
             response.Result[0].Assets[1].Id.Should().Be("ETH_TEST");

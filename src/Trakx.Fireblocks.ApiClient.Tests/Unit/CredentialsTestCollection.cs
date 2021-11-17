@@ -23,6 +23,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Unit
             RsaPrivatePcs8PrivateKey = Convert.ToBase64String(RsaKey.ExportPkcs8PrivateKey());
             Configuration = new FireblocksApiConfiguration
             {
+                BaseUrl = "https://api.fireblocks.io/v1",
                 ApiPrivateKey = RsaPrivatePcs8PrivateKey,
                 ApiPubKey = "pubKey"
             };

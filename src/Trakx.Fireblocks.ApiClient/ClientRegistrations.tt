@@ -23,7 +23,8 @@ namespace <#= nameSpace #>
             <# 
             var clientNames = new [] { "Vault", "InternalWallets", "ExternalWallets", 
                 "ExchangeAccounts", "FiatAccounts", "Transactions", "SupportedAssets", 
-                "NetworkConnections", "TransferTickets", "Fee" };
+                "NetworkConnections", "TransferTickets", "Fee", "Webhooks", "Users",
+                "OffExchangeAccounts" };
 
             foreach(var clientName in clientNames)
             {

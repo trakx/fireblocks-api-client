@@ -20,7 +20,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration
             _fireblocksClient = new FlurlClient("https://api.fireblocks.io");
         }
 
-        [Fact]
+        [Fact(Skip = "local openapi file was changed to improve methods signature and fix nullable issues. After that, this test is no longer working, as it takes the assumption that both files, local and remote, are identical.")]
         public async Task VerifyOpenApiVersion()
         {
             var apiResponse = await _fireblocksClient.Request("docs", "v1", "swagger").SendAsync(HttpMethod.Get);

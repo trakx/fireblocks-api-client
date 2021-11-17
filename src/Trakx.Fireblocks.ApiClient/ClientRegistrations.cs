@@ -163,6 +163,48 @@ namespace Trakx.Fireblocks.ApiClient
                         })
                     .WithPolicyKey("FeeClient"));
 
+            services.AddHttpClient<IWebhooksClient, WebhooksClient>("Trakx.Fireblocks.ApiClient.WebhooksClient")
+                .AddPolicyHandler((s, request) => 
+                    Policy<HttpResponseMessage>
+                    .Handle<ApiException>()
+                    .Or<HttpRequestException>()
+                    .OrTransientHttpStatusCode()
+                    .WaitAndRetryAsync(delay,
+                        onRetry: (result, timeSpan, retryCount, context) =>
+                        {
+                            var logger = Log.Logger.ForContext<WebhooksClient>();
+                            LogFailure(logger, result, timeSpan, retryCount, context);
+                        })
+                    .WithPolicyKey("WebhooksClient"));
+
+            services.AddHttpClient<IUsersClient, UsersClient>("Trakx.Fireblocks.ApiClient.UsersClient")
+                .AddPolicyHandler((s, request) => 
+                    Policy<HttpResponseMessage>
+                        .Handle<ApiException>()
+                        .Or<HttpRequestException>()
+                        .OrTransientHttpStatusCode()
+                        .WaitAndRetryAsync(delay,
+                            onRetry: (result, timeSpan, retryCount, context) =>
+                            {
+                                var logger = Log.Logger.ForContext<UsersClient>();
+                                LogFailure(logger, result, timeSpan, retryCount, context);
+                            })
+                        .WithPolicyKey("UsersClient"));
+
+            services.AddHttpClient<IOffExchangeAccountsClient, OffExchangeAccountsClient>("Trakx.Fireblocks.ApiClient.OffExchangeAccountsClient")
+                .AddPolicyHandler((s, request) => 
+                    Policy<HttpResponseMessage>
+                        .Handle<ApiException>()
+                        .Or<HttpRequestException>()
+                        .OrTransientHttpStatusCode()
+                        .WaitAndRetryAsync(delay,
+                            onRetry: (result, timeSpan, retryCount, context) =>
+                            {
+                                var logger = Log.Logger.ForContext<OffExchangeAccountsClient>();
+                                LogFailure(logger, result, timeSpan, retryCount, context);
+                            })
+                        .WithPolicyKey("OffExchangeAccountsClient"));
+
         }
     }
 }

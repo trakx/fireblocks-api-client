@@ -72,5 +72,26 @@ namespace Trakx.Fireblocks.ApiClient
             CredentialProvider.AddCredentials(request);
         }
     }
+    internal partial class WebhooksClient
+    {
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
+    }
+    internal partial class UsersClient
+    {
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
+    }
+    internal partial class OffExchangeAccountsClient
+    {
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
+    }
 
 }
