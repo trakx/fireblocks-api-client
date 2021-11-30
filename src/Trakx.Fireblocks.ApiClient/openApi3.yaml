@@ -344,6 +344,7 @@ paths:
     get:
       tags: [Vault]
       summary: Returns all addresses generated for a Vault wallet
+      operationId: getVaultWalletAddressesByAssetId
       parameters:
         - in: path
           name: vaultAccountId
@@ -2552,6 +2553,7 @@ components:
             - ERC20
             - BEP20
             - COMPOUND
+            - XLM_ASSET
         contractAddress:
           type: string
         nativeAsset:
@@ -2614,22 +2616,36 @@ components:
       type: object
       properties:
         feePerByte:
-          type: string
+          type:
+            - 'null'
+            - string
         gasPrice:
-          type: string
+          type:
+            - 'null'
+            - string
         gasLimit:
-          type: string
+          type:
+            - 'null'
+            - string
         networkFee:
-          type: string
+          type:
+            - 'null'
+            - string
     NetworkFee:
       type: object
       properties:
         feePerByte:
-          type: string
+          type:
+            - 'null'
+            - string
         gasPrice:
-          type: string
+          type:
+            - 'null'
+            - string
         networkFee:
-          type: string
+          type:
+            - 'null'
+            - string
     GasStationConfiguration:
       type: object
       properties:
@@ -2667,6 +2683,7 @@ components:
           oneOf:
             - type: number
             - type: string
+            - type: 'null'
         feeLevel:
           type: string
           enum:
@@ -2691,14 +2708,17 @@ components:
           oneOf:
             - type: number
             - type: string
+            - type: 'null'
         gasLimit:
           oneOf:
             - type: number
             - type: string
+            - type: 'null'
         networkFee:
           oneOf:
             - type: number
             - type: string
+            - type: 'null'
         note:
           type: string
         autoStaking:
@@ -2711,6 +2731,7 @@ components:
           oneOf:
             - type: number
             - type: string
+            - type: 'null'
         extraParameters:
           type: object
           properties: {}
@@ -2758,6 +2779,7 @@ components:
         - KORBIT
         - SEEDCX
         - BITSO
+        - FTX
     FiatAccountType:
       type: string
       enum:
