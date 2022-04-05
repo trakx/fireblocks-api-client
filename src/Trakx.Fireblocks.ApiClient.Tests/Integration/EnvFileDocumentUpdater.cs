@@ -1,10 +1,10 @@
 ﻿using Trakx.Utils.Testing;
+using Trakx.Utils.Testing.ReadmeUpdater;
 using Xunit.Abstractions;
 
-namespace Trakx.Fireblocks.ApiClient.Tests.Integration
+namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
+
+public class ReadmeDocumentationUpdater : ReadmeDocumentationUpdaterBase
 {
-    public class EnvFileDocumentUpdater : EnvFileDocumentationUpdaterBase
-    {
-        public EnvFileDocumentUpdater(ITestOutputHelper output) : base(output) { }
-    }
+    public ReadmeDocumentationUpdater(ITestOutputHelper output) : base(output) { }
 }

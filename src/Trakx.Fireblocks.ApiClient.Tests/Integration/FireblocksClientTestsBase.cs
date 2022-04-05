@@ -1,64 +1,64 @@
 using System;
+using System.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using Trakx.Utils.Testing;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Trakx.Fireblocks.ApiClient.Tests.Integration
+namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
+
+[Collection(nameof(ApiTestCollection))]
+public class FireblocksClientTestsBase
 {
-    [Collection(nameof(ApiTestCollection))]
-    public class FireblocksClientTestsBase
+    protected readonly ServiceProvider ServiceProvider;
+    protected ILogger Logger;
+
+    protected FireblocksClientTestsBase(FireblocksApiFixture apiFixture, ITestOutputHelper output)
     {
-        protected readonly ServiceProvider ServiceProvider;
-        protected ILogger Logger;
+        Logger = new LoggerConfiguration().WriteTo.TestOutput(output).CreateLogger();
 
-        protected FireblocksClientTestsBase(FireblocksApiFixture apiFixture, ITestOutputHelper output)
-        {
-            Logger = new LoggerConfiguration().WriteTo.TestOutput(output).CreateLogger();
-
-            ServiceProvider = apiFixture.ServiceProvider;
-        }
+        ServiceProvider = apiFixture.ServiceProvider;
     }
+}
 
-    [CollectionDefinition(nameof(ApiTestCollection))]
-    public class ApiTestCollection : ICollectionFixture<FireblocksApiFixture>
+[CollectionDefinition(nameof(ApiTestCollection))]
+public class ApiTestCollection : ICollectionFixture<FireblocksApiFixture>
+{
+    // This class has no code, and is never created. Its purpose is simply
+    // to be the place to apply [CollectionDefinition] and all the
+    // ICollectionFixture<> interfaces.
+}
+
+public class FireblocksApiFixture : IDisposable
+{
+    public readonly ServiceProvider ServiceProvider;
+
+    public FireblocksApiFixture()
     {
-        // This class has no code, and is never created. Its purpose is simply
-        // to be the place to apply [CollectionDefinition] and all the
-        // ICollectionFixture<> interfaces.
-    }
-
-    public class FireblocksApiFixture : IDisposable
-    {
-        public readonly ServiceProvider ServiceProvider;
-
-        public FireblocksApiFixture()
-        {
-            var configuration = new FireblocksApiConfiguration
+        var configuration = ConfigurationHelper.GetConfigurationFromEnv<FireblocksApiConfiguration>()
+            with
             {
                 BaseUrl = "https://api.fireblocks.io/v1",
-                ApiPubKey = new Secrets().ApiPubKey,
-                ApiPrivateKey = new Secrets().ApiPrivateKey
             };
 
-            var serviceCollection = new ServiceCollection();
+        var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddSingleton(configuration);
-            serviceCollection.AddFireblocksClient(configuration);
+        serviceCollection.AddSingleton(configuration);
+        serviceCollection.AddFireblocksClient(configuration);
 
-            ServiceProvider = serviceCollection.BuildServiceProvider();
-        }
+        ServiceProvider = serviceCollection.BuildServiceProvider();
+    }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposing) return;
-            ServiceProvider.Dispose();
-        }
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposing) return;
+        ServiceProvider.Dispose();
+    }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 }

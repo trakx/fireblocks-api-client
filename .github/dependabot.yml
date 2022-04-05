@@ -1,0 +1,30 @@
+version: 2
+registries:
+  trakx-nuget:
+    type: nuget-feed
+    url: https://nuget.pkg.github.com/trakx/index.json
+    username: trakx-bot
+    password: ${{secrets.TRAKX_BOT_READONLY_PAT}}
+  official-nuget:
+    type: nuget-feed
+    url: https://api.nuget.org/v3/index.json
+
+updates:
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+  # Maintain dependencies for docker
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "daily"
+  # Maintain dependencies for nuget
+  - package-ecosystem: "nuget"
+    registries:
+      - "trakx-nuget"
+      - "official-nuget"
+    directory: "/"
+    schedule:
+      interval: "daily"

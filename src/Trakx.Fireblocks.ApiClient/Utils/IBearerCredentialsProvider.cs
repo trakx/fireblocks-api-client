@@ -1,9 +1,8 @@
 ﻿using System.Net.Http;
 
-namespace Trakx.Fireblocks.ApiClient.Utils
+namespace Trakx.Fireblocks.ApiClient.Utils;
+
+public interface IBearerCredentialsProvider
 {
-    public interface IBearerCredentialsProvider
-    {
-        public string GenerateJwtToken(HttpRequestMessage msg);
-    }
+    public string GenerateJwtToken(HttpRequestMessage msg);
 }
