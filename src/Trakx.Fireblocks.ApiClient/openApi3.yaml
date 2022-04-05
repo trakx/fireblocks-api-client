@@ -1,7 +1,7 @@
 ﻿openapi: 3.0.0
 info:
   title: Fireblocks API
-  version: "1.5.0"
+  version: "1.5.1"
 servers:
   - url: 'https://api.fireblocks.io/v1'
 paths:
@@ -77,6 +77,64 @@ paths:
                 $ref: '#/components/schemas/VaultAccount'
         default:
           $ref: '#/components/responses/Error'
+  '/vault/accounts_paged':
+    get:
+      summary: Retrieves all vault accounts in your workspace. This command is limited up to a certain amount of results to ensure response time is received in a timely manner
+      parameters:
+        - in: query
+          name: namePrefix
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: nameSuffix
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: minAmountThreshold
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: assetId
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: orderBy
+          required: false
+          schema:
+            type: string
+            enum: ["ASC", "DESC"]
+            default: "DESC"
+        - in: query
+          name: before
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: after
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: number
+            minimum: 1
+            maximum: 25000
+            default: 10000
+      responses:
+        '200':
+          description: An object containing vault accounts and previous/next page cursors
+          content:
+            '*/*':
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/VaultAccountsPagedResponse'
   '/vault/accounts/{vaultAccountId}':
     get:
       tags: [Vault]
@@ -158,6 +216,33 @@ paths:
       responses:
         '201':
           description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  /vault/accounts/{vaultAccountId}/{assetId}/activate:
+    post:
+      tags: [Vault]
+      summary: Activate a wallet in a Vault account
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: >-
+            The ID of the vault account to return, or 'default' for the default vault account
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateVaultAssetResponse'
         default:
           $ref: '#/components/responses/Error'
   /vault/accounts/{vaultAccountId}/{assetId}/lock_allocation:
@@ -338,6 +423,38 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/CreateVaultAssetResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/{assetId}/balance':
+    post:
+      summary: Update balance and returns a wallet of a specific asset inside a Fireblocks Vault account
+      parameters:
+        - in: path
+          name: vaultAccountId
+          required: true
+          description: >-
+            The ID of the vault account to return
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          '*/*':
+            schema:
+              type: object
+      responses:
+        '200':
+          description: A VaultAsset object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VaultAsset'
         default:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/addresses':
@@ -1826,7 +1943,27 @@ paths:
     get:
       tags: [Fee]
       summary: >-
-        Returns a summary of Gas Station configuration and balances
+        Returns a summary of Gas Station configuration and balances for ETH.
+      responses:
+        '200':
+          description: Gas Station properties
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GasStationPropertiesResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/gas_station/{assetId}':
+    get:
+      tags: [Fee]
+      summary: >-
+        Returns a summary of Gas Station configuration and balances for requested asset.
+      parameters:
+        - in: path
+          name: assetId
+          description: The ID of the asset
+          schema:
+            type: string
       responses:
         '200':
           description: Gas Station properties
@@ -1840,7 +1977,29 @@ paths:
     put:
       tags: [Fee]
       summary: >-
-        Sets Gas Station configuration
+        Sets Gas Station configuration for ETH.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GasStationConfiguration'
+      responses:
+        '201':
+          description: OK
+        default:
+          $ref: '#/components/responses/Error'
+  '/gas_station/configuration/{assetId}':
+    put:
+      tags: [Fee]
+      summary: >-
+        Sets Gas Station configuration for requested asset.
+      parameters:
+        - in: path
+          name: assetId
+          description: The ID of the asset
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -1864,6 +2023,33 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ResendWebhooksResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/webhooks/resend/{txId}':
+    post:
+      tags: [Webhooks]
+      summary: Resend failed webhooks for transaction by ID
+      parameters:
+        - in: path
+          name: txId
+          required: true
+          description: The ID of the transaction for webhooks
+          schema:
+            type: string
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                resendCreated:
+                  type: boolean
+                resendStatusUpdated:
+                  type: boolean
+      responses:
+        '200':
+          description: OK
         default:
           $ref: '#/components/responses/Error'
   # USERS
@@ -2050,6 +2236,10 @@ components:
           type: string
         eosAccountName:
           type: string
+        status:
+          type: string
+        activationTxId:
+          type: string
     AllocatedBalance:
       type: object
       properties:
@@ -2072,6 +2262,12 @@ components:
         locked:
           type: string
         staked:
+          type: string
+    RewardsInfo:
+      type: object
+      properties:
+        pendingRewards:
+          description: Amount that is pending for rewards
           type: string
     VaultAsset:
       type: object
@@ -2120,6 +2316,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AllocatedBalance'
+        rewardsInfo:
+          $ref: '#/components/schemas/RewardsInfo'
     VaultWalletAddress:
       type: object
       properties:
@@ -2144,6 +2342,8 @@ components:
           type: string
         enterpriseAddress:
           type: string
+        bip44AddressIndex:
+          type: integer
     CreateAddressResponse:
       type: object
       properties:
@@ -2154,6 +2354,26 @@ components:
         enterpriseAddress:
           type: string
         tag:
+          type: string
+        bip44AddressIndex:
+          type: integer
+    VaultAccountsPagedResponse:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultAccount'
+        paging:
+          type: object
+          properties:
+            before:
+              type: string
+            after:
+              type: string
+        previousUrl:
+          type: string
+        nextUrl:
           type: string
     VaultAccount:
       type: object
@@ -2225,6 +2445,8 @@ components:
         name:
           type: string
           description: Display name of the fiat account
+        address:
+          type: string
         assets:
           type: array
           items:
@@ -2346,9 +2568,15 @@ components:
         netAmount:
           type: string
         amountUSD:
-          type:
-            - 'null'
-            - string
+          type: string
+          nullable: true
+    RewardInfo:
+      type: object
+      properties:
+        srcRewards:
+          type: string
+        destRewards:
+          type: string
     TransferPeerPathResponse:
       allOf:
         - $ref: '#/components/schemas/TransferPeerPath'
@@ -2388,9 +2616,8 @@ components:
           type: number
         amountUSD:
           description: The USD value of the requested amount
-          type:
-            - 'null'
-            - number
+          type: number
+          nullable: true
         serviceFee:
           description: The total fee deducted by the exchange from the actual requested amount (serviceFee = amount - netAmount)
           type: number
@@ -2433,8 +2660,7 @@ components:
           type: string
         subStatus:
           $ref: '#/components/schemas/TransactionSubStatus'
-          nullable:
-            true
+          nullable: true
         destinationAddress:
           type: string
         sourceAddress:
@@ -2494,19 +2720,21 @@ components:
           $ref: '#/components/schemas/AuthorizationInfo'
         index:
           type: number
+        rewardInfo:
+          $ref: '#/components/schemas/RewardInfo'
     TransactionResponseDestination:
       type: object
       properties:
         amount:
           type: string
         amountUSD:
-          type:
-            - 'null'
-            - string
+          type: string
         amlScreeningResult:
           $ref: '#/components/schemas/AmlScreeningResult'
         destination:
           $ref: '#/components/schemas/TransferPeerPathResponse'
+        authorizationInfo:
+          $ref: '#/components/schemas/AuthorizationInfo'
     NetworkRecord:
       type: object
       properties:
@@ -2532,11 +2760,11 @@ components:
         sourceAddress:
           type: string
         amountUSD:
-          type:
-            - 'null'
-            - string
+          type: string
         index:
           type: number
+        rewardInfo:
+          $ref: '#/components/schemas/RewardInfo'
     AssetTypeResponse:
       type: object
       properties:
@@ -2550,9 +2778,9 @@ components:
             - BASE_ASSET
             - ETH_CONTRACT
             - FIAT
+            - COMPOUND
             - ERC20
             - BEP20
-            - COMPOUND
             - XLM_ASSET
             - SOL_ASSET
             - ALGO_ASSET
@@ -2561,6 +2789,8 @@ components:
           type: string
         nativeAsset:
           type: string
+        decimals:
+          type: number
       required:
         - id
         - name
@@ -2619,36 +2849,30 @@ components:
       type: object
       properties:
         feePerByte:
-          type:
-            - 'null'
-            - string
+          type: string
         gasPrice:
-          type:
-            - 'null'
-            - string
+          type: string
         gasLimit:
-          type:
-            - 'null'
-            - string
+          type: string
         networkFee:
-          type:
-            - 'null'
-            - string
+          type: string
+        baseFee:
+          type: string
+        priorityFee:
+          type: string
     NetworkFee:
       type: object
       properties:
         feePerByte:
-          type:
-            - 'null'
-            - string
+          type: string
         gasPrice:
-          type:
-            - 'null'
-            - string
+          type: string
         networkFee:
-          type:
-            - 'null'
-            - string
+          type: string
+        baseFee:
+          type: string
+        priorityFee:
+          type: string
     GasStationConfiguration:
       type: object
       properties:
@@ -2686,7 +2910,6 @@ components:
           oneOf:
             - type: number
             - type: string
-            - type: 'null'
         feeLevel:
           type: string
           enum:
@@ -2696,7 +2919,9 @@ components:
         priorityFee:
           description: >-
             - For ETH based assets only, the fee for eip-1559 transaction pricing mechanism. Value is in gwei.
-          type: string
+          oneOf:
+            - type: number
+            - type: string
         failOnLowFee:
           type: boolean
         maxFee:
@@ -2742,6 +2967,8 @@ components:
           $ref: '#/components/schemas/TransactionOperation'
         customerRefId:
           type: string
+        replaceTxByHash:
+          type: string
         externalTxId:
           type: string
         destinations:
@@ -2762,31 +2989,38 @@ components:
     ExchangeType:
       type: string
       enum:
-        - BITTREX
-        - COINBASEPRO
         - BINANCE
         - BINANCEUS
-        - BITMEX
-        - KRAKEN
-        - GEMINI
         - BITFINEX
-        - BITSTAMP
-        - POLONIEX
-        - DERIBIT
-        - LIQUID
-        - HUOBI
         - BITHUMB
-        - OKEX
-        - OKCOIN
-        - HITBTC
-        - KORBIT
-        - SEEDCX
+        - BITMEX
         - BITSO
+        - BITSTAMP
+        - BITTREX
+        - CIRCLE
+        - COINBASEPRO
+        - COINMETRO
+        - COINSPRO
+        - CRYPTOCOM
+        - DERIBIT
         - FTX
+        - FIXUS
+        - GEMINI
+        - HITBTC
+        - HUOBI
+        - KORBIT
+        - KRAKEN
+        - LIQUID
+        - POLONIEX
+        - OKCOIN
+        - OKEX
+        - SEEDCX
     FiatAccountType:
       type: string
       enum:
         - SIGNET
+        - BLINC
+        - SILVERGATE
     ConfigChangeRequestStatus:
       type: string
       enum:
@@ -2806,11 +3040,12 @@ components:
         - RAW
         - CONTRACT_CALL
         - INTERNAL_LEDGER_TRANSFER
+        - TYPED_MESSAGE
       default: TRANSFER
     Error:
       type: object
       properties:
-        error:
+        message:
           type: string
         code:
           type: number
@@ -2840,6 +3075,7 @@ components:
         - INVALID_THIRD_PARTY_RESPONSE
         - VAULT_WALLET_NOT_READY
         - MISSING_DEPOSIT_ADDRESS
+        - ONE_TIME_ADDRESS_DISABLED
         - INTERNAL_ERROR
         - UNKNOWN_ERROR
         - AUTHORIZER_NOT_FOUND
@@ -2853,7 +3089,6 @@ components:
         - 3RD_PARTY_CONFIRMING
         - CONFIRMED
         - 3RD_PARTY_COMPLETED
-        - PENDING_BLOCKCHAIN_CONFIRMATIONSREJECTED_BY_USER
         - CANCELLED_BY_USER
         - 3RD_PARTY_CANCELLED
         - 3RD_PARTY_REJECTED
@@ -2863,6 +3098,28 @@ components:
         - PARTIALLY_FAILED
         - 3RD_PARTY_FAILED
         - ZERO_BALANCE_IN_PERMANENT_ADDRESS
+        - GAS_PRICE_TOO_LOW_FOR_RBF
+        - DROPPED_BY_BLOCKCHAIN
+        - INVALID_FEE_PARAMS
+        - MISSING_TAG_OR_MEMO
+        - SIGNING_ERROR
+        - GAS_LIMIT_TOO_LOW
+        - TOO_MANY_INPUTS
+        - MAX_FEE_EXCEEDED
+        - ACTUAL_FEE_TOO_HIGH
+        - INVALID_CONTRACT_CALL_DATA
+        - INVALID_NONCE_TOO_LOW
+        - INVALID_NONCE_TOO_HIGH
+        - INVALID_NONCE_FOR_RBF
+        - FAIL_ON_LOW_FEE
+        - TOO_LONG_MEMPOOL_CHAIN
+        - TX_OUTDATED
+        - INCOMPLETE_USER_SETUP
+        - SIGNER_NOT_FOUND
+        - INVALID_TAG_OR_MEMO
+        - NEED_MORE_TO_CREATE_DESTINATION
+        - NON_EXISTING_ACCOUNT_NAME
+        - ENV_UNSUPPORTED_ASSET
       description: >
         - `INSUFFICIENT_FUNDS` - Not enough funds to fulfill the withdraw request
 
@@ -2956,6 +3213,27 @@ components:
 
         - `ZERO_BALANCE_IN_PERMANENT_ADDRESS` - Not enough BTC balance to fund the requested transaction in legacy address
 
+        - 'DROPPED_BY_BLOCKCHAIN' - The transaction was replaced by another transaction with higher fee
+        - 'INVALID_FEE_PARAMS' - Fee parameters are inconsistent or unknown
+        - 'MISSING_TAG_OR_MEMO' - A tag or memo is required to send funds to a third party address, including all exchanges
+        - 'SIGNING_ERROR' - The transaction signing failed, resubmit the transaction to sign again
+        - 'GAS_LIMIT_TOO_LOW' - The transaction was rejected because the gas limit was set too low
+        -  'MAX_FEE_EXCEEDED' - Gas price is currently above selected max fee
+        - 'ACTUAL_FEE_TOO_HIGH' - Chosen fee is below current price
+        - 'INVALID_CONTRACT_CALL_DATA' - Transaction data was not encoded properly
+        - 'INVALID_NONCE_TOO_LOW' - Illegal nonce
+        - 'INVALID_NONCE_TOO_HIGH' - Illegal nonce
+        - 'INVALID_NONCE_FOR_RBF' - No matching nonce
+        - 'FAIL_ON_LOW_FEE' - Current blockchain fee is higher than selected
+        - 'TOO_LONG_MEMPOOL_CHAIN' - Too many unconfirmed transactions from this address
+        - 'TX_OUTDATED' - Nonce already used
+        - 'INCOMPLETE_USER_SETUP' - MPC setup was not completed
+        - 'SIGNER_NOT_FOUND' - Signer not found
+        - 'INVALID_TAG_OR_MEMO' - Invalid Tag or Memo
+        - 'ZERO_BALANCE_IN_PERMANENT_ADDRESS' - Not enough BTC on legacy permanent address
+        - 'NEED_MORE_TO_CREATE_DESTINATION' - Insufficient funds for creating destination account
+        - 'NON_EXISTING_ACCOUNT_NAME' - Account does not exist
+        - 'ENV_UNSUPPORTED_ASSET' - Asset is not supported under this workspace settings
     TransferTicketTermResponse:
       type: object
       properties:
@@ -3061,7 +3339,7 @@ components:
         content:
           type: string
         bip44addressIndex:
-          type: number
+          type: integer
         bip44change:
           type: number
         derivationPath:
@@ -3126,6 +3404,8 @@ components:
         - USDT_MARGINED_SWAP_ISOLATED
         - USDT_FUTURES
         - COIN_FUTURES
+        - FUTURES_CROSS
+        - UNIFIED
     ValidateAddressResponse:
       type: object
       properties:
@@ -3142,6 +3422,8 @@ components:
           type: string
         amount:
           type: string
+        treatAsGrossAmount:
+          type: boolean
     DeallocateFundsRequest:
       type: object
       properties:

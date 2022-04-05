@@ -20,8 +20,8 @@ public class SwaggerVersionChecker : IDisposable
         _fireblocksClient = new FlurlClient("https://docs.fireblocks.com");
     }
 
-    //[Fact(Skip = "local openapi file was changed to improve methods signature and fix nullable issues. After that, this test is no longer working, as it takes the assumption that both files, local and remote, are identical.")]
-    [Fact]
+    [Fact(Skip = "local openapi file was changed to improve methods signature and fix nullable issues. After that, this test is no longer working, as it takes the assumption that both files, local and remote, are identical.")]
+    //[Fact]
     public async Task VerifyOpenApiVersion()
     {
         var apiResponse = await _fireblocksClient.Request("api", "v1", "swagger").SendAsync(HttpMethod.Get);
@@ -30,6 +30,7 @@ public class SwaggerVersionChecker : IDisposable
 
         var fireblocksRawOpenApi = Regex.Replace(fireblocksOpenApi, @"\s+", string.Empty);
         var unmodifiedOpenAPi = Regex.Replace(modifiedOpenApi, @"tags\: \[[A-Za-z]{2,}\](\r?\n)", string.Empty);
+        unmodifiedOpenAPi = Regex.Replace(unmodifiedOpenAPi, @"operationId\: [A-Za-z]{2,}(\r?\n)", string.Empty);
         var currentRawOpenApi = Regex.Replace(unmodifiedOpenAPi, @"\s+", string.Empty);
         currentRawOpenApi = Regex.Replace(currentRawOpenApi, "-FTX", string.Empty);
 
