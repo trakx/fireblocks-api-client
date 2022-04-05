@@ -44,7 +44,7 @@ jobs:
         echo "compilation mode set to ${{steps.comp-mode.outputs.compilationMode}}"
 
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Bump version
       id: bumpVersion
@@ -91,7 +91,7 @@ jobs:
           --source "https://nuget.pkg.github.com/trakx/index.json"; done
 
     - name: push version tag
-      uses: anothrNick/github-tag-action@1.26.0
+      uses: anothrNick/github-tag-action@1.38.0
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         CUSTOM_TAG: v${{steps.bumpVersion.outputs.fullVersion}}
