@@ -55,7 +55,7 @@ jobs:
         githubToken: ${{secrets.GITHUB_TOKEN}}
     
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1.7.2
+      uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 5.0.x
     
