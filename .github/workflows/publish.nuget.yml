@@ -44,7 +44,7 @@ jobs:
         echo "compilation mode set to ${{steps.comp-mode.outputs.compilationMode}}"
         
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Bump version
       id: bumpVersion
