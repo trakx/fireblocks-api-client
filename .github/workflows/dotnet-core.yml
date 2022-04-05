@@ -5,12 +5,12 @@ on:
     branches: [ dev, master ]
   pull_request:
     branches: [ dev, master ]
-    
+
 env:
   SOLUTION_PATH: "src/Trakx.Fireblocks.ApiClient.sln"
   FireblocksApiConfiguration__ApiPubKey: ${{secrets.FIREBLOCKS_API_KEY}}
   FireblocksApiConfiguration__ApiPrivateKey: ${{secrets.FIREBLOCKS_API_SECRET}}
-  
+
 jobs:
   build:
 
@@ -21,15 +21,15 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
 
     - name: Add github nuget source
       run: dotnet nuget add source "https://nuget.pkg.github.com/trakx/index.json" --name "github" --username "trakx-bot" --password ${{secrets.TRAKX_BOT_READONLY_PAT}} --store-password-in-clear-text
-    
+
     - name: Install dependencies
       run: dotnet restore ${{env.SOLUTION_PATH}}
-    
-    - name: Remove github source    
+
+    - name: Remove github source
       run: dotnet nuget remove source "github"
 
     - name: Build
@@ -49,11 +49,10 @@ jobs:
         done
         #dotnet test ${{env.SOLUTION_PATH}} --no-restore --logger GitHubActions --verbosity normal
     - name: Publish Coverage
-      env: 
+      env:
         CODACY_PROJECT_TOKEN: ${{secrets.CODACY_TOKEN}}
       run: |
         for f in ./src/*.Tests/coverage.opencover.xml; do echo "sending coverage report $f" && \
             bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l csharp -r $f --partial --commit-uuid ${{github.sha}}; \
         done
         bash <(curl -Ls https://coverage.codacy.com/get.sh) final --commit-uuid ${{github.sha}}
-

@@ -1,6 +1,6 @@
 name: Publish nuget package
 
-on: 
+on:
   workflow_dispatch:
     inputs:
       semverIncrementLevel:
@@ -12,7 +12,7 @@ on:
         required: true
         default: 'true'
   push:
-    branches: 
+    branches:
       - master
       - dev
 
@@ -23,13 +23,13 @@ env:
   FireblocksApiConfiguration__ApiPrivateKey: ${{secrets.FIREBLOCKS_API_SECRET}}
 
 jobs:
-  
+
   build:
 
     runs-on: ubuntu-latest
 
     steps:
-    
+
     - name: Set compilation mode
       id: comp-mode
       run: |
@@ -42,32 +42,31 @@ jobs:
         fi
         echo '::set-output name=compilationMode::'$COMP_MODE
         echo "compilation mode set to ${{steps.comp-mode.outputs.compilationMode}}"
-        
+
     - name: checkout
       uses: actions/checkout@v2
 
     - name: Bump version
       id: bumpVersion
-      uses: trakx/bump-version-action@v6
+      uses: trakx/bump-version-action@v8
       with:
         semverIncrementLevel: ${{github.event.inputs.semverIncrementLevel}}
         releaseBranches: master
         githubToken: ${{secrets.GITHUB_TOKEN}}
-    
+
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1.7.2
-      with:
-        dotnet-version: 5.0.x
-    
+      uses: actions/setup-dotnet@v2
+        dotnet-version: 6.0.x
+
     - name: Add github nuget source
       run: dotnet nuget add source "https://nuget.pkg.github.com/trakx/index.json" --name "github" --username "trakx-bot" --password ${{secrets.TRAKX_BOT_READONLY_PAT}} --store-password-in-clear-text
 
     - name: Install dependencies
       run: dotnet restore ${{env.SOLUTION_PATH}}
-    
+
     - name: Remove github source
       run: dotnet nuget remove source "github"
-    
+
     - name: Build
       run: |
         dotnet build ${{env.SOLUTION_PATH}} \
@@ -75,7 +74,7 @@ jobs:
           -p:Version=${{steps.bumpVersion.outputs.assemblyVersion}} \
           -p:SourceRevisionId=${{steps.bumpVersion.outputs.productVersion}} \
           --no-restore
-    
+
     - name: Test
       run: dotnet test ${{env.SOLUTION_PATH}} --no-restore --verbosity normal
 
