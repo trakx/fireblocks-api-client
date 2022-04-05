@@ -2433,7 +2433,7 @@ components:
           type: string
         subStatus:
           $ref: '#/components/schemas/TransactionSubStatus'
-          nullable: 
+          nullable:
             true
         destinationAddress:
           type: string
@@ -2554,6 +2554,9 @@ components:
             - BEP20
             - COMPOUND
             - XLM_ASSET
+            - SOL_ASSET
+            - ALGO_ASSET
+            - TRON_TRC20
         contractAddress:
           type: string
         nativeAsset:
