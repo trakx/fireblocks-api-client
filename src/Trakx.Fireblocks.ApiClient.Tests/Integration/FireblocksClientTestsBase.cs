@@ -1,5 +1,3 @@
-using System;
-using System.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Trakx.Utils.Testing;

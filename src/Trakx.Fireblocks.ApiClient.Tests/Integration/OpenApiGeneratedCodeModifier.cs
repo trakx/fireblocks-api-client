@@ -1,5 +1,4 @@
-﻿using System.IO;
-using FluentAssertions.Execution;
+﻿using FluentAssertions.Execution;
 using Trakx.Utils.Extensions;
 using Xunit.Abstractions;
 

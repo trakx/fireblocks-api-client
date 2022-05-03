@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.Extensions.Options;
 using NSubstitute;
 using Trakx.Fireblocks.ApiClient.Utils;

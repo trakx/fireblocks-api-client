@@ -1,11 +1,6 @@
-﻿using System;
-using System.Net.Http;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Polly;
-using Serilog;
-using Trakx.Utils.Apis;
 using Trakx.Utils.DateTimeHelpers;
 using Trakx.Fireblocks.ApiClient.Utils;
 

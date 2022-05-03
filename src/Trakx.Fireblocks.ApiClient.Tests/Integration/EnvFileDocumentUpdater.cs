@@ -1,5 +1,4 @@
-﻿using Trakx.Utils.Testing;
-using Trakx.Utils.Testing.ReadmeUpdater;
+﻿using Trakx.Utils.Testing.ReadmeUpdater;
 using Xunit.Abstractions;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration;

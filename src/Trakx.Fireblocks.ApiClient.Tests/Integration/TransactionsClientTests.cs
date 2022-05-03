@@ -1,8 +1,5 @@
-using System.Threading;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Linq;
 using Xunit;
 using Xunit.Abstractions;
 

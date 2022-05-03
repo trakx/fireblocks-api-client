@@ -1,6 +1,4 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Text;
 using FluentAssertions;

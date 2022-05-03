@@ -1,6 +1,4 @@
-﻿using System.Net.Http;
-
-namespace Trakx.Fireblocks.ApiClient.Utils;
+﻿namespace Trakx.Fireblocks.ApiClient.Utils;
 
 public interface IBearerCredentialsProvider
 {

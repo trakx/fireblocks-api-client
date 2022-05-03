@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using NSubstitute;
 using Serilog;
 using Trakx.Utils.DateTimeHelpers;
