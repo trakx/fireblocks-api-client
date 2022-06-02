@@ -11,7 +11,7 @@ internal abstract class AuthorisedClient
     private string? _baseUrl;
     protected string BaseUrl => _baseUrl ??= Configuration!.BaseUrl;
 
-    protected readonly ICredentialsProvider? CredentialProvider;
+    protected readonly ICredentialsProvider CredentialProvider;
 
     protected AuthorisedClient(ClientConfigurator clientConfigurator)
     {

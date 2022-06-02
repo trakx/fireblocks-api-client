@@ -15,8 +15,8 @@ FireblocksApiConfiguration__ApiPubKey=********
 ## AWS Parameters
 In order to be able to run some integration tests you should ensure that you have access to the following AWS parameters :
 ```awsParams
-/Trakx/Fireblocks/ApiClient/FireblocksApiConfiguration/ApiPrivateKey
-/Trakx/Fireblocks/ApiClient/FireblocksApiConfiguration/ApiPubKey
+/CiCd/Trakx/Fireblocks/ApiClient/FireblocksApiConfiguration/ApiPrivateKey
+/CiCd/Trakx/Fireblocks/ApiClient/FireblocksApiConfiguration/ApiPubKey
 ```
 
 ## How to regenerate C# API clients

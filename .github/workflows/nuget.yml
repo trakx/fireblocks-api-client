@@ -1,0 +1,52 @@
+name: Publish Nuget Packages
+
+on:
+  workflow_run:
+    workflows: ["Build and Test"]
+    types: [completed]
+
+  workflow_dispatch:
+    inputs:
+      semverIncrementLevel:
+        description: "Level of the semver (major.minor.patch) to be increased to get the new package version."
+        required: false
+        default: "patch"
+      debuggable:
+        description: "Set to false if you want a non debuggable (Release) package."
+        required: false
+        default: "true"
+
+jobs:
+
+  test:
+    uses: ./.github/workflows/test.yml
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    secrets: inherit
+
+  publish:
+
+    needs: [test]
+    runs-on: ubuntu-latest
+    if: | 
+      always() && (needs.test.result == 'success' || needs.test.result == 'skipped')
+
+    steps:
+      - name: Default input values
+        id: default-inputs
+        run: |
+          debuggable="${{github.event.inputs.debuggable}}"
+          debuggable=${debuggable:-true}
+          echo '::set-output name=debuggable::'$debuggable
+          
+          semverIncrementLevel="${{github.event.inputs.semverIncrementLevel}}"
+          semverIncrementLevel=${semverIncrementLevel:-true}
+          echo '::set-output name=semverIncrementLevel::'$semverIncrementLevel
+
+      - name: Build and publish nuget packages
+        id: publish
+        uses: trakx/github-actions/publish-nuget@v9.1.3
+        with:
+          packageReadonlyPat: ${{secrets.TRAKX_BOT_READONLY_PAT}}
+          githubToken: ${{secrets.GITHUB_TOKEN}}
+          debuggable: ${{steps.default-inputs.outputs.debuggable}}
+          semverIncrementLevel: ${{steps.default-inputs.outputs.semverIncrementLevel}}

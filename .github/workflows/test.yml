@@ -1,0 +1,22 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ dev, stage, master ]
+  pull_request:
+    branches: [ dev, stage, master ]
+  workflow_call:
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test and cover solutions
+        id: test
+        uses: trakx/github-actions/test-dotnet@v9.1.3
+        with:
+          packageReadonlyPat: ${{secrets.TRAKX_BOT_READONLY_PAT}}
+          codacyToken: ${{secrets.CODACY_TOKEN}}
+          awsAccessKeyId: ${{secrets.AWS_ACCESS_KEY_ID}}
+          awsAccessKeySecret: ${{secrets.AWS_ACCESS_KEY_SECRET}}

@@ -1,0 +1,17 @@
+name: Auto Merge Dependabot Requests
+
+on: pull_request_target
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - name: Merge non major updates
+        uses: trakx/github-actions/dependabot-automerge@v9.1.3
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}

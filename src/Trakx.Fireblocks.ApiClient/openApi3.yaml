@@ -2785,6 +2785,7 @@ components:
             - SOL_ASSET
             - ALGO_ASSET
             - TRON_TRC20
+            - XDB_ASSET
         contractAddress:
           type: string
         nativeAsset:

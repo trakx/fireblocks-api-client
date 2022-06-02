@@ -4,9 +4,9 @@ namespace Trakx.Fireblocks.ApiClient;
 
 public record FireblocksApiConfiguration
 {
+#nullable disable
     public string BaseUrl { get; set; }
 
-#nullable disable
     [AwsParameter, SecretEnvironmentVariable]
     public string ApiPubKey { get; init; }
 

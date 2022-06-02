@@ -11,7 +11,7 @@ public class ExternalWalletsClientTests : FireblocksClientTestsBase
     private readonly IExternalWalletsClient _externalWalletsClient;
     private readonly MockCreator _mockCreator;
 
-    public ExternalWalletsClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output) 
+    public ExternalWalletsClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
         : base(apiFixture, output)
     {
         _externalWalletsClient = ServiceProvider.GetRequiredService<IExternalWalletsClient>();
@@ -35,8 +35,8 @@ public class ExternalWalletsClientTests : FireblocksClientTestsBase
     [Fact]
     public async Task CreateExternalWalletAsync_should_add_a_new_wallet_in_fireblocks_database()
     {
-        var walletName = _mockCreator.GetRandomString(10);
-        var refId = _mockCreator.GetRandomString(10);
+        var walletName = _mockCreator.GetString(10);
+        var refId = _mockCreator.GetString(10);
         var response = await _externalWalletsClient.CreateExternalWalletAsync(new Body12
         {
             Name = walletName,

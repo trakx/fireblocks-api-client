@@ -17,8 +17,8 @@ internal class ClientConfigurator
 
     public FireblocksApiConfiguration Configuration { get; }
 
-    public ICredentialsProvider? GetCredentialsProvider()
+    public ICredentialsProvider GetCredentialsProvider()
     {
-        return _provider.GetService<IFireblocksCredentialsProvider>();
+        return _provider.GetRequiredService<IFireblocksCredentialsProvider>();
     }
 }
