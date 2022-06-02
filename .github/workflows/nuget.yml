@@ -27,8 +27,11 @@ jobs:
 
     needs: [test]
     runs-on: ubuntu-latest
-    if: | 
-      always() && (needs.test.result == 'success' || needs.test.result == 'skipped')
+    if: |
+      always() && 
+      ((needs.test.result == 'success' || needs.test.result == 'skipped')
+      ||  (github.event_name == 'workflow_run' 
+            && github.event.workflow_run.conclusion == 'success'))
 
     steps:
       - name: Default input values
