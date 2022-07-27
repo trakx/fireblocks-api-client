@@ -18,7 +18,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="DotNetEnv" Version="2.3.0" />
-    <PackageReference Include="Trakx.Utils.Testing" Version="0.6.1" />
+    <PackageReference Include="Trakx.Utils.Testing" Version="0.6.10" />
     <PackageReference Include="FluentAssertions" Version="6.7.0" />
     <PackageReference Include="Flurl" Version="3.0.6" />
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
