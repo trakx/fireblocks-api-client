@@ -1,9 +1,19 @@
 name: Publish Nuget Packages
 
 on:
+
+  # the workflow run allows to not run the test suite twice for non release
+  # branches, and should be used for all branches, but the reference branch
+  # in workflow run is the default branch and we don't get the correct release
+  # tags when it is triggered from release branches like stage and dev.
   workflow_run:
     workflows: ["Build and Test"]
     types: [completed]
+    branches-ignore: [ stage, master ]
+
+  # so we treat these releases branches specially, using the push trigger directly.
+  push:
+    branches: [ stage, master ]
 
   workflow_dispatch:
     inputs:
@@ -20,7 +30,7 @@ jobs:
 
   test:
     uses: ./.github/workflows/test.yml
-    if: ${{ github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.event_name != 'workflow_run' }}
     secrets: inherit
 
   publish:
@@ -31,7 +41,7 @@ jobs:
       always() && 
         (needs.test.result == 'success' || (needs.test.result == 'skipped' 
             && github.event_name == 'workflow_run' 
-            && github.event.workflow_run.conclusion == 'success'))
+            && github.event.workflow_run.conclusion == 'success' ))
 
     steps:
       - name: Default input values

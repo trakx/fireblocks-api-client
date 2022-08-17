@@ -1,0 +1,27 @@
+name: Delete old packages
+
+on: 
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'The name of the package to be deleted.'
+        required: true
+      num-old-versions-to-delete:
+        description: 'The number of old versions to delete starting from the oldest version.'
+        default: '1'
+        required: false
+
+jobs:
+  
+  delete:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Delete packages
+      id: deletePackages
+      uses: actions/delete-package-versions@v3
+      with:
+        package-name: '${{github.event.inputs.name}}'
+        num-old-versions-to-delete: ${{github.event.inputs.num-old-versions-to-delete}}
+          
