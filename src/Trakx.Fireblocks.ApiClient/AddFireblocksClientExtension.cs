@@ -11,10 +11,10 @@ public static partial class AddFireblocksClientExtension
     public static IServiceCollection AddFireblocksClient(
         this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddOptions();
-        services.Configure<FireblocksApiConfiguration>(
-            configuration.GetSection(nameof(FireblocksApiConfiguration)));
-        AddCommonDependencies(services);
+        var apiConfiguration = configuration.GetSection(nameof(FireblocksApiConfiguration))
+            .Get<FireblocksApiConfiguration>();
+
+        AddFireblocksClient(services, apiConfiguration);
 
         return services;
     }
@@ -22,8 +22,7 @@ public static partial class AddFireblocksClientExtension
     public static IServiceCollection AddFireblocksClient(
         this IServiceCollection services, FireblocksApiConfiguration apiConfiguration)
     {
-        var options = Options.Create(apiConfiguration);
-        services.AddSingleton(options);
+        services.AddSingleton(apiConfiguration);
 
         AddCommonDependencies(services);
 

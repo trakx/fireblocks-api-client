@@ -1,24 +1,23 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Trakx.Fireblocks.ApiClient.Utils;
+﻿using Trakx.Fireblocks.ApiClient.Utils;
 using Trakx.Utils.Apis;
 
 namespace Trakx.Fireblocks.ApiClient;
 
 internal class ClientConfigurator
 {
-    private readonly IServiceProvider _provider;
+    private readonly IFireblocksCredentialsProvider _provider;
 
-    public ClientConfigurator(IServiceProvider provider)
+    public ClientConfigurator(FireblocksApiConfiguration configuration,
+        IFireblocksCredentialsProvider provider)
     {
         _provider = provider;
-        Configuration = provider.GetService<IOptions<FireblocksApiConfiguration>>()!.Value;
+        Configuration = configuration;
     }
 
     public FireblocksApiConfiguration Configuration { get; }
 
     public ICredentialsProvider GetCredentialsProvider()
     {
-        return _provider.GetRequiredService<IFireblocksCredentialsProvider>();
+        return _provider;
     }
 }

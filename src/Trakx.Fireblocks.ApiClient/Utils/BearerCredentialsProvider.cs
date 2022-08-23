@@ -15,9 +15,9 @@ public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDis
     private readonly SigningCredentials _signingCredentials;
     private readonly RSA _rsa;
 
-    public BearerCredentialsProvider(IOptions<FireblocksApiConfiguration> configuration, IDateTimeProvider dateTimeProvider)
+    public BearerCredentialsProvider(FireblocksApiConfiguration configuration, IDateTimeProvider dateTimeProvider)
     {
-        _fireblocksConfiguration = configuration.Value;
+        _fireblocksConfiguration = configuration;
         _dateTimeProvider = dateTimeProvider;
         _rsa = RSA.Create();
         _rsa.ImportPkcs8PrivateKey(Convert.FromBase64String(_fireblocksConfiguration.ApiPrivateKey), out _);

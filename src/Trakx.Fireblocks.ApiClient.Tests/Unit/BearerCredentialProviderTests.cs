@@ -25,7 +25,7 @@ public sealed class BearerCredentialProviderTests : CredentialsTestsBase, IDispo
         _nonce = DateTimeOffset.FromUnixTimeMilliseconds(12345678789);
         dateTimeProvider.UtcNowAsOffset.ReturnsForAnyArgs(_nonce);
 
-        _bearerCredentialsProvider = new BearerCredentialsProvider(Options.Create(Configuration), dateTimeProvider);
+        _bearerCredentialsProvider = new BearerCredentialsProvider(Configuration, dateTimeProvider);
     }
 
 

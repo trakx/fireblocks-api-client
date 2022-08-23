@@ -13,10 +13,9 @@ public sealed class ApiKeyCredentialsProviderTests : IDisposable
 
     public ApiKeyCredentialsProviderTests()
     {
-        var options = Substitute.For<IOptions<FireblocksApiConfiguration>>();
-        options.Value.ReturnsForAnyArgs(new FireblocksApiConfiguration {ApiPubKey = "pubKey"});
+        var fireblocksApiConfiguration = new FireblocksApiConfiguration {ApiPubKey = "pubKey"};
         _bearerCredentials = Substitute.For<IBearerCredentialsProvider>();
-        _provider = new ApiKeyCredentialsProvider(options, _bearerCredentials);
+        _provider = new ApiKeyCredentialsProvider(fireblocksApiConfiguration, _bearerCredentials);
     }
 
     [Fact]

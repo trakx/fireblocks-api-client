@@ -18,9 +18,9 @@ public class ApiKeyCredentialsProvider : IFireblocksCredentialsProvider, IDispos
 
     private static readonly ILogger Logger = Log.Logger.ForContext<ApiKeyCredentialsProvider>();
 
-    public ApiKeyCredentialsProvider(IOptions<FireblocksApiConfiguration> configuration, IBearerCredentialsProvider bearerCredentialsProvider)
+    public ApiKeyCredentialsProvider(FireblocksApiConfiguration configuration, IBearerCredentialsProvider bearerCredentialsProvider)
     {
-        _configuration = configuration.Value;
+        _configuration = configuration;
         _bearerCredentialsProvider = bearerCredentialsProvider;
 
         _tokenSource = new CancellationTokenSource();
