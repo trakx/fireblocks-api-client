@@ -56,7 +56,7 @@
       "wrapResponses": true,
       "wrapResponseMethods": [],
       "generateResponseClasses": false,
-      "responseClass": "Response",
+      "responseClass": "Trakx.Utils.Apis.Response",
       "namespace": "Trakx.Fireblocks.ApiClient",
       "requiredPropertiesMustBeDefined": true,
       "dateType": "System.DateTimeOffset",

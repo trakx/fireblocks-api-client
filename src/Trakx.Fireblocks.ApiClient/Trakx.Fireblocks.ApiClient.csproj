@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <GenerateApiClient>false</GenerateApiClient>
+    <GenerateApiClient>true</GenerateApiClient>
   </PropertyGroup>
 
   <Import Project="../Common.Projects.props" />
@@ -12,7 +12,7 @@
     <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.8" />
     <PackageReference Include="Polly.Contrib.WaitAndRetry" Version="1.1.1" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.1" />
     <PackageReference Include="NSwag.MSBuild" Version="13.16.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -22,31 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="ApiClients.Partials.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ApiClients.Partials.cs</LastGenOutput>
-    </None>
-    <None Update="ClientRegistrations.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClientRegistrations.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="ApiClients.Partials.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ApiClients.Partials.tt</DependentUpon>
-    </Compile>
-    <Compile Update="ClientRegistrations.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ClientRegistrations.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <Target Name="NSwag" BeforeTargets="Build" Condition="'$(GenerateApiClient)'=='True' ">
@@ -56,4 +32,3 @@
   </Target>
 
 </Project>
-
