@@ -44,7 +44,7 @@ public class WorkflowTests : FireblocksClientTestsBase
                 Id = partnerId,
                 Type = TransferPeerPathType. NETWORK_CONNECTION,
             },
-            Source = new TransferPeerPath()
+            Source = new TransferPeerPath
             {
                 Id = sourceVaultIndex,
                 Type = TransferPeerPathType.VAULT_ACCOUNT

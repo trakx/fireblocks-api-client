@@ -20,7 +20,7 @@ public class SwaggerVersionChecker : IDisposable
     [Fact]
     public async Task VerifyOpenApiVersion()
     {
-        var regexPattern = @"info:\r?\n\s+title(.+(\r?\n))\s+version:\s\""(?<version>[0-9\.]+)\""";
+        const string regexPattern = @"info:\r?\n\s+title(.+(\r?\n))\s+version:\s\""(?<version>[0-9\.]+)\""";
         var versionRegex = new Regex(regexPattern, RegexOptions.Multiline);
 
         var getCurrentOpenApiDescription = await _fireblocksClient.Request("api", "v1", "swagger").SendAsync(HttpMethod.Get);

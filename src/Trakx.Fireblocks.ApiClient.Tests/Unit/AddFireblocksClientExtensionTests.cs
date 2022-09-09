@@ -18,7 +18,7 @@ public class AddFireblocksClientExtensionTests : CredentialsTestsBase
         serviceCollection.AddFireblocksClient(Configuration);
 
         var serviceProvider = serviceCollection.BuildServiceProvider();
-        //var client = serviceProvider.GetRequiredService<IExchangeAccountsClient>();
-        //client.Should().NotBeNull();
+        var client = serviceProvider.GetRequiredService<IExchange_accountsClient>();
+        client.Should().NotBeNull();
     }
 }
