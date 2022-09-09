@@ -13496,18 +13496,18 @@ namespace Trakx.Fireblocks.ApiClient
         /// - For BTC based assets, the fee per bytes in the asset's smallest unit (Satoshi/Latoshi etc.) A numeric value representation is required.
         /// <br/>- For XRP, the fee for the transaction
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Fee { get; init; }
+        [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Fee { get; init; }
 
-        [Newtonsoft.Json.JsonProperty("feeLevel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("feeLevel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TransactionRequestFeeLevel FeeLevel { get; set; }
+        public TransactionRequestFeeLevel? FeeLevel { get; set; }
 
         /// <summary>
         /// - For ETH based assets only, the fee for eip-1559 transaction pricing mechanism. Value is in gwei. - A numeric value representation is required.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("priorityFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double PriorityFee { get; init; }
+        [Newtonsoft.Json.JsonProperty("priorityFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? PriorityFee { get; init; }
 
         [Newtonsoft.Json.JsonProperty("failOnLowFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool FailOnLowFee { get; init; }
@@ -13529,8 +13529,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <summary>
         /// A numeric value representation is required.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("gasLimit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double GasLimit { get; init; }
+        [Newtonsoft.Json.JsonProperty("gasLimit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? GasLimit { get; init; }
 
         /// <summary>
         /// A numeric value representation is required.
@@ -14350,7 +14350,7 @@ namespace Trakx.Fireblocks.ApiClient
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public CustomFiatRoutingDestDstType DstType { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("dstId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("dstId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DstId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
@@ -15878,6 +15878,9 @@ namespace Trakx.Fireblocks.ApiClient
         [System.Runtime.Serialization.EnumMember(Value = @"CUSTOM")]
         CUSTOM = 0,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"DEFAULT")]
+        DEFAULT = 1,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.16.1.0 (NJsonSchema v10.7.2.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -15895,6 +15898,9 @@ namespace Trakx.Fireblocks.ApiClient
 
         [System.Runtime.Serialization.EnumMember(Value = @"CUSTOM")]
         CUSTOM = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DEFAULT")]
+        DEFAULT = 1,
 
     }
 

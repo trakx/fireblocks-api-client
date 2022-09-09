@@ -4471,7 +4471,9 @@ components:
           oneOf:
             - type: number
             - type: string
+            - type: 'null'
         feeLevel:
+          nullable: true
           type: string
           enum:
             - LOW
@@ -4484,6 +4486,7 @@ components:
           oneOf:
             - type: number
             - type: string
+            - type: 'null'
         failOnLowFee:
           type: boolean
         maxFee:
@@ -4507,6 +4510,7 @@ components:
           oneOf:
             - type: number
             - type: string
+            - type: 'null'
         networkFee:
           description: >-
             A numeric value representation is required.
@@ -5127,12 +5131,15 @@ components:
           type: string
           enum:
             - CUSTOM
+            - DEFAULT
         dstType:
           type: string
           enum:
             - FIAT_ACCOUNT
         dstId:
-          type: string
+          oneOf:
+            - type: string
+            - type: 'null'
     CustomCryptoRoutingDest:
       type: object
       properties:
@@ -5140,6 +5147,7 @@ components:
           type: string
           enum:
             - CUSTOM
+            - DEFAULT
         dstType:
           type: string
           enum:
