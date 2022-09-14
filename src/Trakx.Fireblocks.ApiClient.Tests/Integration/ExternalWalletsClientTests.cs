@@ -8,27 +8,27 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 
 public class ExternalWalletsClientTests : FireblocksClientTestsBase
 {
-    private readonly IExternalWalletsClient _externalWalletsClient;
+    private readonly IExternal_walletsClient _externalWalletsClient;
     private readonly MockCreator _mockCreator;
 
     public ExternalWalletsClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
         : base(apiFixture, output)
     {
-        _externalWalletsClient = ServiceProvider.GetRequiredService<IExternalWalletsClient>();
+        _externalWalletsClient = ServiceProvider.GetRequiredService<IExternal_walletsClient>();
         _mockCreator = new MockCreator(output);
     }
 
     [Fact]
     public async Task GetExternalWalletsAsync_should_return_all_wallets()
     {
-        var response = await _externalWalletsClient.GetExternalWalletsAsync();
+        var response = await _externalWalletsClient.External_walletsAllAsync();
         response.Result.Should().NotBeEmpty();
     }
 
     [Fact]
     public async Task GetExternalWalletAsync_should_return_one_particular_wallet()
     {
-        var response = await _externalWalletsClient.GetExternalWalletAsync("60af415a-61df-59d5-de2b-580cebc097fc", CancellationToken.None);
+        var response = await _externalWalletsClient.External_walletsGETAsync("60af415a-61df-59d5-de2b-580cebc097fc", CancellationToken.None);
         response.Result.Should().NotBeNull();
     }
 
@@ -37,7 +37,7 @@ public class ExternalWalletsClientTests : FireblocksClientTestsBase
     {
         var walletName = _mockCreator.GetString(10);
         var refId = _mockCreator.GetString(10);
-        var response = await _externalWalletsClient.CreateExternalWalletAsync(new Body12
+        var response = await _externalWalletsClient.External_walletsPOSTAsync(new Body12
         {
             Name = walletName,
             CustomerRefId = refId
@@ -47,14 +47,14 @@ public class ExternalWalletsClientTests : FireblocksClientTestsBase
         // After write op, fireblocks needs some time to refresh data :(
         await Task.Delay(2000).ConfigureAwait(false);
 
-        var response2 = await _externalWalletsClient.GetExternalWalletAsync(walletId);
+        var response2 = await _externalWalletsClient.External_walletsGETAsync(walletId);
         response2.Result.Name.Should().Be(walletName);
-        await _externalWalletsClient.DeleteExternalWalletByIdAsync(walletId);
+        await _externalWalletsClient.External_walletsDELETEAsync(walletId);
 
         // After write op, fireblocks needs some time to refresh data :(
         await Task.Delay(2000).ConfigureAwait(false);
 
-        await new Func<Task>(async () => await _externalWalletsClient.GetExternalWalletAsync(walletId)).Should()
+        await new Func<Task>(async () => await _externalWalletsClient.External_walletsGETAsync(walletId)).Should()
             .ThrowAsync<ApiException>();
     }
 }

@@ -7,7 +7,7 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Unit;
 
 public class AddFireblocksClientExtensionTests : CredentialsTestsBase
 {
-    public AddFireblocksClientExtensionTests(RsaKeyFixture fixture, ITestOutputHelper output) 
+    public AddFireblocksClientExtensionTests(RsaKeyFixture fixture, ITestOutputHelper output)
         : base(fixture, output)
     { }
 
@@ -18,7 +18,7 @@ public class AddFireblocksClientExtensionTests : CredentialsTestsBase
         serviceCollection.AddFireblocksClient(Configuration);
 
         var serviceProvider = serviceCollection.BuildServiceProvider();
-        var client = serviceProvider.GetRequiredService<IExchangeAccountsClient>();
+        var client = serviceProvider.GetRequiredService<IExchange_accountsClient>();
         client.Should().NotBeNull();
     }
 }

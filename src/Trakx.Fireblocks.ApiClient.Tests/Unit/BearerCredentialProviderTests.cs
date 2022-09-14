@@ -2,7 +2,6 @@
 using System.Security.Cryptography;
 using System.Text;
 using FluentAssertions;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NSubstitute;
 using Trakx.Fireblocks.ApiClient.Utils;

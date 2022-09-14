@@ -1,5 +1,4 @@
 ﻿using System.Net.Http.Headers;
-using Microsoft.Extensions.Options;
 using Serilog;
 using Trakx.Utils.Apis;
 
