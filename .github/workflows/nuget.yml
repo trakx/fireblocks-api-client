@@ -57,7 +57,7 @@ jobs:
 
       - name: Build and publish nuget packages
         id: publish
-        uses: trakx/github-actions/publish-nuget@v9.1.3
+        uses: trakx/github-actions/publish-nuget@v9.1.4
         with:
           packageReadonlyPat: ${{secrets.TRAKX_BOT_READONLY_PAT}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
