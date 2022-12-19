@@ -12,6 +12,6 @@ jobs:
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
       - name: Merge non major updates
-        uses: trakx/github-actions/dependabot-automerge@v9.1.3
+        uses: trakx/github-actions/dependabot-automerge@v10.0.1
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
