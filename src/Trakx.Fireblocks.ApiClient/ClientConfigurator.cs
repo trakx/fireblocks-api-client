@@ -1,5 +1,5 @@
-﻿using Trakx.Fireblocks.ApiClient.Utils;
-using Trakx.Utils.Apis;
+﻿using Trakx.Common.ApiClient;
+using Trakx.Fireblocks.ApiClient.Utils;
 
 namespace Trakx.Fireblocks.ApiClient;
 

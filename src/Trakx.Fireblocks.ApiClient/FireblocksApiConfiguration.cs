@@ -1,4 +1,4 @@
-﻿using Trakx.Utils.Attributes;
+﻿using Trakx.Common.Attributes;
 
 namespace Trakx.Fireblocks.ApiClient;
 

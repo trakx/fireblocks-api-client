@@ -20,9 +20,9 @@ public class SupportedAssetsClientTests : FireblocksClientTestsBase
     public async Task GetSupportedAssetsAsync_should_query_all_assets()
     {
         var assets = await _supportedAssetsClient.Supported_assetsAsync();
-        Logger.Information("Found assets: {assets}", assets.Result);
-        var asset = assets.Result.Where(i => i.Id.Contains("ftt", StringComparison.InvariantCultureIgnoreCase)).ToList();
-        assets.Result.Should().NotBeEmpty();
+        Logger.Information("Found assets: {assets}", assets.Content);
+        var asset = assets.Content.Where(i => i.Id.Contains("ftt", StringComparison.InvariantCultureIgnoreCase)).ToList();
+        assets.Content.Should().NotBeEmpty();
     }
 
 }

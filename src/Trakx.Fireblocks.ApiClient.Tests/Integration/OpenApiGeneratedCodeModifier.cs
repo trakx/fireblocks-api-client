@@ -1,10 +1,10 @@
 ﻿using FluentAssertions.Execution;
-using Trakx.Utils.Extensions;
+using Trakx.Common.Infrastructure.Environment.Env;
 using Xunit.Abstractions;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 
-public class OpenApiGeneratedCodeModifier : Trakx.Utils.Testing.OpenApiGeneratedCodeModifier
+public class OpenApiGeneratedCodeModifier : Trakx.Common.Testing.Documentation.OpenApiGeneratedCodeModifier
 {
     public OpenApiGeneratedCodeModifier(ITestOutputHelper output)
         : base(output)
