@@ -51,10 +51,6 @@ public class WorkflowTests : FireblocksClientTestsBase
             },
             Note = "testing production signer api key",
             Operation = TransactionOperation.TRANSFER,
-            NetworkFee = null,
-            Fee = null,
-            GasPrice = null,
-            GasLimit = null,
             FeeLevel = TransactionRequestFeeLevel.MEDIUM
         };
 

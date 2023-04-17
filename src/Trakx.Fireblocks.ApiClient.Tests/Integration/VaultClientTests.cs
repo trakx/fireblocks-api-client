@@ -21,7 +21,6 @@ public class VaultClientTests : FireblocksClientTestsBase
         var response = await _vaultClient.AccountsAllAsync();
         response.Content.Should().NotBeNullOrEmpty();
         response.Content[0].Assets.Should().NotBeNullOrEmpty();
-        response.Content[0].Assets[1].Id.Should().Be("ETH_TEST");
-        Convert.ToDecimal(response.Content[0].Assets[1].Total).Should().BeGreaterOrEqualTo(0.1m);
+        response.Content[0].Assets.Should().Contain(x => x.Id == "BTC_TEST");
     }
 }

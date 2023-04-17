@@ -43,7 +43,7 @@ public class FireblocksApiFixture : IDisposable
         var configuration = configurationRoot.GetSection(nameof(FireblocksApiConfiguration)).Get<FireblocksApiConfiguration>()!
                 with
         {
-            BaseUrl = "https://api.fireblocks.io/v1",
+            BaseUrl = "https://api.fireblocks.io/v1"
         };
 
         var serviceCollection = new ServiceCollection();
