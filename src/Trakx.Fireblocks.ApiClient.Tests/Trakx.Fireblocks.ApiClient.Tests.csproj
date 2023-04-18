@@ -31,7 +31,6 @@
         </PackageReference>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
         <PackageReference Include="Trakx.Common.Testing.Documentation" Version="0.1.0" />
-        <PackageReference Include="Trakx.Common.Infrastructure.Environment" Version="0.1.0" />
     </ItemGroup>
 
     <ItemGroup>

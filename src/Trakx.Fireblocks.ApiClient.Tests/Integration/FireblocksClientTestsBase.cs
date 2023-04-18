@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Trakx.Common.Infrastructure.Environment.Aws;
+using Trakx.Common.Testing.Configuration;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -35,13 +36,8 @@ public class FireblocksApiFixture : IDisposable
 
     public FireblocksApiFixture()
     {
-        const string environement="CiCd";
-        var configBuilder = new ConfigurationBuilder().AddAwsSystemManagerConfiguration(environement,
-         assemblyResolver: new Common.Testing.Resolvers.GenericSecretsAssemblyResolver<FireblocksApiConfiguration>());
-        var configurationRoot = configBuilder.Build();
-
-        var configuration = configurationRoot.GetSection(nameof(FireblocksApiConfiguration)).Get<FireblocksApiConfiguration>()!
-                with
+        var configuration = AwsConfigurationHelper.GetConfigurationFromAws<FireblocksApiConfiguration>()
+        with
         {
             BaseUrl = "https://api.fireblocks.io/v1"
         };

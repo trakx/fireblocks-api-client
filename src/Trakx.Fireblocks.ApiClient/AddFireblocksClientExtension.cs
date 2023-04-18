@@ -13,7 +13,7 @@ public static partial class AddFireblocksClientExtension
         var apiConfiguration = configuration.GetSection(nameof(FireblocksApiConfiguration))
             .Get<FireblocksApiConfiguration>();
 
-        AddFireblocksClient(services, apiConfiguration);
+        AddFireblocksClient(services, apiConfiguration!);
 
         return services;
     }
