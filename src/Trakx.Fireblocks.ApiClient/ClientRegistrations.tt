@@ -23,7 +23,7 @@ namespace <#= nameSpace #>;
                    "External_wallets", "Fee_payer", "Fiat_accounts", "Gas_stations",
                    "Internal_wallets", "Network_connection", "Network_connections",
                    "Off_exchanges", "Payments", "Supported_assets", "Transactions",
-                   "Transfer_tickets", "Users", "Vaults", "Webhooks"
+                   "Transfer_tickets", "Users", "Vaults", "Webhooks","NFTs_Beta","Web3_connections"
                };
 
             foreach(var clientName in clientNames)
