@@ -1,6 +1,6 @@
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Trakx.Utils.Testing;
+using Trakx.Common.Testing.Mocks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -22,14 +22,14 @@ public class ExternalWalletsClientTests : FireblocksClientTestsBase
     public async Task GetExternalWalletsAsync_should_return_all_wallets()
     {
         var response = await _externalWalletsClient.External_walletsAllAsync();
-        response.Result.Should().NotBeEmpty();
+        response.Content.Should().NotBeEmpty();
     }
 
     [Fact]
     public async Task GetExternalWalletAsync_should_return_one_particular_wallet()
     {
         var response = await _externalWalletsClient.External_walletsGETAsync("60af415a-61df-59d5-de2b-580cebc097fc", CancellationToken.None);
-        response.Result.Should().NotBeNull();
+        response.Content.Should().NotBeNull();
     }
 
     [Fact]
@@ -37,18 +37,18 @@ public class ExternalWalletsClientTests : FireblocksClientTestsBase
     {
         var walletName = _mockCreator.GetString(10);
         var refId = _mockCreator.GetString(10);
-        var response = await _externalWalletsClient.External_walletsPOSTAsync(new Body12
+        var response = await _externalWalletsClient.External_walletsPOSTAsync(new Body20
         {
             Name = walletName,
             CustomerRefId = refId
         });
-        var walletId = response.Result.Id;
+        var walletId = response.Content.Id;
 
         // After write op, fireblocks needs some time to refresh data :(
         await Task.Delay(2000).ConfigureAwait(false);
 
         var response2 = await _externalWalletsClient.External_walletsGETAsync(walletId);
-        response2.Result.Name.Should().Be(walletName);
+        response2.Content.Name.Should().Be(walletName);
         await _externalWalletsClient.External_walletsDELETEAsync(walletId);
 
         // After write op, fireblocks needs some time to refresh data :(
