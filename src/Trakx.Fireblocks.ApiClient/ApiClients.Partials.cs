@@ -1,95 +1,128 @@
-﻿#pragma warning disable S1172, IDE0060 // Unused method parameters should be removed
+#pragma warning disable S1172, IDE0060 // Unused method parameters should be removed
 
-namespace Trakx.Fireblocks.ApiClient;
+namespace Trakx.Fireblocks.ApiClient
+{
+    internal partial class Audit_LogsClient
+    {
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
+    }
+    internal partial class ContractsClient
+    {
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
+    }
+    internal partial class Exchange_accountsClient
+    {
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
+    }
+    internal partial class External_walletsClient
+    {
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
+    }
 
-internal partial class VaultClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+    internal partial class Fiat_accountsClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
-}
-internal partial class InternalWalletsClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+    internal partial class Gas_stationsClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
-}
-internal partial class ExternalWalletsClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+    internal partial class Internal_walletsClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
-}
-internal partial class ExchangeAccountsClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+    
+    internal partial class Network_connectionsClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
-}
-internal partial class FiatAccountsClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+    internal partial class Off_exchangesClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
-}
-internal partial class TransactionsClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+    internal partial class PaymentsClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
-}
-internal partial class SupportedAssetsClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+    internal partial class Supported_assetsClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
-}
-internal partial class NetworkConnectionsClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+    internal partial class TransactionsClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
-}
-internal partial class TransferTicketsClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+    internal partial class UsersClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
-}
-internal partial class FeeClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+    internal partial class VaultsClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
-}
-internal partial class WebhooksClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+    internal partial class WebhooksClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
-}
-internal partial class UsersClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+    internal partial class NFTs_BetaClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
-}
-internal partial class OffExchangeAccountsClient
-{
-    partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+
+    internal partial class Web3_connectionsClient
     {
-        CredentialProvider.AddCredentials(request);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
     }
+
 }

@@ -2,12 +2,11 @@
 using System.Security.Cryptography;
 using System.Text;
 using FluentAssertions;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NSubstitute;
+using Trakx.Common.DateAndTime;
+using Trakx.Common.Extensions;
 using Trakx.Fireblocks.ApiClient.Utils;
-using Trakx.Utils.DateTimeHelpers;
-using Trakx.Utils.Extensions;
 using Xunit;
 using Xunit.Abstractions;
 

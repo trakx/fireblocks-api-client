@@ -1,5 +1,5 @@
 ﻿{
-  "runtime": "Net60",
+  "runtime": "Net70",
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
@@ -41,9 +41,7 @@
       "className": "{controller}Client",
       "operationGenerationMode": "MultipleClientsFromFirstTagAndOperationId",
       "additionalNamespaceUsages": [
-        "Microsoft.AspNetCore.Mvc",
-        "System.Threading",
-        "Trakx.Utils.Apis"
+        "Trakx.Common.ApiClient"
       ],
       "additionalContractNamespaceUsages": [],
       "generateOptionalParameters": true,
@@ -56,7 +54,7 @@
       "wrapResponses": true,
       "wrapResponseMethods": [],
       "generateResponseClasses": false,
-      "responseClass": "Response",
+      "responseClass": "Trakx.Common.ApiClient.Response",
       "namespace": "Trakx.Fireblocks.ApiClient",
       "requiredPropertiesMustBeDefined": true,
       "dateType": "System.DateTimeOffset",

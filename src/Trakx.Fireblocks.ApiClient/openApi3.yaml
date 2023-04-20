@@ -1,16 +1,34 @@
 ﻿openapi: 3.0.0
 info:
   title: Fireblocks API
-  version: "1.5.1"
+  version: "1.6.1"
+  contact:
+    email: support@fireblocks.com
 servers:
   - url: 'https://api.fireblocks.io/v1'
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - javascript
+  - python
+
 paths:
   #  VAULT
   '/vault/accounts':
     get:
-      tags: [Vault]
-      summary: Retrieves all vault accounts for the specified filter.
-      operationId: getVaultAccounts
+      summary: List vault accounts
+      description: Gets all vault accounts in your workspace.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vault_accounts = fireblocks.get_vault_accounts()
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAccounts = await fireblocks.getVaultAccounts();
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: query
           name: namePrefix
@@ -26,27 +44,50 @@ paths:
           name: minAmountThreshold
           required: false
           schema:
-            type: string
+            type: number
         - in: query
           name: assetId
           required: false
           schema:
             type: string
+            x-fb-entity: asset
+        - in: query
+          name: maxBip44AddressIndexUsed
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: maxBip44ChangeAddressIndexUsed
+          required: false
+          schema:
+            type: number
       responses:
         '200':
           description: A list of vault accounts
+          headers: &req-id-header
+            X-Request-ID:
+              $ref: '#/components/headers/X-Request-ID'
           content:
             '*/*':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/VaultAccount'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/VaultAccount'
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [Vault]
-      summary: Creates a new vault account
-      operationId: createVaultAccount
+      summary: Create a new vault account
+      description: Creates a new vault account with the requested name.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vaultAccount = fireblocks.create_vault_account(name, hiddenOnUI, customer_ref_id, auto_fueling)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAccount = await fireblocks.createVaultAccount(name, hiddenOnUI, customerRefId, autoFueling);
+          name: Fireblocks SDK Javascript example
       requestBody:
         required: true
         content:
@@ -71,6 +112,7 @@ paths:
       responses:
         '200':
           description: A Vault Account object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -79,7 +121,18 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts_paged':
     get:
-      summary: Retrieves all vault accounts in your workspace. This command is limited up to a certain amount of results to ensure response time is received in a timely manner
+      summary: List vault acounts (Paginated)
+      description: Gets all vault accounts in your workspace. This endpoint returns a limited amount of results with a quick response time.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vault_accounts = fireblocks.get_vault_accounts_with_page_info(filters)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAccounts = await fireblocks.getVaultAccountsWithPageInfo(filters);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: query
           name: namePrefix
@@ -95,12 +148,23 @@ paths:
           name: minAmountThreshold
           required: false
           schema:
-            type: string
+            type: number
         - in: query
           name: assetId
           required: false
           schema:
             type: string
+            x-fb-entity: asset
+        - in: query
+          name: maxBip44AddressIndexUsed
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: maxBip44ChangeAddressIndexUsed
+          required: false
+          schema:
+            type: number
         - in: query
           name: orderBy
           required: false
@@ -124,22 +188,30 @@ paths:
           schema:
             type: number
             minimum: 1
-            maximum: 25000
-            default: 10000
+            maximum: 500
+            default: 200
       responses:
         '200':
-          description: An object containing vault accounts and previous/next page cursors
+          description: A VaultAccountsPagedResponse object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
-                type: object
-                items:
                   $ref: '#/components/schemas/VaultAccountsPagedResponse'
   '/vault/accounts/{vaultAccountId}':
     get:
-      tags: [Vault]
-      summary: Returns a Fireblock Vault account by ID
-      operationId: getVaultAccountById
+      summary: Find a vault account by ID
+      description: Returns the requested vault account.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vault_account = fireblocks.get_vault_account(vault_account_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAccount = await fireblocks.getVaultAccount(vault_account_id);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: vaultAccountId
@@ -149,9 +221,12 @@ paths:
             type: string
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
       responses:
         '200':
           description: A Vault Account object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -159,9 +234,18 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     put:
-      tags: [Vault]
-      summary: Edit a Fireblock Vault account
-      operationId: updateVaultAccount
+      summary: Rename a vault account
+      description: Renames the requested vault account.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vaultAccount = fireblocks.update_vault_account(vault_account_id, name)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAccount = await fireblocks.updateVaultAccount(vautlAccountId, name);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: vaultAccountId
@@ -170,6 +254,8 @@ paths:
             The ID of the vault account to edit
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
       requestBody:
         required: true
         content:
@@ -182,12 +268,23 @@ paths:
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/hide':
     post:
-      tags: [Vault]
-      summary: Hides a vault account on Fireblocks console
+      summary: Hide a vault account in the console
+      description: Hides the requested vault account from the web console view.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vaultAsset = fireblocks.hide_vault_account(vault_account_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAsset = await fireblocks.hideVaultAccount(vaultAccountId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: vaultAccountId
@@ -196,15 +293,28 @@ paths:
           schema:
             type: string
             minimum: 1
+            format: numeric
+            x-fb-entity: vault_account
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/unhide':
     post:
-      tags: [Vault]
-      summary: Reveals a hidden vault account on Fireblocks console
+      summary: Unhide a vault account in the console
+      description: Makes a hidden vault account visible in web console view.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vaultAsset = fireblocks.unhide_vault_account(vault_account_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAsset = await fireblocks.unhideVaultAccount(vaultAccountId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: vaultAccountId
@@ -213,15 +323,20 @@ paths:
           schema:
             type: string
             minimum: 1
+            format: numeric
+            x-fb-entity: vault_account
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
-  /vault/accounts/{vaultAccountId}/{assetId}/activate:
+  '/vault/accounts/{vaultAccountId}/{assetId}/activate':
     post:
-      tags: [Vault]
-      summary: Activate a wallet in a Vault account
+      summary: Activate a wallet in a vault account
+      description: Initiates activation for a wallet in a vault account.
+      tags:
+        - Vaults
       parameters:
         - in: path
           name: vaultAccountId
@@ -230,91 +345,39 @@ paths:
             The ID of the vault account to return, or 'default' for the default vault account
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
         - in: path
           name: assetId
           required: true
           description: The ID of the asset
           schema:
             type: string
+            x-fb-entity: asset
       responses:
         '200':
           description: OK
+          headers: *req-id-header
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/CreateVaultAssetResponse'
         default:
           $ref: '#/components/responses/Error'
-  /vault/accounts/{vaultAccountId}/{assetId}/lock_allocation:
-    post:
-      tags: [Vault]
-      summary: Allocate funds to private ledger
-      parameters:
-        - in: path
-          name: vaultAccountId
-          required: true
-          description: The vault account to allocate funds in
-          schema:
-            type: string
-            minimum: 1
-        - in: path
-          name: assetId
-          required: true
-          description: The allocation asset id
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '200':
-          description: A transaction object
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/CreateTransactionResponse'
-        default:
-          $ref: '#/components/responses/Error'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AllocateFundsRequest'
-  /vault/accounts/{vaultAccountId}/{assetId}/release_allocation:
-    post:
-      tags: [Vault]
-      summary: Deallocate funds from private ledger
-      parameters:
-        - in: path
-          name: vaultAccountId
-          required: true
-          description: The vault account to allocate funds in
-          schema:
-            type: string
-            minimum: 1
-        - in: path
-          name: assetId
-          required: true
-          description: The allocation asset id
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '200':
-          description: A transaction object
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/CreateTransactionResponse'
-        default:
-          $ref: '#/components/responses/Error'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeallocateFundsRequest'
   '/vault/accounts/{vaultAccountId}/set_customer_ref_id':
     post:
-      tags: [Vault]
-      summary: Sets a reference customer ID for AML
+      summary: Set an AML/KYT customer reference ID for a vault account
+      description: Assigns an AML/KYT customer reference ID for the vault account.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vaultAsset = fireblocks.set_vault_account_customer_ref_id(vault_account_id, customer_ref_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAsset = await fireblocks.setCustomerRefIdForVaultAccount(vaultAccountId, customerRefId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: vaultAccountId
@@ -323,6 +386,8 @@ paths:
           schema:
             type: string
             minimum: 1
+            format: numeric
+            x-fb-entity: vault_account
       requestBody:
         required: true
         content:
@@ -335,12 +400,15 @@ paths:
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/set_auto_fuel':
     post:
-      tags: [Vault]
-      summary: Sets the autoFuel property of the vault account to true or false
+      summary: Turn autofueling on or off
+      description: Sets the autofueling property of the vault account to enabled or disabled.
+      tags:
+        - Vaults
       parameters:
         - in: path
           name: vaultAccountId
@@ -349,6 +417,8 @@ paths:
           schema:
             type: string
             minimum: 1
+            format: numeric
+            x-fb-entity: vault_account
       requestBody:
         required: true
         content:
@@ -361,12 +431,23 @@ paths:
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}':
     get:
-      tags: [Vault]
-      summary: Returns a wallet of a specific asset inside a Fireblocks Vault account
+      summary: Get the asset balance for a vault account
+      description: Returns a wallet for a specific asset of a vault account.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vaultAsset = fireblocks.get_vault_account_asset(vault_account_id, asset_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAsset = await fireblocks.getVaultAccountAsset(vaultAccountId, assetId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: vaultAccountId
@@ -375,12 +456,15 @@ paths:
             The ID of the vault account to return
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
         - in: path
           name: assetId
           required: true
           description: The ID of the asset
           schema:
             type: string
+            x-fb-entity: asset
       responses:
         '200':
           description: A VaultAsset object
@@ -391,8 +475,18 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [Vault]
-      summary: Creates a new wallet in a Vault account
+      summary: Create a new wallet
+      description: Creates a wallet for a specific asset in a vault account.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vaultAsset = fireblocks.create_vault_asset(vault_account_id, asset_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAsset = await fireblocks.createVaultAsset(vaultAccountId, assetId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: vaultAccountId
@@ -401,12 +495,15 @@ paths:
             The ID of the vault account to return, or 'default' for the default vault account
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
         - in: path
           name: assetId
           required: true
           description: The ID of the asset
           schema:
             type: string
+            x-fb-entity: asset
       requestBody:
         required: false
         content:
@@ -419,6 +516,7 @@ paths:
       responses:
         '200':
           description: OK
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -427,7 +525,18 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/balance':
     post:
-      summary: Update balance and returns a wallet of a specific asset inside a Fireblocks Vault account
+      summary: Refresh asset balance data
+      description: Updates the balance of a specific asset in a vault account.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vaultAsset = fireblocks.refresh_vault_asset_balance(vault_account_id, asset_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAsset = await fireblocks.refreshVaultAssetBalance(vaultAccountId, assetId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: vaultAccountId
@@ -436,12 +545,15 @@ paths:
             The ID of the vault account to return
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
         - in: path
           name: assetId
           required: true
           description: The ID of the asset
           schema:
             type: string
+            x-fb-entity: asset
       requestBody:
         required: false
         content:
@@ -451,6 +563,7 @@ paths:
       responses:
         '200':
           description: A VaultAsset object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -459,9 +572,18 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/addresses':
     get:
-      tags: [Vault]
-      summary: Returns all addresses generated for a Vault wallet
-      operationId: getVaultWalletAddressesByAssetId
+      summary: Get asset addresses
+      description: Lists all addresses for specific asset of vault account.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: depositAddresses = fireblocks.get_deposit_addresses(vault_account_id, asset_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const depositAddresses = await fireblocks.getDepositAddresses(vaultAccountId, assetId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: vaultAccountId
@@ -470,15 +592,19 @@ paths:
             The ID of the vault account to return
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
         - in: path
           name: assetId
           required: true
           description: The ID of the asset
           schema:
             type: string
+            x-fb-entity: asset
       responses:
         '200':
           description: A list of deposit addresses
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -488,8 +614,18 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [Vault]
-      summary: Generate a new deposit address for a Vault wallet
+      summary: Create new asset deposit address
+      description: Creates a new deposit address for an asset of a vault account.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: address = fireblocks.generate_new_address(vault_account_id, asset_id, description, customer_ref_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const address = await fireblocks.generateNewAddress(vaultAccountId, assetId, description, customerRefId);
+          name: Fireblocks SDK Javascript example
       requestBody:
         required: false
         content:
@@ -511,25 +647,84 @@ paths:
             The ID of the vault account to return
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
         - in: path
           name: assetId
           required: true
           description: The ID of the asset
           schema:
             type: string
+            x-fb-entity: asset
       responses:
         '200':
           description: The created address
+          headers: *req-id-header
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/CreateAddressResponse'
         default:
           $ref: '#/components/responses/Error'
+  '/vault/accounts/{vaultAccountId}/{assetId}/max_spendable_amount':
+    get:
+        summary: Get the maximum spendable amount in a single transaction.
+        description: Get the maximum amount of a particular asset that can be spent in a single transaction from a specified vault account (UTXO assets only, with a limitation on number of inputs embedded). Send several transactions if you want to spend more than the maximum spendable amount.
+        tags:
+          - Vaults
+        x-readme:
+          code-samples:
+          - language: python
+            code: address = fireblocks.set_address_description(vault_account_id, asset_id, address, tag, description)
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const address = await fireblocks.setAddressDescription(vaultAccountId, assetId, address, tag, description);
+            name: Fireblocks SDK Javascript example
+        parameters:
+          - in: path
+            name: vaultAccountId
+            required: true
+            description: >-
+              The ID of the vault account, or 'default' for the default vault account
+            schema:
+              type: string
+              format: numeric
+              x-fb-entity: vault_account
+          - in: path
+            name: assetId
+            required: true
+            description: The ID of the asset
+            schema:
+              type: string
+              x-fb-entity: asset
+          - in: query
+            name: manualSignging
+            required: false
+            description: False by default. The maximum number of inputs depends if the transaction will be signed by an automated co-signer server or on a mobile device.
+            schema:
+              type: boolean
+        responses:
+          '200':
+            description: OK
+            headers:
+              X-Request-ID:
+                $ref: '#/components/headers/X-Request-ID'
+          default:
+            $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}':
     put:
-      tags: [Vault]
-      summary: Update the description of an existing address within a vault wallet
+      summary: Update address description
+      description: Updates the description of an existing address of an asset in a vault account.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: address = fireblocks.set_address_description(vault_account_id, asset_id, address, tag, description)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const address = await fireblocks.setAddressDescription(vaultAccountId, assetId, address, tag, description);
+          name: Fireblocks SDK Javascript example
       requestBody:
         required: false
         content:
@@ -547,12 +742,15 @@ paths:
             The ID of the vault account
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
         - in: path
           name: assetId
           required: true
           description: The ID of the asset
           schema:
             type: string
+            x-fb-entity: asset
         - in: path
           name: addressId
           required: true
@@ -563,12 +761,23 @@ paths:
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}/set_customer_ref_id':
     post:
-      tags: [Vault]
-      summary: Sets a reference customer ID for AML
+      summary: Assign AML customer reference ID
+      description: Sets an AML/KYT customer reference ID for a specific address.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vaultAsset = fireblocks.set_customer_ref_id_for_address(vault_account_id, asset_id, address_id, customer_ref_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAsset = await fireblocks.setCustomerRefIdForAddress(vaultAccountId, assetId, addressId, customerRefId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: vaultAccountId
@@ -577,12 +786,15 @@ paths:
             The ID of the vault account
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
         - in: path
           name: assetId
           required: true
           description: The ID of the asset
           schema:
             type: string
+            x-fb-entity: asset
         - in: path
           name: addressId
           required: true
@@ -602,12 +814,15 @@ paths:
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}/create_legacy':
     post:
-      tags: [Vault]
-      summary: Translates an existing segwit address to the legacy format
+      summary: Convert a segwit address to legacy format
+      description: Converts an existing segwit address to the legacy format.
+      tags:
+        - Vaults
       parameters:
         - in: path
           name: vaultAccountId
@@ -616,12 +831,15 @@ paths:
             The ID of the vault account
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
         - in: path
           name: assetId
           required: true
           description: The ID of the asset
           schema:
             type: string
+            x-fb-entity: asset
         - in: path
           name: addressId
           required: true
@@ -632,6 +850,7 @@ paths:
       responses:
         '200':
           description: The created address
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -640,8 +859,18 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/unspent_inputs':
     get:
-      tags: [Vault]
-      summary: Gets UTXO unspent inputs information
+      summary: Get UTXO unspent inputs information
+      description: Returns unspent inputs information of an asset in a vault account.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: vaultAsset = fireblocks.get_unspent_inputs(vault_account_id, asset_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const vaultAsset = await fireblocks.getUnspentInputs(vaultAccountId, assetId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: vaultAccountId
@@ -650,27 +879,46 @@ paths:
             The ID of the vault account
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
         - in: path
           name: assetId
           required: true
           description: The ID of the asset
           schema:
             type: string
+            x-fb-entity: asset
       responses:
         '200':
           description: List of Unspent information per input
+          headers: *req-id-header
           content:
             '*/*':
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/unspentInputsData'
+                  $ref: '#/components/schemas/UnspentInputsResponse'
         default:
           $ref: '#/components/responses/Error'
   '/vault/public_key_info/':
     get:
-      tags: [Vault]
-      summary: Gets the public key information based on derivationPath and signing algorithm
+      summary: Get the public key information
+      description: Gets the public key information based on derivation path and signing algorithm.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: pubKey = fireblocks.get_public_key_info(algorithm, derivation_path, compressed)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: >
+            const PublicKeyInfoArgs = {
+            algorithm: 'MPC_ECDSA_SECP256K1',
+            derivationPath: '[44,0,0,0,0]'
+            }
+            const pubKey = await fireblocks.getPublicKeyInfo(PublicKeyInfoArgs);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: query
           name: derivationPath
@@ -689,6 +937,7 @@ paths:
       responses:
         '200':
           description: Public key information
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -697,19 +946,37 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/accounts/{vaultAccountId}/{assetId}/{change}/{addressIndex}/public_key_info':
     get:
-      tags: [Vault]
-      summary: Gets the public key information for vault account
+      summary: Get the public key for a vault account
+      description: Gets the public key information for the vault account.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: pubKey = fireblocks.get_public_key_info_for_vault_account(vault_account_id, asset_id, change, address_index, compressed)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: >
+            const PublicKeyInfoArgs = {
+            algorithm: 'MPC_ECDSA_SECP256K1',
+            derivationPath: '[44,0,0,0,0]'
+            }
+            const pubKey = await fireblocks.getPublicKeyInfo(PublicKeyInfoArgs);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: vaultAccountId
           required: true
           schema:
             type: string
+            format: numeric
+            x-fb-entity: vault_account
         - in: path
           name: assetId
           required: true
           schema:
             type: string
+            x-fb-entity: asset
         - in: path
           name: change
           required: true
@@ -728,6 +995,7 @@ paths:
       responses:
         '200':
           description: Public Key Information
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -736,8 +1004,18 @@ paths:
           $ref: '#/components/responses/Error'
   '/vault/assets':
     get:
-      tags: [Vault]
-      summary: Gets the assets amount summary for all \ filtered accounts.
+      summary: Get asset balance for chosen assets
+      description: Gets the assets amount summary for all accounts or filtered accounts.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: assets_balance = fireblocks.get_vault_assets_balance(accout_name_prefix, account_name_suffix)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const assetsBalance = await fireblocks.getVaultAssetsBalance(accountNamePrefix, accountNameSuffix);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: query
           name: accountNamePrefix
@@ -752,41 +1030,908 @@ paths:
       responses:
         '200':
           description: Amount by asset
+          headers: *req-id-header
           content:
             '*/*':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/VaultAsset'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/VaultAsset'
         default:
           $ref: '#/components/responses/Error'
   '/vault/assets/{assetId}':
     get:
-      tags: [Vault]
-      summary: Gets vault balance summary by asset.
+      summary: Get vault balance by asset
+      description: Gets the vault balance summary for an asset.
+      tags:
+        - Vaults
+      x-readme:
+        code-samples:
+        - language: python
+          code: assets_balance = fireblocks.get_vault_balance_by_asset(asset_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const assetsBalance = await fireblocks.getVaultBalanceByAsset(assetId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: assetId
           required: true
           schema:
             type: string
+            x-fb-entity: asset
       responses:
         '200':
           description: Vault amount by asset
+          headers: *req-id-header
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/VaultAsset'
         default:
           $ref: '#/components/responses/Error'
+
+  # EXCHANGE ACCOUNTS
+  /exchange_accounts:
+    get:
+      summary: List exchange accounts
+      description: Returns all exchange accounts.
+      tags:
+        - Exchange accounts
+      x-readme:
+        code-samples:
+          - language: python
+            code: exchangeAccounts = fireblocks.get_exchange_accounts()
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const exchangeAccounts = await fireblocks.getExchangeAccounts();
+            name: Fireblocks SDK Javascript example
+      responses:
+        '200':
+          description: An ExchangeAccount object
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExchangeAccount'
+        default:
+          $ref: '#/components/responses/Error'
+  '/exchange_accounts/{exchangeAccountId}':
+    get:
+      summary: Find a specific exchange account
+      description: Returns an exchange account by ID.
+      tags:
+        - Exchange accounts
+      x-readme:
+        code-samples:
+          - language: python
+            code: exchangeAccount = fireblocks.get_exchange_account(exchangeAccountId)
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const exchnageAccount = await fireblocks.get_exchange_account(exchangeAccountId);
+            name: Fireblocks SDK Javascript example
+      parameters:
+        - in: path
+          name: exchangeAccountId
+          required: true
+          description: The ID of the exchange account to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: An ExchangeAccount object
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExchangeAccount'
+        default:
+          $ref: '#/components/responses/Error'
+  '/exchange_accounts/{exchangeAccountId}/internal_transfer':
+    post:
+      summary: Internal tranfer for exchange accounts
+      description: Transfers funds between trading accounts under the same exchange account.
+      tags:
+        - Exchange accounts
+      parameters:
+        - in: path
+          name: exchangeAccountId
+          required: true
+          description: The ID of the exchange account to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: Transfer succeeded
+          headers: *req-id-header
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                asset:
+                  type: string
+                amount:
+                  type: string
+                sourceType:
+                  $ref: '#/components/schemas/TradingAccountType'
+                destType:
+                  $ref: '#/components/schemas/TradingAccountType'
+  '/exchange_accounts/{exchangeAccountId}/convert':
+    post:
+      summary: Convert exchange account funds from the source asset to the destination asset. Coinbase (USD to USDC, USDC to USD) and Bitso (MXN to USD) are supported conversions.
+      tags:
+        - Exchange accounts
+      parameters:
+        - in: path
+          name: exchangeAccountId
+          required: true
+          description: The ID of the exchange account. Please make sure the exchange supports conversions. To find the ID of your exchange account, use GET/exchange_accounts.
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: Conversion successful
+          headers: *req-id-header
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                srcAsset:
+                  type: string
+                  description: Name of the source asset (must be in a currency that is supported for conversions in the selected exchange type that corresponds to your exchange ID)
+                destAsset:
+                  type: string
+                  description: Name of the destination asset (must be in a currency that is supported for conversions in the selected exchange type that corresponds to your exchange ID)
+                amount:
+                  type: number
+                  description: The amount to transfer (in the currency of the source asset)
+              required:
+                - srcAsset
+                - destAsset
+                - amount
+  '/exchange_accounts/{exchangeAccountId}/{assetId}':
+    get:
+      summary: Find an asset for an exchange account
+      description: Returns an asset for an exchange account.
+      tags:
+        - Exchange accounts
+      x-readme:
+        code-samples:
+          - language: python
+            code: exchangeAsset = fireblocks.get_exchange_account_asset(exchangeAccountId, assetId)
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const exchangeAsset = await fireblocks.getExchangeAsset(exchangeAccountId, assetId);
+            name: Fireblocks SDK Javascript example
+      parameters:
+        - in: path
+          name: exchangeAccountId
+          required: true
+          description: The ID of the exchange account to return
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: An ExchangeAccountAsset object
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExchangeAsset'
+        default:
+          $ref: '#/components/responses/Error'
+
+  # FIAT ACCOUNTS
+  /fiat_accounts:
+    get:
+      summary: List fiat accounts
+      description: Returns all fiat accounts.
+      tags:
+        - Fiat accounts
+      x-readme:
+        code-samples:
+          - language: python
+            code: transactions = fireblocks.get_fiat_accounts()
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const transactions = await fireblocks.getFiatAccounts();
+            name: Fireblocks SDK Javascript example
+      responses:
+        '200':
+          description: A fiat account object
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FiatAccount'
+        default:
+          $ref: '#/components/responses/Error'
+  '/fiat_accounts/{accountId}':
+    get:
+      summary: Find a specific fiat account
+      description: Returns a fiat account by ID.
+      tags:
+        - Fiat accounts
+      x-readme:
+        code-samples:
+          - language: python
+            code: transactions = fireblocks.get_fiat_account_by_id(account_id)
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const transactions = await fireblocks.getFiatAccountById(accountId);
+            name: Fireblocks SDK Javascript example
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the fiat account to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A fiat account object
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/FiatAccount'
+        default:
+          $ref: '#/components/responses/Error'
+  '/fiat_accounts/{accountId}/redeem_to_linked_dda':
+    post:
+      summary: Redeem funds to DDA
+      description: Redeems funds to the linked DDA.
+      tags:
+        - Fiat accounts
+      x-readme:
+        code-samples:
+          - language: python
+            code: transactions = fireblocks.redeem_to_linked_dda(account_id, amount)
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const transactions = await fireblocks.redeemToLinkedDDA(accountId, amount);
+            name: Fireblocks SDK Javascript example
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the fiat account to use
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: Transfer succeeded
+          headers: *req-id-header
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                amount:
+                  type: number
+  '/fiat_accounts/{accountId}/deposit_from_linked_dda':
+    post:
+      summary: Deposit funds from DDA
+      description: Deposits funds from the linked DDA.
+      tags:
+        - Fiat accounts
+      x-readme:
+        code-samples:
+          - language: python
+            code: transactions = fireblocks.deposit_from_linked_dda(account_id, amount)
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const transactions = await fireblocks.depositFromLinkedDDA(accountId, amount);
+            name: Fireblocks SDK Javascript example
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the fiat account to use
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: Transfer succeeded
+          headers: *req-id-header
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                amount:
+                  type: number
+
+  # NETWORK CONNECTIONS
+  '/network_connections':
+    get:
+      summary: List network connections
+      description: |
+        Returns all network connections.
+
+        **Note:** This API call is subject to Flexible Routing Schemes.
+        
+        Your routing policy defines how your transactions are routed.
+        You can choose 1 of the 3 different schemes mentioned below for each asset type:
+          - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+          - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+          - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+
+        Default Workspace Presets:
+          - Network Profile Crypto → **Custom** 
+          - Network Profile FIAT → **None**
+          - Network Connection Crypto → **Default**
+          - Network Connection FIAT → **Default**
+
+            - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+      tags:
+        - Network connections
+      x-readme:
+        code-samples:
+          - language: python
+            code: network_connections = fireblocks.get_network_connections()
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const networkConnections = await fireblocks.getNetworkConnections();
+            name: Fireblocks SDK Javascript example
+      responses:
+        '200':
+          description: A list of network connections
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NetworkConnectionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Creates a new network connection
+      description: |
+        Initiates a new network connection. 
+
+        **Note:** This API call is subject to Flexible Routing Schemes.
+        
+        Your routing policy defines how your transactions are routed.
+        You can choose 1 of the 3 different schemes mentioned below for each asset type:
+          - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+          - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+          - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+
+        Default Workspace Presets:
+          - Network Profile Crypto → **Custom** 
+          - Network Profile FIAT → **None**
+          - Network Connection Crypto → **Default**
+          - Network Connection FIAT → **Default**
+
+            - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+      tags:
+        - Network connections
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkConnection'
+      responses:
+        '201':
+          description: A Network Connection object
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NetworkConnectionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/network_connections/{connectionId}/set_routing_policy':
+    patch:
+      summary: Update network connection routing policy.
+      description: |
+        Updates an existing network connection's routing policy. 
+        
+        **Note:** This API call is subject to Flexible Routing Schemes.
+        
+        Your routing policy defines how your transactions are routed.
+        You can choose 1 of the 3 different schemes mentioned below for each asset type:
+          - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+          - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+          - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+        
+        Default Workspace Presets:
+          - Network Profile Crypto → **Custom** 
+          - Network Profile FIAT → **None**
+          - Network Connection Crypto → **Default**
+          - Network Connection FIAT → **Default**
+        
+            - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+      tags:
+        - Network connections
+      parameters:
+        - in: path
+          name: connectionId
+          required: true
+          description: The ID of the network connection
+          schema:
+            type: string
+            minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                routingPolicy:
+                  $ref: '#/components/schemas/NetworkConnectionRoutingPolicy'
+              required:
+                - routingPolicy
+      responses:
+        '200':
+          description: Network ID
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/X-Request-ID'
+          content:
+            '*/*':
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                required:
+                  - success
+        default:
+          $ref: '#/components/responses/Error'
+  '/network_connections/{connectionId}/is_third_party_routing/{assetType}':
+    get:
+      summary: Retrieve third-party network routing validation by asset type.
+      description: The Fireblocks Network allows for flexibility around incoming deposits. A receiver can receive network deposits to locations other than Fireblocks. This endpoint validates whether future transactions are routed to the displayed recipient or to a 3rd party.
+      tags:
+        - Network connections
+      parameters:
+        - in: path
+          name: connectionId
+          required: true
+          description: The ID of the network connection
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: assetType
+          required: true
+          description: The destination asset type
+          schema:
+            type: string
+            enum:
+              - CRYPTO
+              - SIGNET
+              - SEN
+              - SIGNET_TEST
+              - SEN_TEST
+      responses:
+        '200':
+          description: result for the validation
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/X-Request-ID'
+          content:
+            '*/*':
+              schema:
+                properties:
+                  isThirdPartyRouting:
+                    type: boolean
+                  description:
+                    type: string
+        default:
+          $ref: '#/components/responses/Error'
+  '/network_connections/{connectionId}':
+    get:
+      summary: Get a network connection
+      description: |
+        Gets a network connection by ID.
+        
+        **Note:** This API call is subject to Flexible Routing Schemes.
+        
+        Your routing policy defines how your transactions are routed.
+        You can choose 1 of the 3 different schemes mentioned below for each asset type:
+          - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+          - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+          - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+
+        Default Workspace Presets:
+          - Network Profile Crypto → **Custom** 
+          - Network Profile FIAT → **None**
+          - Network Connection Crypto → **Default**
+          - Network Connection FIAT → **Default**
+
+            - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+      tags:
+        - Network connections
+      x-readme:
+        code-samples:
+          - language: python
+            code: network_connection = fireblocks.get_network_connection_by_id(connectionId)
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const network_connection = await fireblocks.getNetworkConnection(connectionId);
+            name: Fireblocks SDK Javascript example
+      parameters:
+        - in: path
+          name: connectionId
+          required: true
+          description: The ID of the connection
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A network connection
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NetworkConnectionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+    delete:
+      summary: Deletes a network connection by ID
+      description: |
+        Deletes an existing network connection specified by its connection ID. 
+        
+        **Note:** This API call is subject to Flexible Routing Schemes.
+        
+        Your routing policy defines how your transactions are routed.
+        You can choose 1 of the 3 different schemes mentioned below for each asset type:
+          - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+          - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+          - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+
+        Default Workspace Presets:
+          - Network Profile Crypto → **Custom** 
+          - Network Profile FIAT → **None**
+          - Network Connection Crypto → **Default**
+          - Network Connection FIAT → **Default**
+
+            - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+      tags:
+        - Network connections
+      parameters:
+        - in: path
+          name: connectionId
+          required: true
+          description: The ID of the network connection to delete
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: Network ID
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/X-Request-ID'
+          content:
+            '*/*':
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                required:
+                  - success
+        default:
+          $ref: '#/components/responses/Error'
+  '/network_ids':
+    get:
+      summary: Returns all network IDs, both local IDs and discoverable remote IDs
+      description: |
+        Retrieves a list of all local and discoverable remote network IDs. 
+
+        **Note:** This API call is subject to Flexible Routing Schemes.
+        
+        Your routing policy defines how your transactions are routed.
+        You can choose 1 of the 3 different schemes mentioned below for each asset type:
+          - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+          - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+          - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+
+        Default Workspace Presets:
+          - Network Profile Crypto → **Custom** 
+          - Network Profile FIAT → **None**
+          - Network Connection Crypto → **Default**
+          - Network Connection FIAT → **Default**
+
+            - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+      tags:
+        - Network connections
+      responses:
+        '200':
+          description: A list of network IDs
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: '#/components/schemas/NetworkIdResponse'
+
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Creates a new Network ID
+      description: |
+        Creates a new Network ID. 
+
+        **Note:** This API call is subject to Flexible Routing Schemes.
+        
+        Your routing policy defines how your transactions are routed.
+        You can choose 1 of the 3 different schemes mentioned below for each asset type:
+          - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+          - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+          - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+
+        Default Workspace Presets:
+          - Network Profile Crypto → **Custom** 
+          - Network Profile FIAT → **None**
+          - Network Connection Crypto → **Default**
+          - Network Connection FIAT → **Default**
+
+            - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+      tags:
+        - Network connections
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                routingPolicy:
+                  $ref: '#/components/schemas/NetworkIdRoutingPolicy'
+              required:
+                - name
+      responses:
+        '201':
+          description: Returns the new channel in your workspace
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NetworkIdResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/network_ids/{networkId}':
+    get:
+      summary: Returns specific network ID.
+      description: |
+        Retrieves a network by its ID. 
+
+        **Note:** This API call is subject to Flexible Routing Schemes.
+        
+        Your routing policy defines how your transactions are routed.
+        You can choose 1 of the 3 different schemes mentioned below for each asset type:
+          - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+          - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+          - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+
+        Default Workspace Presets:
+          - Network Profile Crypto → **Custom** 
+          - Network Profile FIAT → **None**
+          - Network Connection Crypto → **Default**
+          - Network Connection FIAT → **Default**
+
+            - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+      tags:
+        - Network connections
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          description: The ID of the network
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: Network ID
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NetworkIdResponse'
+        default:
+          $ref: '#/components/responses/Error'
+    delete:
+      summary: Deletes specific network ID.
+      description: |
+        Deletes a network by its ID. 
+
+        **Note:** This API call is subject to Flexible Routing Schemes.
+        
+        Your routing policy defines how your transactions are routed.
+        You can choose 1 of the 3 different schemes mentioned below for each asset type:
+          - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+          - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+          - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+
+        Default Workspace Presets:
+          - Network Profile Crypto → **Custom** 
+          - Network Profile FIAT → **None**
+          - Network Connection Crypto → **Default**
+          - Network Connection FIAT → **Default**
+
+            - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+      tags:
+        - Network connections
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          description: The ID of the network
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: Network ID
+          content:
+            '*/*':
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                required:
+                  - success
+        default:
+          $ref: '#/components/responses/Error'
+  '/network_ids/{networkId}/set_routing_policy':
+    patch:
+      summary: Update network id routing policy.
+      description: |
+        Updates the routing policy of a specified network ID. 
+
+        **Note:** This API call is subject to Flexible Routing Schemes.
+        
+        Your routing policy defines how your transactions are routed.
+        You can choose 1 of the 3 different schemes mentioned below for each asset type:
+          - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+          - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+          - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+
+        Default Workspace Presets:
+          - Network Profile Crypto → **Custom** 
+          - Network Profile FIAT → **None**
+          - Network Connection Crypto → **Default**
+          - Network Connection FIAT → **Default**
+
+            - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+      tags:
+        - Network connections
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          description: The ID of the network
+          schema:
+            type: string
+            minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                routingPolicy:
+                  $ref: '#/components/schemas/NetworkIdRoutingPolicy'
+              required:
+                - routingPolicy
+      responses:
+        '200':
+          description: Network ID
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                required:
+                  - success
+        default:
+          $ref: '#/components/responses/Error'
+  '/network_ids/{networkId}/set_discoverability':
+    patch:
+      summary: Update network ID's discoverability.
+      description: |
+        Update whether or not the network ID is discoverable by others. 
+
+        **Note:** This API call is subject to Flexible Routing Schemes.
+        
+        Your routing policy defines how your transactions are routed.
+        You can choose 1 of the 3 different schemes mentioned below for each asset type:
+          - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+          - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+          - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+
+        Default Workspace Presets:
+          - Network Profile Crypto → **Custom** 
+          - Network Profile FIAT → **None**
+          - Network Connection Crypto → **Default**
+          - Network Connection FIAT → **Default**
+
+            - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+      tags:
+        - Network connections
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          description: The ID of the network
+          schema:
+            type: string
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                isDiscoverable:
+                  type: boolean
+              required:
+                - isDiscoverable
+      responses:
+        '200':
+          description: Network ID
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                required:
+                  - success
+        default:
+          $ref: '#/components/responses/Error'
+
   #  INTERNAL WALLETS
   /internal_wallets:
     get:
-      tags: [InternalWallets]
-      summary: Gets a list of internal wallets
+      summary: List internal wallets
+      tags:
+        - Internal wallets
+      description: | 
+        Gets a list of internal wallets.
+
+        **Note**: BTC-based assets belonging to whitelisted addresses cannot be retrieved between 00:00 UTC and 00:01 UTC daily due to third-party provider, Blockchair, being unavailable for this 60 second period. Please wait until the next minute to retrieve BTC-based assets.
       responses:
         '200':
           description: A list of internal wallets
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -796,11 +1941,22 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [InternalWallets]
-      summary: Creates a new internal wallet
+      summary: Create an internal wallet
+      tags:
+        - Internal wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: internalWallet = fireblocks.create_internal_wallet(name, customer_ref_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const internalWallet = await fireblocks.createInternalWallet(name, customerRefId);
+          name: Fireblocks SDK Javascript example
+      description: Creates a new internal wallet with the requested name.
       responses:
         '200':
           description: A new wallet object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -821,8 +1977,18 @@ paths:
                   type: string
   '/internal_wallets/{walletId}':
     get:
-      tags: [InternalWallets]
-      summary: Returns an internal wallet by ID
+      summary: Get assets for internal wallet
+      tags:
+        - Internal wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: internalWallet = fireblocks.get_internal_wallet(walletId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const result = await fireblocks.getInternalWallet(walletId);
+          name: Fireblocks SDK Javascript example
+      description: Returns all assets in an internal wallet by ID.
       parameters:
         - in: path
           name: walletId
@@ -834,6 +2000,7 @@ paths:
       responses:
         '200':
           description: A Wallet object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -841,8 +2008,18 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     delete:
-      tags: [InternalWallets]
-      summary: Deletes an internal wallet by ID
+      summary: Delete an internal wallet
+      tags:
+        - Internal wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: result = firebocks.delete_internal_wallet(walletId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const result = await fireblocks.deleteInternalWallet(walletId);
+          name: Fireblocks SDK Javascript example
+      description: Deletes an internal wallet by ID.
       parameters:
         - in: path
           name: walletId
@@ -854,12 +2031,23 @@ paths:
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
   '/internal_wallets/{walletId}/set_customer_ref_id':
     post:
-      tags: [InternalWallets]
-      summary: Sets a reference customer ID for AML
+      summary: Set an AML/KYT customer reference ID for an internal wallet
+      tags:
+        - Internal wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: result = firebocks.set_customer_ref_id_for_internal_wallet(wallet_id, customer_ref_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const result = await fireblocks.setCustomerRefIdForInternalWallet(walletId, customerRefId);
+          name: Fireblocks SDK Javascript example
+      description: Sets an AML/KYT customer reference ID for the specific internal wallet.
       parameters:
         - in: path
           name: walletId
@@ -880,12 +2068,23 @@ paths:
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
   '/internal_wallets/{walletId}/{assetId}':
     get:
-      tags: [InternalWallets]
-      summary: Returns an internal wallet asset by ID
+      summary: Get an asset from an internal wallet
+      tags:
+        - Internal wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: internalWalletAsset = fireblocks.get_internal_wallet_asset(walletId, assetId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const internalWalletAsset = fireblocks.getInternalWalletAsset(walletId, assetId);
+          name: Fireblocks SDK Javascript example
+      description: Returns information for an asset in an internal wallet.
       parameters:
         - in: path
           name: walletId
@@ -901,9 +2100,11 @@ paths:
           schema:
             type: string
             minimum: 1
+            x-fb-entity: asset
       responses:
         '200':
           description: A Wallet Asset object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -911,8 +2112,18 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [InternalWallets]
-      summary: Create asset to an existing internal wallet
+      summary: Add an asset to an internal wallet
+      tags:
+        - Internal wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: internalWalletAsset = fireblocks.create_internal_wallet_asset(walletId, assetId, address, tag)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const internalWalletAsset = await fireblocks.createInternalWalletAsset(walletContainerId, assetId, address, tag);
+          name: Fireblocks SDK Javascript example
+      description: Adds an asset to an existing internal wallet.
       parameters:
         - in: path
           name: walletId
@@ -929,6 +2140,7 @@ paths:
       responses:
         '200':
           description: A Wallet Asset object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -945,12 +2157,22 @@ paths:
                   description: The wallet's address or, for EOS wallets, the account name
                 tag:
                   type: string
-                  description: for XRP wallets, the destination tag. For EOS, the memo
+                  description: for XRP wallets, the destination tag; for EOS, the memo; for the fiat providers (Signet by Signature, SEN by Silvergate, or BLINC by BCB Group), the Bank Transfer Description
               required:
                 - address
     delete:
-      tags: [InternalWallets]
-      summary: Deletes an internal wallet asset by ID
+      summary: Delete a whitelisted address from an internal wallet
+      tags:
+        - Internal wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: result = fireblocks.delete_internal_wallet_asset(walletId, assetId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const result = await fireblocks.deleteInternalWalletAsset(walletId, assetId);
+          name: Fireblocks SDK Javascript example
+      description: Deletes a whitelisted address (for an asset) from an internal wallet.
       parameters:
         - in: path
           name: walletId
@@ -966,20 +2188,33 @@ paths:
           schema:
             type: string
             minimum: 1
+            x-fb-entity: asset
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
+
   # EXTERNAL WALLETS
   /external_wallets:
     get:
-      tags: [ExternalWallets]
-      summary: Gets a list of external wallets under the tenant
-      operationId: getExternalWallets
+      summary: List external wallets
+      description: Gets a list of external wallets under the workspace.
+      tags:
+        - External wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: externalWallets = fireblocks.get_external_wallets()
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const externalWallets = await fireblocks.getExternalWallets();
+          name: Fireblocks SDK Javascript example
       responses:
         '200':
           description: A list of external wallets
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -989,12 +2224,22 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [ExternalWallets]
-      summary: Creates a new external wallet
-      operationId: createExternalWallet
+      summary: Create an external wallet
+      description: Creates a new external wallet with the requested name.
+      tags:
+        - External wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: externalWallet = fireblocks.create_external_wallet(name, customer_ref_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const externalWallet = await fireblocks.createExternalWallet(name, customerRefId);
+          name: Fireblocks SDK Javascript example
       responses:
         '200':
           description: A Wallet object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1015,9 +2260,18 @@ paths:
                   type: string
   '/external_wallets/{walletId}':
     get:
-      tags: [ExternalWallets]
-      summary: Returns an external wallet by ID
-      operationId: getExternalWallet
+      summary: Find an external wallet
+      description: Returns an external wallet by ID.
+      tags:
+        - External wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: externalWallet = fireblocks.get_external_wallet(walletId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const externalWallet = await fireblocks.getExternalWallet(walletId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: walletId
@@ -1029,6 +2283,7 @@ paths:
       responses:
         '200':
           description: A Wallet object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1036,9 +2291,18 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     delete:
-      tags: [ExternalWallets]
-      summary: Deletes an external wallet by ID
-      operationId: deleteExternalWalletById
+      summary: Delete an external wallet
+      description: Deletes an external wallet by ID.
+      tags:
+        - External wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: result = firebocks.delete_external_wallet(walletId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const result = await fireblocks.deleteExternalWallet(walletId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: walletId
@@ -1050,12 +2314,23 @@ paths:
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
   '/external_wallets/{walletId}/set_customer_ref_id':
     post:
-      tags: [ExternalWallets]
-      summary: Sets a reference customer ID for AML
+      summary: Set an AML customer reference ID for an external wallet
+      description: Sets an AML/KYT customer reference ID for the specific external wallet.
+      tags:
+        - External wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: result = firebocks.set_customer_ref_id_for_external_wallet(wallet_id, customer_ref_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const result = await fireblocks.setCustomerRefIdForExternalWallet(walletId, customerRefId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: walletId
@@ -1076,12 +2351,23 @@ paths:
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
   '/external_wallets/{walletId}/{assetId}':
     get:
-      tags: [ExternalWallets]
-      summary: Returns an external wallet asset by ID
+      summary: Get an asset from an external wallet
+      description: Returns an external wallet by wallet ID and asset ID.
+      tags:
+        - External wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: externalWalletAsset = fireblocks.get_external_wallet_asset(walletId, assetId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const externalWalletAsset = fireblocks.getExternalWalletAsset(walletId, assetId)
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: walletId
@@ -1097,9 +2383,11 @@ paths:
           schema:
             type: string
             minimum: 1
+            x-fb-entity: asset
       responses:
         '200':
           description: A Wallet Asset object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1107,8 +2395,18 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [ExternalWallets]
-      summary: Adds an asset to an existing external wallet
+      summary: Add an asset to an external wallet.
+      description: Adds an asset to an existing external wallet.
+      tags:
+        - External wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: externalWalletAsset = fireblocks.create_external_wallet_asset(walletId, assetId, address, tag)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const externalWalletAsset = await fireblocks.createExternalWalletAsset(walletContainerId, assetId, address, tag);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: walletId
@@ -1122,9 +2420,11 @@ paths:
           description: The ID of the asset to add
           schema:
             type: string
+            x-fb-entity: asset
       responses:
         '200':
           description: A Wallet Asset object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1141,12 +2441,22 @@ paths:
                   description: The wallet's address (or xpub) of the wallet
                 tag:
                   type: string
-                  description: The destination tag, for XRP wallets
+                  description: For XRP wallets, the destination tag; for EOS/XLM, the memo; for the fiat providers (Signet by Signature, SEN by Silvergate, or BLINC by BCB Group), the Bank Transfer Description
               required:
                 - address
     delete:
-      tags: [ExternalWallets]
-      summary: Deletes an external wallet asset by ID
+      summary: Delete an asset from an external wallet
+      description: Deletes an external wallet asset by ID.
+      tags:
+        - External wallets
+      x-readme:
+        code-samples:
+        - language: python
+          code: result = fireblocks.delete_external_wallet_asset(walletId, assetId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const result = await fireblocks.deleteExternalWalletAsset(walletId, assetId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: walletId
@@ -1162,63 +2472,46 @@ paths:
           schema:
             type: string
             minimum: 1
+            x-fb-entity: asset
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
-  # EXCHANGE ACCOUNTS
-  /exchange_accounts:
+
+  # CONTRACTS
+  /contracts:
     get:
-      tags: [ExchangeAccounts]
-      summary: Returns all exchange accounts
+      summary: List contracts
+      description: Gets a list of contracts.
+      tags:
+        - Contracts
       responses:
         '200':
-          description: An ExchangeAccount object
+          description: A list of contracts
+          headers: *req-id-header
           content:
             '*/*':
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExchangeAccount'
+                  $ref: '#/components/schemas/UnmanagedWallet'
         default:
           $ref: '#/components/responses/Error'
-  '/exchange_accounts/{exchangeAccountId}':
-    get:
-      tags: [ExchangeAccounts]
-      summary: Returns an exchange account by ID
-      parameters:
-        - in: path
-          name: exchangeAccountId
-          required: true
-          description: The ID of the exchange account to return
-          schema:
-            type: string
-            minimum: 1
+    post:
+      summary: Create a contract
+      description: Creates a new contract.
+      tags:
+        - Contracts
       responses:
         '200':
-          description: An ExchangeAccount object
+          description: A Wallet object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ExchangeAccount'
-        default:
-          $ref: '#/components/responses/Error'
-  '/exchange_accounts/{exchangeAccountId}/internal_transfer':
-    post:
-      tags: [ExchangeAccounts]
-      summary: Transfers funds between trading accounts under the same exchange account
-      parameters:
-        - in: path
-          name: exchangeAccountId
-          required: true
-          description: The ID of the exchange account to return
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '201':
-          description: Transfer succeeded
+                $ref: '#/components/schemas/UnmanagedWallet'
         default:
           $ref: '#/components/responses/Error'
       requestBody:
@@ -1226,23 +2519,63 @@ paths:
           application/json:
             schema:
               properties:
-                asset:
+                name:
                   type: string
-                amount:
-                  type: string
-                sourceType:
-                  $ref: '#/components/schemas/TradingAccountType'
-                destType:
-                  $ref: '#/components/schemas/TradingAccountType'
-  '/exchange_accounts/{exchangeAccountId}/{assetId}':
+                  description: the contract's display name
+  '/contracts/{contractId}':
     get:
-      tags: [ExchangeAccounts]
-      summary: Returns a single asset within an exchange account
+      summary: Find a specific contract
+      description: Returns a contract by ID.
+      tags:
+        - Contracts
       parameters:
         - in: path
-          name: exchangeAccountId
+          name: contractId
           required: true
-          description: The ID of the exchange account to return
+          description: The ID of the contract to return
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: A Wallet object
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UnmanagedWallet'
+        default:
+          $ref: '#/components/responses/Error'
+    delete:
+      summary: Delete a contract
+      description: Deletes a contract by ID.
+      tags:
+        - Contracts
+      parameters:
+        - in: path
+          name: contractId
+          required: true
+          description: The ID of the contract to delete
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '201':
+          description: OK
+          headers: *req-id-header
+        default:
+          $ref: '#/components/responses/Error'
+  '/contracts/{contractId}/{assetId}':
+    get:
+      summary: Find a contract asset
+      description: Returns a contract asset by ID.
+      tags:
+        - Contracts
+      parameters:
+        - in: path
+          name: contractId
+          required: true
+          description: The ID of the contract
           schema:
             type: string
             minimum: 1
@@ -1253,106 +2586,134 @@ paths:
           schema:
             type: string
             minimum: 1
+            x-fb-entity: asset
       responses:
         '200':
-          description: An ExchangeAccountAsset object
+          description: A Wallet Asset object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ExchangeAsset'
+                $ref: '#/components/schemas/ExternalWalletAsset'
         default:
           $ref: '#/components/responses/Error'
-  # FIAT ACCOUNTS
-  /fiat_accounts:
-    get:
-      tags: [FiatAccounts]
-      summary: Returns all fiat accounts
+    post:
+      summary: Add an asset to a contract
+      description: Adds an asset to an existing contract.
+      tags:
+        - Contracts
+      parameters:
+        - in: path
+          name: contractId
+          required: true
+          description: The ID of the contract
+          schema:
+            type: string
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset to add
+          schema:
+            type: string
+            x-fb-entity: asset
       responses:
         '200':
-          description: A fiat account object
+          description: A Wallet Asset object
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExternalWalletAsset'
+        default:
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                address:
+                  type: string
+                  description: The contract's address (or xpub) of the wallet
+                tag:
+                  type: string
+                  description: The destination tag, for XRP wallets
+              required:
+                - address
+    delete:
+      summary: Delete a contract asset
+      description: Deletes a contract asset by ID.
+      tags:
+        - Contracts
+      parameters:
+        - in: path
+          name: contractId
+          required: true
+          description: The ID of the contract
+          schema:
+            type: string
+            minimum: 1
+        - in: path
+          name: assetId
+          required: true
+          description: The ID of the asset to delete
+          schema:
+            type: string
+            minimum: 1
+            x-fb-entity: asset
+      responses:
+        '201':
+          description: OK
+          headers: *req-id-header
+        default:
+          $ref: '#/components/responses/Error'
+
+  # SUPPORTED ASSETS
+  '/supported_assets':
+    get:
+      summary: List all asset types supported by Fireblocks
+      description: Returns all asset types supported by Fireblocks.
+      tags:
+        - Supported assets
+      x-readme:
+        code-samples:
+          - language: python
+            code: supportedAssets = fireblocks.get_supported_assets()
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const supportedAssets = await fireblocks.getSupportedAssets();
+            name: Fireblocks SDK Javascript example
+      responses:
+        '200':
+          description: A Transaction object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/FiatAccount'
+                  $ref: '#/components/schemas/AssetTypeResponse'
         default:
           $ref: '#/components/responses/Error'
-  '/fiat_accounts/{accountId}':
-    get:
-      tags: [FiatAccounts]
-      summary: Returns a fiat account by ID
-      parameters:
-        - in: path
-          name: accountId
-          required: true
-          description: The ID of the fiat account to return
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '200':
-          description: A fiat account object
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/FiatAccount'
-        default:
-          $ref: '#/components/responses/Error'
-  '/fiat_accounts/{accountId}/redeem_to_linked_dda':
-    post:
-      tags: [FiatAccounts]
-      summary: Redeem funds to DDA
-      parameters:
-        - in: path
-          name: accountId
-          required: true
-          description: The ID of the fiat account to use
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '201':
-          description: Transfer succeeded
-        default:
-          $ref: '#/components/responses/Error'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                amount:
-                  type: number
-  '/fiat_accounts/{accountId}/deposit_from_linked_dda':
-    post:
-      tags: [FiatAccounts]
-      summary: Deposit funds from DDA
-      parameters:
-        - in: path
-          name: accountId
-          required: true
-          description: The ID of the fiat account to use
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '201':
-          description: Transfer succeeded
-        default:
-          $ref: '#/components/responses/Error'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                amount:
-                  type: number
+
   # TRANSACTIONS
   /transactions:
     get:
-      tags: [Transactions]
-      summary: Gets a list of transactions under the tenant
-      operationId: getTransactions
+      summary: List transaction history
+      description: Lists the transaction history for your workspace.
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: transactions = fireblocks.get_transactions()
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: >
+            const transactions = await fireblocks.getTransactions({
+             status: args.status,
+            after: from
+            });
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: query
           name: before
@@ -1373,8 +2734,7 @@ paths:
         - in: query
           name: status
           description: >-
-            Comma-separated list of statuses. Returns only transactions with
-            one of the specified statuses
+            You can filter by one of the statuses.
           required: false
           schema:
             type: string
@@ -1387,6 +2747,15 @@ paths:
             enum:
               - createdAt
               - lastUpdated
+        - in: query
+          name: sort
+          description: The direction to order the results by
+          required: false
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
         - in: query
           name: limit
           description: >-
@@ -1456,6 +2825,7 @@ paths:
       responses:
         '200':
           description: A list of transactions
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1465,12 +2835,43 @@ paths:
         default:
           $ref: '#/components/responses/Error'
     post:
-      tags: [Transactions]
-      summary: Creates a new transaction
-      operationId: createTransaction
+      summary: Create a new transaction
+      description: Creates a new transaction.
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: >
+            tx_result = client.create_transaction(
+            asset_id="BTC",
+            amount="50",
+            source=TransferPeerPath(VAULT_ACCOUNT, from_vault_account_id),
+            destination=DestinationTransferPeerPath(VAULT_ACCOUNT, to_vault_account_id)
+            )
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: >
+            const payload: TransactionArguments = {
+            assetId: asset,
+            source: {
+            type: sourceType,
+            id: sourceId || 0
+            },
+            destination: {
+            type: destinationType,
+            id: String(destinationId)
+            },
+            amount: String(amount),
+            fee: String(fee),
+            note: "Created by fireblocks SDK"
+            };
+            const result = await fireblocks.createTransaction(payload);
+          name: Fireblocks SDK Javascript example
       responses:
         '200':
           description: A transaction object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1484,9 +2885,40 @@ paths:
               $ref: '#/components/schemas/TransactionRequest'
   '/transactions/estimate_fee':
     post:
-      tags: [Transactions]
-      summary: >-
-        Estimates the transaction fee for a given transaction request
+      summary: Estimate transaction fee
+      description: >-
+        Estimates the transaction fee for a transaction request.
+
+        * Note: Supports all Fireblocks assets except ZCash (ZEC).
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: >
+            estimated_fee = client.estimate_fee_for_transaction(
+            asset_id="BTC",
+            amount="50",
+            source=TransferPeerPath(VAULT_ACCOUNT, from_vault_account_id),
+            destination=DestinationTransferPeerPath(VAULT_ACCOUNT, to_vault_account_id)
+            )
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: >
+            const payload: TransactionArguments = {
+            assetId: asset,
+            source: {
+            type: sourceType,
+            id: sourceId || 0
+            },
+            destination: {
+            type: destinationType,
+            id: String(destinationId)
+            },
+            amount: Number(amount)
+            };
+            const estimatedFee = await fireblocks.estimateFeeForTransaction(payload);
+          name: Fireblocks SDK Javascript example
       requestBody:
         content:
           application/json:
@@ -1494,7 +2926,8 @@ paths:
               $ref: '#/components/schemas/TransactionRequest'
       responses:
         '200':
-          description: Estimated fees respose
+          description: Estimated fees response
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1503,9 +2936,18 @@ paths:
           $ref: '#/components/responses/Error'
   '/transactions/{txId}':
     get:
-      tags: [Transactions]
-      summary: Returns a transaction by ID
-      operationId: getTransaction
+      summary: Find a specific transaction
+      description: Returns a transaction by ID.
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: tx = fireblocks.get_transaction_by_id(txId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const tx = await fireblocks.getTransactionById(txId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: txId
@@ -1517,16 +2959,29 @@ paths:
       responses:
         '200':
           description: An Transaction object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/TransactionResponse'
+        '400':
+          $ref: '#/components/responses/Error'
         default:
           $ref: '#/components/responses/Error'
   '/transactions/external_tx_id/{externalTxId}/':
     get:
-      tags: [Transactions]
-      summary: Returns transaction by external transaction ID
+      summary: Find a specific transaction by external transaction ID
+      description: Returns transaction by external transaction ID.
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: tx = fireblocks.get_transaction_by_external_tx_id(externalTxId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const tx = await fireblocks.getTransactionByExternalTxId(externalTxId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: externalTxId
@@ -1538,6 +2993,7 @@ paths:
       responses:
         '200':
           description: An Transaction object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1546,9 +3002,18 @@ paths:
           $ref: '#/components/responses/Error'
   '/transactions/{txId}/set_confirmation_threshold':
     post:
-      tags: [Transactions]
-      summary: Overrides the required number of confirmations for a transaction completion by transaction ID
-      operationId: setConfirmationThreshold
+      summary: Set confirmation threshold by transaction ID
+      description: Overrides the required number of confirmations for transaction completion by transaction ID.
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: set_conf_threshold = client.set_confirmation_threshold_by_tx_id(body)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const setConfThreshold = await fireblocks.setConfirmationThresholdByTxId(body);
+          name: Fireblocks SDK Javascript example
       requestBody:
         content:
           application/json:
@@ -1565,6 +3030,7 @@ paths:
       responses:
         '200':
           description: Set successfully
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1573,9 +3039,18 @@ paths:
           $ref: '#/components/responses/Error'
   '/transactions/{txId}/drop':
     post:
-      tags: [Transactions]
-      summary: Drop ETH based transaction by ID
-      operationId: dropEthByTransactionId
+      summary: Drop ETH transaction by ID
+      description: Drops a stuck ETH transaction and creates a replacement transaction.
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: result = fireblocks.drop_transaction(txId, fee_level)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const result = await fireblocks.dropTransaction(txId, feeLevel);
+          name: Fireblocks SDK Javascript example
       requestBody:
         content:
           application/json:
@@ -1592,6 +3067,7 @@ paths:
       responses:
         '200':
           description: Created successfully
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1600,9 +3076,18 @@ paths:
           $ref: '#/components/responses/Error'
   '/transactions/{txId}/cancel':
     post:
-      tags: [Transactions]
-      summary: Cancels a transaction by ID
-      operationId: cancelTransaction
+      summary: Cancel a transaction
+      description: Cancels a transaction by ID.
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: result = fireblocks.cancel_transaction_by_id(txId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const result = await fireblocks.cancelTransactionById(txId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: txId
@@ -1614,6 +3099,7 @@ paths:
       responses:
         '200':
           description: An Transaction object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1622,9 +3108,18 @@ paths:
           $ref: '#/components/responses/Error'
   '/transactions/{txId}/freeze':
     post:
-      tags: [Transactions]
-      summary: Freezes a transaction by ID
-      operationId: freezeTransaction
+      summary: Freeze a transaction
+      description: Freezes a transaction by ID.
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: result = fireblocks.freeze_transaction(txId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const result = await fireblocks.freezeTransaction(txId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: txId
@@ -1636,15 +3131,25 @@ paths:
       responses:
         '200':
           description: freeze response
+          headers: *req-id-header
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/FreezeTransactionResponse'
   '/transactions/{txId}/unfreeze':
     post:
-      tags: [Transactions]
-      summary: Unfreezes a transaction by ID
-      operationId: unfreezeTransaction
+      summary: Unfreeze a transaction
+      description: Unfreezes a transaction by ID and makes the transaction available again.
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: result = fireblocks.unfreeze_transaction(txId)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const result = await fireblocks.unfreezeTransaction(txId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: txId
@@ -1656,15 +3161,25 @@ paths:
       responses:
         '200':
           description: Unfreeze response
+          headers: *req-id-header
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/UnfreezeTransactionResponse'
   '/transactions/validate_address/{assetId}/{address}':
     get:
-      tags: [Transactions]
-      summary: Check if given address is valid
-      operationId: validateAddressByAssetId
+      summary: Validate destination address
+      description: Checks if an address is valid (for XRP, DOT, XLM, and EOS).
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: result = fireblocks.(asset_id, address)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const result = await fireblocks.(assetId, address);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: assetId
@@ -1672,6 +3187,7 @@ paths:
           description: The asset of the address
           schema:
             type: string
+            x-fb-entity: asset
         - in: path
           name: address
           required: true
@@ -1681,6 +3197,7 @@ paths:
       responses:
         '200':
           description: An Transaction object
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1690,8 +3207,18 @@ paths:
   # TXHASH
   '/txHash/{txHash}/set_confirmation_threshold':
     post:
-      tags: [Transactions]
-      summary: Overrides the required number of confirmations for a transaction completion by its TxHash
+      summary: Set confirmation threshold by transaction hash
+      description: Overrides the required number of confirmations for transaction completion by transaction hash.
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: set_conf_threshold = client.set_confirmation_threshold_by_tx_hash(body)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const setConfThreshold = await fireblocks.setConfirmationThresholdByTxHash(body);
+          name: Fireblocks SDK Javascript example
       requestBody:
         content:
           application/json:
@@ -1708,220 +3235,29 @@ paths:
       responses:
         '200':
           description: A list of transactions affected by the change
+          headers: *req-id-header
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/SetConfirmationsThresholdResponse'
         default:
           $ref: '#/components/responses/Error'
-  # SUPPORTED ASSETS
-  '/supported_assets':
-    get:
-      tags: [SupportedAssets]
-      summary: Returns all asset types supported by Fireblocks
-      operationId: getSupportedAssets
-      responses:
-        '200':
-          description: A Transaction object
-          content:
-            '*/*':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AssetTypeResponse'
-        default:
-          $ref: '#/components/responses/Error'
-  # NETWORK CONNECTIONS
-  '/network_connections':
-    get:
-      tags: [NetworkConnections]
-      summary: Returns all network connections
-      operationId: getNetworkConnections
-      responses:
-        '200':
-          description: A list of network connections
-          content:
-            '*/*':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NetworkConnectionResponse'
-        default:
-          $ref: '#/components/responses/Error'
-  '/network_connections/{connectionId}':
-    get:
-      tags: [NetworkConnections]
-      summary: Gets a network connection by ID
-      operationId: getNetworkConnection
-      parameters:
-        - in: path
-          name: connectionId
-          required: true
-          description: The ID of the connection
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '200':
-          description: A network connection
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/NetworkConnectionResponse'
-        default:
-          $ref: '#/components/responses/Error'
-  # TRANSFER TICKETS
-  '/transfer_tickets':
-    get:
-      tags: [TransferTickets]
-      summary: Gets a list of transfer tickets
-      operationId: getTransferTickets
-      responses:
-        '200':
-          description: A list of transafer tickets
-          content:
-            '*/*':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TransferTicketResponse'
-        default:
-          $ref: '#/components/responses/Error'
-    post:
-      tags: [TransferTickets]
-      summary: Creates a new transfer ticket
-      operationId: createTransferTicket
-      responses:
-        '200':
-          description: A transfer object with ticket id
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/CreateTransferTicketResponse'
-        default:
-          $ref: '#/components/responses/Error'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                terms:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Term'
-                externalTicketId:
-                  type: string
-                description:
-                  type: string
-              required:
-                - terms
-  '/transfer_tickets/{ticketId}':
-    get:
-      tags: [TransferTickets]
-      summary: Get a specific ticket by ticket ID
-      operationId: getTransferTicket
-      parameters:
-        - in: path
-          name: ticketId
-          required: true
-          description: The ID of the ticket
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '200':
-          description: A transfer ticket
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/TransferTicketResponse'
-        default:
-          $ref: '#/components/responses/Error'
-  /transfer_tickets/{ticketId}/cancel:
-    post:
-      tags: [TransferTickets]
-      summary: Cancel a transfer request
-      operationId: cancelTransferTicket
-      parameters:
-        - in: path
-          name: ticketId
-          required: true
-          description: The ID of the ticket
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '200':
-          description: OK
-        default:
-          $ref: '#/components/responses/Error'
-  '/transfer_tickets/{ticketId}/{termId}':
-    get:
-      tags: [TransferTickets]
-      summary: Get a term by ticket ID and term ID
-      parameters:
-        - in: path
-          name: ticketId
-          required: true
-          description: The ID of the ticket
-          schema:
-            type: string
-            minimum: 1
-        - in: path
-          name: termId
-          required: true
-          description: The ID of the term
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '200':
-          description: A term
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/TransferTicketTermResponse'
-        default:
-          $ref: '#/components/responses/Error'
-  /transfer_tickets/{ticketId}/{termId}/transfer:
-    post:
-      tags: [TransferTickets]
-      summary: Triggers a transfer for a term in ticket
-      parameters:
-        - in: path
-          name: ticketId
-          required: true
-          description: The ID of the ticket
-          schema:
-            type: string
-            minimum: 1
-        - in: path
-          name: termId
-          required: true
-          description: The ID of the term
-          schema:
-            type: string
-            minimum: 1
-      responses:
-        '200':
-          description: OK
-        default:
-          $ref: '#/components/responses/Error'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                source:
-                  $ref: '#/components/schemas/TransferPeerPath'
+
   # ESTIMATE NETWORK FEE
   '/estimate_network_fee':
     get:
-      tags: [Fee]
-      summary: >-
-        Estimates the required fee for a given asset.
-        For UTXO based assets, the response will contain the suggested fee per byte,
-        for ETH/ETC based assets, the suggested gas price, and for XRP/XLM, the transaction fee
+      summary: Estimate the required fee for an asset
+      description: Gets the estimated required fee for an asset. For UTXO based assets, the response will contain the suggested fee per byte, for ETH/ETC based assets, the suggested gas price, and for XRP/XLM, the transaction fee.
+      tags:
+        - Transactions
+      x-readme:
+        code-samples:
+        - language: python
+          code: fee_result = fireblocks.get_fee_for_asset(asset_id)
+          name: Fireblocks SDK Python example
+        - language: javascript
+          code: const feeResult = await fireblocks.getFeeForAsset(assetId);
+          name: Fireblocks SDK Javascript example
       parameters:
         - in: query
           name: assetId
@@ -1930,23 +3266,307 @@ paths:
           required: true
           schema:
             type: string
+            x-fb-entity: asset
       responses:
         '200':
-          description: Estimated fees respose
+          description: Estimated fees response
+          headers: *req-id-header
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/EstimatedNetworkFeeResponse'
         default:
           $ref: '#/components/responses/Error'
+
+  # Payments
+  '/payments/xb-settlements/configs':
+    post:
+      tags:
+        - Payments
+      summary: Create a new cross-border (XB) settlement configuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/XBSettlementConfigCreationRequestBody'
+      responses:
+        200:
+          description: XB settlement configuration created successfully
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/XBSettlementConfigCreationResponse'
+        401:
+          description: Unauthorized. Missing / invalid JWT token in Authorization header.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500-599:
+          description: Internal error.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      tags:
+        - Payments
+      summary: Get all the cross-border (XB) settlement configurations of a tenant
+      responses:
+        200:
+          description: Returns all the XB settlement configurations of a tenant
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllXBSettlementConfigsResponse'
+        401:
+          description: Unauthorized. Missing / invalid JWT token in Authorization header.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500-599:
+          description: Internal error.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  '/payments/xb-settlements/configs/{configId}':
+    get:
+      tags:
+        - Payments
+      parameters:
+        - in: path
+          name: configId
+          required: true
+          description: The cross-border (XB) settlement configuration ID.
+          schema:
+            type: string
+      summary: Get a specific XB settlement configuration
+      responses:
+        200:
+          description: Returns a XB settlement configuration
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetXBSettlementConfigResponse'
+        401:
+          description: Unauthorized. Missing / invalid JWT token in Authorization header.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500-599:
+          description: Internal error.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - Payments
+      parameters:
+        - in: path
+          name: configId
+          required: true
+          description: The cross-border (XB) settlement configuration ID.
+          schema:
+            type: string
+      summary: Edit a cross-border (XB) settlement configuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/XBSettlementConfigEditRequestBody'
+      responses:
+        200:
+          description: XB settlement configuration edited successfully
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/XBSettlementConfigEditResponse'
+        401:
+          description: Unauthorized. Missing / invalid JWT token in Authorization header.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500-599:
+          description: Internal error.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - Payments
+      parameters:
+        - in: path
+          name: configId
+          required: true
+          description: The cross-border (XB) settlement configuration ID.
+          schema:
+            type: string
+      summary: Delete a cross-border (XB) settlement configuration
+      responses:
+        200:
+          description: XB settlement configuration deleted successfully
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/XBSettlementConfigDeletionResponse'
+        401:
+          description: Unauthorized. Missing / invalid JWT token in Authorization header.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500-599:
+          description: Internal error.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  '/payments/xb-settlements/flows':
+    post:
+      tags:
+        - Payments
+      summary: Create a new cross-border (XB) settlement flow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/XBCreateSettlementFlowRequestBody'
+      responses:
+        200:
+          description: XB settlement flow created successfully
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/XBCreateSettlementFlowResponse'
+        401:
+          description: Unauthorized. Missing / invalid JWT token in Authorization header.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500-599:
+          description: Internal error.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  '/payments/xb-settlements/flows/{flowId}':
+    get:
+      tags:
+        - Payments
+      parameters:
+        - in: path
+          name: flowId
+          required: true
+          description: The ID of the cross-border (XB) settlement flow.
+          schema:
+            type: string
+      summary: Get a specific cross-border (XB) settlement flow
+      responses:
+        200:
+          description: Returns XB settlement flow
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  setup:
+                    $ref: '#/components/schemas/XBSettlementFlowSetupModel'
+                  execution:
+                    $ref: '#/components/schemas/XBSettlementFlowExecutionModel'
+        401:
+          description: Unauthorized. Missing / invalid JWT token in Authorization header.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500-599:
+          description: Internal error.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  '/payments/xb-settlements/flows/{flowId}/actions/execute':
+    post:
+      tags:
+        - Payments
+      parameters:
+        - in: path
+          name: flowId
+          required: true
+          description: The ID of the cross-border (XB) settlement flow.
+          schema:
+            type: string
+      summary: Execute cross-border (XB) settlement flow
+      responses:
+        200:
+          description: XB settlement flow executed successfully
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/XBSettlementFlowExecutionResponse'
+        401:
+          description: Unauthorized. Missing / invalid JWT token in Authorization header.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500-599:
+          description: Internal error.
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # Gas Station
   '/gas_station':
     get:
-      tags: [Fee]
-      summary: >-
-        Returns a summary of Gas Station configuration and balances for ETH.
+      summary: Get gas station settings
+      description: Returns gas station settings and ETH balance.
+      tags:
+        - Gas stations
+      x-readme:
+        code-samples:
+          - language: python
+            code: gas_station_info = fireblocks.get_gas_station_info()
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const gasStationInfo = await fireblocks.gasStationInfo();
+            name: Fireblocks SDK Javascript example
       responses:
         '200':
           description: Gas Station properties
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1955,18 +3575,30 @@ paths:
           $ref: '#/components/responses/Error'
   '/gas_station/{assetId}':
     get:
-      tags: [Fee]
-      summary: >-
-        Returns a summary of Gas Station configuration and balances for requested asset.
+      summary: Get gas station settings by asset
+      description: Returns gas station settings and balances for a requested asset.
+      tags:
+        - Gas stations
+      x-readme:
+        code-samples:
+          - language: python
+            code: gas_station_info = fireblocks.get_gas_station_info(asset_id)
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const gasStationInfo = await fireblocks.gasStationInfo(assetId);
+            name: Fireblocks SDK Javascript example
       parameters:
         - in: path
+          required: true
           name: assetId
           description: The ID of the asset
           schema:
             type: string
+            x-fb-entity: asset
       responses:
         '200':
           description: Gas Station properties
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -1975,9 +3607,18 @@ paths:
           $ref: '#/components/responses/Error'
   '/gas_station/configuration':
     put:
-      tags: [Fee]
-      summary: >-
-        Sets Gas Station configuration for ETH.
+      summary: Edit gas station settings
+      description: Configures gas station settings for ETH.
+      tags:
+        - Gas stations
+      x-readme:
+        code-samples:
+          - language: python
+            code: gas_station = fireblocks.set_gas_station_configuration(gas_threshold, gas_cap, max_gas_price, asset_id)
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const gasStation = await fireblocks.setGasStationConfiguration(gasThreshold, gasCap, maxGasPrice)
+            name: Fireblocks SDK Javascript example
       requestBody:
         required: true
         content:
@@ -1987,19 +3628,23 @@ paths:
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
   '/gas_station/configuration/{assetId}':
     put:
-      tags: [Fee]
-      summary: >-
-        Sets Gas Station configuration for requested asset.
+      summary: Edit gas station settings for an asset
+      description: Configures gas station settings for a requested asset.
+      tags:
+        - Gas stations
       parameters:
         - in: path
+          required: true
           name: assetId
           description: The ID of the asset
           schema:
             type: string
+            x-fb-entity: asset
       requestBody:
         required: true
         content:
@@ -2009,16 +3654,163 @@ paths:
       responses:
         '201':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
+
+  # USERS
+  '/users':
+    get:
+      summary: List users
+      description: |
+        List all users for the workspace.
+
+        Please note that this endpoint is available only for API keys with Admin permissions.
+
+      tags:
+        - Users
+      x-readme:
+        code-samples:
+          - language: python
+            code: users = fireblocks.get_users()
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const users = await fireblocks.getUsers();
+            name: Fireblocks SDK Javascript example
+      responses:
+        '200':
+          description: List of users
+          headers: *req-id-header
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetUsersResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/audits':
+    get:
+      summary: Get audit logs
+      tags:
+        - Audit Logs
+      parameters:
+        - in: query
+          name: timePeriod
+          required: true
+          description: The last time period to fetch audit logs
+          schema:
+            type: string
+            enum:
+              - DAY
+              - WEEK
+      responses:
+        '200':
+          description: Audit logs from requested time period
+          headers: *req-id-header
+        default:
+          $ref: '#/components/responses/Error'
+
+  # OFF EXCHANGE V2(collateral)
+  '/off_exchange/add':
+    post:
+      summary: add collateral
+      description: add collateral, create deposit request
+      tags:
+        - Off exchanges
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCollateralRequestBody'
+      responses:
+        '200':
+          description: A transaction object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateTransactionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/off_exchange/remove':
+    post:
+      summary: remove collateral
+      description: remove collateral, create withdraw request
+      tags:
+        - Off exchanges
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveCollateralRequestBody'
+      responses:
+        '200':
+          description: A transaction object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateTransactionResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/off_exchange/settlements/trader':
+    post:
+      summary: create settlement for a trader
+      description: create settlement for a trader
+      tags:
+        - Off exchanges
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SettlementRequestBody'
+      responses:
+        '201':
+          description: A settlement object
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SettlementResponse'
+        default:
+          $ref: '#/components/responses/Error'
+  '/off_exchange/settlements/transactions':
+    get:
+      summary: get settlements transactions from exchange
+      description: get settlements transactions from exchange
+      tags:
+        - Off exchanges
+      parameters:
+        - in: query
+          name: mainExchangeAccountId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A settlement transactions
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetSettlementResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
   # WEBHOOKS
   '/webhooks/resend':
     post:
-      tags: [Webhooks]
       summary: Resend failed webhooks
+      description: Resends all failed webhook notifications.
+      tags:
+        - Webhooks
+      x-readme:
+        code-samples:
+          - language: python
+            code: result = fireblocks.resend_webhooks()
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const result = await fireblocks.resendWebhooks();
+            name: Fireblocks SDK Javascript example
       responses:
         '200':
           description: OK
+          headers: *req-id-header
           content:
             '*/*':
               schema:
@@ -2027,8 +3819,18 @@ paths:
           $ref: '#/components/responses/Error'
   '/webhooks/resend/{txId}':
     post:
-      tags: [Webhooks]
-      summary: Resend failed webhooks for transaction by ID
+      summary: Resend failed webhooks for a transaction by ID
+      description: Resends failed webhook notifications for a transaction by ID.
+      tags:
+        - Webhooks
+      x-readme:
+        code-samples:
+          - language: python
+            code: result = fireblocks.resend_transaction_webhooks_by_id(txId, resend_created, resend_status_updated)
+            name: Fireblocks SDK Python example
+          - language: javascript
+            code: const result = await fireblocks.resendTransactionWebhooksById(txId, resendCreated, resendStatusUpdated);
+            name: Fireblocks SDK Javascript example
       parameters:
         - in: path
           name: txId
@@ -2050,89 +3852,399 @@ paths:
       responses:
         '200':
           description: OK
+          headers: *req-id-header
         default:
           $ref: '#/components/responses/Error'
-  # USERS
-  '/users':
+
+  # NFTs
+  "/nfts/ownership/tokens":
+    put:
+      operationId: findAllTokensByOwner
+      summary: Search and update all token balances owned in a vault account.
+      description: |
+        Search and update balance for all tokens in tenant/vault account
+        
+        **Note**: Note: This endpoint is now in Beta and is not generally available.
+
+        To enroll in beta & enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+      parameters:
+      - name: vaultAccountId
+        required: true
+        in: query
+        description: Vault account filter
+        schema:
+          type: string
+      - name: blockchainDescriptor
+        required: true
+        in: query
+        description: Blockchain descriptor filter
+        schema:
+          type: string
+      responses:
+        '202':
+          description: ''
+          headers: *req-id-header
+      tags:
+      - NFTs_Beta
+
     get:
-      tags: [Users]
-      summary: >-
-        Returns a list of users
-      operationId: getUsers
+      operationId: getAllNFTsByOwner
+      summary: List all tokens and their balances owned in a vault account.
+      description: | 
+        Fetch all owned tokens in tenant with their corresponding balance.
+        
+        Can be filtered by blockchain, vault account ID and specific IDs.
+
+        **Note**: This endpoint is now in Beta, disabled for general availability at this time.
+
+        To enroll in beta & enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+      parameters:
+      - name: blockchainDescriptor
+        required: false
+        in: query
+        description: Blockchain descriptor filter
+        schema:
+          type: string
+      - name: vaultAccountId
+        required: false
+        in: query
+        description: Vault account filter
+        schema:
+          type: string
+      - name: ids
+        required: false
+        in: query
+        description: A comma separated list of token IDs. Up to 100 are allowed in a single request.
+        schema:
+          type: string
+      - name: pageCursor
+        required: false
+        in: query
+        description: Page cursor to fetch
+        schema:
+          type: string
+      - name: pageSize
+        required: false
+        in: query
+        description: Items per page (max 100)
+        schema:
+          type: number
       responses:
         '200':
-          description: List of users
+          description: ''
+          headers: *req-id-header
           content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/GetUsersResponse'
-        default:
-          $ref: '#/components/responses/Error'
-  # OFF EXCHANGE
-  '/off_exchange_accounts':
-    get:
-      tags: [OffExchangeAccounts]
-      summary: Get off exchanges
-      responses:
-        '200':
-          description: A list of off exchange entities
-          content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/OffExchangeEntityResponse'
-        default:
-          $ref: '#/components/responses/Error'
-  '/off_exchange_accounts/{virtualAccountId}':
+                  "$ref": "#/components/schemas/TokenOwnershipResponse"
+      tags:
+      - NFTs_Beta
+  "/nfts/tokens/{id}":
+    put:
+      operationId: refreshNFT
+      summary: Update token metadata by ID.
+      description: | 
+        Refresh token metadata
+
+        **Note**: This endpoint is now in Beta, disabled for general availability at this time.
+
+        To enroll in beta & enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+      parameters:
+      - name: id
+        required: true
+        in: path
+        description: token id to refresh
+        schema:
+          type: string
+      responses:
+        '202':
+          description: ''
+          headers: *req-id-header
+      tags:
+      - NFTs_Beta
+
     get:
-      tags: [OffExchangeAccounts]
-      summary: Get off exchange by it's ID
+      operationId: getTokenById
+      summary: Retrieve a list of tokens by ID.
+      description: | 
+        Fetch a token by ID
+
+        **Note**: This endpoint is now in Beta, disabled for general availability at this time.
+
+        To enroll in beta & enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+
       parameters:
-        - in: path
-          name: virtualAccountId
-          required: true
-          description: The ID of the off exchange entity
-          schema:
-            type: string
-            minimum: 1
+      - name: id
+        required: true
+        in: path
+        description: token id to fetch
+        schema:
+          type: string
       responses:
         '200':
-          description: An off exchange entity
+          description: ''
+          headers: *req-id-header
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/OffExchangeEntityResponse'
-        default:
-          $ref: '#/components/responses/Error'
-  '/off_exchange_accounts/{virtualAccountId}/settle':
-    post:
-      tags: [OffExchangeAccounts]
-      summary: Settle an off exchange entity
+                "$ref": "#/components/schemas/TokenResponse"
+      tags:
+      - NFTs_Beta
+  "/nfts/tokens":
+    get:
+      operationId: getToken
+      summary: List all tokens in a vault account.
+      description: | 
+        Fetch a list of all tokens.
+        
+        **Note**: This endpoint is now in Beta, disabled for general availability at this time.
+
+        To enroll in beta & enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+
       parameters:
-        - in: path
-          name: virtualAccountId
-          required: true
-          description: The ID of the off exchange entity
-          schema:
-            type: string
-            minimum: 1
+      - name: ids
+        required: true
+        in: query
+        description: comma separated of tokens ids to fetch
+        schema:
+          type: string
+      - name: pageCursor
+        in: query
+        description: Page cursor to fetch
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: Items per page (max 100)
+        schema:
+          type: string
       responses:
         '200':
-          description: A settle succeeded
-        default:
-          $ref: '#/components/responses/Error'
-security:
-  - bearerTokenAuth: [ ]
-  - ApiKeyAuth: [ ]
+          description: ''
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TokenResponse"
+      tags:
+      - NFTs_Beta
+
+ # WEB3 CONNECTIONS
+  /connections:
+    get:
+      operationId: get
+      summary: List all open Web3 connections.
+      description: Get open Web3 connections.
+      parameters:
+        - name: order
+          required: false
+          in: query
+          description: List order; ascending or descending.
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+            default: ASC
+        - name: filter
+          required: false
+          in: query
+          description: Parsed filter object
+          examples:
+            object:
+              summary: The filter object
+              description: ''
+              value:
+                id: string
+                userId: string
+                vaultAccountId: number
+                connectionMethod: string
+                feeLevel: string
+                appUrl: string
+                appName: string
+            stringified:
+              summary: The stringified parsed object
+              description: >-
+                About stringified parsed objects: 
+
+
+                * Each key-value pair is separated by '=', and each pair is
+                separated by ',' (you can use [`qs`](https://www.npmjs.com/package/qs) package for this)
+              value: >-
+                id=string,userId=string,vaultAccountId=number,connectionMethod=string,feeLevel=string,appUrl=string,appName=string
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              userId:
+                type: string
+              vaultAccountId:
+                type: number
+              connectionMethod:
+                type: string
+              feeLevel:
+                type: string
+              appUrl:
+                type: string
+              appName:
+                type: string
+        - name: sort
+          required: false
+          in: query
+          description: Property to sort Web3 connections by.
+          schema:
+            type: string
+            enum:
+              - id
+              - userId
+              - vaultAccountId
+              - createdAt
+              - feeLevel
+              - appUrl
+              - appName
+            default: createdAt
+        - name: pageSize
+          required: false
+          in: query
+          description: Amount of results to return in the next page.
+          schema:
+            type: number
+            default: 10
+            maximum: 50
+        - name: next
+          required: false
+          in: query
+          description: Cursor to the next page
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConnectionsResponse'
+        '400':
+          description: Query parameters were invalid
+          headers: *req-id-header
+        '500':
+          description: Something went wrong
+          headers: *req-id-header
+      tags:
+        - Web3 connections
+  /connections/wc:
+    post:
+      operationId: create
+      summary: Create a new Web3 connection.
+      description: |-
+        Initiate a new Web3 connection.
+
+        * Note: After this succeeds, make a request to `PUT /v1/connections/wc/{id}` (below) to approve or reject the new Web3 connection. 
+        
+
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConnectionRequest'
+      responses:
+        '201':
+          description: Web3 connection initiated successfully
+          headers: *req-id-header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateConnectionResponse'
+        '400':
+          description: Invalid data sent
+          headers: *req-id-header
+        '500': &ref_0
+          description: Something went wrong
+          headers: *req-id-header
+      tags: &ref_1
+        - Web3 connections
+  /connections/wc/{id}:
+    put:
+      operationId: submit
+      summary: Respond to a pending Web3 connection request.
+      description: >-
+        Submit a response to *approve* or *reject* an initiated Web3 connection. 
+
+        * Note: This call is used to complete your `POST /v1/connections/wc/` request.
+
+
+        After this succeeds, your new Web3 connection is created and functioning.
+      parameters:
+        - name: id
+          description: The ID of the initiated Web3 connection to approve.
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespondToConnectionRequest'
+      responses:
+        '200':
+          description: Connection submitted successfully
+          headers: *req-id-header
+        '400':
+          description: Invalid data sent
+          headers: *req-id-header
+        '404':
+          description: Connection not found
+          headers: *req-id-header
+        '500': *ref_0
+      tags: *ref_1
+    delete:
+      operationId: remove
+      summary: Remove an existing Web3 connection.
+      description: Remove a Web3 connection
+      parameters:
+        - name: id
+          description: The ID of the existing Web3 connection to remove.
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Connection removed successfully
+          headers: *req-id-header
+        '404':
+          description: Connection not found
+          headers: *req-id-header
+        '500': *ref_0
+      tags: *ref_1
+
 components:
   responses:
     Error:
       description: Error Response
+      headers:
+        X-Request-ID:
+          $ref: '#/components/headers/X-Request-ID'
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+
+  headers:
+    X-Request-ID:
+      schema:
+        type: string
+      description: Unique ID correlated to the API request. Please provide it in any support ticket you create or on Github issues related to Fireblocks SDKs
   requestBodies:
     NewWallet:
       content:
@@ -2160,6 +4272,115 @@ components:
       in: header
       name: X-API-Key
   schemas:
+    MediaEntityResponse:
+      type: object
+      properties:
+        url:
+          type: string
+        contentType:
+          type: string
+      required:
+      - url
+      - contentType
+    TokenCollectionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+      required:
+      - id
+      - name
+      - symbol
+    TokenResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique token id with fireblocks
+        tokenId:
+          type: string
+          description: Token id within the contract/collection
+        standard:
+          type: string
+          description: ERC721 / ERC1155
+        metadataURI:
+          type: string
+          description: URL to original token metadata JSON
+        media:
+          description: Media items extracted from metadata JSON
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaEntityResponse'
+        collection:
+          description: Parent collection information
+          allOf:
+            - $ref: '#/components/schemas/TokenCollectionResponse'
+        blockchainDescriptor:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - tokenId
+        - standard
+        - metadataURI
+        - media
+        - collection
+        - blockchainDescriptor
+        - description
+        - name
+    TokenOwnershipResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique token id with fireblocks
+        tokenId:
+          type: string
+          description: Token id within the contract/collection
+        standard:
+          type: string
+          description: ERC721 / ERC1155
+        metadataURI:
+          type: string
+          description: URL to original token metadata JSON
+        media:
+          description: Media items extracted from metadata JSON
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaEntityResponse'
+        collection:
+          description: Parent collection information
+          allOf:
+            - $ref: '#/components/schemas/TokenCollectionResponse'
+        vaultAccountId:
+          type: string
+        balance:
+          type: number
+        blockchainDescriptor:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - tokenId
+        - standard
+        - metadataURI
+        - media
+        - collection
+        - vaultAccountId
+        - balance
+        - blockchainDescriptor
+        - description
+        - name
     WalletAsset:
       type: object
       properties:
@@ -2240,29 +4461,6 @@ components:
           type: string
         activationTxId:
           type: string
-    AllocatedBalance:
-      type: object
-      properties:
-        allocationId:
-          type: string
-        thirdPartyAccountId:
-          type: string
-        affiliation:
-          type: string
-        virtualType:
-          type: string
-        total:
-          type: string
-        available:
-          type: string
-        pending:
-          type: string
-        frozen:
-          type: string
-        locked:
-          type: string
-        staked:
-          type: string
     RewardsInfo:
       type: object
       properties:
@@ -2296,26 +4494,34 @@ components:
         staked:
           description: Staked balance
           type: string
+        maxBip44AddressIndexUsed:
+          description: The maximum BIP44 index used in deriving addresses for this wallet
+          type: number
+        maxBip44ChangeAddressIndexUsed:
+          description: The maximum BIP44 index used in deriving change addresses for this wallet
+          type: number
         totalStakedCPU:
-          type: string
+          type: number
+          description: Deprecated
         totalStakedNetwork:
           type: string
+          description: Deprecated
         selfStakedCPU:
           type: string
+          description: Deprecated
         selfStakedNetwork:
           type: string
+          description: Deprecated
         pendingRefundCPU:
           type: string
+          description: Deprecated
         pendingRefundNetwork:
           type: string
+          description: Deprecated
         blockHeight:
           type: string
         blockHash:
           type: string
-        allocatedBalances:
-          type: array
-          items:
-            $ref: '#/components/schemas/AllocatedBalance'
         rewardsInfo:
           $ref: '#/components/schemas/RewardsInfo'
     VaultWalletAddress:
@@ -2323,6 +4529,7 @@ components:
       properties:
         assetId:
           type: string
+          x-fb-entity: asset
         address:
           type: string
         description:
@@ -2344,6 +4551,8 @@ components:
           type: string
         bip44AddressIndex:
           type: integer
+        userDefined:
+          type: boolean
     CreateAddressResponse:
       type: object
       properties:
@@ -2484,6 +4693,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/TransferPeerPath'
         - type: object
+        - description: (optional) Destination address. You will only be able to provide this parameter if the type is enabled for OneTimeAddress.
           properties:
             oneTimeAddress:
               $ref: '#/components/schemas/OneTimeAddress'
@@ -2494,6 +4704,20 @@ components:
           type: string
         status:
           type: string
+        systemMessages:
+          $ref: '#/components/schemas/SystemMessageInfo'
+    SystemMessageInfo:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+           - WARN
+           - BLOCK
+        message:
+          type: string
+          description: A response from Fireblocks that communicates a message about the health of the process being performed. If this object is returned with data, you should expect potential delays or incomplete transaction statuses.
+          example: Slow transaction processing. Outgoing transactions might be stuck.
     CancelTransactionResponse:
       type: object
       properties:
@@ -2522,6 +4746,8 @@ components:
         networkFee:
           type: string
         serviceFee:
+          type: string
+        gasPrice:
           type: string
     BlockInfo:
       type: object
@@ -2569,7 +4795,6 @@ components:
           type: string
         amountUSD:
           type: string
-          nullable: true
     RewardInfo:
       type: object
       properties:
@@ -2586,14 +4811,7 @@ components:
               type: string
             subType:
               type: string
-            virtualType:
-              type: string
-              enum:
-                - OFF_EXCHANGE
-                - DEFAULT
-                - UNKNOWN
-            virtualId:
-              type: string
+              description: The specific exchange, fiat account or unmanaged wallet (either INTERNAL / EXTERNAL)
     TransactionResponse:
       type: object
       properties:
@@ -2601,10 +4819,21 @@ components:
           type: string
         assetId:
           type: string
+          x-fb-entity: asset
         source:
           $ref: '#/components/schemas/TransferPeerPathResponse'
         destination:
           $ref: '#/components/schemas/TransferPeerPathResponse'
+        contractCallDecodedData:
+          description: Contains decoded data for smart contract transaction calls.
+          type: object
+          properties:
+            contractName:
+              type: string
+            functionCalls:
+              type: array
+              items:
+                type: object
         requestedAmount:
           description: The amount requested by the user
           type: number
@@ -2660,11 +4889,12 @@ components:
           type: string
         subStatus:
           $ref: '#/components/schemas/TransactionSubStatus'
-          nullable: true
         destinationAddress:
           type: string
         sourceAddress:
           type: string
+          description: >- 
+             Note: If the status is `CONFIRMING`, `COMPLETED`, or has been `CONFIRMING`; then moved forward to `FAILED` or `REJECTED`, then this parameter will contain the source address. In any other case, this parameter will be empty.
         destinationAddressDescription:
           type: string
         destinationTag:
@@ -2702,9 +4932,7 @@ components:
         feeInfo:
           $ref: '#/components/schemas/FeeInfo'
         signedMessages:
-          type: array
-          items:
-            $ref: '#/components/schemas/SignedMessage'
+           $ref: '#/components/schemas/SignedMessage'
         extraParameters:
           type: object
           properties: {}
@@ -2722,6 +4950,15 @@ components:
           type: number
         rewardInfo:
           $ref: '#/components/schemas/RewardInfo'
+        feePayerInfo:
+          type: object
+          properties:
+            feePayerAccountId:
+              type: string
+        treatAsGrossAmount:
+          type: boolean
+        systemMessages:
+          $ref: '#/components/schemas/SystemMessageInfo'
     TransactionResponseDestination:
       type: object
       properties:
@@ -2748,6 +4985,7 @@ components:
           type: string
         assetId:
           type: string
+          x-fb-entity: asset
         netAmount:
           description: The net amount of the transaction, after fee deduction
           type: string
@@ -2775,16 +5013,15 @@ components:
         type:
           type: string
           enum:
+            - ALGO_ASSET
             - BASE_ASSET
-            - ETH_CONTRACT
-            - FIAT
+            - BEP20
             - COMPOUND
             - ERC20
-            - BEP20
-            - XLM_ASSET
+            - FIAT
             - SOL_ASSET
-            - ALGO_ASSET
             - TRON_TRC20
+            - XLM_ASSET
             - XDB_ASSET
         contractAddress:
           type: string
@@ -2796,19 +5033,49 @@ components:
         - id
         - name
         - type
+    NetworkConnection:
+      type: object
+      properties:
+        localNetworkId:
+          type: string
+          description: The network ID of the profile trying to create the connection.
+        remoteNetworkId:
+          type: string
+          description: The network ID the profile is attempting to connect to.
+        routingPolicy:
+          $ref: '#/components/schemas/NetworkConnectionRoutingPolicy'
+      required:
+        - localNetworkId
+        - remoteNetworkId
     NetworkConnectionResponse:
       type: object
       properties:
         id:
           type: string
         localChannel:
-          $ref: '#/components/schemas/Channel'
+          allOf:
+            - $ref: '#/components/schemas/NetworkChannel'
+          deprecated: true
+          description: "Deprecated - Replaced by `localNetworkId`"
         remoteChannel:
-          $ref: '#/components/schemas/Channel'
+          allOf:
+            - $ref: '#/components/schemas/NetworkChannel'
+          deprecated: true
+          description: "Deprecated - Replaced by `remoteNetworkId`"
+        status:
+          $ref: '#/components/schemas/ConfigChangeRequestStatus'
+        localNetworkId:
+          $ref: '#/components/schemas/NetworkId'
+        remoteNetworkId:
+          $ref: '#/components/schemas/NetworkId'
+        routingPolicy:
+          $ref: '#/components/schemas/NetworkConnectionRoutingPolicy'
       required:
         - id
-        - localChannel
-        - remoteChannel
+        - localNetworkId
+        - remoteNetworkId
+        - routingPolicy
+        - status
     EstimatedTransactionFeeResponse:
       type: object
       properties:
@@ -2858,8 +5125,10 @@ components:
         networkFee:
           type: string
         baseFee:
+          description: (optional) Base Fee according to EIP-1559 (ETH assets)
           type: string
         priorityFee:
+          description: (optional) Priority Fee according to EIP-1559 (ETH assets)
           type: string
     NetworkFee:
       type: object
@@ -2871,8 +5140,10 @@ components:
         networkFee:
           type: string
         baseFee:
+          description: (optional) Base Fee according to EIP-1559 (ETH assets)
           type: string
         priorityFee:
+          description: (optional) Priority Fee according to EIP-1559 (ETH assets)
           type: string
     GasStationConfiguration:
       type: object
@@ -2883,31 +5154,54 @@ components:
           type: string
         maxGasPrice:
           type: string
-    Channel:
+    NetworkChannel:
+      deprecated: true
+      description: "Deprecated in the only used reference - NetworkConnectionResponse"
       type: object
       properties:
         networkId:
           type: string
         name:
           type: string
+    NetworkId:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name
+    NetworkIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/NetworkId'
+        - type: object
+          properties:
+            routingPolicy:
+              $ref: '#/components/schemas/NetworkIdRoutingPolicy'
+            isDiscoverable:
+              type: boolean
+              description: The specific network is discoverable.
     TransactionRequest:
       type: object
       properties:
         assetId:
           type: string
+          x-fb-entity: asset
         source:
           $ref: '#/components/schemas/TransferPeerPath'
         destination:
           $ref: '#/components/schemas/DestinationTransferPeerPath'
         amount:
+          description: >-
+            The amount of the transaction, in the asset's unit. A numeric value representation (either string or number) is required.
           oneOf:
             - type: number
             - type: string
         fee:
           description: >-
-            - For BTC based assets, the fee per bytes in the asset's smallest unit (Satoshi/Latoshi etc.)
-
-            - For XRP, the fee for the transaction
+            - For BTC based assets, the fee per bytes in the asset's smallest unit (Satoshi/Latoshi etc.) A numeric value representation is required. For XRP, the fee for the transaction.
           oneOf:
             - type: number
             - type: string
@@ -2920,6 +5214,7 @@ components:
         priorityFee:
           description: >-
             - For ETH based assets only, the fee for eip-1559 transaction pricing mechanism. Value is in gwei.
+            - A numeric value representation is required.
           oneOf:
             - type: number
             - type: string
@@ -2930,24 +5225,27 @@ components:
             - For ETH based assets only, must be provided when using the priorityFee parameter. This will be used to limit the fee max possible fee (according to eip-1559). Value is in gwei.
 
             - For other assets, it fails a transaction when the automatically selected fee is higher than the provided value.
+
+            - A numeric value representation is required.
           type: string
         gasPrice:
           description: >-
-            For ETH based asset only. this will be used instead of the fee property. Value is in gwei
+            For ETH based asset only. this will be used instead of the fee property. Value is in gwei. A numeric value representation is required.
           oneOf:
             - type: number
             - type: string
-            - type: 'null'
         gasLimit:
+          description: >-
+            A numeric value representation is required.
           oneOf:
             - type: number
             - type: string
-            - type: 'null'
         networkFee:
+          description: >-
+            A numeric value representation is required.
           oneOf:
             - type: number
             - type: string
-            - type: 'null'
         note:
           type: string
         autoStaking:
@@ -2960,7 +5258,6 @@ components:
           oneOf:
             - type: number
             - type: string
-            - type: 'null'
         extraParameters:
           type: object
           properties: {}
@@ -2980,6 +5277,13 @@ components:
           type: boolean
         forceSweep:
           type: boolean
+        feePayerInfo:
+          type: object
+          properties:
+            feePayerAccountId:
+              description: >-
+                A numeric value representation is required.
+              type: string
     TransactionRequestDestination:
       type: object
       properties:
@@ -2990,32 +5294,32 @@ components:
     ExchangeType:
       type: string
       enum:
-        - BINANCE
-        - BINANCEUS
-        - BITFINEX
-        - BITHUMB
-        - BITMEX
-        - BITSO
-        - BITSTAMP
-        - BITTREX
-        - CIRCLE
-        - COINBASEPRO
-        - COINMETRO
-        - COINSPRO
-        - CRYPTOCOM
-        - DERIBIT
-        - FTX
-        - FIXUS
-        - GEMINI
-        - HITBTC
-        - HUOBI
-        - KORBIT
-        - KRAKEN
-        - LIQUID
-        - POLONIEX
-        - OKCOIN
-        - OKEX
-        - SEEDCX
+      - BINANCE
+      - BINANCEUS
+      - BITFINEX
+      - BITHUMB
+      - BITMEX
+      - BITSO
+      - BITSTAMP
+      - BITTREX
+      - CIRCLE
+      - COINBASEPRO
+      - COINMETRO
+      - COINSPRO
+      - CRYPTOCOM
+      - DERIBIT
+      - FTX
+      - FIXUS
+      - GEMINI
+      - HITBTC
+      - HUOBI
+      - KORBIT
+      - KRAKEN
+      - LIQUID
+      - POLONIEX
+      - OKCOIN
+      - OKEX
+      - SEEDCX
     FiatAccountType:
       type: string
       enum:
@@ -3033,14 +5337,13 @@ components:
     TransactionOperation:
       type: string
       enum:
-        - TRANSFER
-        - MINT
         - BURN
-        - SUPPLY_TO_COMPOUND
-        - REDEEM_FROM_COMPOUND
-        - RAW
         - CONTRACT_CALL
-        - INTERNAL_LEDGER_TRANSFER
+        - MINT
+        - RAW
+        - REDEEM_FROM_COMPOUND
+        - SUPPLY_TO_COMPOUND
+        - TRANSFER
         - TYPED_MESSAGE
       default: TRANSFER
     Error:
@@ -3050,6 +5353,8 @@ components:
           type: string
         code:
           type: number
+
+
     TransactionSubStatus:
       type: string
       enum:
@@ -3121,6 +5426,7 @@ components:
         - NEED_MORE_TO_CREATE_DESTINATION
         - NON_EXISTING_ACCOUNT_NAME
         - ENV_UNSUPPORTED_ASSET
+        - DEST_TYPE_NOT_SUPPORTED
       description: >
         - `INSUFFICIENT_FUNDS` - Not enough funds to fulfill the withdraw request
 
@@ -3215,78 +5521,48 @@ components:
         - `ZERO_BALANCE_IN_PERMANENT_ADDRESS` - Not enough BTC balance to fund the requested transaction in legacy address
 
         - 'DROPPED_BY_BLOCKCHAIN' - The transaction was replaced by another transaction with higher fee
+
         - 'INVALID_FEE_PARAMS' - Fee parameters are inconsistent or unknown
+
         - 'MISSING_TAG_OR_MEMO' - A tag or memo is required to send funds to a third party address, including all exchanges
+
         - 'SIGNING_ERROR' - The transaction signing failed, resubmit the transaction to sign again
+
         - 'GAS_LIMIT_TOO_LOW' - The transaction was rejected because the gas limit was set too low
+
         -  'MAX_FEE_EXCEEDED' - Gas price is currently above selected max fee
+
         - 'ACTUAL_FEE_TOO_HIGH' - Chosen fee is below current price
+
         - 'INVALID_CONTRACT_CALL_DATA' - Transaction data was not encoded properly
+
         - 'INVALID_NONCE_TOO_LOW' - Illegal nonce
+
         - 'INVALID_NONCE_TOO_HIGH' - Illegal nonce
+
         - 'INVALID_NONCE_FOR_RBF' - No matching nonce
+
         - 'FAIL_ON_LOW_FEE' - Current blockchain fee is higher than selected
+
         - 'TOO_LONG_MEMPOOL_CHAIN' - Too many unconfirmed transactions from this address
+
         - 'TX_OUTDATED' - Nonce already used
+
         - 'INCOMPLETE_USER_SETUP' - MPC setup was not completed
+
         - 'SIGNER_NOT_FOUND' - Signer not found
+
         - 'INVALID_TAG_OR_MEMO' - Invalid Tag or Memo
+
         - 'ZERO_BALANCE_IN_PERMANENT_ADDRESS' - Not enough BTC on legacy permanent address
+
         - 'NEED_MORE_TO_CREATE_DESTINATION' - Insufficient funds for creating destination account
+
         - 'NON_EXISTING_ACCOUNT_NAME' - Account does not exist
+
         - 'ENV_UNSUPPORTED_ASSET' - Asset is not supported under this workspace settings
-    TransferTicketTermResponse:
-      type: object
-      properties:
-        termId:
-          type: string
-        networkConnectionId:
-          type: string
-        outgoing:
-          type: boolean
-        asset:
-          type: string
-        amount:
-          type: string
-        txIds:
-          type: array
-          items:
-            type: string
-        operation:
-          type: string
-        status:
-          type: string
-          enum:
-            - OPEN
-            - FULFILLED
-        note:
-          type: string
-    CreateTransferTicketResponse:
-      type: object
-      properties:
-        ticketId:
-          type: string
-    TransferTicketResponse:
-      type: object
-      properties:
-        ticketId:
-          type: string
-        externalTicketId:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
-          enum:
-            - OPEN
-            - PARTIALLY_FULFILLED
-            - FULFILLED
-            - FAILED
-            - CANCELED
-        terms:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransferTicketTermResponse'
+
+        - 'DEST_TYPE_NOT_SUPPORTED' - Withdrawal from this third party account to this destination is not supported. This sub-status appears for withdrawals from a Paxos exchange account to a one-time address
     Term:
       type: object
       properties:
@@ -3391,21 +5667,19 @@ components:
     TradingAccountType:
       type: string
       enum:
-        - FUNDABLE
-        - SPOT
+        - COIN_FUTURES
+        - COIN_MARGINED_SWAP
+        - EXCHANGE
         - FUNDING
+        - FUNDABLE
         - FUTURES
-        - OPTIONS
+        - FUTURES_CROSS
         - MARGIN
         - MARGIN_CROSS
-        - MARGIN_ISOLATED
-        - EXCHANGE
-        - COIN_MARGINED_SWAP
+        - OPTIONS
+        - SPOT
         - USDT_MARGINED_SWAP_CROSS
-        - USDT_MARGINED_SWAP_ISOLATED
         - USDT_FUTURES
-        - COIN_FUTURES
-        - FUTURES_CROSS
         - UNIFIED
     ValidateAddressResponse:
       type: object
@@ -3416,54 +5690,16 @@ components:
           type: boolean
         requiresTag:
           type: boolean
-    AllocateFundsRequest:
-      type: object
-      properties:
-        allocationId:
-          type: string
-        amount:
-          type: string
-        treatAsGrossAmount:
-          type: boolean
-    DeallocateFundsRequest:
-      type: object
-      properties:
-        allocationId:
-          type: string
-        amount:
-          type: string
     ResendWebhooksResponse:
       type: object
       properties:
-        webhooksCount:
+        messagesCount:
           type: number
-    OffExchangeEntityResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        vaultAccountId:
-          type: string
-        thirdPartyAccountId:
-          type: string
-        balance:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              total:
-                type: string
-              locked:
-                type: string
-              pending:
-                type: string
-              frozen:
-                type: string
-    unspentInputsData:
+    UnspentInputsResponse:
       type: object
       properties:
         input:
-          type: string
+          $ref: '#/components/schemas/UnspentInput'
         address:
           type: string
         amount:
@@ -3472,6 +5708,13 @@ components:
           type: number
         status:
           type: string
+    UnspentInput:
+      type: object
+      properties:
+        txHash:
+          type: string
+        index:
+          type: number
     GetUsersResponse:
       type: object
       properties:
@@ -3479,6 +5722,119 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserResponse'
+
+    NetworkIdRoutingPolicy:
+      type: object
+      properties:
+        crypto:
+          oneOf:
+           - $ref: '#/components/schemas/CustomCryptoRoutingDest'
+           - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+        sen:
+          oneOf:
+           - $ref: '#/components/schemas/CustomFiatRoutingDest'
+           - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+        signet:
+          oneOf:
+           - $ref: '#/components/schemas/CustomFiatRoutingDest'
+           - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+        sen_test:
+          oneOf:
+           - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+           - $ref: '#/components/schemas/CustomFiatRoutingDest'
+        signet_test:
+          oneOf:
+           - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+           - $ref: '#/components/schemas/CustomFiatRoutingDest'
+    NetworkConnectionRoutingPolicy:
+      type: object
+      properties:
+        crypto:
+          oneOf:
+           - $ref: '#/components/schemas/CustomCryptoRoutingDest'
+           - $ref: '#/components/schemas/DefaultNetworkRoutingDest'
+           - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+        sen:
+          oneOf:
+           - $ref: '#/components/schemas/CustomFiatRoutingDest'
+           - $ref: '#/components/schemas/DefaultNetworkRoutingDest'
+           - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+        signet:
+          oneOf:
+           - $ref: '#/components/schemas/DefaultNetworkRoutingDest'
+           - $ref: '#/components/schemas/CustomFiatRoutingDest'
+           - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+        sen_test:
+          oneOf:
+           - $ref: '#/components/schemas/DefaultNetworkRoutingDest'
+           - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+           - $ref: '#/components/schemas/CustomFiatRoutingDest'
+        signet_test:
+          oneOf:
+           - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+           - $ref: '#/components/schemas/CustomFiatRoutingDest'
+           - $ref: '#/components/schemas/DefaultNetworkRoutingDest'
+    CustomFiatRoutingDest:
+      type: object
+      properties:
+        scheme:
+          description: The network routing logic.
+          type: string
+          enum:
+            - CUSTOM
+        dstType:
+          type: string
+          description: The fiat account the funds are being sent to.
+          enum:
+            - FIAT_ACCOUNT
+        dstId:
+          type: string
+          description: The ID of the fiat account the funds are being sent to.
+      required:
+        - scheme
+        - dstType
+        - dstId
+    CustomCryptoRoutingDest:
+      type: object
+      properties:
+        scheme:
+          type: string
+          description: The network routing logic.
+          enum:
+            - CUSTOM
+        dstType:
+          type: string
+          description: The type of destination account the funds are being sent to.
+          enum:
+            - VAULT
+            - EXCHANGE
+        dstId:
+          type: string
+          description: The ID of the destination account the funds are being sent to.
+      required:
+        - scheme
+        - dstType
+        - dstId
+    DefaultNetworkRoutingDest:
+      type: object
+      properties:
+        scheme:
+          type: string
+          description: The network routing logic.
+          enum:
+            - DEFAULT
+      required:
+        - scheme
+    NoneNetworkRoutingDest:
+      type: object
+      properties:
+        scheme:
+          type: string
+          description: No network routing logic.
+          enum:
+            - NONE
+      required:
+        - scheme
     UserResponse:
       type: object
       properties:
@@ -3494,3 +5850,494 @@ components:
           type: string
         enabled:
           type: boolean
+    SessionMetadata:
+      type: object
+      properties:
+        appUrl:
+          type: string
+        appName:
+          type: string
+        appDescription:
+          type: string
+        appIcon:
+          type: string
+      required:
+        - appUrl
+    SessionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the connection
+          example: 4e9e7051-f3b2-48e9-8ee6-b12492552657
+        userId:
+          type: string
+          description: Id of the user that created the connection
+        sessionMetadata:
+          description: Metadata of the connection (provided by the dapp)
+          allOf:
+            - $ref: '#/components/schemas/SessionMetadata'
+        vaultAccountId:
+          type: number
+          description: The vault to connect
+          example: 1
+        feeLevel:
+          type: string
+          description: The default fee level
+          example: MEDIUM
+          enum:
+            - MEDIUM
+            - HIGH
+        chainIds:
+          description: The chains approved for the connection
+          example: '[ETH, ETH_TEST, SOL]'
+          type: array
+          items:
+            type: string
+        connectionType:
+          type: string
+          description: The connection's type
+          example: WalletConnect
+          enum:
+            - WalletConnect
+        connectionMethod:
+          type: string
+          description: The method through which the connection was established
+          example: API
+          enum:
+            - DESKTOP
+            - MOBILE
+            - API
+        creationDate:
+          format: date-time
+          type: string
+          description: Timestamp of the session's creation
+      required:
+        - id
+        - userId
+        - sessionMetadata
+        - vaultAccountId
+        - feeLevel
+        - chainIds
+        - connectionType
+        - connectionMethod
+        - creationDate
+    Paging:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Cursor to the next page
+      required:
+        - next
+    GetConnectionsResponse:
+      type: object
+      properties:
+        data:
+          description: Array with the requested Web3 connection's data
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionDTO'
+        paging:
+          $ref: '#/components/schemas/Paging'
+      required:
+        - data
+    CreateConnectionRequest:
+      type: object
+      properties:
+        vaultAccountId:
+          type: number
+          description: The ID of the vault to connect to the Web3 connection.
+          example: 1
+        feeLevel:
+          type: string
+          description: The default fee level. Valid values are `MEDIUM` and `HIGH`.
+          example: MEDIUM
+          enum:
+            - MEDIUM
+            - HIGH
+        uri:
+          type: string
+          description: The WalletConnect uri provided by the dapp.
+          example: >-
+            wc:77752975-906f-48f5-b59f-047826ee947e@1?bridge=https%3A%2F%2F0.bridge.walletconnect.org&key=64be99adc6086b7a729b0ec8c7e1f174927ab92e84f5c6f9527050225344a637
+        chainIds:
+          description: The ID of the blockchain network used in the Web3 connection.
+          example:
+            - ETH
+            - ETH_TEST
+          type: array
+          items:
+            type: string
+      required:
+        - vaultAccountId
+        - feeLevel
+        - uri
+        - chainIds
+    CreateConnectionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the Web3 connection initiated.
+          example: 4e9e7051-f3b2-48e9-8ee6-b12492552657
+        sessionMetadata:
+          description: Metadata of the Web3 connection (provided by the DApp).
+          allOf:
+            - $ref: '#/components/schemas/SessionMetadata'
+      required:
+        - id
+        - sessionMetadata
+    RespondToConnectionRequest:
+      type: object
+      properties:
+        approve:
+          type: boolean
+          description: Approval of the initiated Web3 connection.
+          example: true
+      required:
+        - approve
+    AddCollateralRequestBody: 
+      type: object
+      properties:
+        transactionRequest:
+          $ref: '#/components/schemas/TransactionRequest'
+        isSrcCollateral:
+          type: boolean
+          description: optional
+    RemoveCollateralRequestBody:
+      type: object
+      properties:
+        transactionRequest:
+          $ref: '#/components/schemas/TransactionRequest'
+        isDstCollateral:
+          type: boolean
+          description: optional
+    SettlementRequestBody:
+      type: object
+      properties:
+        mainExchangeAccountId:
+          type: string
+    SettlementResponse: 
+      type: object
+      properties:
+        id: 
+          type: string
+        initiator:
+          type: string
+        exchangeReply:
+          type: string
+        fireblocksInitiatedTransactions: 
+          type: object
+        exchangeRequestedTransactions:
+          $ref: '#/components/schemas/ExchangeSettlementTransactionsResponse'
+    GetSettlementResponse:
+      $ref: '#/components/schemas/ExchangeSettlementTransactionsResponse'
+    ExchangeSettlementTransactionsResponse: 
+      type: object
+      properties: 
+        toExchange:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToExchangeTransaction'
+        toCollateral: 
+            type: array
+            items:
+              $ref: '#/components/schemas/ToCollateralTransaction'
+    ToExchangeTransaction: 
+      type: object
+      properties:
+        assetId:
+          type: string
+        amount:
+          type: string
+        dstAddress:
+          type: string
+        dstTag:
+          type: string
+          description: optional
+    ToCollateralTransaction: 
+      type: object
+      properties:
+        asset:
+          type: string
+        amount:
+          type: string
+        srcAddress:
+          type: string
+        srcTag: 
+          type: string
+          description: optional
+        fee: 
+          type: string
+          description: optional
+    XBSettlementConfigCreationRequestBody:
+      type: object
+      properties:
+        name:
+          type: string
+        corridorId:
+          type: string
+        steps:
+          $ref: '#/components/schemas/XBSettlementConfigStepsRecord'
+
+      required:
+        - name
+        - corridorId
+        - steps
+    XBSettlementConfigCreationResponse:
+      $ref: '#/components/schemas/XBSettlementConfigModel'
+    XBSettlementConfigEditRequestBody:
+      type: object
+      properties:
+        name:
+          type: string
+        steps:
+          $ref: '#/components/schemas/XBSettlementConfigStepsRecord'
+    XBSettlementConfigEditResponse:
+      $ref: '#/components/schemas/XBSettlementConfigModel'
+    XBSettlementConfigDeletionResponse:
+      type: object
+      properties:
+        configId:
+          type: string
+          format: uuid
+      required:
+        - configId
+    GetXBSettlementConfigResponse:
+      $ref: '#/components/schemas/XBSettlementConfigModel'
+    GetAllXBSettlementConfigsResponse:
+      type: object
+      properties:
+        configurations:
+          type: array
+          items:
+            $ref: '#/components/schemas/XBSettlementConfigModel'
+      required:
+        - configurations
+    XBCreateSettlementFlowRequestBody:
+      type: object
+      properties:
+        configId:
+          type: string
+          format: uuid
+        amount:
+          $ref: '#/components/schemas/XBSettlementAsset'
+      required:
+        - configId
+        - amount
+    XBCreateSettlementFlowResponse:
+      $ref: '#/components/schemas/XBSettlementFlowSetupModel'
+    XBSettlementFlowExecutionResponse:
+      $ref: '#/components/schemas/XBSettlementFlowExecutionModel'
+    XBSettlementFlowExecutionStep:
+      type: object
+      properties:
+        id:
+          type: string
+        accountId:
+          type: string
+        status:
+          $ref: '#/components/schemas/XBSettlementFlowExecutionStepStatus'
+        inputAmount:
+          $ref: '#/components/schemas/XBSettlementAsset'
+        outputAmount:
+          $ref: '#/components/schemas/XBSettlementAsset'
+        fee:
+          $ref: '#/components/schemas/XBSettlementAsset'
+        startedAt:
+          type: number
+      required:
+        - id
+        - accountId
+        - status
+        - inputAmount
+        - outputAmount
+        - fee
+        - startedAt
+    XBSettlementFlowExecutionStepStatus:
+      type: string
+      enum:
+        - NOT_STARTED
+        - PROCESSING
+        - COMPLETED
+        - FAILED
+    XBSettlementFlowExecutionStatus:
+      type: string
+      enum:
+        - NOT_LAUNCHED
+        - PROCESSING
+        - COMPLETED
+        - FAILED
+    XBSettlementConfigModel:
+      type: object
+      properties:
+        tenantId:
+          type: string
+        configId:
+          type: string
+          format: uuid
+        corridorId:
+          type: string
+        name:
+          type: string
+        steps:
+          $ref: '#/components/schemas/XBSettlementConfigStepsRecord'
+      required:
+        - tenantId
+        - configId
+        - name
+        - corridorId
+        - steps
+    XBSettlementConfigStep:
+      type: object
+      properties:
+        stepType:
+          $ref: '#/components/schemas/XBSettlementStepType'
+        accountId:
+          type: string
+      required:
+        - stepType
+        - accountId
+    XBSettlementStepType:
+      type: string
+      enum:
+        - ON_RAMP
+        - VAULT_ACCOUNT
+        - OFF_RAMP
+        - FIAT_DESTINATION
+    XBSettlementFlowSetupStep:
+      type: object
+      properties:
+        accountId:
+          type: string
+        inputAmount:
+          $ref: '#/components/schemas/XBSettlementAsset'
+        outputAmount:
+          $ref: '#/components/schemas/XBSettlementAsset'
+        estimatedFeeAmount:
+          $ref: '#/components/schemas/XBSettlementAsset'
+        estimatedTime:
+          type: number
+      required:
+        - accountId
+        - inputAmount
+        - outputAmount
+        - estimatedFeeAmount
+        - estimatedTime
+    XBSettlementFlowSetupModel:
+      type: object
+      properties:
+        tenantId:
+          type: string
+        flowId:
+          type: string
+        configId:
+          type: string
+        steps:
+          $ref: '#/components/schemas/XBSettlementFlowStepsRecord'
+        inputAmount:
+          $ref: '#/components/schemas/XBSettlementAsset'
+        outputAmount:
+          $ref: '#/components/schemas/XBSettlementAsset'
+        totalEstimatedFees:
+          $ref: '#/components/schemas/XBSettlementAsset'
+        totalEstimatedTime:
+          type: number
+      required:
+        - tenantId
+        - configId
+        - steps
+        - inputAmount
+        - outputAmount
+        - totalEstimatedFees
+        - totalEstimatedTime
+    XBSettlementFlowExecutionModel:
+      type: object
+      properties:
+        tenantId:
+          type: string
+        flowId:
+          type: string
+        configId:
+          type: string
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/XBSettlementFlowExecutionStep'
+        inputAmount:
+          $ref: '#/components/schemas/XBSettlementAsset'
+        outputAmount:
+          $ref: '#/components/schemas/XBSettlementAsset'
+        totalFees:
+          $ref: '#/components/schemas/XBSettlementAsset'
+        initiatedAt:
+          type: number
+        initiatedBy:
+          description: 'id of the user which launched the flow'
+          type: string
+        state:
+          $ref: '#/components/schemas/XBSettlementFlowExecutionStatus'
+      required:
+        - tenantId
+        - flowId
+        - configId
+        - steps
+        - inputAmount
+        - outputAmount
+        - totalFees
+        - initiatedAt
+        - initiatedBy
+        - state
+    XBSettlementConfigStepsRecord:
+      type: object
+      properties:
+        stepType:
+          $ref: '#/components/schemas/XBSettlementStepType'
+      additionalProperties:
+        type: object
+        properties:
+          accountId:
+            type: string
+        required:
+          - accountId
+    XBSettlementFlowStepsRecord:
+      type: object
+      properties:
+        stepType:
+          $ref: '#/components/schemas/XBSettlementStepType'
+      additionalProperties:
+        $ref: '#/components/schemas/XBSettlementFlowSetupStep'
+    XBSettlementAsset:
+      type: object
+      properties:
+        amount:
+          type: string
+        assetId:
+          type: string
+      required:
+        - amount
+        - assetId
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - INTERNAL
+                - AUTHENTICATION
+                - AUTHORIZATION
+                - VALIDATION
+                - NOT_FOUND
+                - UNPROCESSABLE_ENTITY
+                - FORBIDDEN
+            message:
+              type: string
+          required:
+            - type
+            - message
+      required:
+        - error

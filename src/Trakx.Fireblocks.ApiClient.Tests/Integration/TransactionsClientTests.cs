@@ -18,8 +18,8 @@ public class TransactionsClientTests : FireblocksClientTestsBase
     [Fact]
     public async Task GetTransactionsAsync_should_query_ethereum_transactions_when_passing_eth_asset_id()
     {
-        var response = await _transactionsClient.GetTransactionsAsync(assets: "ETH_TEST", limit: 2);
-        response.Result.Should().NotBeEmpty();
+        var response = await _transactionsClient.TransactionsAllAsync(assets: "BTC_TEST", limit: 2);
+        response.Content.Should().NotBeEmpty();
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class TransactionsClientTests : FireblocksClientTestsBase
                 Type = TransferPeerPathType.VAULT_ACCOUNT,
             },
             AutoStaking = true,
-            AssetId = "ETH_TEST",
+            AssetId = "BTC_TEST",
             CpuStaking = 0.0,
             FeeLevel = TransactionRequestFeeLevel.LOW,
             GasLimit = 0.1,
@@ -53,11 +53,11 @@ public class TransactionsClientTests : FireblocksClientTestsBase
             CustomerRefId = "1",
             FailOnLowFee = true
         };
-        var createResponse = await _transactionsClient.CreateTransactionAsync(trans);
-        var id = createResponse.Result.Id;
+        var createResponse = await _transactionsClient.TransactionsPOSTAsync(trans);
+        var id = createResponse.Content.Id;
 
-        var getResponse = await _transactionsClient.GetTransactionAsync(id, CancellationToken.None);
-        var actualTrans = getResponse.Result;
+        var getResponse = await _transactionsClient.TransactionsGETAsync(id, CancellationToken.None);
+        var actualTrans = getResponse.Content;
         actualTrans.AssetId.Should().Be(trans.AssetId);
         actualTrans.Amount.Should().Be(trans.Amount);
     }

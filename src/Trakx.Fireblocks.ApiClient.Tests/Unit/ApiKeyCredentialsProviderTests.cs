@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Microsoft.Extensions.Options;
 using NSubstitute;
 using Trakx.Fireblocks.ApiClient.Utils;
 using Xunit;

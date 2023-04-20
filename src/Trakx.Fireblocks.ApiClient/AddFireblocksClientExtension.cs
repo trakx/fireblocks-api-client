@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Trakx.Utils.DateTimeHelpers;
 using Trakx.Fireblocks.ApiClient.Utils;
+using Trakx.Common.DateAndTime;
 
 namespace Trakx.Fireblocks.ApiClient;
 
@@ -14,7 +13,7 @@ public static partial class AddFireblocksClientExtension
         var apiConfiguration = configuration.GetSection(nameof(FireblocksApiConfiguration))
             .Get<FireblocksApiConfiguration>();
 
-        AddFireblocksClient(services, apiConfiguration);
+        AddFireblocksClient(services, apiConfiguration!);
 
         return services;
     }
