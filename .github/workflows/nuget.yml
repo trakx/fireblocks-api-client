@@ -9,11 +9,11 @@ on:
   workflow_run:
     workflows: ["Build and Test"]
     types: [completed]
-    branches-ignore: [ stage, master ]
+    branches-ignore: [ stage, prod ]
 
   # so we treat these releases branches specially, using the push trigger directly.
   push:
-    branches: [ stage, master ]
+    branches: [ stage, prod ]
 
   workflow_dispatch:
     inputs:
