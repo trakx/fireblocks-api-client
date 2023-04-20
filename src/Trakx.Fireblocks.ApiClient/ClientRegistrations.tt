@@ -7,8 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Contrib.WaitAndRetry;
 using Polly.Extensions.Http;
-using Serilog;
-using Trakx.Utils.Apis;
+using Trakx.Common.Logging;
+using Trakx.Fireblocks.ApiClient.Utils;
 <# var nameSpace = "Trakx.Fireblocks.ApiClient"; #>
 
 namespace <#= nameSpace #>;
@@ -23,7 +23,7 @@ namespace <#= nameSpace #>;
                    "External_wallets", "Fee_payer", "Fiat_accounts", "Gas_stations",
                    "Internal_wallets", "Network_connection", "Network_connections",
                    "Off_exchanges", "Payments", "Supported_assets", "Transactions",
-                   "Transfer_tickets", "Users", "Vaults", "Webhooks"
+                   "Transfer_tickets", "Users", "Vaults", "Webhooks","NFTs_Beta","Web3_connections"
                };
 
             foreach(var clientName in clientNames)
@@ -40,7 +40,7 @@ namespace <#= nameSpace #>;
                     .WaitAndRetryAsync(delay,
                         onRetry: (result, timeSpan, retryCount, context) =>
                         {
-                            var logger = Log.Logger.ForContext<<#= name #>>();
+                            var logger = LoggerProvider.Create<<#= name #>>();
                             logger.LogApiFailure(result, timeSpan, retryCount, context);
                         })
                     .WithPolicyKey("<#= name #>"));

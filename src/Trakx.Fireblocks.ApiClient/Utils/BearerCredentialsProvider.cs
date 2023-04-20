@@ -2,8 +2,8 @@
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using Trakx.Utils.DateTimeHelpers;
-using Trakx.Utils.Extensions;
+using Trakx.Common.DateAndTime;
+using Trakx.Common.Extensions;
 
 namespace Trakx.Fireblocks.ApiClient.Utils;
 

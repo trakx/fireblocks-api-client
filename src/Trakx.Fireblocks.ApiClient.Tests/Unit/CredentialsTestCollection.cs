@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using NSubstitute;
 using Serilog;
-using Trakx.Utils.DateTimeHelpers;
+using Trakx.Common.DateAndTime;
 using Xunit;
 using Xunit.Abstractions;
 
