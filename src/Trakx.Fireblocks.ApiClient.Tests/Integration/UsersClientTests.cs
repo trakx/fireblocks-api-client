@@ -20,7 +20,7 @@ public class UsersClientTests : FireblocksClientTestsBase
     public async Task GetUsersAsync_should_query_all_users()
     {
         var users = await _usersClient.UsersAsync();
-        users.Result.Users.Should().NotBeEmpty();
+        users.Content.Users.Should().NotBeEmpty();
     }
 
 }

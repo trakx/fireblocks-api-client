@@ -1,6 +1,8 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using Trakx.Utils.Testing;
+using Trakx.Common.Infrastructure.Environment.Aws;
+using Trakx.Common.Testing.Configuration;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -34,11 +36,11 @@ public class FireblocksApiFixture : IDisposable
 
     public FireblocksApiFixture()
     {
-        var configuration = ConfigurationHelper.GetConfigurationFromAws<FireblocksApiConfiguration>()
-            with
-            {
-                BaseUrl = "https://api.fireblocks.io/v1",
-            };
+        var configuration = AwsConfigurationHelper.GetConfigurationFromAws<FireblocksApiConfiguration>()
+        with
+        {
+            BaseUrl = "https://api.fireblocks.io/v1"
+        };
 
         var serviceCollection = new ServiceCollection();
 

@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Headers;
-using Serilog;
-using Trakx.Utils.Apis;
+using Microsoft.Extensions.Logging;
+using Trakx.Common.ApiClient;
+using Trakx.Common.Logging;
 
 namespace Trakx.Fireblocks.ApiClient.Utils;
 
@@ -15,7 +16,7 @@ public class ApiKeyCredentialsProvider : IFireblocksCredentialsProvider, IDispos
     private readonly IBearerCredentialsProvider _bearerCredentialsProvider;
     private readonly CancellationTokenSource _tokenSource;
 
-    private static readonly ILogger Logger = Log.Logger.ForContext<ApiKeyCredentialsProvider>();
+    private static readonly ILogger Logger = LoggerProvider.Create<ApiKeyCredentialsProvider>();
 
     public ApiKeyCredentialsProvider(FireblocksApiConfiguration configuration, IBearerCredentialsProvider bearerCredentialsProvider)
     {
@@ -34,7 +35,7 @@ public class ApiKeyCredentialsProvider : IFireblocksCredentialsProvider, IDispos
         var token = _bearerCredentialsProvider.GenerateJwtToken(msg);
         msg.Headers.Authorization = new AuthenticationHeaderValue(JwtScheme, token);
         msg.Headers.Add(ApiKeyHeader, _configuration.ApiPubKey);
-        Logger.Verbose("Headers added");
+        Logger.LogTrace("Headers added");
     }
 
     public Task AddCredentialsAsync(HttpRequestMessage msg)

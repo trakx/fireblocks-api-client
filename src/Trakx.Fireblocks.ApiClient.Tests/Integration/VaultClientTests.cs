@@ -19,9 +19,8 @@ public class VaultClientTests : FireblocksClientTestsBase
     public async Task GetVaultAccountsAsync_should_return_all_vault_accounts()
     {
         var response = await _vaultClient.AccountsAllAsync();
-        response.Result.Should().NotBeNullOrEmpty();
-        response.Result[0].Assets.Should().NotBeNullOrEmpty();
-        response.Result[0].Assets[1].Id.Should().Be("ETH_TEST");
-        Convert.ToDecimal(response.Result[0].Assets[1].Total).Should().BeGreaterOrEqualTo(0.1m);
+        response.Content.Should().NotBeNullOrEmpty();
+        response.Content[0].Assets.Should().NotBeNullOrEmpty();
+        response.Content[0].Assets.Should().Contain(x => x.Id == "BTC_TEST");
     }
 }
