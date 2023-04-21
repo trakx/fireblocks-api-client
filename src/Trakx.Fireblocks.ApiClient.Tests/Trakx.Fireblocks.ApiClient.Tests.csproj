@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
@@ -30,7 +30,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
-        <PackageReference Include="Trakx.Common.Testing.Documentation" Version="0.1.0" />
+        <PackageReference Include="Trakx.Common.Testing.Documentation" Version="0.2.0" />
     </ItemGroup>
 
     <ItemGroup>
