@@ -19,10 +19,10 @@
     </PackageReference>
     <PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
     <PackageReference Include="Polly.Caching.Memory" Version="3.0.2" />
-    
-    <PackageReference Include="Trakx.Common" Version="0.1.0" />
-    <PackageReference Include="Trakx.Common.ApiClient" Version="0.1.0" />
-    <PackageReference Include="Trakx.Common.Logging" Version="0.1.0" />
+
+    <PackageReference Include="Trakx.Common" Version="0.2.1" />
+    <PackageReference Include="Trakx.Common.ApiClient" Version="0.2.1" />
+    <PackageReference Include="Trakx.Common.Logging" Version="0.2.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,7 +31,8 @@
 
   <Target Name="NSwag" BeforeTargets="Build" Condition="'$(GenerateApiClient)'=='True' ">
     <Copy SourceFiles="@(Reference)" DestinationFolder="$(OutDir)References" />
-    <Exec Command="$(NSwagExe_Net70) run nswag.json /variables:Configuration=$(Configuration) /runtime:Net70" />
+    <Exec
+      Command="$(NSwagExe_Net70) run nswag.json /variables:Configuration=$(Configuration) /runtime:Net70" />
     <RemoveDir Directories="$(OutDir)References" />
   </Target>
 
