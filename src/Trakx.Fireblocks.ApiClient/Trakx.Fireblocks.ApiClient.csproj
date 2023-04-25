@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -22,7 +22,7 @@
     
     <PackageReference Include="Trakx.Common" Version="0.1.0" />
     <PackageReference Include="Trakx.Common.ApiClient" Version="0.1.0" />
-    <PackageReference Include="Trakx.Common.Logging" Version="0.1.0" />
+    <PackageReference Include="Trakx.Common.Logging" Version="0.2.1" />
   </ItemGroup>
 
   <ItemGroup>
