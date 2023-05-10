@@ -8,7 +8,6 @@
   <Import Project="../Common.Projects.props" />
 
   <ItemGroup>
-
     <PackageReference Include="coverlet.msbuild" Version="3.2.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
