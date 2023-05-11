@@ -83,6 +83,25 @@ namespace Trakx.Fireblocks.ApiClient
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
+        /// List asset wallets (Paginated)
+        /// </summary>
+        /// <remarks>
+        /// Gets all asset wallets at all of the vault accounts in your workspace. An asset wallet is an asset at a vault account. This method allows fast traversal of all account balances.
+        /// <br/>**Note:**
+        /// <br/>  - This API endpoint is in limited availability and available for selected customers. If you would like to get early access to this endpoint, please reach out to [Fireblocks Support](https://support.fireblocks.io/hc/en-us/requests/new?ticket_form_id=36000337220)
+        /// <br/>  - This API call is subject to [rate limits](https://developers.fireblocks.com/reference/rate-limiting).
+        /// </remarks>
+        /// <param name="totalAmountLargerThan">When specified, only asset wallets with total balance larger than this amount are returned.</param>
+        /// <param name="assetId">When specified, only asset wallets cross vault accounts that have this asset ID are returned.</param>
+        /// <param name="before">Fetches the next paginated response before this element. This element is a cursor and is returned at the response of the previous page.</param>
+        /// <param name="after">Fetches the next paginated response after this element. This element is a cursor and is returned at the response of the previous page.</param>
+        /// <param name="limit">The maximum number of asset wallets in a single response. The default is 200 and the maximum is 1000.</param>
+        /// <returns>A PaginatedAssetWalletResponse object</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<PaginatedAssetWalletResponse>> Asset_walletsAsync(double? totalAmountLargerThan = null, string assetId = null, string before = null, string after = null, double? limit = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
         /// Hide a vault account in the console
         /// </summary>
         /// <remarks>
@@ -798,6 +817,108 @@ namespace Trakx.Fireblocks.ApiClient
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// List asset wallets (Paginated)
+        /// </summary>
+        /// <remarks>
+        /// Gets all asset wallets at all of the vault accounts in your workspace. An asset wallet is an asset at a vault account. This method allows fast traversal of all account balances.
+        /// <br/>**Note:**
+        /// <br/>  - This API endpoint is in limited availability and available for selected customers. If you would like to get early access to this endpoint, please reach out to [Fireblocks Support](https://support.fireblocks.io/hc/en-us/requests/new?ticket_form_id=36000337220)
+        /// <br/>  - This API call is subject to [rate limits](https://developers.fireblocks.com/reference/rate-limiting).
+        /// </remarks>
+        /// <param name="totalAmountLargerThan">When specified, only asset wallets with total balance larger than this amount are returned.</param>
+        /// <param name="assetId">When specified, only asset wallets cross vault accounts that have this asset ID are returned.</param>
+        /// <param name="before">Fetches the next paginated response before this element. This element is a cursor and is returned at the response of the previous page.</param>
+        /// <param name="after">Fetches the next paginated response after this element. This element is a cursor and is returned at the response of the previous page.</param>
+        /// <param name="limit">The maximum number of asset wallets in a single response. The default is 200 and the maximum is 1000.</param>
+        /// <returns>A PaginatedAssetWalletResponse object</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<PaginatedAssetWalletResponse>> Asset_walletsAsync(double? totalAmountLargerThan = null, string assetId = null, string before = null, string after = null, double? limit = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/vault/asset_wallets?");
+            if (totalAmountLargerThan != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("totalAmountLargerThan") + "=").Append(System.Uri.EscapeDataString(ConvertToString(totalAmountLargerThan, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (assetId != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("assetId") + "=").Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (before != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("before") + "=").Append(System.Uri.EscapeDataString(ConvertToString(before, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (after != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("after") + "=").Append(System.Uri.EscapeDataString(ConvertToString(after, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (limit != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("limit") + "=").Append(System.Uri.EscapeDataString(ConvertToString(limit, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("*/*"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<PaginatedAssetWalletResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new Trakx.Common.ApiClient.Response<PaginatedAssetWalletResponse>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
                         }
                     }
                     finally
@@ -3695,7 +3816,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -3711,7 +3832,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Creates a new network connection
         /// </summary>
         /// <remarks>
-        /// Initiates a new network connection. 
+        /// Initiates a new network connection.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -3722,7 +3843,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -3738,7 +3859,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Update network connection routing policy.
         /// </summary>
         /// <remarks>
-        /// Updates an existing network connection's routing policy. 
+        /// Updates an existing network connection's routing policy.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -3749,7 +3870,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -3790,7 +3911,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -3807,7 +3928,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Deletes a network connection by ID
         /// </summary>
         /// <remarks>
-        /// Deletes an existing network connection specified by its connection ID. 
+        /// Deletes an existing network connection specified by its connection ID.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -3818,7 +3939,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -3835,7 +3956,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Returns all network IDs, both local IDs and discoverable remote IDs
         /// </summary>
         /// <remarks>
-        /// Retrieves a list of all local and discoverable remote network IDs. 
+        /// Retrieves a list of all local and discoverable remote network IDs.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -3846,7 +3967,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -3862,7 +3983,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Creates a new Network ID
         /// </summary>
         /// <remarks>
-        /// Creates a new Network ID. 
+        /// Creates a new Network ID.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -3873,14 +3994,14 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
         /// <br/>
         /// <br/>    - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
         /// </remarks>
-        /// <returns>Returns the new channel in your workspace</returns>
+        /// <returns>Returns the new network ID in your workspace</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<NetworkIdResponse>> Network_idsPOSTAsync(Body14 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
@@ -3889,7 +4010,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Returns specific network ID.
         /// </summary>
         /// <remarks>
-        /// Retrieves a network by its ID. 
+        /// Retrieves a network by its ID.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -3900,7 +4021,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -3917,7 +4038,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Deletes specific network ID.
         /// </summary>
         /// <remarks>
-        /// Deletes a network by its ID. 
+        /// Deletes a network by its ID.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -3928,7 +4049,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -3945,7 +4066,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Update network id routing policy.
         /// </summary>
         /// <remarks>
-        /// Updates the routing policy of a specified network ID. 
+        /// Updates the routing policy of a specified network ID.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -3956,7 +4077,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -3973,7 +4094,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Update network ID's discoverability.
         /// </summary>
         /// <remarks>
-        /// Update whether or not the network ID is discoverable by others. 
+        /// Update whether or not the network ID is discoverable by others.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -3984,7 +4105,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -3995,6 +4116,34 @@ namespace Trakx.Fireblocks.ApiClient
         /// <returns>Network ID</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<Response6>> Set_discoverabilityAsync(string networkId, Body16 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Update network ID's name.
+        /// </summary>
+        /// <remarks>
+        /// Updates name of a specified network ID.
+        /// <br/>
+        /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
+        /// <br/>
+        /// <br/>Your routing policy defines how your transactions are routed.
+        /// <br/>You can choose 1 of the 3 different schemes mentioned below for each asset type:
+        /// <br/>  - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+        /// <br/>  - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+        /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+        /// <br/>
+        /// <br/>Default Workspace Presets:
+        /// <br/>  - Network Profile Crypto → **Custom**
+        /// <br/>  - Network Profile FIAT → **None**
+        /// <br/>  - Network Connection Crypto → **Default**
+        /// <br/>  - Network Connection FIAT → **Default**
+        /// <br/>
+        /// <br/>    - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+        /// </remarks>
+        /// <param name="networkId">The ID of the network</param>
+        /// <returns>Network ID</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<Response7>> Set_nameAsync(string networkId, Body17 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 
@@ -4041,7 +4190,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -4123,7 +4272,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Creates a new network connection
         /// </summary>
         /// <remarks>
-        /// Initiates a new network connection. 
+        /// Initiates a new network connection.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -4134,7 +4283,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -4220,7 +4369,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Update network connection routing policy.
         /// </summary>
         /// <remarks>
-        /// Updates an existing network connection's routing policy. 
+        /// Updates an existing network connection's routing policy.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -4231,7 +4380,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -4420,7 +4569,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -4507,7 +4656,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Deletes a network connection by ID
         /// </summary>
         /// <remarks>
-        /// Deletes an existing network connection specified by its connection ID. 
+        /// Deletes an existing network connection specified by its connection ID.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -4518,7 +4667,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -4605,7 +4754,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Returns all network IDs, both local IDs and discoverable remote IDs
         /// </summary>
         /// <remarks>
-        /// Retrieves a list of all local and discoverable remote network IDs. 
+        /// Retrieves a list of all local and discoverable remote network IDs.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -4616,7 +4765,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -4698,7 +4847,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Creates a new Network ID
         /// </summary>
         /// <remarks>
-        /// Creates a new Network ID. 
+        /// Creates a new Network ID.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -4709,14 +4858,14 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
         /// <br/>
         /// <br/>    - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
         /// </remarks>
-        /// <returns>Returns the new channel in your workspace</returns>
+        /// <returns>Returns the new network ID in your workspace</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<NetworkIdResponse>> Network_idsPOSTAsync(Body14 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
@@ -4795,7 +4944,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Returns specific network ID.
         /// </summary>
         /// <remarks>
-        /// Retrieves a network by its ID. 
+        /// Retrieves a network by its ID.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -4806,7 +4955,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -4893,7 +5042,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Deletes specific network ID.
         /// </summary>
         /// <remarks>
-        /// Deletes a network by its ID. 
+        /// Deletes a network by its ID.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -4904,7 +5053,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -4991,7 +5140,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Update network id routing policy.
         /// </summary>
         /// <remarks>
-        /// Updates the routing policy of a specified network ID. 
+        /// Updates the routing policy of a specified network ID.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -5002,7 +5151,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -5093,7 +5242,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Update network ID's discoverability.
         /// </summary>
         /// <remarks>
-        /// Update whether or not the network ID is discoverable by others. 
+        /// Update whether or not the network ID is discoverable by others.
         /// <br/>
         /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
         /// <br/>
@@ -5104,7 +5253,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
         /// <br/>
         /// <br/>Default Workspace Presets:
-        /// <br/>  - Network Profile Crypto → **Custom** 
+        /// <br/>  - Network Profile Crypto → **Custom**
         /// <br/>  - Network Profile FIAT → **None**
         /// <br/>  - Network Connection Crypto → **Default**
         /// <br/>  - Network Connection FIAT → **Default**
@@ -5168,6 +5317,111 @@ namespace Trakx.Fireblocks.ApiClient
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             return new Trakx.Common.ApiClient.Response<Response6>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Error>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Update network ID's name.
+        /// </summary>
+        /// <remarks>
+        /// Updates name of a specified network ID.
+        /// <br/>
+        /// <br/>**Note:** This API call is subject to Flexible Routing Schemes.
+        /// <br/>
+        /// <br/>Your routing policy defines how your transactions are routed.
+        /// <br/>You can choose 1 of the 3 different schemes mentioned below for each asset type:
+        /// <br/>  - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
+        /// <br/>  - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
+        /// <br/>  - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
+        /// <br/>
+        /// <br/>Default Workspace Presets:
+        /// <br/>  - Network Profile Crypto → **Custom**
+        /// <br/>  - Network Profile FIAT → **None**
+        /// <br/>  - Network Connection Crypto → **Default**
+        /// <br/>  - Network Connection FIAT → **Default**
+        /// <br/>
+        /// <br/>    - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
+        /// </remarks>
+        /// <param name="networkId">The ID of the network</param>
+        /// <returns>Network ID</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<Response7>> Set_nameAsync(string networkId, Body17 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (networkId == null)
+                throw new System.ArgumentNullException("networkId");
+
+            if (body == null)
+                throw new System.ArgumentNullException("body");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/network_ids/{networkId}/set_name");
+            urlBuilder_.Replace("{networkId}", System.Uri.EscapeDataString(ConvertToString(networkId, System.Globalization.CultureInfo.InvariantCulture)));
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("PATCH");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("*/*"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Response7>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new Trakx.Common.ApiClient.Response<Response7>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5322,7 +5576,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// </remarks>
         /// <returns>A new wallet object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> Internal_walletsPOSTAsync(Body17 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> Internal_walletsPOSTAsync(Body18 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5358,7 +5612,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="walletId">The wallet ID</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> Set_customer_ref_id3Async(string walletId, Body18 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> Set_customer_ref_id3Async(string walletId, Body19 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5384,7 +5638,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="assetId">The ID of the asset to add</param>
         /// <returns>A Wallet Asset object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<WalletAsset>> Internal_walletsPOST2Async(string walletId, string assetId, Body19 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<WalletAsset>> Internal_walletsPOST2Async(string walletId, string assetId, Body20 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5516,7 +5770,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// </remarks>
         /// <returns>A new wallet object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> Internal_walletsPOSTAsync(Body17 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> Internal_walletsPOSTAsync(Body18 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/internal_wallets");
@@ -5756,7 +6010,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="walletId">The wallet ID</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> Set_customer_ref_id3Async(string walletId, Body18 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> Set_customer_ref_id3Async(string walletId, Body19 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
@@ -5927,7 +6181,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="assetId">The ID of the asset to add</param>
         /// <returns>A Wallet Asset object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<WalletAsset>> Internal_walletsPOST2Async(string walletId, string assetId, Body19 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<WalletAsset>> Internal_walletsPOST2Async(string walletId, string assetId, Body20 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
@@ -6215,7 +6469,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// </remarks>
         /// <returns>A Wallet object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> External_walletsPOSTAsync(Body20 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> External_walletsPOSTAsync(Body21 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6251,7 +6505,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="walletId">The wallet ID</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> Set_customer_ref_id4Async(string walletId, Body21 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> Set_customer_ref_id4Async(string walletId, Body22 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6277,7 +6531,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="assetId">The ID of the asset to add</param>
         /// <returns>A Wallet Asset object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ExternalWalletAsset>> External_walletsPOST2Async(string walletId, string assetId, Body22 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ExternalWalletAsset>> External_walletsPOST2Async(string walletId, string assetId, Body23 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6407,7 +6661,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// </remarks>
         /// <returns>A Wallet object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> External_walletsPOSTAsync(Body20 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> External_walletsPOSTAsync(Body21 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/external_wallets");
@@ -6647,7 +6901,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="walletId">The wallet ID</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> Set_customer_ref_id4Async(string walletId, Body21 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> Set_customer_ref_id4Async(string walletId, Body22 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
@@ -6818,7 +7072,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="assetId">The ID of the asset to add</param>
         /// <returns>A Wallet Asset object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ExternalWalletAsset>> External_walletsPOST2Async(string walletId, string assetId, Body22 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ExternalWalletAsset>> External_walletsPOST2Async(string walletId, string assetId, Body23 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
@@ -7106,7 +7360,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// </remarks>
         /// <returns>A Wallet object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> ContractsPOSTAsync(Body23 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> ContractsPOSTAsync(Body24 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7156,7 +7410,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="assetId">The ID of the asset to add</param>
         /// <returns>A Wallet Asset object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ExternalWalletAsset>> ContractsPOST2Async(string contractId, string assetId, Body24 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ExternalWalletAsset>> ContractsPOST2Async(string contractId, string assetId, Body25 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7286,7 +7540,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// </remarks>
         /// <returns>A Wallet object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> ContractsPOSTAsync(Body23 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> ContractsPOSTAsync(Body24 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/contracts");
@@ -7614,7 +7868,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="assetId">The ID of the asset to add</param>
         /// <returns>A Wallet Asset object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ExternalWalletAsset>> ContractsPOST2Async(string contractId, string assetId, Body24 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ExternalWalletAsset>> ContractsPOST2Async(string contractId, string assetId, Body25 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contractId == null)
                 throw new System.ArgumentNullException("contractId");
@@ -8654,7 +8908,6 @@ namespace Trakx.Fireblocks.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            
                             var objectResponse_ = await ReadObjectResponseAsync<TransactionResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
@@ -9551,7 +9804,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IPaymentsClient
+    public partial interface IPayments__Cross_Border_settlementClient
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -9612,7 +9865,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="flowId">The ID of the cross-border (XB) settlement flow.</param>
         /// <returns>Returns XB settlement flow</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<Response7>> FlowsGETAsync(string flowId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<Response8>> FlowsGETAsync(string flowId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -9626,12 +9879,12 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    internal partial class PaymentsClient : AuthorisedClient, IPaymentsClient
+    internal partial class Payments__Cross_Border_settlementClient : AuthorisedClient, IPayments__Cross_Border_settlementClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
 
-        public PaymentsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Payments__Cross_Border_settlementClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
             _httpClient = httpClient;
             _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
@@ -10226,7 +10479,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="flowId">The ID of the cross-border (XB) settlement flow.</param>
         /// <returns>Returns XB settlement flow</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<Response7>> FlowsGETAsync(string flowId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<Response8>> FlowsGETAsync(string flowId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (flowId == null)
                 throw new System.ArgumentNullException("flowId");
@@ -10267,12 +10520,12 @@ namespace Trakx.Fireblocks.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response7>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response8>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new Trakx.Common.ApiClient.Response<Response7>(status_, headers_, objectResponse_.Object);
+                            return new Trakx.Common.ApiClient.Response<Response8>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 401)
@@ -10369,6 +10622,537 @@ namespace Trakx.Fireblocks.ApiClient
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             return new Trakx.Common.ApiClient.Response<XBSettlementFlowExecutionResponse>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorResponse>("Unauthorized. Missing / invalid JWT token in Authorization header.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 500-599)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorResponse>("Internal error.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        protected struct ObjectResponseResult<T>
+        {
+            public ObjectResponseResult(T responseObject, string responseText)
+            {
+                this.Object = responseObject;
+                this.Text = responseText;
+            }
+
+            public T Object { get; }
+
+            public string Text { get; }
+        }
+
+        public bool ReadResponseAsString { get; set; }
+
+        protected virtual async System.Threading.Tasks.Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(System.Net.Http.HttpResponseMessage response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Threading.CancellationToken cancellationToken)
+        {
+            if (response == null || response.Content == null)
+            {
+                return new ObjectResponseResult<T>(default(T), string.Empty);
+            }
+
+            if (ReadResponseAsString)
+            {
+                var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    var typedBody = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseText, JsonSerializerSettings);
+                    return new ObjectResponseResult<T>(typedBody, responseText);
+                }
+                catch (Newtonsoft.Json.JsonException exception)
+                {
+                    var message = "Could not deserialize the response body string as " + typeof(T).FullName + ".";
+                    throw new ApiException(message, (int)response.StatusCode, responseText, headers, exception);
+                }
+            }
+            else
+            {
+                try
+                {
+                    using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    using (var streamReader = new System.IO.StreamReader(responseStream))
+                    using (var jsonTextReader = new Newtonsoft.Json.JsonTextReader(streamReader))
+                    {
+                        var serializer = Newtonsoft.Json.JsonSerializer.Create(JsonSerializerSettings);
+                        var typedBody = serializer.Deserialize<T>(jsonTextReader);
+                        return new ObjectResponseResult<T>(typedBody, string.Empty);
+                    }
+                }
+                catch (Newtonsoft.Json.JsonException exception)
+                {
+                    var message = "Could not deserialize the response body stream as " + typeof(T).FullName + ".";
+                    throw new ApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
+                }
+            }
+        }
+
+        private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            if (value == null)
+            {
+                return "";
+            }
+
+            if (value is System.Enum)
+            {
+                var name = System.Enum.GetName(value.GetType(), value);
+                if (name != null)
+                {
+                    var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
+                    if (field != null)
+                    {
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                            as System.Runtime.Serialization.EnumMemberAttribute;
+                        if (attribute != null)
+                        {
+                            return attribute.Value != null ? attribute.Value : name;
+                        }
+                    }
+
+                    var converted = System.Convert.ToString(System.Convert.ChangeType(value, System.Enum.GetUnderlyingType(value.GetType()), cultureInfo));
+                    return converted == null ? string.Empty : converted;
+                }
+            }
+            else if (value is bool) 
+            {
+                return System.Convert.ToString((bool)value, cultureInfo).ToLowerInvariant();
+            }
+            else if (value is byte[])
+            {
+                return System.Convert.ToBase64String((byte[]) value);
+            }
+            else if (value.GetType().IsArray)
+            {
+                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
+            }
+
+            var result = System.Convert.ToString(value, cultureInfo);
+            return result == null ? "" : result;
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial interface IPayments__PayoutClient
+    {
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Create a payout instruction set
+        /// </summary>
+        /// <remarks>
+        /// **Note:** The reference content in this section documents the Payments Engine endpoint. The Payments Engine endpoints include APIs available only for customers with Payments Engine enabled on their accounts. &lt;/br&gt;
+        /// <br/>&lt;/br&gt;These endpoints are currently in beta and might be subject to changes.&lt;/br&gt;
+        /// <br/>&lt;/br&gt;If you want to learn more about Fireblocks Payments Engine, please contact your Fireblocks Customer Success Manager or email CSM@fireblocks.com. &lt;/br&gt;
+        /// <br/>&lt;/br&gt; &lt;b u&gt;Create a payout instruction set.&lt;/b&gt; &lt;/u&gt;&lt;/br&gt;
+        /// <br/>A payout instruction set is a set of instructions for distributing payments from a single payment account to a list of payee accounts. &lt;/br&gt;
+        /// <br/>The instruction set defines: &lt;/br&gt;
+        /// <br/>&lt;ul&gt;
+        /// <br/>&lt;li&gt;the payment account and its account type (vault, exchange, or fiat). &lt;/li&gt;
+        /// <br/>&lt;li&gt;the account type (vault account, exchange account, whitelisted address, network connection, fiat account, or merchant account), the amount, and the asset of payment for each payee account.&lt;/li&gt;
+        /// <br/>&lt;/ul&gt;
+        /// </remarks>
+        /// <returns>The payout instruction set creation succeeded and returns the generated instruction set with a unique payout IDThe payout ID will be used for executing the payout and checking the payout status.</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<PayoutResponse>> PayoutPOSTAsync(CreatePayoutRequest body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Execute a payout instruction set
+        /// </summary>
+        /// <remarks>
+        /// **Note:** The reference content in this section documents the Payments Engine endpoint. The Payments Engine endpoints include APIs available only for customers with Payments Engine enabled on their accounts. &lt;/br&gt;
+        /// <br/>&lt;/br&gt;These endpoints are currently in beta and might be subject to changes.&lt;/br&gt;
+        /// <br/>&lt;/br&gt;If you want to learn more about Fireblocks Payments Engine, please contact your Fireblocks Customer Success Manager or email CSM@fireblocks.com. &lt;/br&gt;
+        /// <br/>&lt;/br&gt;&lt;b u&gt;Execute a payout instruction set.&lt;/b&gt; &lt;/u&gt; &lt;/br&gt;
+        /// <br/>&lt;/br&gt;The instruction set will be verified and executed.&lt;/br&gt;
+        /// <br/>&lt;b&gt;&lt;u&gt;Source locking&lt;/br&gt;&lt;/b&gt; &lt;/u&gt;
+        /// <br/>If you are executing a payout instruction set from a payment account with an already active payout the active payout will complete before the new payout instruction set can be executed. &lt;/br&gt;
+        /// <br/>You cannot execute the same payout instruction set more than once.
+        /// </remarks>
+        /// <param name="payoutId">the payout id received from the creation of the payout instruction set</param>
+        /// <returns>Executed the payout instruction set</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<DispatchPayoutResponse>> Execute2Async(string payoutId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get the status of a payout instruction set
+        /// </summary>
+        /// <remarks>
+        /// **Note:** The reference content in this section documents the Payments Engine endpoint. The Payments Engine endpoints include APIs available only for customers with Payments Engine enabled on their accounts. &lt;/br&gt;
+        /// <br/>  &lt;/br&gt;These endpoints are currently in beta and might be subject to changes.&lt;/br&gt;
+        /// <br/>  &lt;/br&gt;If you want to learn more about Fireblocks Payments Engine, please contact your Fireblocks Customer Success Manager or email CSM@fireblocks.com. &lt;/br&gt;
+        /// </remarks>
+        /// <param name="payoutId">the payout id received from the creation of the payout instruction set</param>
+        /// <returns>Returns the current status of the payout instruction set, including the status of each payout instruction and the transactions created in the process.</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<PayoutResponse>> PayoutGETAsync(string payoutId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    internal partial class Payments__PayoutClient : AuthorisedClient, IPayments__PayoutClient
+    {
+        private System.Net.Http.HttpClient _httpClient;
+        private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
+
+        public Payments__PayoutClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        {
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
+        }
+
+        private Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
+        {
+            var settings = new Newtonsoft.Json.JsonSerializerSettings();
+            UpdateJsonSerializerSettings(settings);
+            return settings;
+        }
+
+        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
+
+        partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
+
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
+        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Create a payout instruction set
+        /// </summary>
+        /// <remarks>
+        /// **Note:** The reference content in this section documents the Payments Engine endpoint. The Payments Engine endpoints include APIs available only for customers with Payments Engine enabled on their accounts. &lt;/br&gt;
+        /// <br/>&lt;/br&gt;These endpoints are currently in beta and might be subject to changes.&lt;/br&gt;
+        /// <br/>&lt;/br&gt;If you want to learn more about Fireblocks Payments Engine, please contact your Fireblocks Customer Success Manager or email CSM@fireblocks.com. &lt;/br&gt;
+        /// <br/>&lt;/br&gt; &lt;b u&gt;Create a payout instruction set.&lt;/b&gt; &lt;/u&gt;&lt;/br&gt;
+        /// <br/>A payout instruction set is a set of instructions for distributing payments from a single payment account to a list of payee accounts. &lt;/br&gt;
+        /// <br/>The instruction set defines: &lt;/br&gt;
+        /// <br/>&lt;ul&gt;
+        /// <br/>&lt;li&gt;the payment account and its account type (vault, exchange, or fiat). &lt;/li&gt;
+        /// <br/>&lt;li&gt;the account type (vault account, exchange account, whitelisted address, network connection, fiat account, or merchant account), the amount, and the asset of payment for each payee account.&lt;/li&gt;
+        /// <br/>&lt;/ul&gt;
+        /// </remarks>
+        /// <returns>The payout instruction set creation succeeded and returns the generated instruction set with a unique payout IDThe payout ID will be used for executing the payout and checking the payout status.</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<PayoutResponse>> PayoutPOSTAsync(CreatePayoutRequest body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/payments/payout");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<PayoutResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new Trakx.Common.ApiClient.Response<PayoutResponse>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorResponse>("Bad request", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorResponse>("Unauthorized. Missing / invalid JWT token in Authorization header.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 500-599)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorResponse>("Internal error.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Execute a payout instruction set
+        /// </summary>
+        /// <remarks>
+        /// **Note:** The reference content in this section documents the Payments Engine endpoint. The Payments Engine endpoints include APIs available only for customers with Payments Engine enabled on their accounts. &lt;/br&gt;
+        /// <br/>&lt;/br&gt;These endpoints are currently in beta and might be subject to changes.&lt;/br&gt;
+        /// <br/>&lt;/br&gt;If you want to learn more about Fireblocks Payments Engine, please contact your Fireblocks Customer Success Manager or email CSM@fireblocks.com. &lt;/br&gt;
+        /// <br/>&lt;/br&gt;&lt;b u&gt;Execute a payout instruction set.&lt;/b&gt; &lt;/u&gt; &lt;/br&gt;
+        /// <br/>&lt;/br&gt;The instruction set will be verified and executed.&lt;/br&gt;
+        /// <br/>&lt;b&gt;&lt;u&gt;Source locking&lt;/br&gt;&lt;/b&gt; &lt;/u&gt;
+        /// <br/>If you are executing a payout instruction set from a payment account with an already active payout the active payout will complete before the new payout instruction set can be executed. &lt;/br&gt;
+        /// <br/>You cannot execute the same payout instruction set more than once.
+        /// </remarks>
+        /// <param name="payoutId">the payout id received from the creation of the payout instruction set</param>
+        /// <returns>Executed the payout instruction set</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<DispatchPayoutResponse>> Execute2Async(string payoutId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (payoutId == null)
+                throw new System.ArgumentNullException("payoutId");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/payments/payout/{payoutId}/actions/execute");
+            urlBuilder_.Replace("{payoutId}", System.Uri.EscapeDataString(ConvertToString(payoutId, System.Globalization.CultureInfo.InvariantCulture)));
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<DispatchPayoutResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new Trakx.Common.ApiClient.Response<DispatchPayoutResponse>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorResponse>("Bad request", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorResponse>("Unauthorized. Missing / invalid JWT token in Authorization header.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 500-599)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorResponse>("Internal error.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get the status of a payout instruction set
+        /// </summary>
+        /// <remarks>
+        /// **Note:** The reference content in this section documents the Payments Engine endpoint. The Payments Engine endpoints include APIs available only for customers with Payments Engine enabled on their accounts. &lt;/br&gt;
+        /// <br/>  &lt;/br&gt;These endpoints are currently in beta and might be subject to changes.&lt;/br&gt;
+        /// <br/>  &lt;/br&gt;If you want to learn more about Fireblocks Payments Engine, please contact your Fireblocks Customer Success Manager or email CSM@fireblocks.com. &lt;/br&gt;
+        /// </remarks>
+        /// <param name="payoutId">the payout id received from the creation of the payout instruction set</param>
+        /// <returns>Returns the current status of the payout instruction set, including the status of each payout instruction and the transactions created in the process.</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<PayoutResponse>> PayoutGETAsync(string payoutId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (payoutId == null)
+                throw new System.ArgumentNullException("payoutId");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/payments/payout/{payoutId}");
+            urlBuilder_.Replace("{payoutId}", System.Uri.EscapeDataString(ConvertToString(payoutId, System.Globalization.CultureInfo.InvariantCulture)));
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<PayoutResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new Trakx.Common.ApiClient.Response<PayoutResponse>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ErrorResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ErrorResponse>("No payout with the given payout ID exists.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         if (status_ == 401)
@@ -11508,7 +12292,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// </remarks>
         /// <returns>A settlement transactions</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<GetSettlementResponse>> TransactionsGET2Async(string mainExchangeAccountId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<SettlementResponse>> TransactionsGET2Async(string mainExchangeAccountId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 
@@ -11791,7 +12575,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// </remarks>
         /// <returns>A settlement transactions</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<GetSettlementResponse>> TransactionsGET2Async(string mainExchangeAccountId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<SettlementResponse>> TransactionsGET2Async(string mainExchangeAccountId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (mainExchangeAccountId == null)
                 throw new System.ArgumentNullException("mainExchangeAccountId");
@@ -11833,12 +12617,12 @@ namespace Trakx.Fireblocks.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<GetSettlementResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<SettlementResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new Trakx.Common.ApiClient.Response<GetSettlementResponse>(status_, headers_, objectResponse_.Object);
+                            return new Trakx.Common.ApiClient.Response<SettlementResponse>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -11992,7 +12776,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="txId">The ID of the transaction for webhooks</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> Resend2Async(string txId, Body25 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> Resend2Async(string txId, Body26 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 
@@ -12111,7 +12895,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="txId">The ID of the transaction for webhooks</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> Resend2Async(string txId, Body25 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> Resend2Async(string txId, Body26 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (txId == null)
                 throw new System.ArgumentNullException("txId");
@@ -12293,28 +13077,10 @@ namespace Trakx.Fireblocks.ApiClient
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Search and update all token balances owned in a vault account.
+        /// Refresh vault account tokens
         /// </summary>
         /// <remarks>
-        /// Search and update balance for all tokens in tenant/vault account
-        /// <br/>
-        /// <br/>**Note**: Note: This endpoint is now in Beta and is not generally available.
-        /// <br/>
-        /// <br/>To enroll in beta &amp; enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
-        /// </remarks>
-        /// <param name="vaultAccountId">Vault account filter</param>
-        /// <param name="blockchainDescriptor">Blockchain descriptor filter</param>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> FindAllTokensByOwnerAsync(string vaultAccountId, string blockchainDescriptor, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// List all tokens and their balances owned in a vault account.
-        /// </summary>
-        /// <remarks>
-        /// Fetch all owned tokens in tenant with their corresponding balance.
-        /// <br/>
-        /// <br/>Can be filtered by blockchain, vault account ID and specific IDs.
+        /// Updates all tokens and balances per blockchain and vault account.
         /// <br/>
         /// <br/>**Note**: This endpoint is now in Beta, disabled for general availability at this time.
         /// <br/>
@@ -12322,58 +13088,95 @@ namespace Trakx.Fireblocks.ApiClient
         /// </remarks>
         /// <param name="blockchainDescriptor">Blockchain descriptor filter</param>
         /// <param name="vaultAccountId">Vault account filter</param>
-        /// <param name="ids">A comma separated list of token IDs. Up to 100 are allowed in a single request.</param>
-        /// <param name="pageCursor">Page cursor to fetch</param>
-        /// <param name="pageSize">Items per page (max 100)</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<TokenOwnershipResponse>>> GetAllNFTsByOwnerAsync(string blockchainDescriptor = null, string vaultAccountId = null, string ids = null, string pageCursor = null, double? pageSize = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> RefreshNFTOwnershipByVaultAsync(BlockchainDescriptor blockchainDescriptor, string vaultAccountId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Update token metadata by ID.
+        /// List all owned tokens (paginated)
         /// </summary>
         /// <remarks>
+        /// Returns all tokens and their data in your workspace.
+        /// <br/>
+        /// <br/>**Note**: This endpoint is now in Beta, disabled for general availability at this time.
+        /// <br/>
+        /// <br/>To enroll in beta &amp; enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <param name="blockchainDescriptor">Blockchain descriptor filter</param>
+        /// <param name="vaultAccountIds">A comma separated list of Vault Account IDs. Up to 100 are allowed in a single request</param>
+        /// <param name="ids">A comma separated list of NFT IDs. Up to 100 are allowed in a single request.</param>
+        /// <param name="collectionIds">A comma separated list of collection IDs. Up to 100 are allowed in a single request.</param>
+        /// <param name="pageCursor">Page cursor to fetch</param>
+        /// <param name="pageSize">Items per page (max 100)</param>
+        /// <param name="sort">Sort by param, it can be one param or a list of params separated by comma</param>
+        /// <param name="order">Order direction, it can be `ASC` for ascending or `DESC` for descending</param>
+        /// <param name="status">Token ownership status</param>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<Response9>> GetOwnedNFTsAsync(BlockchainDescriptor2? blockchainDescriptor = null, string vaultAccountIds = null, string ids = null, string collectionIds = null, string pageCursor = null, double? pageSize = null, System.Collections.Generic.List<Anonymous> sort = null, Order? order = null, Status? status = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
         /// Refresh token metadata
+        /// </summary>
+        /// <remarks>
+        /// Updates the latest token metadata.
         /// <br/>
         /// <br/>**Note**: This endpoint is now in Beta, disabled for general availability at this time.
         /// <br/>
         /// <br/>To enroll in beta &amp; enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
         /// </remarks>
-        /// <param name="id">token id to refresh</param>
+        /// <param name="id">NFT ID</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> RefreshNFTAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> RefreshNFTMetadataAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Retrieve a list of tokens by ID.
+        /// List token data by ID
         /// </summary>
         /// <remarks>
-        /// Fetch a token by ID
+        /// Returns the requested token data.
         /// <br/>
         /// <br/>**Note**: This endpoint is now in Beta, disabled for general availability at this time.
         /// <br/>
         /// <br/>To enroll in beta &amp; enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
         /// </remarks>
-        /// <param name="id">token id to fetch</param>
+        /// <param name="id">NFT ID</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TokenResponse>> GetTokenByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TokenResponse>> GetNFTAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// List all tokens in a vault account.
+        /// List tokens by IDs
         /// </summary>
         /// <remarks>
-        /// Fetch a list of all tokens.
+        /// Returns the requested tokens data
         /// <br/>
         /// <br/>**Note**: This endpoint is now in Beta, disabled for general availability at this time.
         /// <br/>
         /// <br/>To enroll in beta &amp; enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
         /// </remarks>
-        /// <param name="ids">comma separated of tokens ids to fetch</param>
+        /// <param name="ids">A comma separated list of NFT IDs. Up to 100 are allowed in a single request.</param>
         /// <param name="pageCursor">Page cursor to fetch</param>
         /// <param name="pageSize">Items per page (max 100)</param>
+        /// <param name="sort">Sort by param, it can be one param or a list of params separated by comma</param>
+        /// <param name="order">Order direction, it can be `ASC` for ascending or `DESC` for descending</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<TokenResponse>>> GetTokenAsync(string ids, string pageCursor = null, string pageSize = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<Response10>> GetNFTsAsync(string ids, string pageCursor = null, double? pageSize = null, System.Collections.Generic.List<Anonymous2> sort = null, Order2? order = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Update token ownership status
+        /// </summary>
+        /// <remarks>
+        /// Updates token ownership status for a tenant, in all tenant vaults.
+        /// <br/>
+        /// <br/>**Note**: This endpoint is now in Beta, disabled for general availability at this time.
+        /// <br/>
+        /// <br/>To enroll in beta &amp; enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <param name="id">NFT ID</param>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> UpdateTokenOwnershipStatusAsync(string id, UpdateTokenOwnershipStatusDto body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 
@@ -12406,30 +13209,30 @@ namespace Trakx.Fireblocks.ApiClient
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Search and update all token balances owned in a vault account.
+        /// Refresh vault account tokens
         /// </summary>
         /// <remarks>
-        /// Search and update balance for all tokens in tenant/vault account
+        /// Updates all tokens and balances per blockchain and vault account.
         /// <br/>
-        /// <br/>**Note**: Note: This endpoint is now in Beta and is not generally available.
+        /// <br/>**Note**: This endpoint is now in Beta, disabled for general availability at this time.
         /// <br/>
         /// <br/>To enroll in beta &amp; enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
         /// </remarks>
-        /// <param name="vaultAccountId">Vault account filter</param>
         /// <param name="blockchainDescriptor">Blockchain descriptor filter</param>
+        /// <param name="vaultAccountId">Vault account filter</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> FindAllTokensByOwnerAsync(string vaultAccountId, string blockchainDescriptor, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> RefreshNFTOwnershipByVaultAsync(BlockchainDescriptor blockchainDescriptor, string vaultAccountId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (vaultAccountId == null)
-                throw new System.ArgumentNullException("vaultAccountId");
-
             if (blockchainDescriptor == null)
                 throw new System.ArgumentNullException("blockchainDescriptor");
 
+            if (vaultAccountId == null)
+                throw new System.ArgumentNullException("vaultAccountId");
+
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/nfts/ownership/tokens?");
-            urlBuilder_.Append(System.Uri.EscapeDataString("vaultAccountId") + "=").Append(System.Uri.EscapeDataString(ConvertToString(vaultAccountId, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             urlBuilder_.Append(System.Uri.EscapeDataString("blockchainDescriptor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(blockchainDescriptor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            urlBuilder_.Append(System.Uri.EscapeDataString("vaultAccountId") + "=").Append(System.Uri.EscapeDataString(ConvertToString(vaultAccountId, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
@@ -12488,24 +13291,26 @@ namespace Trakx.Fireblocks.ApiClient
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// List all tokens and their balances owned in a vault account.
+        /// List all owned tokens (paginated)
         /// </summary>
         /// <remarks>
-        /// Fetch all owned tokens in tenant with their corresponding balance.
-        /// <br/>
-        /// <br/>Can be filtered by blockchain, vault account ID and specific IDs.
+        /// Returns all tokens and their data in your workspace.
         /// <br/>
         /// <br/>**Note**: This endpoint is now in Beta, disabled for general availability at this time.
         /// <br/>
         /// <br/>To enroll in beta &amp; enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
         /// </remarks>
         /// <param name="blockchainDescriptor">Blockchain descriptor filter</param>
-        /// <param name="vaultAccountId">Vault account filter</param>
-        /// <param name="ids">A comma separated list of token IDs. Up to 100 are allowed in a single request.</param>
+        /// <param name="vaultAccountIds">A comma separated list of Vault Account IDs. Up to 100 are allowed in a single request</param>
+        /// <param name="ids">A comma separated list of NFT IDs. Up to 100 are allowed in a single request.</param>
+        /// <param name="collectionIds">A comma separated list of collection IDs. Up to 100 are allowed in a single request.</param>
         /// <param name="pageCursor">Page cursor to fetch</param>
         /// <param name="pageSize">Items per page (max 100)</param>
+        /// <param name="sort">Sort by param, it can be one param or a list of params separated by comma</param>
+        /// <param name="order">Order direction, it can be `ASC` for ascending or `DESC` for descending</param>
+        /// <param name="status">Token ownership status</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<TokenOwnershipResponse>>> GetAllNFTsByOwnerAsync(string blockchainDescriptor = null, string vaultAccountId = null, string ids = null, string pageCursor = null, double? pageSize = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<Response9>> GetOwnedNFTsAsync(BlockchainDescriptor2? blockchainDescriptor = null, string vaultAccountIds = null, string ids = null, string collectionIds = null, string pageCursor = null, double? pageSize = null, System.Collections.Generic.List<Anonymous> sort = null, Order? order = null, Status? status = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/nfts/ownership/tokens?");
@@ -12513,13 +13318,17 @@ namespace Trakx.Fireblocks.ApiClient
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("blockchainDescriptor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(blockchainDescriptor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (vaultAccountId != null)
+            if (vaultAccountIds != null)
             {
-                urlBuilder_.Append(System.Uri.EscapeDataString("vaultAccountId") + "=").Append(System.Uri.EscapeDataString(ConvertToString(vaultAccountId, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append(System.Uri.EscapeDataString("vaultAccountIds") + "=").Append(System.Uri.EscapeDataString(ConvertToString(vaultAccountIds, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (ids != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(ids, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (collectionIds != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("collectionIds") + "=").Append(System.Uri.EscapeDataString(ConvertToString(collectionIds, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (pageCursor != null)
             {
@@ -12528,6 +13337,18 @@ namespace Trakx.Fireblocks.ApiClient
             if (pageSize != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("pageSize") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (sort != null)
+            {
+                foreach (var item_ in sort) { urlBuilder_.Append(System.Uri.EscapeDataString("sort") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+            }
+            if (order != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("order") + "=").Append(System.Uri.EscapeDataString(ConvertToString(order, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (status != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("status") + "=").Append(System.Uri.EscapeDataString(ConvertToString(status, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -12563,12 +13384,12 @@ namespace Trakx.Fireblocks.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<TokenOwnershipResponse>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response9>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new Trakx.Common.ApiClient.Response<System.Collections.Generic.List<TokenOwnershipResponse>>(status_, headers_, objectResponse_.Object);
+                            return new Trakx.Common.ApiClient.Response<Response9>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -12592,18 +13413,18 @@ namespace Trakx.Fireblocks.ApiClient
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Update token metadata by ID.
+        /// Refresh token metadata
         /// </summary>
         /// <remarks>
-        /// Refresh token metadata
+        /// Updates the latest token metadata.
         /// <br/>
         /// <br/>**Note**: This endpoint is now in Beta, disabled for general availability at this time.
         /// <br/>
         /// <br/>To enroll in beta &amp; enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
         /// </remarks>
-        /// <param name="id">token id to refresh</param>
+        /// <param name="id">NFT ID</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> RefreshNFTAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> RefreshNFTMetadataAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -12668,18 +13489,18 @@ namespace Trakx.Fireblocks.ApiClient
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Retrieve a list of tokens by ID.
+        /// List token data by ID
         /// </summary>
         /// <remarks>
-        /// Fetch a token by ID
+        /// Returns the requested token data.
         /// <br/>
         /// <br/>**Note**: This endpoint is now in Beta, disabled for general availability at this time.
         /// <br/>
         /// <br/>To enroll in beta &amp; enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
         /// </remarks>
-        /// <param name="id">token id to fetch</param>
+        /// <param name="id">NFT ID</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TokenResponse>> GetTokenByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TokenResponse>> GetNFTAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -12749,20 +13570,22 @@ namespace Trakx.Fireblocks.ApiClient
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// List all tokens in a vault account.
+        /// List tokens by IDs
         /// </summary>
         /// <remarks>
-        /// Fetch a list of all tokens.
+        /// Returns the requested tokens data
         /// <br/>
         /// <br/>**Note**: This endpoint is now in Beta, disabled for general availability at this time.
         /// <br/>
         /// <br/>To enroll in beta &amp; enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
         /// </remarks>
-        /// <param name="ids">comma separated of tokens ids to fetch</param>
+        /// <param name="ids">A comma separated list of NFT IDs. Up to 100 are allowed in a single request.</param>
         /// <param name="pageCursor">Page cursor to fetch</param>
         /// <param name="pageSize">Items per page (max 100)</param>
+        /// <param name="sort">Sort by param, it can be one param or a list of params separated by comma</param>
+        /// <param name="order">Order direction, it can be `ASC` for ascending or `DESC` for descending</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<TokenResponse>>> GetTokenAsync(string ids, string pageCursor = null, string pageSize = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<Response10>> GetNFTsAsync(string ids, string pageCursor = null, double? pageSize = null, System.Collections.Generic.List<Anonymous2> sort = null, Order2? order = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (ids == null)
                 throw new System.ArgumentNullException("ids");
@@ -12777,6 +13600,14 @@ namespace Trakx.Fireblocks.ApiClient
             if (pageSize != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("pageSize") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (sort != null)
+            {
+                foreach (var item_ in sort) { urlBuilder_.Append(System.Uri.EscapeDataString("sort") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+            }
+            if (order != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("order") + "=").Append(System.Uri.EscapeDataString(ConvertToString(order, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -12812,12 +13643,94 @@ namespace Trakx.Fireblocks.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<TokenResponse>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response10>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new Trakx.Common.ApiClient.Response<System.Collections.Generic.List<TokenResponse>>(status_, headers_, objectResponse_.Object);
+                            return new Trakx.Common.ApiClient.Response<Response10>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Update token ownership status
+        /// </summary>
+        /// <remarks>
+        /// Updates token ownership status for a tenant, in all tenant vaults.
+        /// <br/>
+        /// <br/>**Note**: This endpoint is now in Beta, disabled for general availability at this time.
+        /// <br/>
+        /// <br/>To enroll in beta &amp; enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <param name="id">NFT ID</param>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response> UpdateTokenOwnershipStatusAsync(string id, UpdateTokenOwnershipStatusDto body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (id == null)
+                throw new System.ArgumentNullException("id");
+
+            if (body == null)
+                throw new System.ArgumentNullException("body");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/nfts/ownership/tokens/{id}/status");
+            urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return new Trakx.Common.ApiClient.Response(status_, headers_);
                         }
                         else
                         {
@@ -12959,7 +13872,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="pageSize">Amount of results to return in the next page.</param>
         /// <param name="next">Cursor to the next page</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<GetConnectionsResponse>> GetAsync(Order? order = null, Filter filter = null, Sort2? sort = null, double? pageSize = null, string next = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<GetConnectionsResponse>> GetAsync(Order3? order = null, Filter filter = null, Sort2? sort = null, double? pageSize = null, string next = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -12979,7 +13892,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Respond to a pending Web3 connection request.
         /// </summary>
         /// <remarks>
-        /// Submit a response to *approve* or *reject* an initiated Web3 connection. 
+        /// Submit a response to *approve* or *reject* an initiated Web3 connection.
         /// <br/>* Note: This call is used to complete your `POST /v1/connections/wc/` request.
         /// <br/>
         /// <br/>After this succeeds, your new Web3 connection is created and functioning.
@@ -13043,7 +13956,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="pageSize">Amount of results to return in the next page.</param>
         /// <param name="next">Cursor to the next page</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<GetConnectionsResponse>> GetAsync(Order? order = null, Filter filter = null, Sort2? sort = null, double? pageSize = null, string next = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<GetConnectionsResponse>> GetAsync(Order3? order = null, Filter filter = null, Sort2? sort = null, double? pageSize = null, string next = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/connections?");
@@ -13239,7 +14152,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Respond to a pending Web3 connection request.
         /// </summary>
         /// <remarks>
-        /// Submit a response to *approve* or *reject* an initiated Web3 connection. 
+        /// Submit a response to *approve* or *reject* an initiated Web3 connection.
         /// <br/>* Note: This call is used to complete your `POST /v1/connections/wc/` request.
         /// <br/>
         /// <br/>After this succeeds, your new Web3 connection is created and functioning.
@@ -13521,16 +14434,744 @@ namespace Trakx.Fireblocks.ApiClient
         }
     }
 
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial interface ITravel_Rule_BetaClient
+    {
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Validate Travel Rule Transaction
+        /// </summary>
+        /// <remarks>
+        /// Validate Travel Rule transactions.
+        /// <br/>
+        /// <br/>Checks what beneficiary VASP details are required by your jurisdiction and the beneficiary's jurisdiction.
+        /// <br/>
+        /// <br/>**Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
+        /// <br/>
+        /// <br/>To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <returns>Transaction validated successfully</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TravelRuleValidateTransactionResponse>> TravelRuleApiController_validateAsync(TravelRuleValidateTransactionRequest body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Validate Full Travel Rule Transaction
+        /// </summary>
+        /// <remarks>
+        /// Validate Full Travel Rule transactions.
+        /// <br/>
+        /// <br/>Checks for all required information on the originator and beneficiary VASPs.
+        /// <br/>
+        /// <br/>**Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
+        /// <br/>
+        /// <br/>To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <returns>Transaction validated successfully</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TravelRuleValidateTransactionResponse>> TravelRuleApiController_validateFullAsync(TravelRuleValidateFullTransactionRequest body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get VASP details
+        /// </summary>
+        /// <remarks>
+        /// Get VASP Details.
+        /// <br/>
+        /// <br/>Returns information about a VASP that has the specified DID.
+        /// <br/>
+        /// <br/>**Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
+        /// <br/>
+        /// <br/>To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <param name="fields">CSV of fields to return (all, "blank" or see list of all field names below)</param>
+        /// <returns>Transaction validated successfully</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TravelRuleVASP>> TravelRuleApiController_findVaspAsync(string did, string fields = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get All VASPs
+        /// </summary>
+        /// <remarks>
+        /// Get All VASPs.
+        /// <br/>
+        /// <br/>Returns a list of VASPs. VASPs can be searched and sorted and results are paginated.
+        /// <br/>
+        /// <br/>**Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
+        /// <br/>
+        /// <br/>To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <param name="order">Field to order by</param>
+        /// <param name="per_page">Records per page</param>
+        /// <param name="page">Page number</param>
+        /// <param name="fields">CSV of fields to return (all, "blank" or see list of all field names below)</param>
+        /// <returns>Get all VASPs</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TravelRuleGetAllVASPsResponse>> TravelRuleApiController_findAllVaspAsync(string order = null, double? per_page = null, double? page = null, string fields = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Add jsonDidKey to VASP details
+        /// </summary>
+        /// <remarks>
+        /// Update VASP Details.
+        /// <br/>
+        /// <br/>Updates a VASP with the provided parameters. Use this endpoint to add your public jsonDIDkey generated by Notabene.
+        /// <br/>
+        /// <br/>**Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
+        /// <br/>
+        /// <br/>To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <returns>VASP updated successfully</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TravelRuleUpdateVASPDetails>> TravelRuleApiController_updateVaspAsync(TravelRuleUpdateVASPDetails body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    internal partial class Travel_Rule_BetaClient : AuthorisedClient, ITravel_Rule_BetaClient
+    {
+        private System.Net.Http.HttpClient _httpClient;
+        private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
+
+        public Travel_Rule_BetaClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        {
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
+        }
+
+        private Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
+        {
+            var settings = new Newtonsoft.Json.JsonSerializerSettings();
+            UpdateJsonSerializerSettings(settings);
+            return settings;
+        }
+
+        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
+
+        partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
+
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
+        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Validate Travel Rule Transaction
+        /// </summary>
+        /// <remarks>
+        /// Validate Travel Rule transactions.
+        /// <br/>
+        /// <br/>Checks what beneficiary VASP details are required by your jurisdiction and the beneficiary's jurisdiction.
+        /// <br/>
+        /// <br/>**Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
+        /// <br/>
+        /// <br/>To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <returns>Transaction validated successfully</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TravelRuleValidateTransactionResponse>> TravelRuleApiController_validateAsync(TravelRuleValidateTransactionRequest body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (body == null)
+                throw new System.ArgumentNullException("body");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/screening/travel_rule/transaction/validate");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<TravelRuleValidateTransactionResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new Trakx.Common.ApiClient.Response<TravelRuleValidateTransactionResponse>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Invalid request body", status_, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == 500)
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Internal server error", status_, responseText_, headers_, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Validate Full Travel Rule Transaction
+        /// </summary>
+        /// <remarks>
+        /// Validate Full Travel Rule transactions.
+        /// <br/>
+        /// <br/>Checks for all required information on the originator and beneficiary VASPs.
+        /// <br/>
+        /// <br/>**Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
+        /// <br/>
+        /// <br/>To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <returns>Transaction validated successfully</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TravelRuleValidateTransactionResponse>> TravelRuleApiController_validateFullAsync(TravelRuleValidateFullTransactionRequest body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (body == null)
+                throw new System.ArgumentNullException("body");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/screening/travel_rule/transaction/validate/full");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<TravelRuleValidateTransactionResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new Trakx.Common.ApiClient.Response<TravelRuleValidateTransactionResponse>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Invalid request body", status_, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == 500)
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Internal server error", status_, responseText_, headers_, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get VASP details
+        /// </summary>
+        /// <remarks>
+        /// Get VASP Details.
+        /// <br/>
+        /// <br/>Returns information about a VASP that has the specified DID.
+        /// <br/>
+        /// <br/>**Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
+        /// <br/>
+        /// <br/>To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <param name="fields">CSV of fields to return (all, "blank" or see list of all field names below)</param>
+        /// <returns>Transaction validated successfully</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TravelRuleVASP>> TravelRuleApiController_findVaspAsync(string did, string fields = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (did == null)
+                throw new System.ArgumentNullException("did");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/screening/travel_rule/vasp/{did}?");
+            urlBuilder_.Replace("{did}", System.Uri.EscapeDataString(ConvertToString(did, System.Globalization.CultureInfo.InvariantCulture)));
+            if (fields != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("fields") + "=").Append(System.Uri.EscapeDataString(ConvertToString(fields, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<TravelRuleVASP>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new Trakx.Common.ApiClient.Response<TravelRuleVASP>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Invalid request body", status_, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == 500)
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Internal server error", status_, responseText_, headers_, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get All VASPs
+        /// </summary>
+        /// <remarks>
+        /// Get All VASPs.
+        /// <br/>
+        /// <br/>Returns a list of VASPs. VASPs can be searched and sorted and results are paginated.
+        /// <br/>
+        /// <br/>**Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
+        /// <br/>
+        /// <br/>To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <param name="order">Field to order by</param>
+        /// <param name="per_page">Records per page</param>
+        /// <param name="page">Page number</param>
+        /// <param name="fields">CSV of fields to return (all, "blank" or see list of all field names below)</param>
+        /// <returns>Get all VASPs</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TravelRuleGetAllVASPsResponse>> TravelRuleApiController_findAllVaspAsync(string order = null, double? per_page = null, double? page = null, string fields = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/screening/travel_rule/vasp?");
+            if (order != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("order") + "=").Append(System.Uri.EscapeDataString(ConvertToString(order, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (per_page != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("per_page") + "=").Append(System.Uri.EscapeDataString(ConvertToString(per_page, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (page != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("page") + "=").Append(System.Uri.EscapeDataString(ConvertToString(page, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (fields != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("fields") + "=").Append(System.Uri.EscapeDataString(ConvertToString(fields, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<TravelRuleGetAllVASPsResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new Trakx.Common.ApiClient.Response<TravelRuleGetAllVASPsResponse>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Add jsonDidKey to VASP details
+        /// </summary>
+        /// <remarks>
+        /// Update VASP Details.
+        /// <br/>
+        /// <br/>Updates a VASP with the provided parameters. Use this endpoint to add your public jsonDIDkey generated by Notabene.
+        /// <br/>
+        /// <br/>**Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
+        /// <br/>
+        /// <br/>To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
+        /// </remarks>
+        /// <returns>VASP updated successfully</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TravelRuleUpdateVASPDetails>> TravelRuleApiController_updateVaspAsync(TravelRuleUpdateVASPDetails body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (body == null)
+                throw new System.ArgumentNullException("body");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/screeening/travel_rule/vasp/update");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = client_.Send(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<TravelRuleUpdateVASPDetails>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new Trakx.Common.ApiClient.Response<TravelRuleUpdateVASPDetails>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        if (status_ == 400)
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Invalid request body", status_, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == 500)
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Internal server error", status_, responseText_, headers_, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        protected struct ObjectResponseResult<T>
+        {
+            public ObjectResponseResult(T responseObject, string responseText)
+            {
+                this.Object = responseObject;
+                this.Text = responseText;
+            }
+
+            public T Object { get; }
+
+            public string Text { get; }
+        }
+
+        public bool ReadResponseAsString { get; set; }
+
+        protected virtual async System.Threading.Tasks.Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(System.Net.Http.HttpResponseMessage response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Threading.CancellationToken cancellationToken)
+        {
+            if (response == null || response.Content == null)
+            {
+                return new ObjectResponseResult<T>(default(T), string.Empty);
+            }
+
+            if (ReadResponseAsString)
+            {
+                var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    var typedBody = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseText, JsonSerializerSettings);
+                    return new ObjectResponseResult<T>(typedBody, responseText);
+                }
+                catch (Newtonsoft.Json.JsonException exception)
+                {
+                    var message = "Could not deserialize the response body string as " + typeof(T).FullName + ".";
+                    throw new ApiException(message, (int)response.StatusCode, responseText, headers, exception);
+                }
+            }
+            else
+            {
+                try
+                {
+                    using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    using (var streamReader = new System.IO.StreamReader(responseStream))
+                    using (var jsonTextReader = new Newtonsoft.Json.JsonTextReader(streamReader))
+                    {
+                        var serializer = Newtonsoft.Json.JsonSerializer.Create(JsonSerializerSettings);
+                        var typedBody = serializer.Deserialize<T>(jsonTextReader);
+                        return new ObjectResponseResult<T>(typedBody, string.Empty);
+                    }
+                }
+                catch (Newtonsoft.Json.JsonException exception)
+                {
+                    var message = "Could not deserialize the response body stream as " + typeof(T).FullName + ".";
+                    throw new ApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
+                }
+            }
+        }
+
+        private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            if (value == null)
+            {
+                return "";
+            }
+
+            if (value is System.Enum)
+            {
+                var name = System.Enum.GetName(value.GetType(), value);
+                if (name != null)
+                {
+                    var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
+                    if (field != null)
+                    {
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                            as System.Runtime.Serialization.EnumMemberAttribute;
+                        if (attribute != null)
+                        {
+                            return attribute.Value != null ? attribute.Value : name;
+                        }
+                    }
+
+                    var converted = System.Convert.ToString(System.Convert.ChangeType(value, System.Enum.GetUnderlyingType(value.GetType()), cultureInfo));
+                    return converted == null ? string.Empty : converted;
+                }
+            }
+            else if (value is bool) 
+            {
+                return System.Convert.ToString((bool)value, cultureInfo).ToLowerInvariant();
+            }
+            else if (value is byte[])
+            {
+                return System.Convert.ToBase64String((byte[]) value);
+            }
+            else if (value.GetType().IsArray)
+            {
+                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
+            }
+
+            var result = System.Convert.ToString(value, cultureInfo);
+            return result == null ? "" : result;
+        }
+    }
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial record MediaEntityResponse
     {
+        /// <summary>
+        /// Cached accessible URL
+        /// </summary>
         [Newtonsoft.Json.JsonProperty("url", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Url { get; set; }
 
+        /// <summary>
+        /// Media type
+        /// </summary>
         [Newtonsoft.Json.JsonProperty("contentType", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string ContentType { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public MediaEntityResponseContentType ContentType { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -13573,7 +15214,7 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record TokenResponse
     {
         /// <summary>
-        /// Unique token id with fireblocks
+        /// The Fireblocks NFT asset id
         /// </summary>
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -13594,11 +15235,16 @@ namespace Trakx.Fireblocks.ApiClient
         public string Standard { get; set; }
 
         /// <summary>
-        /// URL to original token metadata JSON
+        /// URL of the original token JSON metadata
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("metadataURI", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string MetadataURI { get; set; }
+        [Newtonsoft.Json.JsonProperty("metadataURI", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string MetadataURI { get; init; }
+
+        /// <summary>
+        /// URL of the cached token JSON metadata
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("cachedMetadataURI", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CachedMetadataURI { get; init; }
 
         /// <summary>
         /// Media items extracted from metadata JSON
@@ -13610,13 +15256,13 @@ namespace Trakx.Fireblocks.ApiClient
         /// <summary>
         /// Parent collection information
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("collection", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public TokenCollectionResponse Collection { get; set; } = new TokenCollectionResponse();
+        [Newtonsoft.Json.JsonProperty("collection", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public TokenCollectionResponse Collection { get; init; }
 
         [Newtonsoft.Json.JsonProperty("blockchainDescriptor", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string BlockchainDescriptor { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public TokenResponseBlockchainDescriptor BlockchainDescriptor { get; set; }
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -13638,10 +15284,50 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record UpdateTokenOwnershipStatusDto
+    {
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public UpdateTokenOwnershipStatusDtoStatus Status { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record Paging
+    {
+        /// <summary>
+        /// Cursor to the next page
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("next", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Next { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial record TokenOwnershipResponse
     {
         /// <summary>
-        /// Unique token id with fireblocks
+        /// The Fireblocks NFT asset id
         /// </summary>
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -13662,11 +15348,16 @@ namespace Trakx.Fireblocks.ApiClient
         public string Standard { get; set; }
 
         /// <summary>
-        /// URL to original token metadata JSON
+        /// URL of the original token JSON metadata
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("metadataURI", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string MetadataURI { get; set; }
+        [Newtonsoft.Json.JsonProperty("metadataURI", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string MetadataURI { get; init; }
+
+        /// <summary>
+        /// URL of the cached token JSON metadata
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("cachedMetadataURI", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CachedMetadataURI { get; init; }
 
         /// <summary>
         /// Media items extracted from metadata JSON
@@ -13678,20 +15369,27 @@ namespace Trakx.Fireblocks.ApiClient
         /// <summary>
         /// Parent collection information
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("collection", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public TokenCollectionResponse Collection { get; set; } = new TokenCollectionResponse();
+        [Newtonsoft.Json.JsonProperty("collection", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public TokenCollectionResponse Collection { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Balance { get; set; }
 
         [Newtonsoft.Json.JsonProperty("vaultAccountId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string VaultAccountId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.Always)]
-        public double Balance { get; init; }
+        [Newtonsoft.Json.JsonProperty("ownershipStartTime", Required = Newtonsoft.Json.Required.Always)]
+        public double OwnershipStartTime { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("ownershipLastUpdateTime", Required = Newtonsoft.Json.Required.Always)]
+        public double OwnershipLastUpdateTime { get; init; }
 
         [Newtonsoft.Json.JsonProperty("blockchainDescriptor", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string BlockchainDescriptor { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public TokenOwnershipResponseBlockchainDescriptor BlockchainDescriptor { get; set; }
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -13726,7 +15424,7 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ConfigChangeRequestStatus Status { get; set; }
+        public ConfigChangeRequestStatus? Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Address { get; init; }
@@ -13756,7 +15454,7 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ConfigChangeRequestStatus Status { get; set; }
+        public ConfigChangeRequestStatus? Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Address { get; init; }
@@ -13961,19 +15659,19 @@ namespace Trakx.Fireblocks.ApiClient
         /// The maximum BIP44 index used in deriving addresses for this wallet
         /// </summary>
         [Newtonsoft.Json.JsonProperty("maxBip44AddressIndexUsed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double MaxBip44AddressIndexUsed { get; init; }
+        public double? MaxBip44AddressIndexUsed { get; init; }
 
         /// <summary>
         /// The maximum BIP44 index used in deriving change addresses for this wallet
         /// </summary>
         [Newtonsoft.Json.JsonProperty("maxBip44ChangeAddressIndexUsed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double MaxBip44ChangeAddressIndexUsed { get; init; }
+        public double? MaxBip44ChangeAddressIndexUsed { get; init; }
 
         /// <summary>
         /// Deprecated
         /// </summary>
         [Newtonsoft.Json.JsonProperty("totalStakedCPU", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double TotalStakedCPU { get; init; }
+        public double? TotalStakedCPU { get; init; }
 
         /// <summary>
         /// Deprecated
@@ -14048,7 +15746,7 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("addressFormat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public VaultWalletAddressAddressFormat AddressFormat { get; set; }
+        public VaultWalletAddressAddressFormat? AddressFormat { get; set; }
 
         [Newtonsoft.Json.JsonProperty("legacyAddress", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string LegacyAddress { get; init; }
@@ -14057,10 +15755,10 @@ namespace Trakx.Fireblocks.ApiClient
         public string EnterpriseAddress { get; init; }
 
         [Newtonsoft.Json.JsonProperty("bip44AddressIndex", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Bip44AddressIndex { get; init; }
+        public int? Bip44AddressIndex { get; init; }
 
         [Newtonsoft.Json.JsonProperty("userDefined", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool UserDefined { get; init; }
+        public bool? UserDefined { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -14089,7 +15787,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string Tag { get; init; }
 
         [Newtonsoft.Json.JsonProperty("bip44AddressIndex", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Bip44AddressIndex { get; init; }
+        public int? Bip44AddressIndex { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -14129,6 +15827,106 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record PaginatedAssetWalletResponse
+    {
+        [Newtonsoft.Json.JsonProperty("assetWallets", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.List<AssetWallet> AssetWallets { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("paging", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Paging3 Paging { get; init; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record AssetWallet
+    {
+        /// <summary>
+        /// ID of the vault account. You can [get the vault account by this ID](https://developers.fireblocks.com/reference/get_vault-accounts-vaultaccountid) to retrieve vault properties such as its name, auto fueling, hidden on UI or customer reference ID.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("vaultId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string VaultId { get; init; }
+
+        /// <summary>
+        /// ID of the asset. You can get more information about this asset by using the [supported assets API](https://developers.fireblocks.com/reference/get_supported-assets)
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AssetId { get; init; }
+
+        /// <summary>
+        /// Available balance, available to use in a transaction.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("available", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Available { get; init; }
+
+        /// <summary>
+        /// Total balance at the asset wallet, as seen at the blockchain explorers. This includes balance available, and any kind of unavailable balance such as locked, frozen, or others.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Total { get; init; }
+
+        /// <summary>
+        /// Pending balance.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("pending", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Pending { get; init; }
+
+        /// <summary>
+        /// Staked balance.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("staked", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Staked { get; init; }
+
+        /// <summary>
+        /// Funds frozen due to the anti-money laundering policy at this workspace.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("frozen", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Frozen { get; init; }
+
+        /// <summary>
+        /// Locked balance.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("lockedAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string LockedAmount { get; init; }
+
+        /// <summary>
+        /// The height (number) of the block of the balance. Can by empty.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("blockHeight", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BlockHeight { get; init; }
+
+        /// <summary>
+        /// The hash of the block of the balance. Can by empty.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("blockHash", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BlockHash { get; init; }
+
+        /// <summary>
+        /// Unix timestamp of the time the asset wallet was created.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("creationTimestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CreationTimestamp { get; init; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial record VaultAccount
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -14141,13 +15939,13 @@ namespace Trakx.Fireblocks.ApiClient
         public System.Collections.Generic.List<VaultAsset> Assets { get; init; }
 
         [Newtonsoft.Json.JsonProperty("hiddenOnUI", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool HiddenOnUI { get; init; }
+        public bool? HiddenOnUI { get; init; }
 
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CustomerRefId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("autoFuel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool AutoFuel { get; init; }
+        public bool? AutoFuel { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -14196,7 +15994,7 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExchangeType Type { get; set; }
+        public ExchangeType? Type { get; set; }
 
         /// <summary>
         /// Display name of the exchange account
@@ -14217,7 +16015,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// True if the account is a subaccount in an exchange
         /// </summary>
         [Newtonsoft.Json.JsonProperty("isSubaccount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsSubaccount { get; init; }
+        public bool? IsSubaccount { get; init; }
 
         /// <summary>
         /// if the account is a sub-account, the ID of the main account
@@ -14244,7 +16042,7 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public FiatAccountType Type { get; set; }
+        public FiatAccountType? Type { get; set; }
 
         /// <summary>
         /// Display name of the fiat account
@@ -14348,7 +16146,7 @@ namespace Trakx.Fireblocks.ApiClient
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SystemMessageInfoType Type { get; set; }
+        public SystemMessageInfoType? Type { get; set; }
 
         /// <summary>
         /// A response from Fireblocks that communicates a message about the health of the process being performed. If this object is returned with data, you should expect potential delays or incomplete transaction statuses.
@@ -14371,7 +16169,7 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record CancelTransactionResponse
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Success { get; init; }
+        public bool? Success { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -14388,7 +16186,7 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record UnfreezeTransactionResponse
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Success { get; init; }
+        public bool? Success { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -14405,7 +16203,7 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record FreezeTransactionResponse
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Success { get; init; }
+        public bool? Success { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -14485,11 +16283,11 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record AuthorizationInfo
     {
         [Newtonsoft.Json.JsonProperty("allowOperatorAsAuthorizer", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool AllowOperatorAsAuthorizer { get; init; }
+        public bool? AllowOperatorAsAuthorizer { get; init; }
 
         [Newtonsoft.Json.JsonProperty("logic", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AuthorizationInfoLogic Logic { get; set; }
+        public AuthorizationInfoLogic? Logic { get; set; }
 
         [Newtonsoft.Json.JsonProperty("groups", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.List<AuthorizationGroups> Groups { get; init; }
@@ -14509,10 +16307,10 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record AuthorizationGroups
     {
         [Newtonsoft.Json.JsonProperty("th", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Th { get; init; }
+        public double? Th { get; init; }
 
         [Newtonsoft.Json.JsonProperty("users", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.IDictionary<string, Anonymous> Users { get; }
+        public System.Collections.Generic.IDictionary<string, Anonymous3> Users { get; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -14610,19 +16408,19 @@ namespace Trakx.Fireblocks.ApiClient
         /// The amount requested by the user
         /// </summary>
         [Newtonsoft.Json.JsonProperty("requestedAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double RequestedAmount { get; init; }
+        public double? RequestedAmount { get; init; }
 
         /// <summary>
         /// If the transfer is a withdrawal from an exchange, the actual amount that was requested to be transferred. Otherwise, the requested amount
         /// </summary>
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Amount { get; init; }
+        public double? Amount { get; init; }
 
         /// <summary>
         /// The net amount of the transaction, after fee deduction
         /// </summary>
         [Newtonsoft.Json.JsonProperty("netAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NetAmount { get; init; }
+        public double? NetAmount { get; init; }
 
         /// <summary>
         /// The USD value of the requested amount
@@ -14634,36 +16432,36 @@ namespace Trakx.Fireblocks.ApiClient
         /// The total fee deducted by the exchange from the actual requested amount (serviceFee = amount - netAmount)
         /// </summary>
         [Newtonsoft.Json.JsonProperty("serviceFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double ServiceFee { get; init; }
+        public double? ServiceFee { get; init; }
 
         /// <summary>
         /// Deprecated - replaced by "networkFee"
         /// </summary>
         [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.Obsolete]
-        public double Fee { get; set; }
+        public double? Fee { get; set; }
 
         /// <summary>
         /// The fee paid to the network
         /// </summary>
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NetworkFee { get; init; }
+        public double? NetworkFee { get; init; }
 
         /// <summary>
         /// Unix timestamp
         /// </summary>
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double CreatedAt { get; init; }
+        public double? CreatedAt { get; init; }
 
         /// <summary>
         /// Unix timestamp
         /// </summary>
         [Newtonsoft.Json.JsonProperty("lastUpdated", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double LastUpdated { get; init; }
+        public double? LastUpdated { get; init; }
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TransactionResponseStatus Status { get; set; }
+        public TransactionResponseStatus? Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("txHash", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TxHash { get; init; }
@@ -14673,7 +16471,7 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("subStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TransactionSubStatus SubStatus { get; set; }
+        public TransactionSubStatus? SubStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("destinationAddress", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DestinationAddress { get; init; }
@@ -14713,7 +16511,7 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("operation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TransactionOperation Operation { get; set; }
+        public TransactionOperation? Operation { get; set; }
 
         [Newtonsoft.Json.JsonProperty("networkRecords", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.List<NetworkRecord> NetworkRecords { get; init; }
@@ -14725,7 +16523,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string CustomerRefId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("numOfConfirmations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NumOfConfirmations { get; init; }
+        public double? NumOfConfirmations { get; init; }
 
         [Newtonsoft.Json.JsonProperty("amountInfo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public AmountInfo AmountInfo { get; init; }
@@ -14734,7 +16532,7 @@ namespace Trakx.Fireblocks.ApiClient
         public FeeInfo FeeInfo { get; init; }
 
         [Newtonsoft.Json.JsonProperty("signedMessages", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<SignedMessage> SignedMessages { get; init; }
+        public List<SignedMessage> SignedMessages { get; init; }
 
         [Newtonsoft.Json.JsonProperty("extraParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object ExtraParameters { get; init; }
@@ -14752,7 +16550,7 @@ namespace Trakx.Fireblocks.ApiClient
         public AuthorizationInfo AuthorizationInfo { get; init; }
 
         [Newtonsoft.Json.JsonProperty("index", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Index { get; init; }
+        public double? Index { get; init; }
 
         [Newtonsoft.Json.JsonProperty("rewardInfo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RewardInfo RewardInfo { get; init; }
@@ -14761,7 +16559,7 @@ namespace Trakx.Fireblocks.ApiClient
         public FeePayerInfo FeePayerInfo { get; init; }
 
         [Newtonsoft.Json.JsonProperty("treatAsGrossAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool TreatAsGrossAmount { get; init; }
+        public bool? TreatAsGrossAmount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("systemMessages", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public SystemMessageInfo SystemMessages { get; init; }
@@ -14831,7 +16629,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string NetAmount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("isDropped", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsDropped { get; init; }
+        public bool? IsDropped { get; init; }
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Type { get; init; }
@@ -14846,7 +16644,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string AmountUSD { get; init; }
 
         [Newtonsoft.Json.JsonProperty("index", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Index { get; init; }
+        public double? Index { get; init; }
 
         [Newtonsoft.Json.JsonProperty("rewardInfo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RewardInfo RewardInfo { get; init; }
@@ -14885,7 +16683,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string NativeAsset { get; init; }
 
         [Newtonsoft.Json.JsonProperty("decimals", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Decimals { get; init; }
+        public double? Decimals { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -15202,7 +17000,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// The specific network is discoverable.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("isDiscoverable", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsDiscoverable { get; init; }
+        public bool? IsDiscoverable { get; init; }
 
     }
 
@@ -15232,7 +17030,7 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("feeLevel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TransactionRequestFeeLevel FeeLevel { get; set; }
+        public TransactionRequestFeeLevel? FeeLevel { get; set; }
 
         /// <summary>
         /// - For ETH based assets only, the fee for eip-1559 transaction pricing mechanism. Value is in gwei. - A numeric value representation is required.
@@ -15241,7 +17039,7 @@ namespace Trakx.Fireblocks.ApiClient
         public double PriorityFee { get; init; }
 
         [Newtonsoft.Json.JsonProperty("failOnLowFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool FailOnLowFee { get; init; }
+        public bool? FailOnLowFee { get; init; }
 
         /// <summary>
         /// - For ETH based assets only, must be provided when using the priorityFee parameter. This will be used to limit the fee max possible fee (according to eip-1559). Value is in gwei.
@@ -15273,7 +17071,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string Note { get; init; }
 
         [Newtonsoft.Json.JsonProperty("autoStaking", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool AutoStaking { get; init; }
+        public bool? AutoStaking { get; init; }
 
         [Newtonsoft.Json.JsonProperty("networkStaking", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double NetworkStaking { get; init; }
@@ -15286,7 +17084,7 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("operation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TransactionOperation Operation { get; set; }
+        public TransactionOperation? Operation { get; set; }
 
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CustomerRefId { get; init; }
@@ -15301,10 +17099,10 @@ namespace Trakx.Fireblocks.ApiClient
         public System.Collections.Generic.List<TransactionRequestDestination> Destinations { get; init; }
 
         [Newtonsoft.Json.JsonProperty("treatAsGrossAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool TreatAsGrossAmount { get; init; }
+        public bool? TreatAsGrossAmount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("forceSweep", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool ForceSweep { get; init; }
+        public bool? ForceSweep { get; init; }
 
         [Newtonsoft.Json.JsonProperty("feePayerInfo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public FeePayerInfo2 FeePayerInfo { get; init; }
@@ -15497,7 +17295,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string Message { get; init; }
 
         [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Code { get; init; }
+        public double? Code { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -15801,7 +17599,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string NetworkConnectionId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("outgoing", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Outgoing { get; init; }
+        public bool? Outgoing { get; init; }
 
         [Newtonsoft.Json.JsonProperty("asset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Asset { get; init; }
@@ -15830,7 +17628,7 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record SetConfirmationsThresholdRequest
     {
         [Newtonsoft.Json.JsonProperty("numOfConfirmations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NumOfConfirmations { get; init; }
+        public double? NumOfConfirmations { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -15847,7 +17645,7 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record SetConfirmationsThresholdResponse
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Success { get; init; }
+        public bool? Success { get; init; }
 
         [Newtonsoft.Json.JsonProperty("transactions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.List<string> Transactions { get; init; }
@@ -15890,7 +17688,7 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record DropTransactionResponse
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Success { get; init; }
+        public bool? Success { get; init; }
 
         [Newtonsoft.Json.JsonProperty("transactions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.List<string> Transactions { get; init; }
@@ -15914,10 +17712,10 @@ namespace Trakx.Fireblocks.ApiClient
         public string Content { get; set; }
 
         [Newtonsoft.Json.JsonProperty("bip44addressIndex", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Bip44addressIndex { get; init; }
+        public int? Bip44addressIndex { get; init; }
 
         [Newtonsoft.Json.JsonProperty("bip44change", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Bip44change { get; init; }
+        public double? Bip44change { get; init; }
 
         [Newtonsoft.Json.JsonProperty("derivationPath", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.List<double> DerivationPath { get; init; }
@@ -15941,7 +17739,7 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("algorithm", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SignedMessageAlgorithm Algorithm { get; set; }
+        public SignedMessageAlgorithm? Algorithm { get; set; }
 
         [Newtonsoft.Json.JsonProperty("derivationPath", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.List<double> DerivationPath { get; init; }
@@ -16038,13 +17836,13 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record ValidateAddressResponse
     {
         [Newtonsoft.Json.JsonProperty("isValid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsValid { get; init; }
+        public bool? IsValid { get; init; }
 
         [Newtonsoft.Json.JsonProperty("isActive", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsActive { get; init; }
+        public bool? IsActive { get; init; }
 
         [Newtonsoft.Json.JsonProperty("requiresTag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool RequiresTag { get; init; }
+        public bool? RequiresTag { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16061,7 +17859,7 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record ResendWebhooksResponse
     {
         [Newtonsoft.Json.JsonProperty("messagesCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double MessagesCount { get; init; }
+        public double? MessagesCount { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16087,7 +17885,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string Amount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("confirmations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Confirmations { get; init; }
+        public double? Confirmations { get; init; }
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Status { get; init; }
@@ -16110,7 +17908,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string TxHash { get; init; }
 
         [Newtonsoft.Json.JsonProperty("index", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Index { get; init; }
+        public double? Index { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16335,7 +18133,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string Email { get; init; }
 
         [Newtonsoft.Json.JsonProperty("enabled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Enabled { get; init; }
+        public bool? Enabled { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16442,27 +18240,6 @@ namespace Trakx.Fireblocks.ApiClient
         [Newtonsoft.Json.JsonProperty("creationDate", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public System.DateTimeOffset CreationDate { get; set; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
-
-        [Newtonsoft.Json.JsonExtensionData]
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
-            set { _additionalProperties = value; }
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record Paging
-    {
-        /// <summary>
-        /// Cursor to the next page
-        /// </summary>
-        [Newtonsoft.Json.JsonProperty("next", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Next { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16599,7 +18376,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// optional
         /// </summary>
         [Newtonsoft.Json.JsonProperty("isSrcCollateral", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsSrcCollateral { get; init; }
+        public bool? IsSrcCollateral { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16622,7 +18399,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// optional
         /// </summary>
         [Newtonsoft.Json.JsonProperty("isDstCollateral", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsDstCollateral { get; init; }
+        public bool? IsDstCollateral { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16668,27 +18445,7 @@ namespace Trakx.Fireblocks.ApiClient
         public object FireblocksInitiatedTransactions { get; init; }
 
         [Newtonsoft.Json.JsonProperty("exchangeRequestedTransactions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public GetSettlementResponse ExchangeRequestedTransactions { get; init; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
-
-        [Newtonsoft.Json.JsonExtensionData]
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
-            set { _additionalProperties = value; }
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record GetSettlementResponse
-    {
-        [Newtonsoft.Json.JsonProperty("toExchange", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<ToExchangeTransaction> ToExchange { get; init; }
-
-        [Newtonsoft.Json.JsonProperty("toCollateral", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<ToCollateralTransaction> ToCollateral { get; init; }
+        public SettlementResponse ExchangeRequestedTransactions { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17161,7 +18918,7 @@ namespace Trakx.Fireblocks.ApiClient
     {
         [Newtonsoft.Json.JsonProperty("stepType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public XBSettlementStepType StepType { get; set; }
+        public XBSettlementStepType? StepType { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17179,7 +18936,7 @@ namespace Trakx.Fireblocks.ApiClient
     {
         [Newtonsoft.Json.JsonProperty("stepType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public XBSettlementStepType StepType { get; set; }
+        public XBSettlementStepType? StepType { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17202,6 +18959,1276 @@ namespace Trakx.Fireblocks.ApiClient
         [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string AssetId { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record CreatePayoutRequest
+    {
+        [Newtonsoft.Json.JsonProperty("paymentAccount", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public PaymentAccount PaymentAccount { get; set; } = new PaymentAccount();
+
+        [Newtonsoft.Json.JsonProperty("instructionSet", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.List<PayoutInstruction> InstructionSet { get; set; } = new System.Collections.Generic.List<PayoutInstruction>();
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record PaymentAccount
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PaymentAccountType Type { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record PayoutInstruction
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("payeeAccount", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public PayeeAccount PayeeAccount { get; set; } = new PayeeAccount();
+
+        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public InstructionAmount Amount { get; set; } = new InstructionAmount();
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PaymentAccountType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"VAULT_ACCOUNT")]
+        VAULT_ACCOUNT = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"EXCHANGE_ACCOUNT")]
+        EXCHANGE_ACCOUNT = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FIAT_ACCOUNT")]
+        FIAT_ACCOUNT = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record PayeeAccount
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PayeeAccountType Type { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record InstructionAmount
+    {
+        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Amount { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string AssetId { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    /// <summary>
+    /// - VAULT_ACCOUNT  	a native Fireblocks vault account
+    /// <br/>- EXCHANGE_ACCOUNT 	a third-party exchange account
+    /// <br/>- INTERNAL_WALLET 	a whitelisted address marked as internal to the workspace/organization
+    /// <br/>- EXTERNAL_WALLET	a whitelisted address marked as external
+    /// <br/>- NETWORK_CONNECTION	a member of the Fireblocks network
+    /// <br/>- FIAT_ACCOUNT	a third-party account of a fiat bank (Signature, BCB, etc)
+    /// <br/>
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PayeeAccountType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"VAULT_ACCOUNT")]
+        VAULT_ACCOUNT = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"EXCHANGE_ACCOUNT")]
+        EXCHANGE_ACCOUNT = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"INTERNAL_WALLET")]
+        INTERNAL_WALLET = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"EXTERNAL_WALLET")]
+        EXTERNAL_WALLET = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NETWORK_CONNECTION")]
+        NETWORK_CONNECTION = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FIAT_ACCOUNT")]
+        FIAT_ACCOUNT = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record PayoutResponse
+    {
+        [Newtonsoft.Json.JsonProperty("payoutId", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string PayoutId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("paymentAccount", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public PaymentAccountResponse PaymentAccount { get; set; } = new PaymentAccountResponse();
+
+        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Always)]
+        public double CreatedAt { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("state", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PayoutState State { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PayoutStatus Status { get; set; }
+
+        /// <summary>
+        /// &lt;ul&gt; 
+        /// <br/>&lt;li&gt; INSUFFICIENT_BALANCE&lt;/li&gt;
+        /// <br/>&lt;li&gt; SOURCE_TRANSLATION&lt;/li&gt;
+        /// <br/>&lt;li&gt; SOURCE_NOT_UNIQUE&lt;/li&gt;
+        /// <br/>&lt;li&gt; SOURCE_NOT_FOUND&lt;/li&gt;
+        /// <br/>&lt;li&gt; SOURCE_TYPE_NOT_SUPPORTED&lt;/li&gt;
+        /// <br/>&lt;li&gt; EMPTY_SOURCE&lt;/li&gt;
+        /// <br/>&lt;li&gt; DESTINATION_TRANSLATION&lt;/li&gt;
+        /// <br/>&lt;li&gt; DESTINATION_NOT_UNIQUE&lt;/li&gt;
+        /// <br/>&lt;li&gt; DESTINATION_NOT_FOUND&lt;/li&gt;
+        /// <br/>&lt;li&gt; EMPTY_DESTINATION&lt;/li&gt;
+        /// <br/>&lt;li&gt; PARSING &lt;/li&gt;
+        /// <br/>&lt;li&gt; UNKNOWN&lt;/li&gt;
+        /// <br/>&lt;li&gt; FIREBLOCKS_CLIENT&lt;/li&gt;
+        /// <br/>&lt;li&gt; TRANSACTION_SUBMISSION&lt;/li&gt;
+        /// <br/>&lt;/ul&gt;
+        /// <br/>
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("reasonOfFailure", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ReasonOfFailure { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("initMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PayoutInitMethod? InitMethod { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("instructionSet", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.List<PayoutInstructionResponse> InstructionSet { get; set; } = new System.Collections.Generic.List<PayoutInstructionResponse>();
+
+        [Newtonsoft.Json.JsonProperty("reportUrl", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ReportUrl { get; init; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record PaymentAccountResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PaymentAccountType? Type { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    /// <summary>
+    /// - CREATED - payout instruction set created with all its details
+    /// <br/>- FILE_FOUND - new file found in the FTP
+    /// <br/>- REQUESTED - payout requested with all its details
+    /// <br/>- TRANSLATED - payout instruction account IDs identified and translated
+    /// <br/>- PROCESSING - payout instruction set executed and is processing
+    /// <br/>- SUBMITTED - transactions submitted for payout instructions
+    /// <br/>- FINALIZED - payout finished processing, all transactions processed successfully
+    /// <br/>- INSUFFICIENT_BALANCE - insufficient balance in the payment account (can be a temporary state)
+    /// <br/>- FAILED - one or more of the payout instructions failed 
+    /// <br/>
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PayoutState
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"CREATED")]
+        CREATED = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FILE_FOUND")]
+        FILE_FOUND = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"REQUESTED")]
+        REQUESTED = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"TRANSLATED")]
+        TRANSLATED = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PROCESSING")]
+        PROCESSING = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SUBMITTED")]
+        SUBMITTED = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FINALIZED")]
+        FINALIZED = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"INSUFFICIENT_BALANCE")]
+        INSUFFICIENT_BALANCE = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FAILED")]
+        FAILED = 8,
+
+    }
+
+    /// <summary>
+    /// - REQUESTED	payout requested with all its details
+    /// <br/>- VERIFIED	payout instruction set details were verified
+    /// <br/>- PROCESSING	payout instruction set executed and is processing
+    /// <br/>- FINALIZED	payout done (all payout instructions completed successfully)
+    /// <br/>- INSUFFICIENT_BALANCE	insufficient balance in the payment account (can be a temporary state)
+    /// <br/>- FAILED	one or more of the payout instructions failed 
+    /// <br/>
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PayoutStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"REGISTERED")]
+        REGISTERED = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"VERIFYING")]
+        VERIFYING = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"IN_PROGRESS")]
+        IN_PROGRESS = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DONE")]
+        DONE = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"INSUFFICIENT_BALANCE")]
+        INSUFFICIENT_BALANCE = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FAILED")]
+        FAILED = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PayoutInitMethod
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FILE")]
+        FILE = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"API")]
+        API = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record PayoutInstructionResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("payeeAccount", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public PayeeAccountResponse PayeeAccount { get; set; } = new PayeeAccountResponse();
+
+        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public InstructionAmount Amount { get; set; } = new InstructionAmount();
+
+        [Newtonsoft.Json.JsonProperty("state", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PayoutInstructionState State { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("transactions", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.List<Transaction> Transactions { get; set; } = new System.Collections.Generic.List<Transaction>();
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record PayeeAccountResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PayeeAccountType? Type { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    /// <summary>
+    /// - NOT_STARTED	- waiting to start
+    /// <br/>- TRANSACTION_SENT - an underlying transaction was sent
+    /// <br/>- COMPLETED	- completed successfully
+    /// <br/>- FAILED - failed
+    /// <br/>- TRANSLATION_ERROR -lookup of the destination failed (due to changes in the underlying whitelisted external wallet or similar)
+    /// <br/>- SKIPPED- no transaction(s) created for this instruction
+    /// <br/>
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum PayoutInstructionState
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NOT_STARTED")]
+        NOT_STARTED = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"TRANSACTION_SENT")]
+        TRANSACTION_SENT = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"COMPLETED")]
+        COMPLETED = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FAILED")]
+        FAILED = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"TRANSLATION_ERROR")]
+        TRANSLATION_ERROR = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SKIPPED")]
+        SKIPPED = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record Transaction
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("state", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public TransactionState State { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Timestamp { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("instructionId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string InstructionId { get; init; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record DispatchPayoutResponse
+    {
+        [Newtonsoft.Json.JsonProperty("payoutId", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string PayoutId { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record TravelRuleAddress
+    {
+        /// <summary>
+        /// Street address
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("street", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Street { get; set; }
+
+        /// <summary>
+        /// City
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("city", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string City { get; set; }
+
+        /// <summary>
+        /// State or province
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("state", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string State { get; set; }
+
+        /// <summary>
+        /// Postal or ZIP code
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("postalCode", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string PostalCode { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record TravelRuleValidateTransactionRequest
+    {
+        /// <summary>
+        /// Transaction asset symbol BTC,ETH)
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("transactionAsset", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TransactionAsset { get; set; }
+
+        /// <summary>
+        /// Transaction destination address
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("destination", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Destination { get; set; }
+
+        /// <summary>
+        /// Transaction amount in the transaction asset
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("transactionAmount", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TransactionAmount { get; set; }
+
+        /// <summary>
+        /// This is the identifier assigned to your VASP
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("originatorVASPdid", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string OriginatorVASPdid { get; set; }
+
+        /// <summary>
+        /// "True" if the originator and beneficiary is the same person and you therefore do not need to collect any information. "False" if it is a third-party transfer.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("originatorEqualsBeneficiary", Required = Newtonsoft.Json.Required.Always)]
+        public bool OriginatorEqualsBeneficiary { get; init; }
+
+        /// <summary>
+        /// This will also check if the transaction is a TRAVEL_RULE in the beneficiary VASP's jurisdiction
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("travelRuleBehavior", Required = Newtonsoft.Json.Required.Always)]
+        public bool TravelRuleBehavior { get; init; }
+
+        /// <summary>
+        /// This is the identifier assigned to the VASP the funds are being sent to
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiaryVASPdid", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string BeneficiaryVASPdid { get; set; }
+
+        /// <summary>
+        /// Beneficiary VASP name
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiaryVASPname", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string BeneficiaryVASPname { get; set; }
+
+        /// <summary>
+        /// Beneficiary  name
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiaryName", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string BeneficiaryName { get; set; }
+
+        /// <summary>
+        /// Beneficiary  name
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiaryAccountNumber", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string BeneficiaryAccountNumber { get; set; }
+
+        /// <summary>
+        /// Beneficiary  name
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiaryAddress", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleAddress BeneficiaryAddress { get; set; } = new TravelRuleAddress();
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record TravelRuleValidateTransactionResponse
+    {
+        /// <summary>
+        /// "isValid" will tell you if you have collected all the information needed for the travel rule data transfer. Once this field = "true", you can move on to the next step which is to transfer the front-end information to your back-end and perform Travel Rule Transaction create
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("isValid", Required = Newtonsoft.Json.Required.Always)]
+        public bool IsValid { get; init; }
+
+        /// <summary>
+        /// "type" will tell you if the virtual asset value converted to FIAT value of the withdrawal request is above (=TRAVELRULE) or below (=BELOW_THRESHOLD) the threshold in your jurisdiction. If it is to an unhosted wallet which does not require travel rule information to be sent and only collected, it will say NON_CUSTODIAL.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Type { get; set; }
+
+        /// <summary>
+        /// "beneficiaryAddressType" will tell you if your blockchain analytics provider or internal address book has been able to identify the wallet address.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiaryAddressType", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string BeneficiaryAddressType { get; set; }
+
+        /// <summary>
+        /// "addressSource" will tell you if the address was found in your internal address book or identified by the blockchain analytics provider.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("addressSource", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string AddressSource { get; set; }
+
+        /// <summary>
+        /// The VASP DID of the beneficiary VASP
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiaryVASPdid", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string BeneficiaryVASPdid { get; set; }
+
+        /// <summary>
+        /// "beneficiaryVASPname" will tell you the name of the VASP that has been identified as the owner of the wallet address. This name is used in a subsequent call to get its DID.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiaryVASPname", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string BeneficiaryVASPname { get; set; }
+
+        /// <summary>
+        /// "errors/warnings" will tell you what information about the beneficiary you need to collect from the sender.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("warnings", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.List<string> Warnings { get; set; } = new System.Collections.Generic.List<string>();
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record TravelRuleTransactionBlockchainInfo
+    {
+        [Newtonsoft.Json.JsonProperty("txHash", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TxHash { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("origin", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Origin { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("destination", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Destination { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record TravelRulePiiIVMS
+    {
+        [Newtonsoft.Json.JsonProperty("fullName", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string FullName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("dateOfBirth", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string DateOfBirth { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("placeOfBirth", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string PlaceOfBirth { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Address { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("identificationNumber", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string IdentificationNumber { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("nationality", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Nationality { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("countryOfResidence", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string CountryOfResidence { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("taxIdentificationNumber", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TaxIdentificationNumber { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("customerNumber", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string CustomerNumber { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record TravelRuleOwnershipProof
+    {
+        /// <summary>
+        /// Type of ownership proof
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Type { get; set; }
+
+        /// <summary>
+        /// Identification number
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Name of owner
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Country of issuance
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("country", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Country { get; set; }
+
+        /// <summary>
+        /// Date of issuance
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("issueDate", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string IssueDate { get; set; }
+
+        /// <summary>
+        /// Name of issuing entity
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("issuer", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Issuer { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record TravelRuleValidateFullTransactionRequest
+    {
+        /// <summary>
+        /// The asset involved in the transaction
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("transactionAsset", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TransactionAsset { get; set; }
+
+        /// <summary>
+        /// The amount of the transaction
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("transactionAmount", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TransactionAmount { get; set; }
+
+        /// <summary>
+        /// The DID of the transaction originator
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("originatorDid", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string OriginatorDid { get; set; }
+
+        /// <summary>
+        /// The DID of the transaction beneficiary
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiaryDid", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string BeneficiaryDid { get; set; }
+
+        /// <summary>
+        /// The VASP ID of the transaction originator
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("originatorVASPdid", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string OriginatorVASPdid { get; set; }
+
+        /// <summary>
+        /// The VASP ID of the transaction beneficiary
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiaryVASPdid", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string BeneficiaryVASPdid { get; set; }
+
+        /// <summary>
+        /// The name of the VASP acting as the beneficiary
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiaryVASPname", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string BeneficiaryVASPname { get; set; }
+
+        /// <summary>
+        /// Information about the blockchain transaction
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("transactionBlockchainInfo", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleTransactionBlockchainInfo TransactionBlockchainInfo { get; set; } = new TravelRuleTransactionBlockchainInfo();
+
+        /// <summary>
+        /// Information about the originator of the transaction
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("originator", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRulePiiIVMS Originator { get; set; } = new TravelRulePiiIVMS();
+
+        /// <summary>
+        /// Information about the beneficiary of the transaction
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiary", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRulePiiIVMS Beneficiary { get; set; } = new TravelRulePiiIVMS();
+
+        /// <summary>
+        /// Encrypted data related to the transaction
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("encrypted", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Encrypted { get; set; }
+
+        /// <summary>
+        /// The protocol used to perform the travel rule
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("protocol", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Protocol { get; set; }
+
+        /// <summary>
+        /// The email address where a notification should be sent upon completion of the travel rule
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("notificationEmail", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string NotificationEmail { get; set; }
+
+        /// <summary>
+        /// Whether to skip validation of beneficiary data
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("skipBeneficiaryDataValidation", Required = Newtonsoft.Json.Required.Always)]
+        public bool SkipBeneficiaryDataValidation { get; init; }
+
+        /// <summary>
+        /// Whether to check if the transaction is a TRAVEL_RULE in the beneficiary VASP's jurisdiction
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("travelRuleBehavior", Required = Newtonsoft.Json.Required.Always)]
+        public bool TravelRuleBehavior { get; init; }
+
+        /// <summary>
+        /// Ownership proof related to the originator of the transaction
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("originatorProof", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleOwnershipProof OriginatorProof { get; set; } = new TravelRuleOwnershipProof();
+
+        /// <summary>
+        /// Ownership proof related to the beneficiary of the transaction
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("beneficiaryProof", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleOwnershipProof BeneficiaryProof { get; set; } = new TravelRuleOwnershipProof();
+
+        /// <summary>
+        /// Personal identifiable information related to the transaction
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("pii", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRulePiiIVMS Pii { get; set; } = new TravelRulePiiIVMS();
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record TravelRuleIssuer
+    {
+        [Newtonsoft.Json.JsonProperty("issuerDid", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string IssuerDid { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record TravelRuleIssuers
+    {
+        [Newtonsoft.Json.JsonProperty("yearFounded", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer YearFounded { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("isRegulated", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer IsRegulated { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("regulatoryAuthorities", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer RegulatoryAuthorities { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer Name { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("logo", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer Logo { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("website", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer Website { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("legalName", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer LegalName { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("legalStructure", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer LegalStructure { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("incorporationCountry", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer IncorporationCountry { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("businessNumber", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer BusinessNumber { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("addressLine1", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer AddressLine1 { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("city", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer City { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("country", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer Country { get; set; } = new TravelRuleIssuer();
+
+        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuer Description { get; set; } = new TravelRuleIssuer();
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record TravelRuleVASP
+    {
+        [Newtonsoft.Json.JsonProperty("did", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Did { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("verificationStatus", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string VerificationStatus { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("addressLine1", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string AddressLine1 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("addressLine2", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string AddressLine2 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("city", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string City { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("country", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Country { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("emailDomains", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string EmailDomains { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("website", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Website { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("logo", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Logo { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("legalStructure", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string LegalStructure { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("legalName", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string LegalName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("yearFounded", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string YearFounded { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("incorporationCountry", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string IncorporationCountry { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isRegulated", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string IsRegulated { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("otherNames", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string OtherNames { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("identificationType", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string IdentificationType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("identificationCountry", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string IdentificationCountry { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("businessNumber", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string BusinessNumber { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("regulatoryAuthorities", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string RegulatoryAuthorities { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jurisdictions", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Jurisdictions { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("street", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Street { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("number", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Number { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("unit", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Unit { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("postCode", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string PostCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("state", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string State { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("certificates", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Certificates { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Description { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("travelRule_OPENVASP", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TravelRule_OPENVASP { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("travelRule_SYGNA", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TravelRule_SYGNA { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("travelRule_TRISA", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TravelRule_TRISA { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("travelRule_TRLIGHT", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TravelRule_TRLIGHT { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("travelRule_EMAIL", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TravelRule_EMAIL { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("travelRule_TRP", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TravelRule_TRP { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("travelRule_SHYFT", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TravelRule_SHYFT { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("travelRule_USTRAVELRULEWG", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TravelRule_USTRAVELRULEWG { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string CreatedAt { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("createdBy", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string CreatedBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("updatedAt", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string UpdatedAt { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("updatedBy", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string UpdatedBy { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lastSentDate", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string LastSentDate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lastReceivedDate", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string LastReceivedDate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Documents { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("hasAdmin", Required = Newtonsoft.Json.Required.Always)]
+        public bool HasAdmin { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("isNotifiable", Required = Newtonsoft.Json.Required.Always)]
+        public bool IsNotifiable { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("issuers", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TravelRuleIssuers Issuers { get; set; } = new TravelRuleIssuers();
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record TravelRuleGetAllVASPsResponse
+    {
+        [Newtonsoft.Json.JsonProperty("vasps", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.List<TravelRuleVASP> Vasps { get; set; } = new System.Collections.Generic.List<TravelRuleVASP>();
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record TravelRuleUpdateVASPDetails
+    {
+        /// <summary>
+        /// The decentralized identifier of the VASP
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("did", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Did { get; set; }
+
+        /// <summary>
+        /// The PII DID key of the VASP
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("pii_didkey", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Pii_didkey { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17245,7 +20272,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Optional - if true, the created account and all related transactions will not be shown on Fireblocks console
         /// </summary>
         [Newtonsoft.Json.JsonProperty("hiddenOnUI", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool HiddenOnUI { get; init; }
+        public bool? HiddenOnUI { get; init; }
 
         /// <summary>
         /// Optional - Sets a customer reference ID
@@ -17257,7 +20284,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Optional - Sets the autoFuel property of the vault account
         /// </summary>
         [Newtonsoft.Json.JsonProperty("autoFuel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool AutoFuel { get; init; }
+        public bool? AutoFuel { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17329,7 +20356,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Auto Fuel
         /// </summary>
         [Newtonsoft.Json.JsonProperty("autoFuel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool AutoFuel { get; init; }
+        public bool? AutoFuel { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17439,11 +20466,11 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("sourceType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TradingAccountType SourceType { get; set; }
+        public TradingAccountType? SourceType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("destType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TradingAccountType DestType { get; set; }
+        public TradingAccountType? DestType { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17494,7 +20521,7 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record Body11
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Amount { get; init; }
+        public double? Amount { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17510,9 +20537,8 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial record Body12
     {
-        
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Amount { get; init; }
+        public double? Amount { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17623,6 +20649,24 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial record Body17
     {
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Name { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record Body18
+    {
         /// <summary>
         /// the wallet's display name
         /// </summary>
@@ -17647,7 +20691,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record Body18
+    public partial record Body19
     {
         /// <summary>
         /// Customer reference ID
@@ -17667,7 +20711,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record Body19
+    public partial record Body20
     {
         /// <summary>
         /// The wallet's address or, for EOS wallets, the account name
@@ -17694,7 +20738,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record Body20
+    public partial record Body21
     {
         /// <summary>
         /// the wallet's display name
@@ -17720,7 +20764,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record Body21
+    public partial record Body22
     {
         /// <summary>
         /// Customer reference ID
@@ -17740,7 +20784,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record Body22
+    public partial record Body23
     {
         /// <summary>
         /// The wallet's address (or xpub) of the wallet
@@ -17767,7 +20811,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record Body23
+    public partial record Body24
     {
         /// <summary>
         /// the contract's display name
@@ -17787,7 +20831,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record Body24
+    public partial record Body25
     {
         /// <summary>
         /// The contract's address (or xpub) of the wallet
@@ -17919,13 +20963,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record Body25
+    public partial record Body26
     {
         [Newtonsoft.Json.JsonProperty("resendCreated", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool ResendCreated { get; init; }
+        public bool? ResendCreated { get; init; }
 
         [Newtonsoft.Json.JsonProperty("resendStatusUpdated", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool ResendStatusUpdated { get; init; }
+        public bool? ResendStatusUpdated { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17939,7 +20983,106 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum BlockchainDescriptor
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ETH")]
+        ETH = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ETH_TEST3")]
+        ETH_TEST3 = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"POLYGON")]
+        POLYGON = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"POLYGON_TEST_MUMBAI")]
+        POLYGON_TEST_MUMBAI = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum BlockchainDescriptor2
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ETH")]
+        ETH = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ETH_TEST3")]
+        ETH_TEST3 = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"POLYGON")]
+        POLYGON = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"POLYGON_TEST_MUMBAI")]
+        POLYGON_TEST_MUMBAI = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Anonymous
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ownershipLastUpdateTime")]
+        OwnershipLastUpdateTime = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"name")]
+        Name = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"collection.name")]
+        Collection_name = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public enum Order
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DESC")]
+        DESC = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ASC")]
+        ASC = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Status
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"LISTED")]
+        LISTED = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ARCHIVED")]
+        ARCHIVED = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Anonymous2
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"collection.name")]
+        Collection_name = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"name")]
+        Name = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Order2
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DESC")]
+        DESC = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ASC")]
+        ASC = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum Order3
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"ASC")]
@@ -17960,7 +21103,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string UserId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("vaultAccountId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double VaultAccountId { get; init; }
+        public double? VaultAccountId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("connectionMethod", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ConnectionMethod { get; init; }
@@ -18033,7 +21176,7 @@ namespace Trakx.Fireblocks.ApiClient
     public partial record Response2
     {
         [Newtonsoft.Json.JsonProperty("isThirdPartyRouting", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsThirdPartyRouting { get; init; }
+        public bool? IsThirdPartyRouting { get; init; }
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; init; }
@@ -18120,6 +21263,23 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial record Response7
     {
+        [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Always)]
+        public bool Success { get; init; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record Response8
+    {
         [Newtonsoft.Json.JsonProperty("setup", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public XBCreateSettlementFlowResponse Setup { get; init; }
 
@@ -18134,6 +21294,127 @@ namespace Trakx.Fireblocks.ApiClient
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
             set { _additionalProperties = value; }
         }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record Response9
+    {
+        [Newtonsoft.Json.JsonProperty("paging", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Paging Paging { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.List<TokenOwnershipResponse> Data { get; init; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record Response10
+    {
+        [Newtonsoft.Json.JsonProperty("paging", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Paging Paging { get; init; }
+
+        [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.List<TokenResponse> Data { get; init; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum MediaEntityResponseContentType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"IMAGE")]
+        IMAGE = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"VIDEO")]
+        VIDEO = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ANIMATION")]
+        ANIMATION = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"THREE_D")]
+        THREE_D = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"TEXT")]
+        TEXT = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"GIF")]
+        GIF = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UNKNOWN_TYPE")]
+        UNKNOWN_TYPE = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SVG")]
+        SVG = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AUDIO")]
+        AUDIO = 8,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum TokenResponseBlockchainDescriptor
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ETH")]
+        ETH = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ETH_TEST3")]
+        ETH_TEST3 = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"POLYGON")]
+        POLYGON = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"POLYGON_TEST_MUMBAI")]
+        POLYGON_TEST_MUMBAI = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum UpdateTokenOwnershipStatusDtoStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"LISTED")]
+        LISTED = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ARCHIVED")]
+        ARCHIVED = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum TokenOwnershipResponseBlockchainDescriptor
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ETH")]
+        ETH = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ETH_TEST3")]
+        ETH_TEST3 = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"POLYGON")]
+        POLYGON = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"POLYGON_TEST_MUMBAI")]
+        POLYGON_TEST_MUMBAI = 3,
 
     }
 
@@ -18155,6 +21436,32 @@ namespace Trakx.Fireblocks.ApiClient
         [Newtonsoft.Json.JsonProperty("before", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Before { get; init; }
 
+        [Newtonsoft.Json.JsonProperty("after", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string After { get; init; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record Paging3
+    {
+        /// <summary>
+        /// A string representing a cursor. Users can use this with a new request to this API endpoint as the “before” request parameter to fetch the previous page of results.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("before", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Before { get; init; }
+
+        /// <summary>
+        /// A string representing a cursor. Users can use this with a new request to this API endpoint as the “before” request parameter to fetch the next page of results.
+        /// </summary>
         [Newtonsoft.Json.JsonProperty("after", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string After { get; init; }
 
@@ -18230,7 +21537,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Anonymous
+    public enum Anonymous3
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"PENDING_AUTHORIZATION")]
@@ -18440,7 +21747,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string S { get; init; }
 
         [Newtonsoft.Json.JsonProperty("v", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double V { get; init; }
+        public double? V { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18555,6 +21862,69 @@ namespace Trakx.Fireblocks.ApiClient
 
         [System.Runtime.Serialization.EnumMember(Value = @"HIGH")]
         HIGH = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum TransactionState
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SUBMITTED")]
+        SUBMITTED = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"QUEUED")]
+        QUEUED = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PENDING_AUTHORIZATION")]
+        PENDING_AUTHORIZATION = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PENDING_SIGNATURE")]
+        PENDING_SIGNATURE = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"BROADCASTING")]
+        BROADCASTING = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PENDING_3RD_PARTY_MANUAL_APPROVAL")]
+        PENDING_3RD_PARTY_MANUAL_APPROVAL = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PENDING_3RD_PARTY")]
+        PENDING_3RD_PARTY = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PENDING")]
+        PENDING = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"CONFIRMING")]
+        CONFIRMING = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"CONFIRMED")]
+        CONFIRMED = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"COMPLETED")]
+        COMPLETED = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PARTIALLY_COMPLETED")]
+        PARTIALLY_COMPLETED = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PENDING_AML_SCREENING")]
+        PENDING_AML_SCREENING = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"CANCELLING")]
+        CANCELLING = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"CANCELLED")]
+        CANCELLED = 14,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"REJECTED")]
+        REJECTED = 15,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"BLOCKED")]
+        BLOCKED = 16,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"FAILED")]
+        FAILED = 17,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"TIMEOUT")]
+        TIMEOUT = 18,
 
     }
 
