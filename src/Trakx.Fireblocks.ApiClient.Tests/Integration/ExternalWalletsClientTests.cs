@@ -37,7 +37,7 @@ public class ExternalWalletsClientTests : FireblocksClientTestsBase
     {
         var walletName = _mockCreator.GetString(10);
         var refId = _mockCreator.GetString(10);
-        var response = await _externalWalletsClient.External_walletsPOSTAsync(new Body20
+        var response = await _externalWalletsClient.External_walletsPOSTAsync(new Body21
         {
             Name = walletName,
             CustomerRefId = refId
