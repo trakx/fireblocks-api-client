@@ -5,7 +5,7 @@ info:
   contact:
     email: support@fireblocks.com
 servers:
-  - url: 'https://api.fireblocks.io/v1'
+  - url: "https://api.fireblocks.io/v1"
 x-readme:
   explorer-enabled: false
   samples-languages:
@@ -15,7 +15,7 @@ x-readme:
 
 paths:
   #  VAULT
-  '/vault/accounts':
+  "/vault/accounts":
     get:
       summary: List vault accounts
       description: Gets all vault accounts in your workspace.
@@ -62,19 +62,19 @@ paths:
           schema:
             type: number
       responses:
-        '200':
+        "200":
           description: A list of vault accounts
           headers: &req-id-header
             X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
+              $ref: "#/components/headers/X-Request-ID"
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/VaultAccount'
+                  $ref: "#/components/schemas/VaultAccount"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     post:
       summary: Create a new vault account
       description: Creates a new vault account with the requested name.
@@ -106,20 +106,19 @@ paths:
                     Optional - Sets a customer reference ID
                   type: string
                 autoFuel:
-                  description:
-                    Optional - Sets the autoFuel property of the vault account
+                  description: Optional - Sets the autoFuel property of the vault account
                   type: boolean
       responses:
-        '200':
+        "200":
           description: A Vault Account object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/VaultAccount'
+                $ref: "#/components/schemas/VaultAccount"
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts_paged':
+          $ref: "#/components/responses/Error"
+  "/vault/accounts_paged":
     get:
       summary: List vault acounts (Paginated)
       description: Gets all vault accounts in your workspace. This endpoint returns a limited amount of results with a quick response time.
@@ -191,14 +190,14 @@ paths:
             maximum: 500
             default: 200
       responses:
-        '200':
+        "200":
           description: A VaultAccountsPagedResponse object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/VaultAccountsPagedResponse'
-  '/vault/accounts/{vaultAccountId}':
+                $ref: "#/components/schemas/VaultAccountsPagedResponse"
+  "/vault/accounts/{vaultAccountId}":
     get:
       summary: Find a vault account by ID
       description: Returns the requested vault account.
@@ -224,15 +223,15 @@ paths:
             format: numeric
             x-fb-entity: vault_account
       responses:
-        '200':
+        "200":
           description: A Vault Account object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/VaultAccount'
+                $ref: "#/components/schemas/VaultAccount"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     put:
       summary: Rename a vault account
       description: Renames the requested vault account.
@@ -266,12 +265,12 @@ paths:
                   description: Account Name
                   type: string
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/asset_wallets':
+          $ref: "#/components/responses/Error"
+  "/vault/asset_wallets":
     get:
       summary: List asset wallets (Paginated)
       description: |
@@ -325,14 +324,14 @@ paths:
             maximum: 1000
             default: 200
       responses:
-        '200':
+        "200":
           description: A PaginatedAssetWalletResponse object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/PaginatedAssetWalletResponse'
-  '/vault/accounts/{vaultAccountId}/hide':
+                $ref: "#/components/schemas/PaginatedAssetWalletResponse"
+  "/vault/accounts/{vaultAccountId}/hide":
     post:
       summary: Hide a vault account in the console
       description: Hides the requested vault account from the web console view.
@@ -357,12 +356,12 @@ paths:
             format: numeric
             x-fb-entity: vault_account
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/unhide':
+          $ref: "#/components/responses/Error"
+  "/vault/accounts/{vaultAccountId}/unhide":
     post:
       summary: Unhide a vault account in the console
       description: Makes a hidden vault account visible in web console view.
@@ -387,12 +386,12 @@ paths:
             format: numeric
             x-fb-entity: vault_account
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/{assetId}/activate':
+          $ref: "#/components/responses/Error"
+  "/vault/accounts/{vaultAccountId}/{assetId}/activate":
     post:
       summary: Activate a wallet in a vault account
       description: Initiates activation for a wallet in a vault account.
@@ -416,16 +415,16 @@ paths:
             type: string
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: OK
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/CreateVaultAssetResponse'
+                $ref: "#/components/schemas/CreateVaultAssetResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/set_customer_ref_id':
+          $ref: "#/components/responses/Error"
+  "/vault/accounts/{vaultAccountId}/set_customer_ref_id":
     post:
       summary: Set an AML/KYT customer reference ID for a vault account
       description: Assigns an AML/KYT customer reference ID for the vault account.
@@ -459,12 +458,12 @@ paths:
                   description: Customer reference ID
                   type: string
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/set_auto_fuel':
+          $ref: "#/components/responses/Error"
+  "/vault/accounts/{vaultAccountId}/set_auto_fuel":
     post:
       summary: Turn autofueling on or off
       description: Sets the autofueling property of the vault account to enabled or disabled.
@@ -490,12 +489,12 @@ paths:
                   description: Auto Fuel
                   type: boolean
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/{assetId}':
+          $ref: "#/components/responses/Error"
+  "/vault/accounts/{vaultAccountId}/{assetId}":
     get:
       summary: Get the asset balance for a vault account
       description: Returns a wallet for a specific asset of a vault account.
@@ -527,14 +526,14 @@ paths:
             type: string
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: A VaultAsset object
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/VaultAsset'
+                $ref: "#/components/schemas/VaultAsset"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     post:
       summary: Create a new wallet
       description: Creates a wallet for a specific asset in a vault account.
@@ -575,16 +574,16 @@ paths:
                   description: Optional - when creating an EOS wallet, the account name. If not provided, a random name will be generated
                   type: string
       responses:
-        '200':
+        "200":
           description: OK
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/CreateVaultAssetResponse'
+                $ref: "#/components/schemas/CreateVaultAssetResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/{assetId}/balance':
+          $ref: "#/components/responses/Error"
+  "/vault/accounts/{vaultAccountId}/{assetId}/balance":
     post:
       summary: Refresh asset balance data
       description: Updates the balance of a specific asset in a vault account.
@@ -618,20 +617,20 @@ paths:
       requestBody:
         required: false
         content:
-          '*/*':
+          "*/*":
             schema:
               type: object
       responses:
-        '200':
+        "200":
           description: A VaultAsset object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/VaultAsset'
+                $ref: "#/components/schemas/VaultAsset"
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/{assetId}/addresses':
+          $ref: "#/components/responses/Error"
+  "/vault/accounts/{vaultAccountId}/{assetId}/addresses":
     get:
       summary: Get asset addresses
       description: Lists all addresses for specific asset of vault account.
@@ -663,17 +662,17 @@ paths:
             type: string
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: A list of deposit addresses
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/VaultWalletAddress'
+                  $ref: "#/components/schemas/VaultWalletAddress"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     post:
       summary: Create new asset deposit address
       description: Creates a new deposit address for an asset of a vault account.
@@ -718,16 +717,16 @@ paths:
             type: string
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: The created address
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/CreateAddressResponse'
+                $ref: "#/components/schemas/CreateAddressResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/{assetId}/max_spendable_amount':
+          $ref: "#/components/responses/Error"
+  "/vault/accounts/{vaultAccountId}/{assetId}/max_spendable_amount":
     get:
       summary: Get the maximum spendable amount in a single transaction.
       description: Get the maximum amount of a particular asset that can be spent in a single transaction from a specified vault account (UTXO assets only, with a limitation on number of inputs embedded). Send several transactions if you want to spend more than the maximum spendable amount.
@@ -765,14 +764,14 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
+              $ref: "#/components/headers/X-Request-ID"
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}':
+          $ref: "#/components/responses/Error"
+  "/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}":
     put:
       summary: Update address description
       description: Updates the description of an existing address of an asset in a vault account.
@@ -820,13 +819,13 @@ paths:
           schema:
             type: string
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}/set_customer_ref_id':
-    post:
+          $ref: "#/components/responses/Error"
+  ? "/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}/set_customer_ref_id"
+  : post:
       summary: Assign AML customer reference ID
       description: Sets an AML/KYT customer reference ID for a specific address.
       tags:
@@ -873,13 +872,13 @@ paths:
                   description: Customer reference ID
                   type: string
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}/create_legacy':
-    post:
+          $ref: "#/components/responses/Error"
+  ? "/vault/accounts/{vaultAccountId}/{assetId}/addresses/{addressId}/create_legacy"
+  : post:
       summary: Convert a segwit address to legacy format
       description: Converts an existing segwit address to the legacy format.
       tags:
@@ -909,16 +908,16 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: The created address
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/CreateAddressResponse'
+                $ref: "#/components/schemas/CreateAddressResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/{assetId}/unspent_inputs':
+          $ref: "#/components/responses/Error"
+  "/vault/accounts/{vaultAccountId}/{assetId}/unspent_inputs":
     get:
       summary: Get UTXO unspent inputs information
       description: Returns unspent inputs information of an asset in a vault account.
@@ -950,18 +949,18 @@ paths:
             type: string
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: List of Unspent information per input
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/UnspentInputsResponse'
+                  $ref: "#/components/schemas/UnspentInputsResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/public_key_info/':
+          $ref: "#/components/responses/Error"
+  "/vault/public_key_info/":
     get:
       summary: Get the public key information
       description: Gets the public key information based on derivation path and signing algorithm.
@@ -996,17 +995,17 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           description: Public key information
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/PublicKeyInformation'
+                $ref: "#/components/schemas/PublicKeyInformation"
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/accounts/{vaultAccountId}/{assetId}/{change}/{addressIndex}/public_key_info':
-    get:
+          $ref: "#/components/responses/Error"
+  ? "/vault/accounts/{vaultAccountId}/{assetId}/{change}/{addressIndex}/public_key_info"
+  : get:
       summary: Get the public key for a vault account
       description: Gets the public key information for the vault account.
       tags:
@@ -1054,16 +1053,16 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           description: Public Key Information
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/PublicKeyInformation'
+                $ref: "#/components/schemas/PublicKeyInformation"
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/assets':
+          $ref: "#/components/responses/Error"
+  "/vault/assets":
     get:
       summary: Get asset balance for chosen assets
       description: Gets the assets amount summary for all accounts or filtered accounts.
@@ -1089,18 +1088,18 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Amount by asset
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/VaultAsset'
+                  $ref: "#/components/schemas/VaultAsset"
         default:
-          $ref: '#/components/responses/Error'
-  '/vault/assets/{assetId}':
+          $ref: "#/components/responses/Error"
+  "/vault/assets/{assetId}":
     get:
       summary: Get vault balance by asset
       description: Gets the vault balance summary for an asset.
@@ -1122,15 +1121,15 @@ paths:
             type: string
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: Vault amount by asset
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/VaultAsset'
+                $ref: "#/components/schemas/VaultAsset"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   # EXCHANGE ACCOUNTS
   /exchange_accounts:
@@ -1148,18 +1147,18 @@ paths:
             code: const exchangeAccounts = await fireblocks.getExchangeAccounts();
             name: Fireblocks SDK Javascript example
       responses:
-        '200':
+        "200":
           description: An ExchangeAccount object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExchangeAccount'
+                  $ref: "#/components/schemas/ExchangeAccount"
         default:
-          $ref: '#/components/responses/Error'
-  '/exchange_accounts/{exchangeAccountId}':
+          $ref: "#/components/responses/Error"
+  "/exchange_accounts/{exchangeAccountId}":
     get:
       summary: Find a specific exchange account
       description: Returns an exchange account by ID.
@@ -1182,16 +1181,16 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: An ExchangeAccount object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ExchangeAccount'
+                $ref: "#/components/schemas/ExchangeAccount"
         default:
-          $ref: '#/components/responses/Error'
-  '/exchange_accounts/{exchangeAccountId}/internal_transfer':
+          $ref: "#/components/responses/Error"
+  "/exchange_accounts/{exchangeAccountId}/internal_transfer":
     post:
       summary: Internal tranfer for exchange accounts
       description: Transfers funds between trading accounts under the same exchange account.
@@ -1206,11 +1205,11 @@ paths:
             type: string
             minimum: 1
       responses:
-        '201':
+        "201":
           description: Transfer succeeded
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       requestBody:
         content:
           application/json:
@@ -1221,10 +1220,10 @@ paths:
                 amount:
                   type: string
                 sourceType:
-                  $ref: '#/components/schemas/TradingAccountType'
+                  $ref: "#/components/schemas/TradingAccountType"
                 destType:
-                  $ref: '#/components/schemas/TradingAccountType'
-  '/exchange_accounts/{exchangeAccountId}/convert':
+                  $ref: "#/components/schemas/TradingAccountType"
+  "/exchange_accounts/{exchangeAccountId}/convert":
     post:
       summary: Convert exchange account funds from the source asset to the destination asset. Coinbase (USD to USDC, USDC to USD) and Bitso (MXN to USD) are supported conversions.
       tags:
@@ -1238,11 +1237,11 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: Conversion successful
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       requestBody:
         content:
           application/json:
@@ -1261,7 +1260,7 @@ paths:
                 - srcAsset
                 - destAsset
                 - amount
-  '/exchange_accounts/{exchangeAccountId}/{assetId}':
+  "/exchange_accounts/{exchangeAccountId}/{assetId}":
     get:
       summary: Find an asset for an exchange account
       description: Returns an asset for an exchange account.
@@ -1291,15 +1290,15 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: An ExchangeAccountAsset object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ExchangeAsset'
+                $ref: "#/components/schemas/ExchangeAsset"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   # FIAT ACCOUNTS
   /fiat_accounts:
@@ -1317,18 +1316,18 @@ paths:
             code: const transactions = await fireblocks.getFiatAccounts();
             name: Fireblocks SDK Javascript example
       responses:
-        '200':
+        "200":
           description: A fiat account object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/FiatAccount'
+                  $ref: "#/components/schemas/FiatAccount"
         default:
-          $ref: '#/components/responses/Error'
-  '/fiat_accounts/{accountId}':
+          $ref: "#/components/responses/Error"
+  "/fiat_accounts/{accountId}":
     get:
       summary: Find a specific fiat account
       description: Returns a fiat account by ID.
@@ -1351,16 +1350,16 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: A fiat account object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/FiatAccount'
+                $ref: "#/components/schemas/FiatAccount"
         default:
-          $ref: '#/components/responses/Error'
-  '/fiat_accounts/{accountId}/redeem_to_linked_dda':
+          $ref: "#/components/responses/Error"
+  "/fiat_accounts/{accountId}/redeem_to_linked_dda":
     post:
       summary: Redeem funds to DDA
       description: Redeems funds to the linked DDA.
@@ -1383,11 +1382,11 @@ paths:
             type: string
             minimum: 1
       responses:
-        '201':
+        "201":
           description: Transfer succeeded
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       requestBody:
         content:
           application/json:
@@ -1395,7 +1394,7 @@ paths:
               properties:
                 amount:
                   type: number
-  '/fiat_accounts/{accountId}/deposit_from_linked_dda':
+  "/fiat_accounts/{accountId}/deposit_from_linked_dda":
     post:
       summary: Deposit funds from DDA
       description: Deposits funds from the linked DDA.
@@ -1418,11 +1417,11 @@ paths:
             type: string
             minimum: 1
       responses:
-        '201':
+        "201":
           description: Transfer succeeded
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       requestBody:
         content:
           application/json:
@@ -1432,14 +1431,14 @@ paths:
                   type: number
 
   # NETWORK CONNECTIONS
-  '/network_connections':
+  "/network_connections":
     get:
       summary: List network connections
       description: |
         Returns all network connections.
 
         **Note:** This API call is subject to Flexible Routing Schemes.
-        
+
         Your routing policy defines how your transactions are routed.
         You can choose 1 of the 3 different schemes mentioned below for each asset type:
           - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
@@ -1464,24 +1463,24 @@ paths:
             code: const networkConnections = await fireblocks.getNetworkConnections();
             name: Fireblocks SDK Javascript example
       responses:
-        '200':
+        "200":
           description: A list of network connections
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NetworkConnectionResponse'
+                  $ref: "#/components/schemas/NetworkConnectionResponse"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     post:
       summary: Creates a new network connection
       description: |
         Initiates a new network connection.
 
         **Note:** This API call is subject to Flexible Routing Schemes.
-        
+
         Your routing policy defines how your transactions are routed.
         You can choose 1 of the 3 different schemes mentioned below for each asset type:
           - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
@@ -1501,37 +1500,37 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NetworkConnection'
+              $ref: "#/components/schemas/NetworkConnection"
       responses:
-        '201':
+        "201":
           description: A Network Connection object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/NetworkConnectionResponse'
+                $ref: "#/components/schemas/NetworkConnectionResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/network_connections/{connectionId}/set_routing_policy':
+          $ref: "#/components/responses/Error"
+  "/network_connections/{connectionId}/set_routing_policy":
     patch:
       summary: Update network connection routing policy.
       description: |
         Updates an existing network connection's routing policy.
-        
+
         **Note:** This API call is subject to Flexible Routing Schemes.
-        
+
         Your routing policy defines how your transactions are routed.
         You can choose 1 of the 3 different schemes mentioned below for each asset type:
           - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
           - **Custom**; Route to an account that you choose. If you remove the account, incoming transactions will fail until you choose another one.
           - **Default**; Use the routing specified by the network profile the connection is connected to. This scheme is also referred to as "Profile Routing"
-        
+
         Default Workspace Presets:
           - Network Profile Crypto → **Custom**
           - Network Profile FIAT → **None**
           - Network Connection Crypto → **Default**
           - Network Connection FIAT → **Default**
-        
+
             - **Note**: By default, Custom routing scheme uses (`dstId` = `0`, `dstType` = `VAULT`).
       tags:
         - Network connections
@@ -1549,17 +1548,17 @@ paths:
             schema:
               properties:
                 routingPolicy:
-                  $ref: '#/components/schemas/NetworkConnectionRoutingPolicy'
+                  $ref: "#/components/schemas/NetworkConnectionRoutingPolicy"
               required:
                 - routingPolicy
       responses:
-        '200':
+        "200":
           description: Network ID
           headers:
             X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
+              $ref: "#/components/headers/X-Request-ID"
           content:
-            '*/*':
+            "*/*":
               schema:
                 properties:
                   success:
@@ -1567,8 +1566,8 @@ paths:
                 required:
                   - success
         default:
-          $ref: '#/components/responses/Error'
-  '/network_connections/{connectionId}/is_third_party_routing/{assetType}':
+          $ref: "#/components/responses/Error"
+  "/network_connections/{connectionId}/is_third_party_routing/{assetType}":
     get:
       summary: Retrieve third-party network routing validation by asset type.
       description: The Fireblocks Network allows for flexibility around incoming deposits. A receiver can receive network deposits to locations other than Fireblocks. This endpoint validates whether future transactions are routed to the displayed recipient or to a 3rd party.
@@ -1595,13 +1594,13 @@ paths:
               - SIGNET_TEST
               - SEN_TEST
       responses:
-        '200':
+        "200":
           description: result for the validation
           headers:
             X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
+              $ref: "#/components/headers/X-Request-ID"
           content:
-            '*/*':
+            "*/*":
               schema:
                 properties:
                   isThirdPartyRouting:
@@ -1609,15 +1608,15 @@ paths:
                   description:
                     type: string
         default:
-          $ref: '#/components/responses/Error'
-  '/network_connections/{connectionId}':
+          $ref: "#/components/responses/Error"
+  "/network_connections/{connectionId}":
     get:
       summary: Get a network connection
       description: |
         Gets a network connection by ID.
-        
+
         **Note:** This API call is subject to Flexible Routing Schemes.
-        
+
         Your routing policy defines how your transactions are routed.
         You can choose 1 of the 3 different schemes mentioned below for each asset type:
           - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
@@ -1650,22 +1649,22 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: A network connection
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/NetworkConnectionResponse'
+                $ref: "#/components/schemas/NetworkConnectionResponse"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     delete:
       summary: Deletes a network connection by ID
       description: |
         Deletes an existing network connection specified by its connection ID.
-        
+
         **Note:** This API call is subject to Flexible Routing Schemes.
-        
+
         Your routing policy defines how your transactions are routed.
         You can choose 1 of the 3 different schemes mentioned below for each asset type:
           - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
@@ -1690,13 +1689,13 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: Network ID
           headers:
             X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
+              $ref: "#/components/headers/X-Request-ID"
           content:
-            '*/*':
+            "*/*":
               schema:
                 properties:
                   success:
@@ -1704,15 +1703,15 @@ paths:
                 required:
                   - success
         default:
-          $ref: '#/components/responses/Error'
-  '/network_ids':
+          $ref: "#/components/responses/Error"
+  "/network_ids":
     get:
       summary: Returns all network IDs, both local IDs and discoverable remote IDs
       description: |
         Retrieves a list of all local and discoverable remote network IDs.
 
         **Note:** This API call is subject to Flexible Routing Schemes.
-        
+
         Your routing policy defines how your transactions are routed.
         You can choose 1 of the 3 different schemes mentioned below for each asset type:
           - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
@@ -1729,26 +1728,26 @@ paths:
       tags:
         - Network connections
       responses:
-        '200':
+        "200":
           description: A list of network IDs
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
                   allOf:
-                    - $ref: '#/components/schemas/NetworkIdResponse'
+                    - $ref: "#/components/schemas/NetworkIdResponse"
 
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     post:
       summary: Creates a new Network ID
       description: |
         Creates a new Network ID.
 
         **Note:** This API call is subject to Flexible Routing Schemes.
-        
+
         Your routing policy defines how your transactions are routed.
         You can choose 1 of the 3 different schemes mentioned below for each asset type:
           - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
@@ -1772,27 +1771,27 @@ paths:
                 name:
                   type: string
                 routingPolicy:
-                  $ref: '#/components/schemas/NetworkIdRoutingPolicy'
+                  $ref: "#/components/schemas/NetworkIdRoutingPolicy"
               required:
                 - name
       responses:
-        '201':
+        "201":
           description: Returns the new network ID in your workspace
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/NetworkIdResponse'
+                $ref: "#/components/schemas/NetworkIdResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/network_ids/{networkId}':
+          $ref: "#/components/responses/Error"
+  "/network_ids/{networkId}":
     get:
       summary: Returns specific network ID.
       description: |
         Retrieves a network by its ID.
 
         **Note:** This API call is subject to Flexible Routing Schemes.
-        
+
         Your routing policy defines how your transactions are routed.
         You can choose 1 of the 3 different schemes mentioned below for each asset type:
           - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
@@ -1817,22 +1816,22 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: Network ID
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/NetworkIdResponse'
+                $ref: "#/components/schemas/NetworkIdResponse"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     delete:
       summary: Deletes specific network ID.
       description: |
         Deletes a network by its ID.
 
         **Note:** This API call is subject to Flexible Routing Schemes.
-        
+
         Your routing policy defines how your transactions are routed.
         You can choose 1 of the 3 different schemes mentioned below for each asset type:
           - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
@@ -1857,10 +1856,10 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: Network ID
           content:
-            '*/*':
+            "*/*":
               schema:
                 properties:
                   success:
@@ -1868,15 +1867,15 @@ paths:
                 required:
                   - success
         default:
-          $ref: '#/components/responses/Error'
-  '/network_ids/{networkId}/set_routing_policy':
+          $ref: "#/components/responses/Error"
+  "/network_ids/{networkId}/set_routing_policy":
     patch:
       summary: Update network id routing policy.
       description: |
         Updates the routing policy of a specified network ID.
 
         **Note:** This API call is subject to Flexible Routing Schemes.
-        
+
         Your routing policy defines how your transactions are routed.
         You can choose 1 of the 3 different schemes mentioned below for each asset type:
           - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
@@ -1906,15 +1905,15 @@ paths:
             schema:
               properties:
                 routingPolicy:
-                  $ref: '#/components/schemas/NetworkIdRoutingPolicy'
+                  $ref: "#/components/schemas/NetworkIdRoutingPolicy"
               required:
                 - routingPolicy
       responses:
-        '200':
+        "200":
           description: Network ID
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 properties:
                   success:
@@ -1922,15 +1921,15 @@ paths:
                 required:
                   - success
         default:
-          $ref: '#/components/responses/Error'
-  '/network_ids/{networkId}/set_discoverability':
+          $ref: "#/components/responses/Error"
+  "/network_ids/{networkId}/set_discoverability":
     patch:
       summary: Update network ID's discoverability.
       description: |
         Update whether or not the network ID is discoverable by others.
 
         **Note:** This API call is subject to Flexible Routing Schemes.
-        
+
         Your routing policy defines how your transactions are routed.
         You can choose 1 of the 3 different schemes mentioned below for each asset type:
           - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
@@ -1965,11 +1964,11 @@ paths:
               required:
                 - isDiscoverable
       responses:
-        '200':
+        "200":
           description: Network ID
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 properties:
                   success:
@@ -1977,15 +1976,15 @@ paths:
                 required:
                   - success
         default:
-          $ref: '#/components/responses/Error'
-  '/network_ids/{networkId}/set_name':
+          $ref: "#/components/responses/Error"
+  "/network_ids/{networkId}/set_name":
     patch:
       summary: Update network ID's name.
       description: |
         Updates name of a specified network ID.
 
         **Note:** This API call is subject to Flexible Routing Schemes.
-        
+
         Your routing policy defines how your transactions are routed.
         You can choose 1 of the 3 different schemes mentioned below for each asset type:
           - **None**; Defines the profile routing to no destination for that asset type. Incoming transactions to asset types routed to `None` will fail.
@@ -2020,11 +2019,11 @@ paths:
               required:
                 - name
       responses:
-        '200':
+        "200":
           description: Network ID
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 properties:
                   success:
@@ -2032,7 +2031,7 @@ paths:
                 required:
                   - success
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   #  INTERNAL WALLETS
   /internal_wallets:
@@ -2045,17 +2044,17 @@ paths:
 
         **Note**: BTC-based assets belonging to whitelisted addresses cannot be retrieved between 00:00 UTC and 00:01 UTC daily due to third-party provider, Blockchair, being unavailable for this 60 second period. Please wait until the next minute to retrieve BTC-based assets.
       responses:
-        '200':
+        "200":
           description: A list of internal wallets
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/UnmanagedWallet'
+                  $ref: "#/components/schemas/UnmanagedWallet"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     post:
       summary: Create an internal wallet
       tags:
@@ -2070,15 +2069,15 @@ paths:
             name: Fireblocks SDK Javascript example
       description: Creates a new internal wallet with the requested name.
       responses:
-        '200':
+        "200":
           description: A new wallet object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/UnmanagedWallet'
+                $ref: "#/components/schemas/UnmanagedWallet"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       requestBody:
         content:
           application/json:
@@ -2091,7 +2090,7 @@ paths:
                   description: >-
                     Optional - Sets a customer reference ID
                   type: string
-  '/internal_wallets/{walletId}':
+  "/internal_wallets/{walletId}":
     get:
       summary: Get assets for internal wallet
       tags:
@@ -2114,15 +2113,15 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: A Wallet object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/UnmanagedWallet'
+                $ref: "#/components/schemas/UnmanagedWallet"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     delete:
       summary: Delete an internal wallet
       tags:
@@ -2145,12 +2144,12 @@ paths:
             type: string
             minimum: 1
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/internal_wallets/{walletId}/set_customer_ref_id':
+          $ref: "#/components/responses/Error"
+  "/internal_wallets/{walletId}/set_customer_ref_id":
     post:
       summary: Set an AML/KYT customer reference ID for an internal wallet
       tags:
@@ -2182,12 +2181,12 @@ paths:
                   description: Customer reference ID
                   type: string
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/internal_wallets/{walletId}/{assetId}':
+          $ref: "#/components/responses/Error"
+  "/internal_wallets/{walletId}/{assetId}":
     get:
       summary: Get an asset from an internal wallet
       tags:
@@ -2218,15 +2217,15 @@ paths:
             minimum: 1
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: A Wallet Asset object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/WalletAsset'
+                $ref: "#/components/schemas/WalletAsset"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     post:
       summary: Add an asset to an internal wallet
       tags:
@@ -2254,15 +2253,15 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: A Wallet Asset object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/WalletAsset'
+                $ref: "#/components/schemas/WalletAsset"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       requestBody:
         content:
           application/json:
@@ -2306,11 +2305,11 @@ paths:
             minimum: 1
             x-fb-entity: asset
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   # EXTERNAL WALLETS
   /external_wallets:
@@ -2328,17 +2327,17 @@ paths:
             code: const externalWallets = await fireblocks.getExternalWallets();
             name: Fireblocks SDK Javascript example
       responses:
-        '200':
+        "200":
           description: A list of external wallets
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/UnmanagedWallet'
+                  $ref: "#/components/schemas/UnmanagedWallet"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     post:
       summary: Create an external wallet
       description: Creates a new external wallet with the requested name.
@@ -2353,15 +2352,15 @@ paths:
             code: const externalWallet = await fireblocks.createExternalWallet(name, customerRefId);
             name: Fireblocks SDK Javascript example
       responses:
-        '200':
+        "200":
           description: A Wallet object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/UnmanagedWallet'
+                $ref: "#/components/schemas/UnmanagedWallet"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       requestBody:
         content:
           application/json:
@@ -2374,7 +2373,7 @@ paths:
                   description: >-
                     Optional - Sets a customer reference ID
                   type: string
-  '/external_wallets/{walletId}':
+  "/external_wallets/{walletId}":
     get:
       summary: Find an external wallet
       description: Returns an external wallet by ID.
@@ -2397,15 +2396,15 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: A Wallet object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/UnmanagedWallet'
+                $ref: "#/components/schemas/UnmanagedWallet"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     delete:
       summary: Delete an external wallet
       description: Deletes an external wallet by ID.
@@ -2428,12 +2427,12 @@ paths:
             type: string
             minimum: 1
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/external_wallets/{walletId}/set_customer_ref_id':
+          $ref: "#/components/responses/Error"
+  "/external_wallets/{walletId}/set_customer_ref_id":
     post:
       summary: Set an AML customer reference ID for an external wallet
       description: Sets an AML/KYT customer reference ID for the specific external wallet.
@@ -2465,12 +2464,12 @@ paths:
                   description: Customer reference ID
                   type: string
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/external_wallets/{walletId}/{assetId}':
+          $ref: "#/components/responses/Error"
+  "/external_wallets/{walletId}/{assetId}":
     get:
       summary: Get an asset from an external wallet
       description: Returns an external wallet by wallet ID and asset ID.
@@ -2501,15 +2500,15 @@ paths:
             minimum: 1
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: A Wallet Asset object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ExternalWalletAsset'
+                $ref: "#/components/schemas/ExternalWalletAsset"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     post:
       summary: Add an asset to an external wallet.
       description: Adds an asset to an existing external wallet.
@@ -2538,15 +2537,15 @@ paths:
             type: string
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: A Wallet Asset object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ExternalWalletAsset'
+                $ref: "#/components/schemas/ExternalWalletAsset"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       requestBody:
         content:
           application/json:
@@ -2590,11 +2589,11 @@ paths:
             minimum: 1
             x-fb-entity: asset
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   # CONTRACTS
   /contracts:
@@ -2604,32 +2603,32 @@ paths:
       tags:
         - Contracts
       responses:
-        '200':
+        "200":
           description: A list of contracts
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/UnmanagedWallet'
+                  $ref: "#/components/schemas/UnmanagedWallet"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     post:
       summary: Create a contract
       description: Creates a new contract.
       tags:
         - Contracts
       responses:
-        '200':
+        "200":
           description: A Wallet object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/UnmanagedWallet'
+                $ref: "#/components/schemas/UnmanagedWallet"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       requestBody:
         content:
           application/json:
@@ -2638,7 +2637,7 @@ paths:
                 name:
                   type: string
                   description: the contract's display name
-  '/contracts/{contractId}':
+  "/contracts/{contractId}":
     get:
       summary: Find a specific contract
       description: Returns a contract by ID.
@@ -2653,15 +2652,15 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: A Wallet object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/UnmanagedWallet'
+                $ref: "#/components/schemas/UnmanagedWallet"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     delete:
       summary: Delete a contract
       description: Deletes a contract by ID.
@@ -2676,12 +2675,12 @@ paths:
             type: string
             minimum: 1
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/contracts/{contractId}/{assetId}':
+          $ref: "#/components/responses/Error"
+  "/contracts/{contractId}/{assetId}":
     get:
       summary: Find a contract asset
       description: Returns a contract asset by ID.
@@ -2704,15 +2703,15 @@ paths:
             minimum: 1
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: A Wallet Asset object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ExternalWalletAsset'
+                $ref: "#/components/schemas/ExternalWalletAsset"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     post:
       summary: Add an asset to a contract
       description: Adds an asset to an existing contract.
@@ -2733,15 +2732,15 @@ paths:
             type: string
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: A Wallet Asset object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ExternalWalletAsset'
+                $ref: "#/components/schemas/ExternalWalletAsset"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       requestBody:
         content:
           application/json:
@@ -2777,14 +2776,14 @@ paths:
             minimum: 1
             x-fb-entity: asset
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   # SUPPORTED ASSETS
-  '/supported_assets':
+  "/supported_assets":
     get:
       summary: List all asset types supported by Fireblocks
       description: Returns all asset types supported by Fireblocks.
@@ -2799,17 +2798,17 @@ paths:
             code: const supportedAssets = await fireblocks.getSupportedAssets();
             name: Fireblocks SDK Javascript example
       responses:
-        '200':
+        "200":
           description: A Transaction object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/AssetTypeResponse'
+                  $ref: "#/components/schemas/AssetTypeResponse"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   # TRANSACTIONS
   /transactions:
@@ -2939,17 +2938,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: A list of transactions
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/TransactionResponse'
+                  $ref: "#/components/schemas/TransactionResponse"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
     post:
       summary: Create a new transaction
       description: Creates a new transaction.
@@ -2985,21 +2984,21 @@ paths:
               const result = await fireblocks.createTransaction(payload);
             name: Fireblocks SDK Javascript example
       responses:
-        '200':
+        "200":
           description: A transaction object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/CreateTransactionResponse'
+                $ref: "#/components/schemas/CreateTransactionResponse"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TransactionRequest'
-  '/transactions/estimate_fee':
+              $ref: "#/components/schemas/TransactionRequest"
+  "/transactions/estimate_fee":
     post:
       summary: Estimate transaction fee
       description: >-
@@ -3039,18 +3038,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TransactionRequest'
+              $ref: "#/components/schemas/TransactionRequest"
       responses:
-        '200':
+        "200":
           description: Estimated fees response
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/EstimatedTransactionFeeResponse'
+                $ref: "#/components/schemas/EstimatedTransactionFeeResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/transactions/{txId}':
+          $ref: "#/components/responses/Error"
+  "/transactions/{txId}":
     get:
       summary: Find a specific transaction
       description: Returns a transaction by ID.
@@ -3073,18 +3072,18 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: An Transaction object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/TransactionResponse'
-        '400':
-          $ref: '#/components/responses/Error'
+                $ref: "#/components/schemas/TransactionResponse"
+        "400":
+          $ref: "#/components/responses/Error"
         default:
-          $ref: '#/components/responses/Error'
-  '/transactions/external_tx_id/{externalTxId}/':
+          $ref: "#/components/responses/Error"
+  "/transactions/external_tx_id/{externalTxId}/":
     get:
       summary: Find a specific transaction by external transaction ID
       description: Returns transaction by external transaction ID.
@@ -3107,16 +3106,16 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: An Transaction object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/TransactionResponse'
+                $ref: "#/components/schemas/TransactionResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/transactions/{txId}/set_confirmation_threshold':
+          $ref: "#/components/responses/Error"
+  "/transactions/{txId}/set_confirmation_threshold":
     post:
       summary: Set confirmation threshold by transaction ID
       description: Overrides the required number of confirmations for transaction completion by transaction ID.
@@ -3134,7 +3133,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SetConfirmationsThresholdRequest'
+              $ref: "#/components/schemas/SetConfirmationsThresholdRequest"
       parameters:
         - in: path
           name: txId
@@ -3144,16 +3143,16 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: Set successfully
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/SetConfirmationsThresholdResponse'
+                $ref: "#/components/schemas/SetConfirmationsThresholdResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/transactions/{txId}/drop':
+          $ref: "#/components/responses/Error"
+  "/transactions/{txId}/drop":
     post:
       summary: Drop ETH transaction by ID
       description: Drops a stuck ETH transaction and creates a replacement transaction.
@@ -3171,7 +3170,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DropTransactionRequest'
+              $ref: "#/components/schemas/DropTransactionRequest"
       parameters:
         - in: path
           name: txId
@@ -3181,16 +3180,16 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: Created successfully
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/DropTransactionResponse'
+                $ref: "#/components/schemas/DropTransactionResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/transactions/{txId}/cancel':
+          $ref: "#/components/responses/Error"
+  "/transactions/{txId}/cancel":
     post:
       summary: Cancel a transaction
       description: Cancels a transaction by ID.
@@ -3213,16 +3212,16 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: An Transaction object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/CancelTransactionResponse'
+                $ref: "#/components/schemas/CancelTransactionResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/transactions/{txId}/freeze':
+          $ref: "#/components/responses/Error"
+  "/transactions/{txId}/freeze":
     post:
       summary: Freeze a transaction
       description: Freezes a transaction by ID.
@@ -3245,14 +3244,14 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: freeze response
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/FreezeTransactionResponse'
-  '/transactions/{txId}/unfreeze':
+                $ref: "#/components/schemas/FreezeTransactionResponse"
+  "/transactions/{txId}/unfreeze":
     post:
       summary: Unfreeze a transaction
       description: Unfreezes a transaction by ID and makes the transaction available again.
@@ -3275,14 +3274,14 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: Unfreeze response
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/UnfreezeTransactionResponse'
-  '/transactions/validate_address/{assetId}/{address}':
+                $ref: "#/components/schemas/UnfreezeTransactionResponse"
+  "/transactions/validate_address/{assetId}/{address}":
     get:
       summary: Validate destination address
       description: Checks if an address is valid (for XRP, DOT, XLM, and EOS).
@@ -3311,17 +3310,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: An Transaction object
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ValidateAddressResponse'
+                $ref: "#/components/schemas/ValidateAddressResponse"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
   # TXHASH
-  '/txHash/{txHash}/set_confirmation_threshold':
+  "/txHash/{txHash}/set_confirmation_threshold":
     post:
       summary: Set confirmation threshold by transaction hash
       description: Overrides the required number of confirmations for transaction completion by transaction hash.
@@ -3339,7 +3338,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SetConfirmationsThresholdRequest'
+              $ref: "#/components/schemas/SetConfirmationsThresholdRequest"
       parameters:
         - in: path
           name: txHash
@@ -3349,18 +3348,18 @@ paths:
             type: string
             minimum: 1
       responses:
-        '200':
+        "200":
           description: A list of transactions affected by the change
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/SetConfirmationsThresholdResponse'
+                $ref: "#/components/schemas/SetConfirmationsThresholdResponse"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   # ESTIMATE NETWORK FEE
-  '/estimate_network_fee':
+  "/estimate_network_fee":
     get:
       summary: Estimate the required fee for an asset
       description: Gets the estimated required fee for an asset. For UTXO based assets, the response will contain the suggested fee per byte, for ETH/ETC based assets, the suggested gas price, and for XRP/XLM, the transaction fee.
@@ -3384,19 +3383,19 @@ paths:
             type: string
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: Estimated fees response
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/EstimatedNetworkFeeResponse'
+                $ref: "#/components/schemas/EstimatedNetworkFeeResponse"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   # Payments
   #Cross Border
-  '/payments/xb-settlements/configs':
+  "/payments/xb-settlements/configs":
     post:
       tags:
         - Payments - Cross Border settlement
@@ -3405,7 +3404,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/XBSettlementConfigCreationRequestBody'
+              $ref: "#/components/schemas/XBSettlementConfigCreationRequestBody"
       responses:
         200:
           description: XB settlement configuration created successfully
@@ -3413,21 +3412,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/XBSettlementConfigCreationResponse'
+                $ref: "#/components/schemas/XBSettlementConfigCreationResponse"
         401:
           description: Unauthorized. Missing / invalid JWT token in Authorization header.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         500-599:
           description: Internal error.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
     get:
       tags:
         - Payments - Cross Border settlement
@@ -3439,22 +3438,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAllXBSettlementConfigsResponse'
+                $ref: "#/components/schemas/GetAllXBSettlementConfigsResponse"
         401:
           description: Unauthorized. Missing / invalid JWT token in Authorization header.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         500-599:
           description: Internal error.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-  '/payments/xb-settlements/configs/{configId}':
+                $ref: "#/components/schemas/ErrorResponse"
+  "/payments/xb-settlements/configs/{configId}":
     get:
       tags:
         - Payments - Cross Border settlement
@@ -3473,21 +3472,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetXBSettlementConfigResponse'
+                $ref: "#/components/schemas/GetXBSettlementConfigResponse"
         401:
           description: Unauthorized. Missing / invalid JWT token in Authorization header.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         500-599:
           description: Internal error.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
     put:
       tags:
         - Payments - Cross Border settlement
@@ -3503,7 +3502,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/XBSettlementConfigEditRequestBody'
+              $ref: "#/components/schemas/XBSettlementConfigEditRequestBody"
       responses:
         200:
           description: XB settlement configuration edited successfully
@@ -3511,21 +3510,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/XBSettlementConfigEditResponse'
+                $ref: "#/components/schemas/XBSettlementConfigEditResponse"
         401:
           description: Unauthorized. Missing / invalid JWT token in Authorization header.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         500-599:
           description: Internal error.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
     delete:
       tags:
         - Payments - Cross Border settlement
@@ -3544,22 +3543,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/XBSettlementConfigDeletionResponse'
+                $ref: "#/components/schemas/XBSettlementConfigDeletionResponse"
         401:
           description: Unauthorized. Missing / invalid JWT token in Authorization header.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         500-599:
           description: Internal error.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-  '/payments/xb-settlements/flows':
+                $ref: "#/components/schemas/ErrorResponse"
+  "/payments/xb-settlements/flows":
     post:
       tags:
         - Payments - Cross Border settlement
@@ -3568,7 +3567,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/XBCreateSettlementFlowRequestBody'
+              $ref: "#/components/schemas/XBCreateSettlementFlowRequestBody"
       responses:
         200:
           description: XB settlement flow created successfully
@@ -3576,22 +3575,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/XBCreateSettlementFlowResponse'
+                $ref: "#/components/schemas/XBCreateSettlementFlowResponse"
         401:
           description: Unauthorized. Missing / invalid JWT token in Authorization header.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         500-599:
           description: Internal error.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-  '/payments/xb-settlements/flows/{flowId}':
+                $ref: "#/components/schemas/ErrorResponse"
+  "/payments/xb-settlements/flows/{flowId}":
     get:
       tags:
         - Payments - Cross Border settlement
@@ -3613,24 +3612,24 @@ paths:
                 type: object
                 properties:
                   setup:
-                    $ref: '#/components/schemas/XBSettlementFlowSetupModel'
+                    $ref: "#/components/schemas/XBSettlementFlowSetupModel"
                   execution:
-                    $ref: '#/components/schemas/XBSettlementFlowExecutionModel'
+                    $ref: "#/components/schemas/XBSettlementFlowExecutionModel"
         401:
           description: Unauthorized. Missing / invalid JWT token in Authorization header.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         500-599:
           description: Internal error.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-  '/payments/xb-settlements/flows/{flowId}/actions/execute':
+                $ref: "#/components/schemas/ErrorResponse"
+  "/payments/xb-settlements/flows/{flowId}/actions/execute":
     post:
       tags:
         - Payments - Cross Border settlement
@@ -3649,46 +3648,46 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/XBSettlementFlowExecutionResponse'
+                $ref: "#/components/schemas/XBSettlementFlowExecutionResponse"
         401:
           description: Unauthorized. Missing / invalid JWT token in Authorization header.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         500-599:
           description: Internal error.
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
   #Payments
   #Payout
-  '/payments/payout':
+  "/payments/payout":
     post:
       tags:
         - Payments - Payout
       description: |
-          **Note:** The reference content in this section documents the Payments Engine endpoint. The Payments Engine endpoints include APIs available only for customers with Payments Engine enabled on their accounts. </br>
-          </br>These endpoints are currently in beta and might be subject to changes.</br>
-          </br>If you want to learn more about Fireblocks Payments Engine, please contact your Fireblocks Customer Success Manager or email CSM@fireblocks.com. </br>
-          </br> <b u>Create a payout instruction set.</b> </u></br>
-          A payout instruction set is a set of instructions for distributing payments from a single payment account to a list of payee accounts. </br>
-          The instruction set defines: </br>
-          <ul>
-          <li>the payment account and its account type (vault, exchange, or fiat). </li>
-          <li>the account type (vault account, exchange account, whitelisted address, network connection, fiat account, or merchant account), the amount, and the asset of payment for each payee account.</li>
-          </ul>
+        **Note:** The reference content in this section documents the Payments Engine endpoint. The Payments Engine endpoints include APIs available only for customers with Payments Engine enabled on their accounts. </br>
+        </br>These endpoints are currently in beta and might be subject to changes.</br>
+        </br>If you want to learn more about Fireblocks Payments Engine, please contact your Fireblocks Customer Success Manager or email CSM@fireblocks.com. </br>
+        </br> <b u>Create a payout instruction set.</b> </u></br>
+        A payout instruction set is a set of instructions for distributing payments from a single payment account to a list of payee accounts. </br>
+        The instruction set defines: </br>
+        <ul>
+        <li>the payment account and its account type (vault, exchange, or fiat). </li>
+        <li>the account type (vault account, exchange account, whitelisted address, network connection, fiat account, or merchant account), the amount, and the asset of payment for each payee account.</li>
+        </ul>
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       summary: Create a payout instruction set
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreatePayoutRequest'
+              $ref: "#/components/schemas/CreatePayoutRequest"
             example:
               paymentAccount:
                 id: EX_SUB3
@@ -3698,13 +3697,13 @@ paths:
                     id: bef85a1c-b605-4b2e-bdb5-2d400f4d0bf3
                     type: EXTERNAL_WALLET
                   amount:
-                    amount: '43'
+                    amount: "43"
                     assetId: USDC
                 - payeeAccount:
                     id: 3adc1f92-e791-44a8-9aee-7f31c2108b78
                     type: NETWORK_CONNECTION
                   amount:
-                    amount: '4423'
+                    amount: "4423"
                     assetId: USDC
       responses:
         200:
@@ -3712,23 +3711,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PayoutResponse'
+                $ref: "#/components/schemas/PayoutResponse"
               example:
-                  payoutId: 1fe3b61f-7e1f-4a19-aff0-4f0a524d44d7
-                  paymentAccount:
-                  id: EX_SUB3
-                  type: EXCHANGE_ACCOUNT
-                  createdAt: 1645365800
-                  state: REQUESTED
-                  initMethod: API
-                  instructionSet:
+                payoutId: 1fe3b61f-7e1f-4a19-aff0-4f0a524d44d7
+                paymentAccount:
+                id: EX_SUB3
+                type: EXCHANGE_ACCOUNT
+                createdAt: 1645365800
+                state: REQUESTED
+                initMethod: API
+                instructionSet:
                   - id: 6ea4a016-536b-49af-b1a0-40b343ccf879
                     name: payee-wallet-name
                     payeeAccount:
                       id: bef85a1c-b605-4b2e-bdb5-2d400f4d0bf3
                       type: EXTERNAL_WALLET
                     amount:
-                      amount: '43'
+                      amount: "43"
                       assetId: USDC
                     state: NOT_STARTED
                     transactions: []
@@ -3738,34 +3737,34 @@ paths:
                       id: 3adc1f92-e791-44a8-9aee-7f31c2108b78
                       type: NETWORK_CONNECTION
                     amount:
-                      amount: '4423.23'
+                      amount: "4423.23"
                       assetId: USDC
                     state: NOT_STARTED
-                    transactions: []              
+                    transactions: []
         400:
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         401:
           description: Unauthorized. Missing / invalid JWT token in Authorization header.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         500-599:
           description: Internal error.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-  '/payments/payout/{payoutId}/actions/execute':
+                $ref: "#/components/schemas/ErrorResponse"
+  "/payments/payout/{payoutId}/actions/execute":
     post:
       tags:
         - Payments - Payout
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       summary: Execute a payout instruction set
       description: |
         **Note:** The reference content in this section documents the Payments Engine endpoint. The Payments Engine endpoints include APIs available only for customers with Payments Engine enabled on their accounts. </br>
@@ -3790,39 +3789,38 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DispatchPayoutResponse'
-              example: 
+                $ref: "#/components/schemas/DispatchPayoutResponse"
+              example:
                 payoutId: 1fe3b61f-7e1f-4a19-aff0-4f0a524d44d7
         400:
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         401:
           description: Unauthorized. Missing / invalid JWT token in Authorization header.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         500-599:
           description: Internal error.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-  '/payments/payout/{payoutId}':
+                $ref: "#/components/schemas/ErrorResponse"
+  "/payments/payout/{payoutId}":
     get:
       tags:
         - Payments - Payout
-      summary:
-        Get the status of a payout instruction set
+      summary: Get the status of a payout instruction set
       description: |
         **Note:** The reference content in this section documents the Payments Engine endpoint. The Payments Engine endpoints include APIs available only for customers with Payments Engine enabled on their accounts. </br>
           </br>These endpoints are currently in beta and might be subject to changes.</br>
           </br>If you want to learn more about Fireblocks Payments Engine, please contact your Fireblocks Customer Success Manager or email CSM@fireblocks.com. </br>
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       parameters:
         - name: payoutId
           description: the payout id received from the creation of the payout instruction set
@@ -3837,7 +3835,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PayoutResponse'
+                $ref: "#/components/schemas/PayoutResponse"
               example:
                 payoutId: 1fe3b61f-7e1f-4a19-aff0-4f0a524d44d7
                 paymentAccount:
@@ -3845,7 +3843,7 @@ paths:
                   type: EXCHANGE_ACCOUNT
                 createdAt: 1645365800
                 state: FINALIZED
-                status: ' DONE'
+                status: " DONE"
                 initMethod: API
                 instructionSet:
                   - id: 6ea4a016-536b-49af-b1a0-40b343ccf879
@@ -3854,7 +3852,7 @@ paths:
                       id: bef85a1c-b605-4b2e-bdb5-2d400f4d0bf3
                       type: EXTERNAL_WALLET
                     amount:
-                      amount: '4312'
+                      amount: "4312"
                       assetId: USDC
                     state: COMPLETED
                     transactions:
@@ -3867,7 +3865,7 @@ paths:
                       id: 3adc1f92-e791-44a8-9aee-7f31c2108b78
                       type: NETWORK_CONNECTION
                     amount:
-                      amount: '4423.23'
+                      amount: "4423.23"
                       assetId: USDC
                     state: COMPLETED
                     transactions:
@@ -3880,21 +3878,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         401:
           description: Unauthorized. Missing / invalid JWT token in Authorization header.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
         500-599:
           description: Internal error.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
   # Gas Station
-  '/gas_station':
+  "/gas_station":
     get:
       summary: Get gas station settings
       description: Returns gas station settings and ETH balance.
@@ -3909,16 +3907,16 @@ paths:
             code: const gasStationInfo = await fireblocks.gasStationInfo();
             name: Fireblocks SDK Javascript example
       responses:
-        '200':
+        "200":
           description: Gas Station properties
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/GasStationPropertiesResponse'
+                $ref: "#/components/schemas/GasStationPropertiesResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/gas_station/{assetId}':
+          $ref: "#/components/responses/Error"
+  "/gas_station/{assetId}":
     get:
       summary: Get gas station settings by asset
       description: Returns gas station settings and balances for a requested asset.
@@ -3941,16 +3939,16 @@ paths:
             type: string
             x-fb-entity: asset
       responses:
-        '200':
+        "200":
           description: Gas Station properties
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/GasStationPropertiesResponse'
+                $ref: "#/components/schemas/GasStationPropertiesResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/gas_station/configuration':
+          $ref: "#/components/responses/Error"
+  "/gas_station/configuration":
     put:
       summary: Edit gas station settings
       description: Configures gas station settings for ETH.
@@ -3969,14 +3967,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GasStationConfiguration'
+              $ref: "#/components/schemas/GasStationConfiguration"
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
-  '/gas_station/configuration/{assetId}':
+          $ref: "#/components/responses/Error"
+  "/gas_station/configuration/{assetId}":
     put:
       summary: Edit gas station settings for an asset
       description: Configures gas station settings for a requested asset.
@@ -3995,16 +3993,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GasStationConfiguration'
+              $ref: "#/components/schemas/GasStationConfiguration"
       responses:
-        '201':
+        "201":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   # USERS
-  '/users':
+  "/users":
     get:
       summary: List users
       description: |
@@ -4023,16 +4021,16 @@ paths:
             code: const users = await fireblocks.getUsers();
             name: Fireblocks SDK Javascript example
       responses:
-        '200':
+        "200":
           description: List of users
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/GetUsersResponse'
+                $ref: "#/components/schemas/GetUsersResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/audits':
+          $ref: "#/components/responses/Error"
+  "/audits":
     get:
       summary: Get audit logs
       tags:
@@ -4048,14 +4046,14 @@ paths:
               - DAY
               - WEEK
       responses:
-        '200':
+        "200":
           description: Audit logs from requested time period
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   # OFF EXCHANGE V2(collateral)
-  '/off_exchange/add':
+  "/off_exchange/add":
     post:
       summary: add collateral
       description: add collateral, create deposit request
@@ -4065,17 +4063,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddCollateralRequestBody'
+              $ref: "#/components/schemas/AddCollateralRequestBody"
       responses:
-        '200':
+        "200":
           description: A transaction object
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/CreateTransactionResponse'
+                $ref: "#/components/schemas/CreateTransactionResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/off_exchange/remove':
+          $ref: "#/components/responses/Error"
+  "/off_exchange/remove":
     post:
       summary: remove collateral
       description: remove collateral, create withdraw request
@@ -4085,17 +4083,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RemoveCollateralRequestBody'
+              $ref: "#/components/schemas/RemoveCollateralRequestBody"
       responses:
-        '200':
+        "200":
           description: A transaction object
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/CreateTransactionResponse'
+                $ref: "#/components/schemas/CreateTransactionResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/off_exchange/settlements/trader':
+          $ref: "#/components/responses/Error"
+  "/off_exchange/settlements/trader":
     post:
       summary: create settlement for a trader
       description: create settlement for a trader
@@ -4105,17 +4103,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SettlementRequestBody'
+              $ref: "#/components/schemas/SettlementRequestBody"
       responses:
-        '201':
+        "201":
           description: A settlement object
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/SettlementResponse'
+                $ref: "#/components/schemas/SettlementResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/off_exchange/settlements/transactions':
+          $ref: "#/components/responses/Error"
+  "/off_exchange/settlements/transactions":
     get:
       summary: get settlements transactions from exchange
       description: get settlements transactions from exchange
@@ -4128,17 +4126,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: A settlement transactions
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/GetSettlementResponse'
+                $ref: "#/components/schemas/GetSettlementResponse"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   # WEBHOOKS
-  '/webhooks/resend':
+  "/webhooks/resend":
     post:
       summary: Resend failed webhooks
       description: Resends all failed webhook notifications.
@@ -4153,16 +4151,16 @@ paths:
             code: const result = await fireblocks.resendWebhooks();
             name: Fireblocks SDK Javascript example
       responses:
-        '200':
+        "200":
           description: OK
           headers: *req-id-header
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ResendWebhooksResponse'
+                $ref: "#/components/schemas/ResendWebhooksResponse"
         default:
-          $ref: '#/components/responses/Error'
-  '/webhooks/resend/{txId}':
+          $ref: "#/components/responses/Error"
+  "/webhooks/resend/{txId}":
     post:
       summary: Resend failed webhooks for a transaction by ID
       description: Resends failed webhook notifications for a transaction by ID.
@@ -4195,11 +4193,11 @@ paths:
                 resendStatusUpdated:
                   type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           headers: *req-id-header
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
 
   # NFTs
   /nfts/ownership/tokens:
@@ -4208,7 +4206,7 @@ paths:
       summary: Refresh vault account tokens
       description: |
         Updates all tokens and balances per blockchain and vault account.
-        
+
         **Note**: This endpoint is now in Beta, disabled for general availability at this time.
 
         To enroll in beta & enable this endpoint, contact your Fireblocks Customer Success Manager or reach out to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
@@ -4231,8 +4229,8 @@ paths:
           schema:
             type: string
       responses:
-        '202':
-          description: ''
+        "202":
+          description: ""
           headers: *req-id-header
       tags:
         - NFTs_Beta
@@ -4332,19 +4330,19 @@ paths:
               - ARCHIVED
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: *req-id-header
           content:
             application/json:
               schema:
                 properties:
                   paging:
-                    $ref: '#/components/schemas/Paging'
+                    $ref: "#/components/schemas/Paging"
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/TokenOwnershipResponse'
+                      $ref: "#/components/schemas/TokenOwnershipResponse"
       tags:
         - NFTs_Beta
   /nfts/tokens/{id}:
@@ -4366,8 +4364,8 @@ paths:
           schema:
             type: string
       responses:
-        '202':
-          description: ''
+        "202":
+          description: ""
           headers: *req-id-header
       tags:
         - NFTs_Beta
@@ -4389,13 +4387,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TokenResponse'
+                $ref: "#/components/schemas/TokenResponse"
       tags:
         - NFTs_Beta
   /nfts/tokens:
@@ -4457,19 +4455,19 @@ paths:
               - ASC
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: *req-id-header
           content:
             application/json:
               schema:
                 properties:
                   paging:
-                    $ref: '#/components/schemas/Paging'
+                    $ref: "#/components/schemas/Paging"
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/TokenResponse'
+                      $ref: "#/components/schemas/TokenResponse"
       tags:
         - NFTs_Beta
   /nfts/ownership/tokens/{id}/status:
@@ -4495,10 +4493,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateTokenOwnershipStatusDto'
+              $ref: "#/components/schemas/UpdateTokenOwnershipStatusDto"
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: *req-id-header
       tags:
         - NFTs_Beta
@@ -4527,7 +4525,7 @@ paths:
           examples:
             object:
               summary: The filter object
-              description: ''
+              description: ""
               value:
                 id: string
                 userId: string
@@ -4593,17 +4591,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetConnectionsResponse'
-        '400':
+                $ref: "#/components/schemas/GetConnectionsResponse"
+        "400":
           description: Query parameters were invalid
           headers: *req-id-header
-        '500':
+        "500":
           description: Something went wrong
           headers: *req-id-header
       tags:
@@ -4616,7 +4614,6 @@ paths:
         Initiate a new Web3 connection.
 
         * Note: After this succeeds, make a request to `PUT /v1/connections/wc/{id}` (below) to approve or reject the new Web3 connection.
-      
 
       parameters: []
       requestBody:
@@ -4624,19 +4621,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateConnectionRequest'
+              $ref: "#/components/schemas/CreateConnectionRequest"
       responses:
-        '201':
+        "201":
           description: Web3 connection initiated successfully
           headers: *req-id-header
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateConnectionResponse'
-        '400':
+                $ref: "#/components/schemas/CreateConnectionResponse"
+        "400":
           description: Invalid data sent
           headers: *req-id-header
-        '500': &ref_0
+        "500": &ref_0
           description: Something went wrong
           headers: *req-id-header
       tags: &ref_1
@@ -4664,18 +4661,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RespondToConnectionRequest'
+              $ref: "#/components/schemas/RespondToConnectionRequest"
       responses:
-        '200':
+        "200":
           description: Connection submitted successfully
           headers: *req-id-header
-        '400':
+        "400":
           description: Invalid data sent
           headers: *req-id-header
-        '404':
+        "404":
           description: Connection not found
           headers: *req-id-header
-        '500': *ref_0
+        "500": *ref_0
       tags: *ref_1
     delete:
       operationId: remove
@@ -4689,13 +4686,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Connection removed successfully
           headers: *req-id-header
-        '404':
+        "404":
           description: Connection not found
           headers: *req-id-header
-        '500': *ref_0
+        "500": *ref_0
       tags: *ref_1
   # Travel Rule
   /screening/travel_rule/transaction/validate:
@@ -4708,7 +4705,7 @@ paths:
         Checks what beneficiary VASP details are required by your jurisdiction and the beneficiary's jurisdiction.
 
         **Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
-        
+
         To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
       parameters: []
       requestBody:
@@ -4716,17 +4713,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TravelRuleValidateTransactionRequest'
+              $ref: "#/components/schemas/TravelRuleValidateTransactionRequest"
       responses:
-        '200':
+        "200":
           description: Transaction validated successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TravelRuleValidateTransactionResponse'
-        '400':
+                $ref: "#/components/schemas/TravelRuleValidateTransactionResponse"
+        "400":
           description: Invalid request body
-        '500':
+        "500":
           description: Internal server error
       tags: &ref_3
         - Travel Rule_Beta
@@ -4736,11 +4733,11 @@ paths:
       summary: Validate Full Travel Rule Transaction
       description: |-
         Validate Full Travel Rule transactions.
-        
+
         Checks for all required information on the originator and beneficiary VASPs.
 
         **Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
-        
+
         To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
       parameters: []
       requestBody:
@@ -4748,17 +4745,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TravelRuleValidateFullTransactionRequest'
+              $ref: "#/components/schemas/TravelRuleValidateFullTransactionRequest"
       responses:
-        '200':
+        "200":
           description: Transaction validated successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TravelRuleValidateTransactionResponse'
-        '400':
+                $ref: "#/components/schemas/TravelRuleValidateTransactionResponse"
+        "400":
           description: Invalid request body
-        '500':
+        "500":
           description: Internal server error
       tags: *ref_3
   /screening/travel_rule/vasp/{did}:
@@ -4771,7 +4768,7 @@ paths:
         Returns information about a VASP that has the specified DID.
 
         **Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
-        
+
         To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
       parameters:
         - name: did
@@ -4786,15 +4783,15 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Transaction validated successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TravelRuleVASP'
-        '400':
+                $ref: "#/components/schemas/TravelRuleVASP"
+        "400":
           description: Invalid request body
-        '500':
+        "500":
           description: Internal server error
       tags: *ref_3
   /screening/travel_rule/vasp:
@@ -4807,7 +4804,7 @@ paths:
         Returns a list of VASPs. VASPs can be searched and sorted and results are paginated.
 
         **Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
-        
+
         To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
       parameters:
         - name: order
@@ -4835,12 +4832,12 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get all VASPs
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TravelRuleGetAllVASPsResponse'
+                $ref: "#/components/schemas/TravelRuleGetAllVASPsResponse"
       tags: *ref_3
   /screeening/travel_rule/vasp/update:
     put:
@@ -4852,7 +4849,7 @@ paths:
         Updates a VASP with the provided parameters. Use this endpoint to add your public jsonDIDkey generated by Notabene.
 
         **Note:** The reference content in this section documents the Travel Rule beta endpoint. The beta endpoint includes APIs that are currently in preview and aren't yet generally available.
-        
+
         To enroll in the beta and enable this endpoint, contact your Fireblocks Customer Success Manager or send an email to [CSM@fireblocks.com](mailto:CSM@fireblocks.com).
       parameters: []
       requestBody:
@@ -4860,17 +4857,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TravelRuleUpdateVASPDetails'
+              $ref: "#/components/schemas/TravelRuleUpdateVASPDetails"
       responses:
-        '200':
+        "200":
           description: VASP updated successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TravelRuleUpdateVASPDetails'
-        '400':
+                $ref: "#/components/schemas/TravelRuleUpdateVASPDetails"
+        "400":
           description: Invalid request body
-        '500':
+        "500":
           description: Internal server error
       tags: *ref_3
 
@@ -4880,16 +4877,16 @@ components:
       description: Error Response
       headers:
         X-Request-ID:
-          $ref: '#/components/headers/X-Request-ID'
+          $ref: "#/components/headers/X-Request-ID"
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
 
   headers:
     X-Request-ID:
       schema:
-        type: string 
+        type: string
       description: Unique ID correlated to the API request. Please provide it in any support ticket you create or on Github issues related to Fireblocks SDKs
   requestBodies:
     NewWallet:
@@ -5085,7 +5082,7 @@ components:
         lockedAmount:
           type: string
         status:
-          $ref: '#/components/schemas/ConfigChangeRequestStatus'
+          $ref: "#/components/schemas/ConfigChangeRequestStatus"
         address:
           type: string
         tag:
@@ -5098,7 +5095,7 @@ components:
         id:
           type: string
         status:
-          $ref: '#/components/schemas/ConfigChangeRequestStatus'
+          $ref: "#/components/schemas/ConfigChangeRequestStatus"
         address:
           type: string
         tag:
@@ -5128,7 +5125,7 @@ components:
         assets:
           type: array
           items:
-            $ref: '#/components/schemas/ExchangeAsset'
+            $ref: "#/components/schemas/ExchangeAsset"
     FiatAsset:
       type: object
       properties:
@@ -5217,7 +5214,7 @@ components:
         blockHash:
           type: string
         rewardsInfo:
-          $ref: '#/components/schemas/RewardsInfo'
+          $ref: "#/components/schemas/RewardsInfo"
     VaultWalletAddress:
       type: object
       properties:
@@ -5266,7 +5263,7 @@ components:
         accounts:
           type: array
           items:
-            $ref: '#/components/schemas/VaultAccount'
+            $ref: "#/components/schemas/VaultAccount"
         paging:
           type: object
           properties:
@@ -5284,7 +5281,7 @@ components:
         assetWallets:
           type: array
           items:
-            $ref: '#/components/schemas/AssetWallet'
+            $ref: "#/components/schemas/AssetWallet"
         paging:
           type: object
           properties:
@@ -5340,7 +5337,7 @@ components:
         assets:
           type: array
           items:
-            $ref: '#/components/schemas/VaultAsset'
+            $ref: "#/components/schemas/VaultAsset"
         hiddenOnUI:
           type: boolean
         customerRefId:
@@ -5359,7 +5356,7 @@ components:
         assets:
           type: array
           items:
-            $ref: '#/components/schemas/WalletAsset'
+            $ref: "#/components/schemas/WalletAsset"
       required:
         - id
         - name
@@ -5370,7 +5367,7 @@ components:
         id:
           type: string
         type:
-          $ref: '#/components/schemas/ExchangeType'
+          $ref: "#/components/schemas/ExchangeType"
         name:
           type: string
           description: Display name of the exchange account
@@ -5379,11 +5376,11 @@ components:
         assets:
           type: array
           items:
-            $ref: '#/components/schemas/ExchangeAsset'
+            $ref: "#/components/schemas/ExchangeAsset"
         tradingAccounts:
           type: array
           items:
-            $ref: '#/components/schemas/ExchangeTradingAccount'
+            $ref: "#/components/schemas/ExchangeTradingAccount"
         isSubaccount:
           description: True if the account is a subaccount in an exchange
           type: boolean
@@ -5396,7 +5393,7 @@ components:
         id:
           type: string
         type:
-          $ref: '#/components/schemas/FiatAccountType'
+          $ref: "#/components/schemas/FiatAccountType"
         name:
           type: string
           description: Display name of the fiat account
@@ -5405,7 +5402,7 @@ components:
         assets:
           type: array
           items:
-            $ref: '#/components/schemas/FiatAsset'
+            $ref: "#/components/schemas/FiatAsset"
     OneTimeAddress:
       type: object
       properties:
@@ -5437,12 +5434,12 @@ components:
         - type
     DestinationTransferPeerPath:
       allOf:
-        - $ref: '#/components/schemas/TransferPeerPath'
+        - $ref: "#/components/schemas/TransferPeerPath"
         - type: object
         - description: (optional) Destination address. You will only be able to provide this parameter if the type is enabled for OneTimeAddress.
           properties:
             oneTimeAddress:
-              $ref: '#/components/schemas/OneTimeAddress'
+              $ref: "#/components/schemas/OneTimeAddress"
     CreateTransactionResponse:
       type: object
       properties:
@@ -5451,7 +5448,7 @@ components:
         status:
           type: string
         systemMessages:
-          $ref: '#/components/schemas/SystemMessageInfo'
+          $ref: "#/components/schemas/SystemMessageInfo"
     SystemMessageInfo:
       type: object
       properties:
@@ -5515,7 +5512,7 @@ components:
         groups:
           type: array
           items:
-            $ref: '#/components/schemas/AuthorizationGroups'
+            $ref: "#/components/schemas/AuthorizationGroups"
     AuthorizationGroups:
       type: object
       properties:
@@ -5550,7 +5547,7 @@ components:
           type: string
     TransferPeerPathResponse:
       allOf:
-        - $ref: '#/components/schemas/TransferPeerPath'
+        - $ref: "#/components/schemas/TransferPeerPath"
         - type: object
           properties:
             name:
@@ -5567,9 +5564,9 @@ components:
           type: string
           x-fb-entity: asset
         source:
-          $ref: '#/components/schemas/TransferPeerPathResponse'
+          $ref: "#/components/schemas/TransferPeerPathResponse"
         destination:
-          $ref: '#/components/schemas/TransferPeerPathResponse'
+          $ref: "#/components/schemas/TransferPeerPathResponse"
         contractCallDecodedData:
           description: Contains decoded data for smart contract transaction calls.
           type: object
@@ -5634,7 +5631,9 @@ components:
         tag:
           type: string
         subStatus:
-          $ref: '#/components/schemas/TransactionSubStatus'
+          oneOf:
+            - type: 'null'
+            - $ref: "#/components/schemas/TransactionSubStatus"
         destinationAddress:
           type: string
         sourceAddress:
@@ -5662,23 +5661,25 @@ components:
         feeCurrency:
           type: string
         operation:
-          $ref: '#/components/schemas/TransactionOperation'
+          $ref: "#/components/schemas/TransactionOperation"
         networkRecords:
           type: array
           items:
-            $ref: '#/components/schemas/NetworkRecord'
+            $ref: "#/components/schemas/NetworkRecord"
         amlScreeningResult:
-          $ref: '#/components/schemas/AmlScreeningResult'
+          $ref: "#/components/schemas/AmlScreeningResult"
         customerRefId:
           type: string
         numOfConfirmations:
           type: number
         amountInfo:
-          $ref: '#/components/schemas/AmountInfo'
+          $ref: "#/components/schemas/AmountInfo"
         feeInfo:
-          $ref: '#/components/schemas/FeeInfo'
+          $ref: "#/components/schemas/FeeInfo"
         signedMessages:
-          $ref: '#/components/schemas/SignedMessage'
+          type: array
+          items:
+            $ref: "#/components/schemas/SignedMessage"
         extraParameters:
           type: object
           properties: {}
@@ -5687,15 +5688,15 @@ components:
         destinations:
           type: array
           items:
-            $ref: '#/components/schemas/TransactionResponseDestination'
+            $ref: "#/components/schemas/TransactionResponseDestination"
         blockInfo:
-          $ref: '#/components/schemas/BlockInfo'
+          $ref: "#/components/schemas/BlockInfo"
         authorizationInfo:
-          $ref: '#/components/schemas/AuthorizationInfo'
+          $ref: "#/components/schemas/AuthorizationInfo"
         index:
           type: number
         rewardInfo:
-          $ref: '#/components/schemas/RewardInfo'
+          $ref: "#/components/schemas/RewardInfo"
         feePayerInfo:
           type: object
           properties:
@@ -5704,7 +5705,7 @@ components:
         treatAsGrossAmount:
           type: boolean
         systemMessages:
-          $ref: '#/components/schemas/SystemMessageInfo'
+          $ref: "#/components/schemas/SystemMessageInfo"
     TransactionResponseDestination:
       type: object
       properties:
@@ -5713,18 +5714,18 @@ components:
         amountUSD:
           type: string
         amlScreeningResult:
-          $ref: '#/components/schemas/AmlScreeningResult'
+          $ref: "#/components/schemas/AmlScreeningResult"
         destination:
-          $ref: '#/components/schemas/TransferPeerPathResponse'
+          $ref: "#/components/schemas/TransferPeerPathResponse"
         authorizationInfo:
-          $ref: '#/components/schemas/AuthorizationInfo'
+          $ref: "#/components/schemas/AuthorizationInfo"
     NetworkRecord:
       type: object
       properties:
         source:
-          $ref: '#/components/schemas/TransferPeerPathResponse'
+          $ref: "#/components/schemas/TransferPeerPathResponse"
         destination:
-          $ref: '#/components/schemas/TransferPeerPathResponse'
+          $ref: "#/components/schemas/TransferPeerPathResponse"
         txHash:
           type: string
         networkFee:
@@ -5748,7 +5749,7 @@ components:
         index:
           type: number
         rewardInfo:
-          $ref: '#/components/schemas/RewardInfo'
+          $ref: "#/components/schemas/RewardInfo"
     AssetTypeResponse:
       type: object
       properties:
@@ -5789,7 +5790,7 @@ components:
           type: string
           description: The network ID the profile is attempting to connect to.
         routingPolicy:
-          $ref: '#/components/schemas/NetworkConnectionRoutingPolicy'
+          $ref: "#/components/schemas/NetworkConnectionRoutingPolicy"
       required:
         - localNetworkId
         - remoteNetworkId
@@ -5800,22 +5801,22 @@ components:
           type: string
         localChannel:
           allOf:
-            - $ref: '#/components/schemas/NetworkChannel'
+            - $ref: "#/components/schemas/NetworkChannel"
           deprecated: true
           description: "Deprecated - Replaced by `localNetworkId`"
         remoteChannel:
           allOf:
-            - $ref: '#/components/schemas/NetworkChannel'
+            - $ref: "#/components/schemas/NetworkChannel"
           deprecated: true
           description: "Deprecated - Replaced by `remoteNetworkId`"
         status:
-          $ref: '#/components/schemas/ConfigChangeRequestStatus'
+          $ref: "#/components/schemas/ConfigChangeRequestStatus"
         localNetworkId:
-          $ref: '#/components/schemas/NetworkId'
+          $ref: "#/components/schemas/NetworkId"
         remoteNetworkId:
-          $ref: '#/components/schemas/NetworkId'
+          $ref: "#/components/schemas/NetworkId"
         routingPolicy:
-          $ref: '#/components/schemas/NetworkConnectionRoutingPolicy'
+          $ref: "#/components/schemas/NetworkConnectionRoutingPolicy"
       required:
         - id
         - localNetworkId
@@ -5826,11 +5827,11 @@ components:
       type: object
       properties:
         low:
-          $ref: '#/components/schemas/TransactionFee'
+          $ref: "#/components/schemas/TransactionFee"
         medium:
-          $ref: '#/components/schemas/TransactionFee'
+          $ref: "#/components/schemas/TransactionFee"
         high:
-          $ref: '#/components/schemas/TransactionFee'
+          $ref: "#/components/schemas/TransactionFee"
       required:
         - low
         - medium
@@ -5839,11 +5840,11 @@ components:
       type: object
       properties:
         low:
-          $ref: '#/components/schemas/NetworkFee'
+          $ref: "#/components/schemas/NetworkFee"
         medium:
-          $ref: '#/components/schemas/NetworkFee'
+          $ref: "#/components/schemas/NetworkFee"
         high:
-          $ref: '#/components/schemas/NetworkFee'
+          $ref: "#/components/schemas/NetworkFee"
       required:
         - low
         - medium
@@ -5854,7 +5855,7 @@ components:
         balance:
           type: object
         configuration:
-          $ref: '#/components/schemas/GasStationConfiguration'
+          $ref: "#/components/schemas/GasStationConfiguration"
       required:
         - low
         - medium
@@ -5921,11 +5922,11 @@ components:
         - name
     NetworkIdResponse:
       allOf:
-        - $ref: '#/components/schemas/NetworkId'
+        - $ref: "#/components/schemas/NetworkId"
         - type: object
           properties:
             routingPolicy:
-              $ref: '#/components/schemas/NetworkIdRoutingPolicy'
+              $ref: "#/components/schemas/NetworkIdRoutingPolicy"
             isDiscoverable:
               type: boolean
               description: The specific network is discoverable.
@@ -5936,9 +5937,9 @@ components:
           type: string
           x-fb-entity: asset
         source:
-          $ref: '#/components/schemas/TransferPeerPath'
+          $ref: "#/components/schemas/TransferPeerPath"
         destination:
-          $ref: '#/components/schemas/DestinationTransferPeerPath'
+          $ref: "#/components/schemas/DestinationTransferPeerPath"
         amount:
           description: >-
             The amount of the transaction, in the asset's unit. A numeric value representation (either string or number) is required.
@@ -5951,6 +5952,7 @@ components:
           oneOf:
             - type: number
             - type: string
+            - type: "null"
         feeLevel:
           type: string
           enum:
@@ -5964,6 +5966,7 @@ components:
           oneOf:
             - type: number
             - type: string
+            - type: "null"
         failOnLowFee:
           type: boolean
         maxFee:
@@ -5980,18 +5983,21 @@ components:
           oneOf:
             - type: number
             - type: string
+            - type: "null"
         gasLimit:
           description: >-
             A numeric value representation is required.
           oneOf:
             - type: number
             - type: string
+            - type: "null"
         networkFee:
           description: >-
             A numeric value representation is required.
           oneOf:
             - type: number
             - type: string
+            - type: "null"
         note:
           type: string
         autoStaking:
@@ -6008,7 +6014,7 @@ components:
           type: object
           properties: {}
         operation:
-          $ref: '#/components/schemas/TransactionOperation'
+          $ref: "#/components/schemas/TransactionOperation"
         customerRefId:
           type: string
         replaceTxByHash:
@@ -6018,7 +6024,7 @@ components:
         destinations:
           type: array
           items:
-            $ref: '#/components/schemas/TransactionRequestDestination'
+            $ref: "#/components/schemas/TransactionRequestDestination"
         treatAsGrossAmount:
           type: boolean
         forceSweep:
@@ -6036,7 +6042,7 @@ components:
         amount:
           type: string
         destination:
-          $ref: '#/components/schemas/DestinationTransferPeerPath'
+          $ref: "#/components/schemas/DestinationTransferPeerPath"
     ExchangeType:
       type: string
       enum:
@@ -6099,7 +6105,6 @@ components:
           type: string
         code:
           type: number
-
 
     TransactionSubStatus:
       type: string
@@ -6445,7 +6450,7 @@ components:
       type: object
       properties:
         input:
-          $ref: '#/components/schemas/UnspentInput'
+          $ref: "#/components/schemas/UnspentInput"
         address:
           type: string
         amount:
@@ -6467,59 +6472,59 @@ components:
         users:
           type: array
           items:
-            $ref: '#/components/schemas/UserResponse'
+            $ref: "#/components/schemas/UserResponse"
 
     NetworkIdRoutingPolicy:
       type: object
       properties:
         crypto:
           oneOf:
-            - $ref: '#/components/schemas/CustomCryptoRoutingDest'
-            - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+            - $ref: "#/components/schemas/CustomCryptoRoutingDest"
+            - $ref: "#/components/schemas/NoneNetworkRoutingDest"
         sen:
           oneOf:
-            - $ref: '#/components/schemas/CustomFiatRoutingDest'
-            - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+            - $ref: "#/components/schemas/CustomFiatRoutingDest"
+            - $ref: "#/components/schemas/NoneNetworkRoutingDest"
         signet:
           oneOf:
-            - $ref: '#/components/schemas/CustomFiatRoutingDest'
-            - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+            - $ref: "#/components/schemas/CustomFiatRoutingDest"
+            - $ref: "#/components/schemas/NoneNetworkRoutingDest"
         sen_test:
           oneOf:
-            - $ref: '#/components/schemas/NoneNetworkRoutingDest'
-            - $ref: '#/components/schemas/CustomFiatRoutingDest'
+            - $ref: "#/components/schemas/NoneNetworkRoutingDest"
+            - $ref: "#/components/schemas/CustomFiatRoutingDest"
         signet_test:
           oneOf:
-            - $ref: '#/components/schemas/NoneNetworkRoutingDest'
-            - $ref: '#/components/schemas/CustomFiatRoutingDest'
+            - $ref: "#/components/schemas/NoneNetworkRoutingDest"
+            - $ref: "#/components/schemas/CustomFiatRoutingDest"
     NetworkConnectionRoutingPolicy:
       type: object
       properties:
         crypto:
           oneOf:
-            - $ref: '#/components/schemas/CustomCryptoRoutingDest'
-            - $ref: '#/components/schemas/DefaultNetworkRoutingDest'
-            - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+            - $ref: "#/components/schemas/CustomCryptoRoutingDest"
+            - $ref: "#/components/schemas/DefaultNetworkRoutingDest"
+            - $ref: "#/components/schemas/NoneNetworkRoutingDest"
         sen:
           oneOf:
-            - $ref: '#/components/schemas/CustomFiatRoutingDest'
-            - $ref: '#/components/schemas/DefaultNetworkRoutingDest'
-            - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+            - $ref: "#/components/schemas/CustomFiatRoutingDest"
+            - $ref: "#/components/schemas/DefaultNetworkRoutingDest"
+            - $ref: "#/components/schemas/NoneNetworkRoutingDest"
         signet:
           oneOf:
-            - $ref: '#/components/schemas/DefaultNetworkRoutingDest'
-            - $ref: '#/components/schemas/CustomFiatRoutingDest'
-            - $ref: '#/components/schemas/NoneNetworkRoutingDest'
+            - $ref: "#/components/schemas/DefaultNetworkRoutingDest"
+            - $ref: "#/components/schemas/CustomFiatRoutingDest"
+            - $ref: "#/components/schemas/NoneNetworkRoutingDest"
         sen_test:
           oneOf:
-            - $ref: '#/components/schemas/DefaultNetworkRoutingDest'
-            - $ref: '#/components/schemas/NoneNetworkRoutingDest'
-            - $ref: '#/components/schemas/CustomFiatRoutingDest'
+            - $ref: "#/components/schemas/DefaultNetworkRoutingDest"
+            - $ref: "#/components/schemas/NoneNetworkRoutingDest"
+            - $ref: "#/components/schemas/CustomFiatRoutingDest"
         signet_test:
           oneOf:
-            - $ref: '#/components/schemas/NoneNetworkRoutingDest'
-            - $ref: '#/components/schemas/CustomFiatRoutingDest'
-            - $ref: '#/components/schemas/DefaultNetworkRoutingDest'
+            - $ref: "#/components/schemas/NoneNetworkRoutingDest"
+            - $ref: "#/components/schemas/CustomFiatRoutingDest"
+            - $ref: "#/components/schemas/DefaultNetworkRoutingDest"
     CustomFiatRoutingDest:
       type: object
       properties:
@@ -6622,7 +6627,7 @@ components:
         sessionMetadata:
           description: Metadata of the connection (provided by the dapp)
           allOf:
-            - $ref: '#/components/schemas/SessionMetadata'
+            - $ref: "#/components/schemas/SessionMetadata"
         vaultAccountId:
           type: number
           description: The vault to connect
@@ -6636,7 +6641,7 @@ components:
             - HIGH
         chainIds:
           description: The chains approved for the connection
-          example: '[ETH, ETH_TEST, SOL]'
+          example: "[ETH, ETH_TEST, SOL]"
           type: array
           items:
             type: string
@@ -6675,9 +6680,9 @@ components:
           description: Array with the requested Web3 connection's data
           type: array
           items:
-            $ref: '#/components/schemas/SessionDTO'
+            $ref: "#/components/schemas/SessionDTO"
         paging:
-          $ref: '#/components/schemas/Paging'
+          $ref: "#/components/schemas/Paging"
       required:
         - data
     CreateConnectionRequest:
@@ -6722,7 +6727,7 @@ components:
         sessionMetadata:
           description: Metadata of the Web3 connection (provided by the DApp).
           allOf:
-            - $ref: '#/components/schemas/SessionMetadata'
+            - $ref: "#/components/schemas/SessionMetadata"
       required:
         - id
         - sessionMetadata
@@ -6739,7 +6744,7 @@ components:
       type: object
       properties:
         transactionRequest:
-          $ref: '#/components/schemas/TransactionRequest'
+          $ref: "#/components/schemas/TransactionRequest"
         isSrcCollateral:
           type: boolean
           description: optional
@@ -6747,7 +6752,7 @@ components:
       type: object
       properties:
         transactionRequest:
-          $ref: '#/components/schemas/TransactionRequest'
+          $ref: "#/components/schemas/TransactionRequest"
         isDstCollateral:
           type: boolean
           description: optional
@@ -6768,9 +6773,9 @@ components:
         fireblocksInitiatedTransactions:
           type: object
         exchangeRequestedTransactions:
-          $ref: '#/components/schemas/SettlementResponse'
+          $ref: "#/components/schemas/SettlementResponse"
     GetSettlementResponse:
-      $ref: '#/components/schemas/SettlementResponse'
+      $ref: "#/components/schemas/SettlementResponse"
     ToExchangeTransaction:
       type: object
       properties:
@@ -6806,23 +6811,23 @@ components:
         corridorId:
           type: string
         steps:
-          $ref: '#/components/schemas/XBSettlementConfigStepsRecord'
+          $ref: "#/components/schemas/XBSettlementConfigStepsRecord"
 
       required:
         - name
         - corridorId
         - steps
     XBSettlementConfigCreationResponse:
-      $ref: '#/components/schemas/XBSettlementConfigModel'
+      $ref: "#/components/schemas/XBSettlementConfigModel"
     XBSettlementConfigEditRequestBody:
       type: object
       properties:
         name:
           type: string
         steps:
-          $ref: '#/components/schemas/XBSettlementConfigStepsRecord'
+          $ref: "#/components/schemas/XBSettlementConfigStepsRecord"
     XBSettlementConfigEditResponse:
-      $ref: '#/components/schemas/XBSettlementConfigModel'
+      $ref: "#/components/schemas/XBSettlementConfigModel"
     XBSettlementConfigDeletionResponse:
       type: object
       properties:
@@ -6832,14 +6837,14 @@ components:
       required:
         - configId
     GetXBSettlementConfigResponse:
-      $ref: '#/components/schemas/XBSettlementConfigModel'
+      $ref: "#/components/schemas/XBSettlementConfigModel"
     GetAllXBSettlementConfigsResponse:
       type: object
       properties:
         configurations:
           type: array
           items:
-            $ref: '#/components/schemas/XBSettlementConfigModel'
+            $ref: "#/components/schemas/XBSettlementConfigModel"
       required:
         - configurations
     XBCreateSettlementFlowRequestBody:
@@ -6849,14 +6854,14 @@ components:
           type: string
           format: uuid
         amount:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
       required:
         - configId
         - amount
     XBCreateSettlementFlowResponse:
-      $ref: '#/components/schemas/XBSettlementFlowSetupModel'
+      $ref: "#/components/schemas/XBSettlementFlowSetupModel"
     XBSettlementFlowExecutionResponse:
-      $ref: '#/components/schemas/XBSettlementFlowExecutionModel'
+      $ref: "#/components/schemas/XBSettlementFlowExecutionModel"
     XBSettlementFlowExecutionStep:
       type: object
       properties:
@@ -6865,13 +6870,13 @@ components:
         accountId:
           type: string
         status:
-          $ref: '#/components/schemas/XBSettlementFlowExecutionStepStatus'
+          $ref: "#/components/schemas/XBSettlementFlowExecutionStepStatus"
         inputAmount:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
         outputAmount:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
         fee:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
         startedAt:
           type: number
       required:
@@ -6909,7 +6914,7 @@ components:
         name:
           type: string
         steps:
-          $ref: '#/components/schemas/XBSettlementConfigStepsRecord'
+          $ref: "#/components/schemas/XBSettlementConfigStepsRecord"
       required:
         - tenantId
         - configId
@@ -6920,7 +6925,7 @@ components:
       type: object
       properties:
         stepType:
-          $ref: '#/components/schemas/XBSettlementStepType'
+          $ref: "#/components/schemas/XBSettlementStepType"
         accountId:
           type: string
       required:
@@ -6939,11 +6944,11 @@ components:
         accountId:
           type: string
         inputAmount:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
         outputAmount:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
         estimatedFeeAmount:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
         estimatedTime:
           type: number
       required:
@@ -6962,13 +6967,13 @@ components:
         configId:
           type: string
         steps:
-          $ref: '#/components/schemas/XBSettlementFlowStepsRecord'
+          $ref: "#/components/schemas/XBSettlementFlowStepsRecord"
         inputAmount:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
         outputAmount:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
         totalEstimatedFees:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
         totalEstimatedTime:
           type: number
       required:
@@ -6991,20 +6996,20 @@ components:
         steps:
           type: array
           items:
-            $ref: '#/components/schemas/XBSettlementFlowExecutionStep'
+            $ref: "#/components/schemas/XBSettlementFlowExecutionStep"
         inputAmount:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
         outputAmount:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
         totalFees:
-          $ref: '#/components/schemas/XBSettlementAsset'
+          $ref: "#/components/schemas/XBSettlementAsset"
         initiatedAt:
           type: number
         initiatedBy:
-          description: 'id of the user which launched the flow'
+          description: "id of the user which launched the flow"
           type: string
         state:
-          $ref: '#/components/schemas/XBSettlementFlowExecutionStatus'
+          $ref: "#/components/schemas/XBSettlementFlowExecutionStatus"
       required:
         - tenantId
         - flowId
@@ -7020,7 +7025,7 @@ components:
       type: object
       properties:
         stepType:
-          $ref: '#/components/schemas/XBSettlementStepType'
+          $ref: "#/components/schemas/XBSettlementStepType"
       additionalProperties:
         type: object
         properties:
@@ -7032,9 +7037,9 @@ components:
       type: object
       properties:
         stepType:
-          $ref: '#/components/schemas/XBSettlementStepType'
+          $ref: "#/components/schemas/XBSettlementStepType"
       additionalProperties:
-        $ref: '#/components/schemas/XBSettlementFlowSetupStep'
+        $ref: "#/components/schemas/XBSettlementFlowSetupStep"
     XBSettlementAsset:
       type: object
       properties:
@@ -7050,11 +7055,11 @@ components:
       type: object
       properties:
         paymentAccount:
-          $ref: '#/components/schemas/PaymentAccount'
+          $ref: "#/components/schemas/PaymentAccount"
         instructionSet:
           type: array
           items:
-            $ref: '#/components/schemas/PayoutInstruction'
+            $ref: "#/components/schemas/PayoutInstruction"
       required:
         - paymentAccount
         - instructionSet
@@ -7064,7 +7069,7 @@ components:
         id:
           type: string
         type:
-          $ref: '#/components/schemas/PaymentAccountType'
+          $ref: "#/components/schemas/PaymentAccountType"
       required:
         - id
         - type
@@ -7074,9 +7079,9 @@ components:
         id:
           type: string
         payeeAccount:
-          $ref: '#/components/schemas/PayeeAccount'
+          $ref: "#/components/schemas/PayeeAccount"
         amount:
-          $ref: '#/components/schemas/InstructionAmount'
+          $ref: "#/components/schemas/InstructionAmount"
       required:
         - amount
         - payeeAccount
@@ -7092,7 +7097,7 @@ components:
         id:
           type: string
         type:
-          $ref: '#/components/schemas/PayeeAccountType'
+          $ref: "#/components/schemas/PayeeAccountType"
       required:
         - id
         - type
@@ -7128,13 +7133,13 @@ components:
         payoutId:
           type: string
         paymentAccount:
-          $ref: '#/components/schemas/PaymentAccountResponse'
+          $ref: "#/components/schemas/PaymentAccountResponse"
         createdAt:
           type: number
         state:
-          $ref: '#/components/schemas/PayoutState'
+          $ref: "#/components/schemas/PayoutState"
         status:
-          $ref: '#/components/schemas/PayoutStatus'
+          $ref: "#/components/schemas/PayoutStatus"
         reasonOfFailure:
           type: string
           description: |
@@ -7155,11 +7160,11 @@ components:
             <li> TRANSACTION_SUBMISSION</li>
             </ul>
         initMethod:
-          $ref: '#/components/schemas/PayoutInitMethod'
+          $ref: "#/components/schemas/PayoutInitMethod"
         instructionSet:
           type: array
           items:
-            $ref: '#/components/schemas/PayoutInstructionResponse'
+            $ref: "#/components/schemas/PayoutInstructionResponse"
         reportUrl:
           type: string
       required:
@@ -7175,7 +7180,7 @@ components:
         id:
           type: string
         type:
-          $ref: '#/components/schemas/PaymentAccountType'
+          $ref: "#/components/schemas/PaymentAccountType"
     PayoutState:
       type: string
       enum:
@@ -7197,7 +7202,7 @@ components:
         - SUBMITTED - transactions submitted for payout instructions
         - FINALIZED - payout finished processing, all transactions processed successfully
         - INSUFFICIENT_BALANCE - insufficient balance in the payment account (can be a temporary state)
-        - FAILED - one or more of the payout instructions failed 
+        - FAILED - one or more of the payout instructions failed
     PayoutStatus:
       type: string
       enum:
@@ -7213,27 +7218,27 @@ components:
         - PROCESSING	payout instruction set executed and is processing
         - FINALIZED	payout done (all payout instructions completed successfully)
         - INSUFFICIENT_BALANCE	insufficient balance in the payment account (can be a temporary state)
-        - FAILED	one or more of the payout instructions failed 
+        - FAILED	one or more of the payout instructions failed
     PayoutInitMethod:
       type: string
       enum:
         - FILE
-        - API 
+        - API
     PayoutInstructionResponse:
       type: object
       properties:
         id:
           type: string
         payeeAccount:
-          $ref: '#/components/schemas/PayeeAccountResponse'
+          $ref: "#/components/schemas/PayeeAccountResponse"
         amount:
-          $ref: '#/components/schemas/InstructionAmount'
+          $ref: "#/components/schemas/InstructionAmount"
         state:
-          $ref: '#/components/schemas/PayoutInstructionState'
+          $ref: "#/components/schemas/PayoutInstructionState"
         transactions:
           type: array
           items:
-            $ref: '#/components/schemas/Transaction'
+            $ref: "#/components/schemas/Transaction"
       required:
         - amount
         - payeeAccount
@@ -7245,7 +7250,7 @@ components:
         id:
           type: string
         type:
-          $ref: '#/components/schemas/PayeeAccountType'
+          $ref: "#/components/schemas/PayeeAccountType"
     PayoutInstructionState:
       type: string
       enum:
@@ -7322,7 +7327,7 @@ components:
           description: State or province
         postalCode:
           type: string
-          example: '10001'
+          example: "10001"
           description: Postal or ZIP code
       required:
         - street
@@ -7342,7 +7347,7 @@ components:
           description: Transaction destination address
         transactionAmount:
           type: string
-          example: '10'
+          example: "10"
           description: Transaction amount in the transaction asset
         originatorVASPdid:
           type: string
@@ -7376,7 +7381,7 @@ components:
           example: '{"addressLine: [Wayne Manor, Gotham City, New York, USA]"}'
           description: Beneficiary  name
           allOf:
-            - $ref: '#/components/schemas/TravelRuleAddress'
+            - $ref: "#/components/schemas/TravelRuleAddress"
       required:
         - transactionAsset
         - destination
@@ -7484,7 +7489,7 @@ components:
           description: Type of ownership proof
         id:
           type: string
-          example: '123456789'
+          example: "123456789"
           description: Identification number
         name:
           type: string
@@ -7496,7 +7501,7 @@ components:
           description: Country of issuance
         issueDate:
           type: string
-          example: '2022-01-01'
+          example: "2022-01-01"
           description: Date of issuance
         issuer:
           type: string
@@ -7536,15 +7541,15 @@ components:
         transactionBlockchainInfo:
           description: Information about the blockchain transaction
           allOf:
-            - $ref: '#/components/schemas/TravelRuleTransactionBlockchainInfo'
+            - $ref: "#/components/schemas/TravelRuleTransactionBlockchainInfo"
         originator:
           description: Information about the originator of the transaction
           allOf:
-            - $ref: '#/components/schemas/TravelRulePiiIVMS'
+            - $ref: "#/components/schemas/TravelRulePiiIVMS"
         beneficiary:
           description: Information about the beneficiary of the transaction
           allOf:
-            - $ref: '#/components/schemas/TravelRulePiiIVMS'
+            - $ref: "#/components/schemas/TravelRulePiiIVMS"
         encrypted:
           type: string
           description: Encrypted data related to the transaction
@@ -7563,15 +7568,15 @@ components:
         originatorProof:
           description: Ownership proof related to the originator of the transaction
           allOf:
-            - $ref: '#/components/schemas/TravelRuleOwnershipProof'
+            - $ref: "#/components/schemas/TravelRuleOwnershipProof"
         beneficiaryProof:
           description: Ownership proof related to the beneficiary of the transaction
           allOf:
-            - $ref: '#/components/schemas/TravelRuleOwnershipProof'
+            - $ref: "#/components/schemas/TravelRuleOwnershipProof"
         pii:
           description: Personal identifiable information related to the transaction
           allOf:
-            - $ref: '#/components/schemas/TravelRulePiiIVMS'
+            - $ref: "#/components/schemas/TravelRulePiiIVMS"
       required:
         - transactionAsset
         - transactionAmount
@@ -7602,33 +7607,33 @@ components:
       type: object
       properties:
         yearFounded:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         isRegulated:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         regulatoryAuthorities:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         name:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         logo:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         website:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         legalName:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         legalStructure:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         incorporationCountry:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         businessNumber:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         addressLine1:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         city:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         country:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
         description:
-          $ref: '#/components/schemas/TravelRuleIssuer'
+          $ref: "#/components/schemas/TravelRuleIssuer"
       required:
         - yearFounded
         - isRegulated
@@ -7738,7 +7743,7 @@ components:
         isNotifiable:
           type: boolean
         issuers:
-          $ref: '#/components/schemas/TravelRuleIssuers'
+          $ref: "#/components/schemas/TravelRuleIssuers"
       required:
         - did
         - name
@@ -7792,7 +7797,7 @@ components:
         vasps:
           type: array
           items:
-            $ref: '#/components/schemas/TravelRuleVASP'
+            $ref: "#/components/schemas/TravelRuleVASP"
       required:
         - vasps
     TravelRuleUpdateVASPDetails:
