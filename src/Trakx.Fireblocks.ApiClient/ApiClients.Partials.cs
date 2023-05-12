@@ -67,7 +67,7 @@ namespace Trakx.Fireblocks.ApiClient
             CredentialProvider.AddCredentials(request);
         }
     }
-    internal partial class PaymentsClient
+    internal partial class Travel_Rule_BetaClient
     {
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
         {

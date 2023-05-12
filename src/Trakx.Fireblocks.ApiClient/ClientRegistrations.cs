@@ -163,7 +163,7 @@ public static partial class AddFireblocksClientExtension
                 .WithPolicyKey("Off_exchangesClient"));
 
 
-        services.AddHttpClient<IPaymentsClient, PaymentsClient>("Trakx.Fireblocks.ApiClient.PaymentsClient")
+        services.AddHttpClient<ITravel_Rule_BetaClient, Travel_Rule_BetaClient>("Trakx.Fireblocks.ApiClient.Travel_Rule_BetaClient")
             .AddPolicyHandler((s, request) =>
                 Policy<HttpResponseMessage>
                 .Handle<ApiException>()
@@ -172,10 +172,10 @@ public static partial class AddFireblocksClientExtension
                 .WaitAndRetryAsync(delay,
                     onRetry: (result, timeSpan, retryCount, context) =>
                     {
-                        var logger = LoggerProvider.Create<PaymentsClient>();
+                        var logger = LoggerProvider.Create<Travel_Rule_BetaClient>();
                         logger.LogApiFailure(result, timeSpan, retryCount, context);
                     })
-                .WithPolicyKey("PaymentsClient"));
+                .WithPolicyKey("Travel_Rule_BetaClient"));
 
 
         services.AddHttpClient<ISupported_assetsClient, Supported_assetsClient>("Trakx.Fireblocks.ApiClient.Supported_assetsClient")
@@ -191,7 +191,6 @@ public static partial class AddFireblocksClientExtension
                         logger.LogApiFailure(result, timeSpan, retryCount, context);
                     })
                 .WithPolicyKey("Supported_assetsClient"));
-
 
         services.AddHttpClient<ITransactionsClient, TransactionsClient>("Trakx.Fireblocks.ApiClient.TransactionsClient")
             .AddPolicyHandler((s, request) =>
