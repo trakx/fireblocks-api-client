@@ -7,10 +7,10 @@ public record FireblocksApiConfiguration
 #nullable disable
     public string BaseUrl { get; set; }
 
-    [AwsParameter, SecretEnvironmentVariable]
+    [AwsParameter]
     public string ApiPubKey { get; init; }
 
-    [AwsParameter, SecretEnvironmentVariable]
+    [AwsParameter]
     public string ApiPrivateKey { get; init; }
 #nullable restore
 }
