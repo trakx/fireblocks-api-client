@@ -8,9 +8,9 @@ public record FireblocksApiConfiguration
     public string BaseUrl { get; set; }
 
     [AwsParameter]
-    public string ApiPubKey { get; set; }
+    public string ApiPubKey { get; init; }
 
     [AwsParameter]
-    public string ApiPrivateKey { get; set; }
+    public string ApiPrivateKey { get; init; }
 #nullable restore
 }
