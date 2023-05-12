@@ -23,7 +23,7 @@ public class TransactionsClientTests : FireblocksClientTestsBase
     }
 
     [Fact]
-    public async Task CreateTransactionAsync_should_create_a_new_transaction()
+    public async Task CreateTransactionAsync_should_create_and_cancel_a_new_transaction()
     {
         var trans = new TransactionRequest
         {
@@ -49,6 +49,11 @@ public class TransactionsClientTests : FireblocksClientTestsBase
         var actualTrans = getResponse.Content;
         actualTrans.AssetId.Should().Be(trans.AssetId);
         actualTrans.Amount.Should().Be(trans.Amount);
+
+        var cancelResponse = await _transactionsClient.CancelAsync(id, CancellationToken.None);
+
+        cancelResponse.Content.Should().NotBeNull();
+        cancelResponse.Content.Success.Should().BeTrue();
     }
 
 }
