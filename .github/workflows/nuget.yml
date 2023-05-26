@@ -49,15 +49,15 @@ jobs:
         run: |
           debuggable="${{github.event.inputs.debuggable}}"
           debuggable=${debuggable:-true}
-          echo '::set-output name=debuggable::'$debuggable
+          echo "debuggable=$debuggable" >> $GITHUB_OUTPUT
           
           semverIncrementLevel="${{github.event.inputs.semverIncrementLevel}}"
           semverIncrementLevel=${semverIncrementLevel:-true}
-          echo '::set-output name=semverIncrementLevel::'$semverIncrementLevel
+          echo "semverIncrementLevel=$semverIncrementLevel" >> $GITHUB_OUTPUT
 
       - name: Build and publish nuget packages
         id: publish
-        uses: trakx/github-actions/publish-nuget@v10.0.7
+        uses: trakx/github-actions/publish-nuget@v10.0.14
         with:
           packageReadonlyPat: ${{secrets.TRAKX_BOT_READONLY_PAT}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
