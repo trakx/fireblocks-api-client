@@ -18,7 +18,7 @@
     </PackageReference>
     <PackageReference Include="Flurl" Version="3.0.7" />
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
-    <PackageReference Include="GitHubActionsTestLogger" Version="2.3.0">
+    <PackageReference Include="GitHubActionsTestLogger" Version="2.3.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
