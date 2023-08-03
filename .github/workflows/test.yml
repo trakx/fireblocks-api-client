@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Test and cover solutions
         id: test
-        uses: trakx/github-actions/test-dotnet@v10.0.20
+        uses: trakx/github-actions/test-dotnet@v10.0.21
         with:
           packageReadonlyPat: ${{secrets.TRAKX_BOT_READONLY_PAT}}
           codacyToken: ${{secrets.CODACY_TOKEN}}
