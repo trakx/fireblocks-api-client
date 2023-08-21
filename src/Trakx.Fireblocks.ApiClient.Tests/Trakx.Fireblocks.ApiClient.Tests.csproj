@@ -29,7 +29,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.1" />
-    <PackageReference Include="Trakx.Common.Testing.Documentation" Version="0.4.2" />
+    <PackageReference Include="Trakx.Common.Testing.Documentation" Version="0.4.3" />
   </ItemGroup>
 
   <ItemGroup>
