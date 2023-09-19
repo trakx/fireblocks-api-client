@@ -20,8 +20,9 @@ jobs:
     steps:
     - name: Delete packages
       id: deletePackages
-      uses: actions/delete-package-versions@v3
+      uses: actions/delete-package-versions@v4
       with:
         package-name: '${{github.event.inputs.name}}'
+        package-type: 'nuget'
         num-old-versions-to-delete: ${{github.event.inputs.num-old-versions-to-delete}}
           

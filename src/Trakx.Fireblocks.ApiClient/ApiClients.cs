@@ -16469,7 +16469,7 @@ namespace Trakx.Fireblocks.ApiClient
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Tag { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("subStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("subStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransactionSubStatus? SubStatus { get; set; }
 
@@ -16532,7 +16532,7 @@ namespace Trakx.Fireblocks.ApiClient
         public FeeInfo FeeInfo { get; set; }
 
         [Newtonsoft.Json.JsonProperty("signedMessages", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public List<SignedMessage> SignedMessages { get; set; }
+        public System.Collections.Generic.List<SignedMessage> SignedMessages { get; set; }
 
         [Newtonsoft.Json.JsonProperty("extraParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object ExtraParameters { get; set; }
@@ -17025,8 +17025,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <summary>
         /// - For BTC based assets, the fee per bytes in the asset's smallest unit (Satoshi/Latoshi etc.) A numeric value representation is required. For XRP, the fee for the transaction.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Fee { get; set; }
+        [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Fee { get; set; }
 
         [Newtonsoft.Json.JsonProperty("feeLevel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -17035,8 +17035,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <summary>
         /// - For ETH based assets only, the fee for eip-1559 transaction pricing mechanism. Value is in gwei. - A numeric value representation is required.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("priorityFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double PriorityFee { get; set; }
+        [Newtonsoft.Json.JsonProperty("priorityFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? PriorityFee { get; set; }
 
         [Newtonsoft.Json.JsonProperty("failOnLowFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? FailOnLowFee { get; set; }
@@ -17052,20 +17052,20 @@ namespace Trakx.Fireblocks.ApiClient
         /// <summary>
         /// For ETH based asset only. this will be used instead of the fee property. Value is in gwei. A numeric value representation is required.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double GasPrice { get; set; }
+        [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? GasPrice { get; set; }
 
         /// <summary>
         /// A numeric value representation is required.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("gasLimit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double GasLimit { get; set; }
+        [Newtonsoft.Json.JsonProperty("gasLimit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? GasLimit { get; set; }
 
         /// <summary>
         /// A numeric value representation is required.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NetworkFee { get; set; }
+        [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? NetworkFee { get; set; }
 
         [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Note { get; set; }
@@ -19232,7 +19232,7 @@ namespace Trakx.Fireblocks.ApiClient
     /// <br/>- SUBMITTED - transactions submitted for payout instructions
     /// <br/>- FINALIZED - payout finished processing, all transactions processed successfully
     /// <br/>- INSUFFICIENT_BALANCE - insufficient balance in the payment account (can be a temporary state)
-    /// <br/>- FAILED - one or more of the payout instructions failed 
+    /// <br/>- FAILED - one or more of the payout instructions failed
     /// <br/>
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -19274,7 +19274,7 @@ namespace Trakx.Fireblocks.ApiClient
     /// <br/>- PROCESSING	payout instruction set executed and is processing
     /// <br/>- FINALIZED	payout done (all payout instructions completed successfully)
     /// <br/>- INSUFFICIENT_BALANCE	insufficient balance in the payment account (can be a temporary state)
-    /// <br/>- FAILED	one or more of the payout instructions failed 
+    /// <br/>- FAILED	one or more of the payout instructions failed
     /// <br/>
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
