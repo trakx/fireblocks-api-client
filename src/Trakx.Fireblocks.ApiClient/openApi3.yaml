@@ -6054,24 +6054,32 @@ components:
         - BITSO
         - BITSTAMP
         - BITTREX
+        - BLINC
+        - BYBIT
         - CIRCLE
+        - COINBASEEXCHANGE
         - COINBASEPRO
         - COINMETRO
         - COINSPRO
         - CRYPTOCOM
         - DERIBIT
         - FTX
-        - FIXUS
+        - GATEIO
         - GEMINI
         - HITBTC
         - HUOBI
+        - INDEPENDENTRESERVE
         - KORBIT
         - KRAKEN
+        - KRAKENINTL
+        - KUCOIN
         - LIQUID
-        - POLONIEX
         - OKCOIN
         - OKEX
-        - SEEDCX
+        - PAXOS
+        - POLONIEX
+        - External
+        - Internal
     FiatAccountType:
       type: string
       enum:
