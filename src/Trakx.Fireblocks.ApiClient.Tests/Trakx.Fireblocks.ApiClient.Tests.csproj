@@ -36,4 +36,10 @@
     <ProjectReference Include="..\Trakx.Fireblocks.ApiClient\Trakx.Fireblocks.ApiClient.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Unit\Serialisation\sampleGetAllExchangesResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

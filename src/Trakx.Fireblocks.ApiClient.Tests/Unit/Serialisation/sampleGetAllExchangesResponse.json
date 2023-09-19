@@ -1,0 +1,668 @@
+[
+  {
+    "id": "02e4dcd7-b5ec-4208-8908-34311128ad6f",
+    "name": "Kucoin",
+    "type": "KUCOIN",
+    "assets": [
+      {
+        "id": "CRO",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "UOS",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "USDC",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "USDT",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      }
+    ],
+    "isSubaccount": false,
+    "status": "APPROVED",
+    "tradingAccounts": [
+      {
+        "type": "MARGIN",
+        "assets": [],
+        "name": "Margin"
+      },
+      {
+        "type": "SPOT",
+        "assets": [
+          {
+            "id": "ANC",
+            "balance": "123.45",
+            "total": "125.45",
+            "available": "123.45",
+            "lockedAmount": "2.0"
+          },
+          {
+            "id": "KCS",
+            "balance": "123.45",
+            "total": "125.45",
+            "available": "123.45",
+            "lockedAmount": "2.0"
+          }
+        ],
+        "name": "Trade"
+      }
+    ],
+    "fundableAccountType": "EXCHANGE"
+  },
+  {
+    "id": "18507832-08ed-81af-912f-c1064b7af31b",
+    "name": "FTX",
+    "type": "FTX",
+    "assets": [],
+    "isSubaccount": false,
+    "status": "APPROVED"
+  },
+  {
+    "id": "299ba2bc-0db5-4002-bd2b-94e0db8c7247",
+    "name": "Gate.io",
+    "type": "GATEIO",
+    "assets": [],
+    "isSubaccount": false,
+    "status": "APPROVED",
+    "tradingAccounts": [
+      {
+        "type": "FUTURES",
+        "assets": [],
+        "name": "Futures"
+      },
+      {
+        "type": "OPTIONS",
+        "assets": [],
+        "name": "Options"
+      }
+    ],
+    "fundableAccountType": "SPOT"
+  },
+  {
+    "id": "3f8698df-a486-1e28-5e2a-9bfdfb2fa157",
+    "name": "Bittrex",
+    "type": "BITTREX",
+    "assets": [
+      {
+        "id": "BTXCRD",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      }
+    ],
+    "isSubaccount": false,
+    "status": "APPROVED",
+    "tradingAccounts": [],
+    "fundableAccountType": ""
+  },
+  {
+    "id": "84eb03dc-56ff-5d5e-546a-40b1f787caf4",
+    "name": "Coinbase",
+    "type": "COINBASEEXCHANGE",
+    "assets": [
+      {
+        "id": "CRO",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "EUR",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "USD",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "USDC",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "USDT",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      }
+    ],
+    "isSubaccount": false,
+    "status": "APPROVED",
+    "tradingAccounts": [],
+    "fundableAccountType": ""
+  },
+  {
+    "id": "91db17c5-929e-ce5c-f410-1839398a9e61",
+    "name": "Binance Corp",
+    "type": "BINANCE",
+    "assets": [
+      {
+        "id": "AAVE",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "ADA",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "ALGO",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "ANKR",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "APENFT",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "AR",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "BNB",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "BQX",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "BTC",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "BTT",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "CELO",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "COMP",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "CRV",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "DOGE",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "DOT",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "ENS2",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "ETC",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "ETH",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "FLOW",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "FTT",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "GALA",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "GRT",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "HOT",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "INJ",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "IOTX",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "JST",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "KAVA",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "LDO",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "LINK",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "LTC",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "LUNA",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "LUNC",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "MANA",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "MATIC",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "MKR",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "RPL",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "RUNE",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "SNX",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "SOL",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "SRM",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "SUSHI",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "SXP",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "THETA",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "TRX",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "UNI",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "USDT",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "VOXEL",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "VRT",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "WOO",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "XEM",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "XRP",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "XTZ",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      },
+      {
+        "id": "ZRX",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "2.0"
+      }
+    ],
+    "isSubaccount": false,
+    "status": "APPROVED",
+    "tradingAccounts": [
+      {
+        "type": "MARGIN_CROSS",
+        "assets": [],
+        "name": "Margin (Cross)"
+      }
+    ],
+    "fundableAccountType": "SPOT"
+  },
+  {
+    "id": "cc4f38d8-4c35-1d82-bbcf-4b13da5eef4f",
+    "name": "Kraken",
+    "type": "KRAKEN",
+    "assets": [],
+    "isSubaccount": false,
+    "status": "APPROVED",
+    "tradingAccounts": [],
+    "fundableAccountType": ""
+  },
+  {
+    "id": "d525977e-1f37-2e85-4605-cc9ccdc2f677",
+    "name": "OKX",
+    "type": "OKEX",
+    "assets": [],
+    "isSubaccount": false,
+    "status": "APPROVED"
+  },
+  {
+    "id": "eedde017-7788-ebe3-1d42-2a62f3ef2eee",
+    "name": "Huobi",
+    "type": "HUOBI",
+    "assets": [
+      {
+        "id": "BSV",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "-0.00000000"
+      },
+      {
+        "id": "FLOKI",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "-0.00000001"
+      },
+      {
+        "id": "FLOW",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "-0.00000000"
+      },
+      {
+        "id": "HT",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "-0.00000000"
+      },
+      {
+        "id": "MXC",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "-0.00000001"
+      },
+      {
+        "id": "TON",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "-0.00000000"
+      },
+      {
+        "id": "USDC",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "-0.00000000"
+      },
+      {
+        "id": "USDT",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "-0.00000001"
+      },
+      {
+        "id": "WOO",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "-0.00000001"
+      },
+      {
+        "id": "XDC",
+        "balance": "123.45",
+        "total": "125.45",
+        "available": "123.45",
+        "lockedAmount": "-0.00000001"
+      }
+    ],
+    "isSubaccount": false,
+    "status": "APPROVED",
+    "tradingAccounts": [
+      {
+        "type": "COIN_MARGINED_SWAP",
+        "assets": [],
+        "name": "Coin-margined Swaps"
+      },
+      {
+        "type": "FUTURES",
+        "assets": [],
+        "name": "Futures"
+      },
+      {
+        "type": "MARGIN",
+        "assets": [],
+        "name": "Cross Margin"
+      },
+      {
+        "type": "USDT_MARGINED_SWAP_CROSS",
+        "assets": [],
+        "name": "USDT-margined Swaps (Cross)"
+      }
+    ],
+    "fundableAccountType": "EXCHANGE"
+  }
+]
