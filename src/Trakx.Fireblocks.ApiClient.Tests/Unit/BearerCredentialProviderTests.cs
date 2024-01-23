@@ -47,8 +47,9 @@ public sealed class BearerCredentialProviderTests : CredentialsTestsBase, IDispo
     private void ValidatePayload(JwtSecurityToken retrievedToken, string messageBody)
     {
         var payload = retrievedToken.Payload;
-        payload.Iat.Should().Be(Convert.ToInt32(_nonce.ToUnixTimeSeconds()));
-        payload.Exp.Should().Be(Convert.ToInt32(_nonce.ToUnixTimeSeconds()) + 20);
+        payload.IssuedAt.Should().Be(_nonce.UtcDateTime);
+        payload.Expiration.Should().Be(Convert.ToInt32(_nonce.ToUnixTimeSeconds()) + 20);
+
         payload.Sub.Should().Be(Configuration.ApiPubKey);
         payload.TryGetValue("nonce", out var retrievedNonce).Should().BeTrue();
         retrievedNonce.Should().Be(_nonce.ToUnixTimeMilliseconds());

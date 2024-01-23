@@ -63,3 +63,4 @@ jobs:
           githubToken: ${{secrets.GITHUB_TOKEN}}
           debuggable: ${{steps.default-inputs.outputs.debuggable}}
           semverIncrementLevel: ${{steps.default-inputs.outputs.semverIncrementLevel}}
+          dotnetVersion: 8.x

@@ -1,4 +1,4 @@
-#pragma warning disable S1172, IDE0060 // Unused method parameters should be removed
+﻿#pragma warning disable S1172, IDE0060 // Unused method parameters should be removed
 
 namespace Trakx.Fireblocks.ApiClient
 {
@@ -30,7 +30,13 @@ namespace Trakx.Fireblocks.ApiClient
             CredentialProvider.AddCredentials(request);
         }
     }
-
+    internal partial class Fee_payerClient
+    {
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
+    }
     internal partial class Fiat_accountsClient
     {
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
@@ -52,7 +58,13 @@ namespace Trakx.Fireblocks.ApiClient
             CredentialProvider.AddCredentials(request);
         }
     }
-    
+    internal partial class Network_connectionClient
+    {
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
+    }
     internal partial class Network_connectionsClient
     {
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
@@ -67,7 +79,7 @@ namespace Trakx.Fireblocks.ApiClient
             CredentialProvider.AddCredentials(request);
         }
     }
-    internal partial class Travel_Rule_BetaClient
+    internal partial class PaymentsClient
     {
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
         {
@@ -82,6 +94,13 @@ namespace Trakx.Fireblocks.ApiClient
         }
     }
     internal partial class TransactionsClient
+    {
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
+        {
+            CredentialProvider.AddCredentials(request);
+        }
+    }
+    internal partial class Transfer_ticketsClient
     {
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
         {
@@ -116,7 +135,6 @@ namespace Trakx.Fireblocks.ApiClient
             CredentialProvider.AddCredentials(request);
         }
     }
-
     internal partial class Web3_connectionsClient
     {
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)

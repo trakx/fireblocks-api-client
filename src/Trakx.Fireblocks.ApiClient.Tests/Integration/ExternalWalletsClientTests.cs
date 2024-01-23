@@ -45,14 +45,14 @@ public class ExternalWalletsClientTests : FireblocksClientTestsBase
         var walletId = response.Content.Id;
 
         // After write op, fireblocks needs some time to refresh data :(
-        await Task.Delay(2000).ConfigureAwait(false);
+        await Task.Delay(2000);
 
         var response2 = await _externalWalletsClient.External_walletsGETAsync(walletId);
         response2.Content.Name.Should().Be(walletName);
         await _externalWalletsClient.External_walletsDELETEAsync(walletId);
 
         // After write op, fireblocks needs some time to refresh data :(
-        await Task.Delay(2000).ConfigureAwait(false);
+        await Task.Delay(2000);
 
         await new Func<Task>(async () => await _externalWalletsClient.External_walletsGETAsync(walletId)).Should()
             .ThrowAsync<ApiException>();

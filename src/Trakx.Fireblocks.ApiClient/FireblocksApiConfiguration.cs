@@ -5,7 +5,9 @@ namespace Trakx.Fireblocks.ApiClient;
 public record FireblocksApiConfiguration
 {
 #nullable disable
-    public string BaseUrl { get; set; }
+    
+    [AwsParameter(AllowGlobal = true)]
+    public Uri BaseUrl { get; init; } = new("about:blank");
 
     [AwsParameter]
     public string ApiPubKey { get; init; }
