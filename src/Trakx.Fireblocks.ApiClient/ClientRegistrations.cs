@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Contrib.WaitAndRetry;
 using Polly.Extensions.Http;
@@ -75,21 +73,6 @@ namespace Trakx.Fireblocks.ApiClient;
                     .WithPolicyKey("External_walletsClient"));
 
         
-            services.AddHttpClient<IFee_payerClient, Fee_payerClient>("Trakx.Fireblocks.ApiClient.Fee_payerClient")
-                .AddPolicyHandler((s, request) =>
-                    Policy<HttpResponseMessage>
-                    .Handle<ApiException>()
-                    .Or<HttpRequestException>()
-                    .OrTransientHttpStatusCode()
-                    .WaitAndRetryAsync(delay,
-                        onRetry: (result, timeSpan, retryCount, context) =>
-                        {
-                            var logger = LoggerProvider.Create<Fee_payerClient>();
-                            logger.LogApiFailure(result, timeSpan, retryCount, context);
-                        })
-                    .WithPolicyKey("Fee_payerClient"));
-
-        
             services.AddHttpClient<IFiat_accountsClient, Fiat_accountsClient>("Trakx.Fireblocks.ApiClient.Fiat_accountsClient")
                 .AddPolicyHandler((s, request) =>
                     Policy<HttpResponseMessage>
@@ -135,21 +118,6 @@ namespace Trakx.Fireblocks.ApiClient;
                     .WithPolicyKey("Internal_walletsClient"));
 
         
-            services.AddHttpClient<INetwork_connectionClient, Network_connectionClient>("Trakx.Fireblocks.ApiClient.Network_connectionClient")
-                .AddPolicyHandler((s, request) =>
-                    Policy<HttpResponseMessage>
-                    .Handle<ApiException>()
-                    .Or<HttpRequestException>()
-                    .OrTransientHttpStatusCode()
-                    .WaitAndRetryAsync(delay,
-                        onRetry: (result, timeSpan, retryCount, context) =>
-                        {
-                            var logger = LoggerProvider.Create<Network_connectionClient>();
-                            logger.LogApiFailure(result, timeSpan, retryCount, context);
-                        })
-                    .WithPolicyKey("Network_connectionClient"));
-
-        
             services.AddHttpClient<INetwork_connectionsClient, Network_connectionsClient>("Trakx.Fireblocks.ApiClient.Network_connectionsClient")
                 .AddPolicyHandler((s, request) =>
                     Policy<HttpResponseMessage>
@@ -180,21 +148,6 @@ namespace Trakx.Fireblocks.ApiClient;
                     .WithPolicyKey("Off_exchangesClient"));
 
         
-            services.AddHttpClient<IPaymentsClient, PaymentsClient>("Trakx.Fireblocks.ApiClient.PaymentsClient")
-                .AddPolicyHandler((s, request) =>
-                    Policy<HttpResponseMessage>
-                    .Handle<ApiException>()
-                    .Or<HttpRequestException>()
-                    .OrTransientHttpStatusCode()
-                    .WaitAndRetryAsync(delay,
-                        onRetry: (result, timeSpan, retryCount, context) =>
-                        {
-                            var logger = LoggerProvider.Create<PaymentsClient>();
-                            logger.LogApiFailure(result, timeSpan, retryCount, context);
-                        })
-                    .WithPolicyKey("PaymentsClient"));
-
-        
             services.AddHttpClient<ISupported_assetsClient, Supported_assetsClient>("Trakx.Fireblocks.ApiClient.Supported_assetsClient")
                 .AddPolicyHandler((s, request) =>
                     Policy<HttpResponseMessage>
@@ -223,21 +176,6 @@ namespace Trakx.Fireblocks.ApiClient;
                             logger.LogApiFailure(result, timeSpan, retryCount, context);
                         })
                     .WithPolicyKey("TransactionsClient"));
-
-        
-            services.AddHttpClient<ITransfer_ticketsClient, Transfer_ticketsClient>("Trakx.Fireblocks.ApiClient.Transfer_ticketsClient")
-                .AddPolicyHandler((s, request) =>
-                    Policy<HttpResponseMessage>
-                    .Handle<ApiException>()
-                    .Or<HttpRequestException>()
-                    .OrTransientHttpStatusCode()
-                    .WaitAndRetryAsync(delay,
-                        onRetry: (result, timeSpan, retryCount, context) =>
-                        {
-                            var logger = LoggerProvider.Create<Transfer_ticketsClient>();
-                            logger.LogApiFailure(result, timeSpan, retryCount, context);
-                        })
-                    .WithPolicyKey("Transfer_ticketsClient"));
 
         
             services.AddHttpClient<IUsersClient, UsersClient>("Trakx.Fireblocks.ApiClient.UsersClient")

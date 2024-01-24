@@ -6,7 +6,8 @@ internal abstract class AuthorisedClient
 {
     public FireblocksApiConfiguration Configuration { get; protected set; }
 
-    protected string BaseUrl => Configuration.BaseUrl.AbsoluteUri;
+    protected string _baseUrl ;
+    protected string BaseUrl => _baseUrl ?? Configuration.BaseUrl.AbsoluteUri;
 
     protected readonly ICredentialsProvider CredentialProvider;
 
