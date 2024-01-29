@@ -6,6 +6,7 @@
 
 using Trakx.Common.ApiClient;
 
+#pragma warning disable CS0618
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
 #pragma warning disable 114 // Disable "CS0114 '{derivedDto}.RaisePropertyChanged(String)' hides inherited member 'dtoBase.RaisePropertyChanged(String)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword."
 #pragma warning disable 472 // Disable "CS0472 The result of the expression is always 'false' since a value of type 'Int32' is never equal to 'null' of type 'Int32?'
@@ -15896,7 +15897,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MediaEntityResponse
+    public partial record MediaEntityResponse
     {
         /// <summary>
         /// Cached accessible URL
@@ -15925,7 +15926,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TokenCollectionResponse
+    public partial record TokenCollectionResponse
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -15951,7 +15952,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TokenResponse
+    public partial record TokenResponse
     {
         /// <summary>
         /// The Fireblocks NFT asset id
@@ -15978,13 +15979,13 @@ namespace Trakx.Fireblocks.ApiClient
         /// URL of the original token JSON metadata
         /// </summary>
         [Newtonsoft.Json.JsonProperty("metadataURI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MetadataURI { get; set; }
+        public string MetadataURI { get; init; }
 
         /// <summary>
         /// URL of the cached token JSON metadata
         /// </summary>
         [Newtonsoft.Json.JsonProperty("cachedMetadataURI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CachedMetadataURI { get; set; }
+        public string CachedMetadataURI { get; init; }
 
         /// <summary>
         /// Media items extracted from metadata JSON
@@ -15997,7 +15998,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Parent collection information
         /// </summary>
         [Newtonsoft.Json.JsonProperty("collection", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TokenCollectionResponse Collection { get; set; }
+        public TokenCollectionResponse Collection { get; init; }
 
         [Newtonsoft.Json.JsonProperty("blockchainDescriptor", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -16024,7 +16025,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class UpdateTokenOwnershipStatusDto
+    public partial record UpdateTokenOwnershipStatusDto
     {
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -16043,7 +16044,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Paging
+    public partial record Paging
     {
         /// <summary>
         /// Cursor to the next page
@@ -16064,7 +16065,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TokenOwnershipResponse
+    public partial record TokenOwnershipResponse
     {
         /// <summary>
         /// The Fireblocks NFT asset id
@@ -16091,13 +16092,13 @@ namespace Trakx.Fireblocks.ApiClient
         /// URL of the original token JSON metadata
         /// </summary>
         [Newtonsoft.Json.JsonProperty("metadataURI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MetadataURI { get; set; }
+        public string MetadataURI { get; init; }
 
         /// <summary>
         /// URL of the cached token JSON metadata
         /// </summary>
         [Newtonsoft.Json.JsonProperty("cachedMetadataURI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CachedMetadataURI { get; set; }
+        public string CachedMetadataURI { get; init; }
 
         /// <summary>
         /// Media items extracted from metadata JSON
@@ -16110,7 +16111,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// Parent collection information
         /// </summary>
         [Newtonsoft.Json.JsonProperty("collection", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TokenCollectionResponse Collection { get; set; }
+        public TokenCollectionResponse Collection { get; init; }
 
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -16121,10 +16122,10 @@ namespace Trakx.Fireblocks.ApiClient
         public string VaultAccountId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("ownershipStartTime", Required = Newtonsoft.Json.Required.Always)]
-        public double OwnershipStartTime { get; set; }
+        public double OwnershipStartTime { get; init; }
 
         [Newtonsoft.Json.JsonProperty("ownershipLastUpdateTime", Required = Newtonsoft.Json.Required.Always)]
-        public double OwnershipLastUpdateTime { get; set; }
+        public double OwnershipLastUpdateTime { get; init; }
 
         [Newtonsoft.Json.JsonProperty("blockchainDescriptor", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -16151,29 +16152,29 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class WalletAsset
+    public partial record WalletAsset
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Balance { get; set; }
+        public string Balance { get; init; }
 
         [Newtonsoft.Json.JsonProperty("lockedAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LockedAmount { get; set; }
+        public string LockedAmount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ConfigChangeRequestStatus? Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Address { get; set; }
+        public string Address { get; init; }
 
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
 
         [Newtonsoft.Json.JsonProperty("activationTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ActivationTime { get; set; }
+        public string ActivationTime { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16187,23 +16188,23 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ExternalWalletAsset
+    public partial record ExternalWalletAsset
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ConfigChangeRequestStatus? Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Address { get; set; }
+        public string Address { get; init; }
 
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
 
         [Newtonsoft.Json.JsonProperty("activationTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ActivationTime { get; set; }
+        public string ActivationTime { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16217,22 +16218,22 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ExchangeAsset
+    public partial record ExchangeAsset
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Balance { get; set; }
+        public string Balance { get; init; }
 
         [Newtonsoft.Json.JsonProperty("lockedAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LockedAmount { get; set; }
+        public string LockedAmount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Total { get; set; }
+        public string Total { get; init; }
 
         [Newtonsoft.Json.JsonProperty("available", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Available { get; set; }
+        public string Available { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16246,16 +16247,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ExchangeTradingAccount
+    public partial record ExchangeTradingAccount
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Type { get; set; }
+        public string Type { get; init; }
 
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         [Newtonsoft.Json.JsonProperty("assets", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<ExchangeAsset> Assets { get; set; }
+        public System.Collections.Generic.List<ExchangeAsset> Assets { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16269,13 +16270,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class FiatAsset
+    public partial record FiatAsset
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Balance { get; set; }
+        public string Balance { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16289,31 +16290,31 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateVaultAssetResponse
+    public partial record CreateVaultAssetResponse
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Address { get; set; }
+        public string Address { get; init; }
 
         [Newtonsoft.Json.JsonProperty("legacyAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LegacyAddress { get; set; }
+        public string LegacyAddress { get; init; }
 
         [Newtonsoft.Json.JsonProperty("enterpriseAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string EnterpriseAddress { get; set; }
+        public string EnterpriseAddress { get; init; }
 
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
 
         [Newtonsoft.Json.JsonProperty("eosAccountName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string EosAccountName { get; set; }
+        public string EosAccountName { get; init; }
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Status { get; set; }
+        public string Status { get; init; }
 
         [Newtonsoft.Json.JsonProperty("activationTxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ActivationTxId { get; set; }
+        public string ActivationTxId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16327,13 +16328,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class RewardsInfo
+    public partial record RewardsInfo
     {
         /// <summary>
         /// Amount that is pending for rewards
         /// </summary>
         [Newtonsoft.Json.JsonProperty("pendingRewards", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PendingRewards { get; set; }
+        public string PendingRewards { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16347,16 +16348,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class VaultAsset
+    public partial record VaultAsset
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         /// <summary>
         /// The total wallet balance. In EOS this value includes the network balance, self staking and pending refund. For all other coins it is the balance as it appears on the blockchain.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Total { get; set; }
+        public string Total { get; init; }
 
         /// <summary>
         /// Deprecated - replaced by "total"
@@ -16369,88 +16370,88 @@ namespace Trakx.Fireblocks.ApiClient
         /// Funds available for transfer. Equals the blockchain balance minus any locked amounts
         /// </summary>
         [Newtonsoft.Json.JsonProperty("available", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Available { get; set; }
+        public string Available { get; init; }
 
         /// <summary>
         /// The cumulative balance of all transactions pending to be cleared
         /// </summary>
         [Newtonsoft.Json.JsonProperty("pending", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Pending { get; set; }
+        public string Pending { get; init; }
 
         /// <summary>
         /// The cumulative frozen balance
         /// </summary>
         [Newtonsoft.Json.JsonProperty("frozen", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Frozen { get; set; }
+        public string Frozen { get; init; }
 
         /// <summary>
         /// Funds in outgoing transactions that are not yet published to the network
         /// </summary>
         [Newtonsoft.Json.JsonProperty("lockedAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LockedAmount { get; set; }
+        public string LockedAmount { get; init; }
 
         /// <summary>
         /// Staked balance
         /// </summary>
         [Newtonsoft.Json.JsonProperty("staked", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Staked { get; set; }
+        public string Staked { get; init; }
 
         /// <summary>
         /// The maximum BIP44 index used in deriving addresses for this wallet
         /// </summary>
         [Newtonsoft.Json.JsonProperty("maxBip44AddressIndexUsed", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? MaxBip44AddressIndexUsed { get; set; }
+        public double? MaxBip44AddressIndexUsed { get; init; }
 
         /// <summary>
         /// The maximum BIP44 index used in deriving change addresses for this wallet
         /// </summary>
         [Newtonsoft.Json.JsonProperty("maxBip44ChangeAddressIndexUsed", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? MaxBip44ChangeAddressIndexUsed { get; set; }
+        public double? MaxBip44ChangeAddressIndexUsed { get; init; }
 
         /// <summary>
         /// Deprecated
         /// </summary>
         [Newtonsoft.Json.JsonProperty("totalStakedCPU", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? TotalStakedCPU { get; set; }
+        public double? TotalStakedCPU { get; init; }
 
         /// <summary>
         /// Deprecated
         /// </summary>
         [Newtonsoft.Json.JsonProperty("totalStakedNetwork", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TotalStakedNetwork { get; set; }
+        public string TotalStakedNetwork { get; init; }
 
         /// <summary>
         /// Deprecated
         /// </summary>
         [Newtonsoft.Json.JsonProperty("selfStakedCPU", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SelfStakedCPU { get; set; }
+        public string SelfStakedCPU { get; init; }
 
         /// <summary>
         /// Deprecated
         /// </summary>
         [Newtonsoft.Json.JsonProperty("selfStakedNetwork", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SelfStakedNetwork { get; set; }
+        public string SelfStakedNetwork { get; init; }
 
         /// <summary>
         /// Deprecated
         /// </summary>
         [Newtonsoft.Json.JsonProperty("pendingRefundCPU", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PendingRefundCPU { get; set; }
+        public string PendingRefundCPU { get; init; }
 
         /// <summary>
         /// Deprecated
         /// </summary>
         [Newtonsoft.Json.JsonProperty("pendingRefundNetwork", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PendingRefundNetwork { get; set; }
+        public string PendingRefundNetwork { get; init; }
 
         [Newtonsoft.Json.JsonProperty("blockHeight", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BlockHeight { get; set; }
+        public string BlockHeight { get; init; }
 
         [Newtonsoft.Json.JsonProperty("blockHash", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BlockHash { get; set; }
+        public string BlockHash { get; init; }
 
         [Newtonsoft.Json.JsonProperty("rewardsInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public RewardsInfo RewardsInfo { get; set; }
+        public RewardsInfo RewardsInfo { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16464,41 +16465,41 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class VaultWalletAddress
+    public partial record VaultWalletAddress
     {
         [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AssetId { get; set; }
+        public string AssetId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Address { get; set; }
+        public string Address { get; init; }
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Description { get; set; }
+        public string Description { get; init; }
 
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Type { get; set; }
+        public string Type { get; init; }
 
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("addressFormat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public VaultWalletAddressAddressFormat? AddressFormat { get; set; }
 
         [Newtonsoft.Json.JsonProperty("legacyAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LegacyAddress { get; set; }
+        public string LegacyAddress { get; init; }
 
         [Newtonsoft.Json.JsonProperty("enterpriseAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string EnterpriseAddress { get; set; }
+        public string EnterpriseAddress { get; init; }
 
         [Newtonsoft.Json.JsonProperty("bip44AddressIndex", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Bip44AddressIndex { get; set; }
+        public int? Bip44AddressIndex { get; init; }
 
         [Newtonsoft.Json.JsonProperty("userDefined", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? UserDefined { get; set; }
+        public bool? UserDefined { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16512,22 +16513,22 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateAddressResponse
+    public partial record CreateAddressResponse
     {
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Address { get; set; }
+        public string Address { get; init; }
 
         [Newtonsoft.Json.JsonProperty("legacyAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LegacyAddress { get; set; }
+        public string LegacyAddress { get; init; }
 
         [Newtonsoft.Json.JsonProperty("enterpriseAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string EnterpriseAddress { get; set; }
+        public string EnterpriseAddress { get; init; }
 
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
 
         [Newtonsoft.Json.JsonProperty("bip44AddressIndex", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Bip44AddressIndex { get; set; }
+        public int? Bip44AddressIndex { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16541,19 +16542,19 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class VaultAccountsPagedResponse
+    public partial record VaultAccountsPagedResponse
     {
         [Newtonsoft.Json.JsonProperty("accounts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<VaultAccount> Accounts { get; set; }
+        public System.Collections.Generic.List<VaultAccount> Accounts { get; init; }
 
         [Newtonsoft.Json.JsonProperty("paging", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Paging2 Paging { get; set; }
+        public Paging2 Paging { get; init; }
 
         [Newtonsoft.Json.JsonProperty("previousUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PreviousUrl { get; set; }
+        public string PreviousUrl { get; init; }
 
         [Newtonsoft.Json.JsonProperty("nextUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NextUrl { get; set; }
+        public string NextUrl { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16567,13 +16568,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PaginatedAssetWalletResponse
+    public partial record PaginatedAssetWalletResponse
     {
         [Newtonsoft.Json.JsonProperty("assetWallets", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<AssetWallet> AssetWallets { get; set; }
+        public System.Collections.Generic.List<AssetWallet> AssetWallets { get; init; }
 
         [Newtonsoft.Json.JsonProperty("paging", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Paging3 Paging { get; set; }
+        public Paging3 Paging { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16587,73 +16588,73 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class AssetWallet
+    public partial record AssetWallet
     {
         /// <summary>
         /// ID of the vault account. You can [get the vault account by this ID](https://developers.fireblocks.com/reference/get_vault-accounts-vaultaccountid) to retrieve vault properties such as its name, auto fueling, hidden on UI or customer reference ID.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("vaultId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string VaultId { get; set; }
+        public string VaultId { get; init; }
 
         /// <summary>
         /// ID of the asset. You can get more information about this asset by using the [supported assets API](https://developers.fireblocks.com/reference/get_supported-assets)
         /// </summary>
         [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AssetId { get; set; }
+        public string AssetId { get; init; }
 
         /// <summary>
         /// Available balance, available to use in a transaction.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("available", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Available { get; set; }
+        public string Available { get; init; }
 
         /// <summary>
         /// Total balance at the asset wallet, as seen at the blockchain explorers. This includes balance available, and any kind of unavailable balance such as locked, frozen, or others.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Total { get; set; }
+        public string Total { get; init; }
 
         /// <summary>
         /// Pending balance.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("pending", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Pending { get; set; }
+        public string Pending { get; init; }
 
         /// <summary>
         /// Staked balance.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("staked", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Staked { get; set; }
+        public string Staked { get; init; }
 
         /// <summary>
         /// Funds frozen due to the anti-money laundering policy at this workspace.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("frozen", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Frozen { get; set; }
+        public string Frozen { get; init; }
 
         /// <summary>
         /// Locked balance.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("lockedAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LockedAmount { get; set; }
+        public string LockedAmount { get; init; }
 
         /// <summary>
         /// The height (number) of the block of the balance. Can by empty.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("blockHeight", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BlockHeight { get; set; }
+        public string BlockHeight { get; init; }
 
         /// <summary>
         /// The hash of the block of the balance. Can by empty.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("blockHash", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BlockHash { get; set; }
+        public string BlockHash { get; init; }
 
         /// <summary>
         /// Unix timestamp of the time the asset wallet was created.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("creationTimestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CreationTimestamp { get; set; }
+        public string CreationTimestamp { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16667,25 +16668,25 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class VaultAccount
+    public partial record VaultAccount
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         [Newtonsoft.Json.JsonProperty("assets", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<VaultAsset> Assets { get; set; }
+        public System.Collections.Generic.List<VaultAsset> Assets { get; init; }
 
         [Newtonsoft.Json.JsonProperty("hiddenOnUI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? HiddenOnUI { get; set; }
+        public bool? HiddenOnUI { get; init; }
 
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("autoFuel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? AutoFuel { get; set; }
+        public bool? AutoFuel { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16699,7 +16700,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class UnmanagedWallet
+    public partial record UnmanagedWallet
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -16710,10 +16711,10 @@ namespace Trakx.Fireblocks.ApiClient
         public string Name { get; set; }
 
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("assets", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<WalletAsset> Assets { get; set; }
+        public System.Collections.Generic.List<WalletAsset> Assets { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16727,10 +16728,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ExchangeAccount
+    public partial record ExchangeAccount
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -16740,28 +16741,28 @@ namespace Trakx.Fireblocks.ApiClient
         /// Display name of the exchange account
         /// </summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Status { get; set; }
+        public string Status { get; init; }
 
         [Newtonsoft.Json.JsonProperty("assets", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<ExchangeAsset> Assets { get; set; }
+        public System.Collections.Generic.List<ExchangeAsset> Assets { get; init; }
 
         [Newtonsoft.Json.JsonProperty("tradingAccounts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<ExchangeTradingAccount> TradingAccounts { get; set; }
+        public System.Collections.Generic.List<ExchangeTradingAccount> TradingAccounts { get; init; }
 
         /// <summary>
         /// True if the account is a subaccount in an exchange
         /// </summary>
         [Newtonsoft.Json.JsonProperty("isSubaccount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSubaccount { get; set; }
+        public bool? IsSubaccount { get; init; }
 
         /// <summary>
         /// if the account is a sub-account, the ID of the main account
         /// </summary>
         [Newtonsoft.Json.JsonProperty("mainAccountId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MainAccountId { get; set; }
+        public string MainAccountId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16775,10 +16776,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class FiatAccount
+    public partial record FiatAccount
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -16788,13 +16789,13 @@ namespace Trakx.Fireblocks.ApiClient
         /// Display name of the fiat account
         /// </summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Address { get; set; }
+        public string Address { get; init; }
 
         [Newtonsoft.Json.JsonProperty("assets", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<FiatAsset> Assets { get; set; }
+        public System.Collections.Generic.List<FiatAsset> Assets { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16808,14 +16809,14 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class OneTimeAddress
+    public partial record OneTimeAddress
     {
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Address { get; set; }
 
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16829,7 +16830,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TransferPeerPath
+    public partial record TransferPeerPath
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -16837,7 +16838,7 @@ namespace Trakx.Fireblocks.ApiClient
         public TransferPeerPathType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16851,24 +16852,24 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DestinationTransferPeerPath : TransferPeerPath
+    public partial record DestinationTransferPeerPath : TransferPeerPath
     {
         [Newtonsoft.Json.JsonProperty("oneTimeAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public OneTimeAddress OneTimeAddress { get; set; }
+        public OneTimeAddress OneTimeAddress { get; init; }
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateTransactionResponse
+    public partial record CreateTransactionResponse
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Status { get; set; }
+        public string Status { get; init; }
 
         [Newtonsoft.Json.JsonProperty("systemMessages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public SystemMessageInfo SystemMessages { get; set; }
+        public SystemMessageInfo SystemMessages { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16882,7 +16883,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class SystemMessageInfo
+    public partial record SystemMessageInfo
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -16892,7 +16893,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// A response from Fireblocks that communicates a message about the health of the process being performed. If this object is returned with data, you should expect potential delays or incomplete transaction statuses.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Message { get; set; }
+        public string Message { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16906,10 +16907,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CancelTransactionResponse
+    public partial record CancelTransactionResponse
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Success { get; set; }
+        public bool? Success { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16923,10 +16924,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class UnfreezeTransactionResponse
+    public partial record UnfreezeTransactionResponse
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Success { get; set; }
+        public bool? Success { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16940,10 +16941,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class FreezeTransactionResponse
+    public partial record FreezeTransactionResponse
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Success { get; set; }
+        public bool? Success { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16957,13 +16958,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class AmlScreeningResult
+    public partial record AmlScreeningResult
     {
         [Newtonsoft.Json.JsonProperty("provider", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Provider { get; set; }
+        public string Provider { get; init; }
 
         [Newtonsoft.Json.JsonProperty("payload", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object Payload { get; set; }
+        public object Payload { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -16977,16 +16978,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class FeeInfo
+    public partial record FeeInfo
     {
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkFee { get; set; }
+        public string NetworkFee { get; init; }
 
         [Newtonsoft.Json.JsonProperty("serviceFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ServiceFee { get; set; }
+        public string ServiceFee { get; init; }
 
         [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasPrice { get; set; }
+        public string GasPrice { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17000,13 +17001,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class BlockInfo
+    public partial record BlockInfo
     {
         [Newtonsoft.Json.JsonProperty("blockHeight", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BlockHeight { get; set; }
+        public string BlockHeight { get; init; }
 
         [Newtonsoft.Json.JsonProperty("blockHash", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BlockHash { get; set; }
+        public string BlockHash { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17020,17 +17021,17 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class AuthorizationInfo
+    public partial record AuthorizationInfo
     {
         [Newtonsoft.Json.JsonProperty("allowOperatorAsAuthorizer", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? AllowOperatorAsAuthorizer { get; set; }
+        public bool? AllowOperatorAsAuthorizer { get; init; }
 
         [Newtonsoft.Json.JsonProperty("logic", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public AuthorizationInfoLogic? Logic { get; set; }
 
         [Newtonsoft.Json.JsonProperty("groups", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<AuthorizationGroups> Groups { get; set; }
+        public System.Collections.Generic.List<AuthorizationGroups> Groups { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17044,10 +17045,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class AuthorizationGroups
+    public partial record AuthorizationGroups
     {
         [Newtonsoft.Json.JsonProperty("th", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Th { get; set; }
+        public double? Th { get; init; }
 
         [Newtonsoft.Json.JsonProperty("users", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.IDictionary<string, Anonymous3> Users { get; }
@@ -17064,19 +17065,19 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class AmountInfo
+    public partial record AmountInfo
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("requestedAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string RequestedAmount { get; set; }
+        public string RequestedAmount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("netAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetAmount { get; set; }
+        public string NetAmount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("amountUSD", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AmountUSD { get; set; }
+        public string AmountUSD { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17090,13 +17091,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class RewardInfo
+    public partial record RewardInfo
     {
         [Newtonsoft.Json.JsonProperty("srcRewards", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SrcRewards { get; set; }
+        public string SrcRewards { get; init; }
 
         [Newtonsoft.Json.JsonProperty("destRewards", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DestRewards { get; set; }
+        public string DestRewards { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17110,69 +17111,69 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TransferPeerPathResponse : TransferPeerPath
+    public partial record TransferPeerPathResponse : TransferPeerPath
     {
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         /// <summary>
         /// The specific exchange, fiat account or unmanaged wallet (either INTERNAL / EXTERNAL)
         /// </summary>
         [Newtonsoft.Json.JsonProperty("subType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SubType { get; set; }
+        public string SubType { get; init; }
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TransactionResponse
+    public partial record TransactionResponse
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AssetId { get; set; }
+        public string AssetId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("source", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPathResponse Source { get; set; }
+        public TransferPeerPathResponse Source { get; init; }
 
         [Newtonsoft.Json.JsonProperty("destination", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPathResponse Destination { get; set; }
+        public TransferPeerPathResponse Destination { get; init; }
 
         /// <summary>
         /// Contains decoded data for smart contract transaction calls.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("contractCallDecodedData", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ContractCallDecodedData ContractCallDecodedData { get; set; }
+        public ContractCallDecodedData ContractCallDecodedData { get; init; }
 
         /// <summary>
         /// The amount requested by the user
         /// </summary>
         [Newtonsoft.Json.JsonProperty("requestedAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? RequestedAmount { get; set; }
+        public double? RequestedAmount { get; init; }
 
         /// <summary>
         /// If the transfer is a withdrawal from an exchange, the actual amount that was requested to be transferred. Otherwise, the requested amount
         /// </summary>
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Amount { get; set; }
+        public double? Amount { get; init; }
 
         /// <summary>
         /// The net amount of the transaction, after fee deduction
         /// </summary>
         [Newtonsoft.Json.JsonProperty("netAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? NetAmount { get; set; }
+        public double? NetAmount { get; init; }
 
         /// <summary>
         /// The USD value of the requested amount
         /// </summary>
         [Newtonsoft.Json.JsonProperty("amountUSD", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? AmountUSD { get; set; }
+        public double? AmountUSD { get; init; }
 
         /// <summary>
         /// The total fee deducted by the exchange from the actual requested amount (serviceFee = amount - netAmount)
         /// </summary>
         [Newtonsoft.Json.JsonProperty("serviceFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? ServiceFee { get; set; }
+        public double? ServiceFee { get; init; }
 
         /// <summary>
         /// Deprecated - replaced by "networkFee"
@@ -17185,124 +17186,124 @@ namespace Trakx.Fireblocks.ApiClient
         /// The fee paid to the network
         /// </summary>
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? NetworkFee { get; set; }
+        public double? NetworkFee { get; init; }
 
         /// <summary>
         /// Unix timestamp
         /// </summary>
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? CreatedAt { get; set; }
+        public double? CreatedAt { get; init; }
 
         /// <summary>
         /// Unix timestamp
         /// </summary>
         [Newtonsoft.Json.JsonProperty("lastUpdated", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? LastUpdated { get; set; }
+        public double? LastUpdated { get; init; }
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransactionResponseStatus? Status { get; set; }
 
         [Newtonsoft.Json.JsonProperty("txHash", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TxHash { get; set; }
+        public string TxHash { get; init; }
 
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
 
         [Newtonsoft.Json.JsonProperty("subStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransactionSubStatus? SubStatus { get; set; }
 
         [Newtonsoft.Json.JsonProperty("destinationAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DestinationAddress { get; set; }
+        public string DestinationAddress { get; init; }
 
         /// <summary>
         /// Note: If the status is `CONFIRMING`, `COMPLETED`, or has been `CONFIRMING`; then moved forward to `FAILED` or `REJECTED`, then this parameter will contain the source address. In any other case, this parameter will be empty.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("sourceAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SourceAddress { get; set; }
+        public string SourceAddress { get; init; }
 
         [Newtonsoft.Json.JsonProperty("destinationAddressDescription", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DestinationAddressDescription { get; set; }
+        public string DestinationAddressDescription { get; init; }
 
         [Newtonsoft.Json.JsonProperty("destinationTag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DestinationTag { get; set; }
+        public string DestinationTag { get; init; }
 
         [Newtonsoft.Json.JsonProperty("signedBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<string> SignedBy { get; set; }
+        public System.Collections.Generic.List<string> SignedBy { get; init; }
 
         [Newtonsoft.Json.JsonProperty("createdBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get; init; }
 
         [Newtonsoft.Json.JsonProperty("rejectedBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string RejectedBy { get; set; }
+        public string RejectedBy { get; init; }
 
         [Newtonsoft.Json.JsonProperty("addressType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AddressType { get; set; }
+        public string AddressType { get; init; }
 
         [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Note { get; set; }
+        public string Note { get; init; }
 
         [Newtonsoft.Json.JsonProperty("exchangeTxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ExchangeTxId { get; set; }
+        public string ExchangeTxId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("feeCurrency", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FeeCurrency { get; set; }
+        public string FeeCurrency { get; init; }
 
         [Newtonsoft.Json.JsonProperty("operation", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransactionOperation? Operation { get; set; }
 
         [Newtonsoft.Json.JsonProperty("networkRecords", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<NetworkRecord> NetworkRecords { get; set; }
+        public System.Collections.Generic.List<NetworkRecord> NetworkRecords { get; init; }
 
         [Newtonsoft.Json.JsonProperty("amlScreeningResult", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public AmlScreeningResult AmlScreeningResult { get; set; }
+        public AmlScreeningResult AmlScreeningResult { get; init; }
 
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("numOfConfirmations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? NumOfConfirmations { get; set; }
+        public double? NumOfConfirmations { get; init; }
 
         [Newtonsoft.Json.JsonProperty("amountInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public AmountInfo AmountInfo { get; set; }
+        public AmountInfo AmountInfo { get; init; }
 
         [Newtonsoft.Json.JsonProperty("feeInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FeeInfo FeeInfo { get; set; }
+        public FeeInfo FeeInfo { get; init; }
 
         [Newtonsoft.Json.JsonProperty("signedMessages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<SignedMessage> SignedMessages { get; set; }
+        public System.Collections.Generic.List<SignedMessage> SignedMessages { get; init; }
 
         [Newtonsoft.Json.JsonProperty("extraParameters", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object ExtraParameters { get; set; }
+        public object ExtraParameters { get; init; }
 
         [Newtonsoft.Json.JsonProperty("externalTxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ExternalTxId { get; set; }
+        public string ExternalTxId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("destinations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<TransactionResponseDestination> Destinations { get; set; }
+        public System.Collections.Generic.List<TransactionResponseDestination> Destinations { get; init; }
 
         [Newtonsoft.Json.JsonProperty("blockInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public BlockInfo BlockInfo { get; set; }
+        public BlockInfo BlockInfo { get; init; }
 
         [Newtonsoft.Json.JsonProperty("authorizationInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public AuthorizationInfo AuthorizationInfo { get; set; }
+        public AuthorizationInfo AuthorizationInfo { get; init; }
 
         [Newtonsoft.Json.JsonProperty("index", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Index { get; set; }
+        public double? Index { get; init; }
 
         [Newtonsoft.Json.JsonProperty("rewardInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public RewardInfo RewardInfo { get; set; }
+        public RewardInfo RewardInfo { get; init; }
 
         [Newtonsoft.Json.JsonProperty("feePayerInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FeePayerInfo FeePayerInfo { get; set; }
+        public FeePayerInfo FeePayerInfo { get; init; }
 
         [Newtonsoft.Json.JsonProperty("treatAsGrossAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? TreatAsGrossAmount { get; set; }
+        public bool? TreatAsGrossAmount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("systemMessages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public SystemMessageInfo SystemMessages { get; set; }
+        public SystemMessageInfo SystemMessages { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17316,22 +17317,22 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TransactionResponseDestination
+    public partial record TransactionResponseDestination
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("amountUSD", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AmountUSD { get; set; }
+        public string AmountUSD { get; init; }
 
         [Newtonsoft.Json.JsonProperty("amlScreeningResult", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public AmlScreeningResult AmlScreeningResult { get; set; }
+        public AmlScreeningResult AmlScreeningResult { get; init; }
 
         [Newtonsoft.Json.JsonProperty("destination", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPathResponse Destination { get; set; }
+        public TransferPeerPathResponse Destination { get; init; }
 
         [Newtonsoft.Json.JsonProperty("authorizationInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public AuthorizationInfo AuthorizationInfo { get; set; }
+        public AuthorizationInfo AuthorizationInfo { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17345,49 +17346,49 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class NetworkRecord
+    public partial record NetworkRecord
     {
         [Newtonsoft.Json.JsonProperty("source", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPathResponse Source { get; set; }
+        public TransferPeerPathResponse Source { get; init; }
 
         [Newtonsoft.Json.JsonProperty("destination", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPathResponse Destination { get; set; }
+        public TransferPeerPathResponse Destination { get; init; }
 
         [Newtonsoft.Json.JsonProperty("txHash", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TxHash { get; set; }
+        public string TxHash { get; init; }
 
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkFee { get; set; }
+        public string NetworkFee { get; init; }
 
         [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AssetId { get; set; }
+        public string AssetId { get; init; }
 
         /// <summary>
         /// The net amount of the transaction, after fee deduction
         /// </summary>
         [Newtonsoft.Json.JsonProperty("netAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetAmount { get; set; }
+        public string NetAmount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("isDropped", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsDropped { get; set; }
+        public bool? IsDropped { get; init; }
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Type { get; set; }
+        public string Type { get; init; }
 
         [Newtonsoft.Json.JsonProperty("destinationAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DestinationAddress { get; set; }
+        public string DestinationAddress { get; init; }
 
         [Newtonsoft.Json.JsonProperty("sourceAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SourceAddress { get; set; }
+        public string SourceAddress { get; init; }
 
         [Newtonsoft.Json.JsonProperty("amountUSD", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AmountUSD { get; set; }
+        public string AmountUSD { get; init; }
 
         [Newtonsoft.Json.JsonProperty("index", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Index { get; set; }
+        public double? Index { get; init; }
 
         [Newtonsoft.Json.JsonProperty("rewardInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public RewardInfo RewardInfo { get; set; }
+        public RewardInfo RewardInfo { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17401,7 +17402,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class AssetTypeResponse
+    public partial record AssetTypeResponse
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -17417,13 +17418,13 @@ namespace Trakx.Fireblocks.ApiClient
         public AssetTypeResponseType Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("contractAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ContractAddress { get; set; }
+        public string ContractAddress { get; init; }
 
         [Newtonsoft.Json.JsonProperty("nativeAsset", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NativeAsset { get; set; }
+        public string NativeAsset { get; init; }
 
         [Newtonsoft.Json.JsonProperty("decimals", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Decimals { get; set; }
+        public double? Decimals { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17437,7 +17438,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class NetworkConnection
+    public partial record NetworkConnection
     {
         /// <summary>
         /// The network ID of the profile trying to create the connection.
@@ -17454,7 +17455,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string RemoteNetworkId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("routingPolicy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public NetworkConnectionRoutingPolicy RoutingPolicy { get; set; }
+        public NetworkConnectionRoutingPolicy RoutingPolicy { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17468,7 +17469,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class NetworkConnectionResponse
+    public partial record NetworkConnectionResponse
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -17517,7 +17518,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class EstimatedTransactionFeeResponse
+    public partial record EstimatedTransactionFeeResponse
     {
         [Newtonsoft.Json.JsonProperty("low", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -17543,7 +17544,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class EstimatedNetworkFeeResponse
+    public partial record EstimatedNetworkFeeResponse
     {
         [Newtonsoft.Json.JsonProperty("low", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -17569,13 +17570,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class GasStationPropertiesResponse
+    public partial record GasStationPropertiesResponse
     {
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object Balance { get; set; }
+        public object Balance { get; init; }
 
         [Newtonsoft.Json.JsonProperty("configuration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public GasStationConfiguration Configuration { get; set; }
+        public GasStationConfiguration Configuration { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17589,31 +17590,31 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TransactionFee
+    public partial record TransactionFee
     {
         [Newtonsoft.Json.JsonProperty("feePerByte", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FeePerByte { get; set; }
+        public string FeePerByte { get; init; }
 
         [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasPrice { get; set; }
+        public string GasPrice { get; init; }
 
         [Newtonsoft.Json.JsonProperty("gasLimit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasLimit { get; set; }
+        public string GasLimit { get; init; }
 
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkFee { get; set; }
+        public string NetworkFee { get; init; }
 
         /// <summary>
         /// (optional) Base Fee according to EIP-1559 (ETH assets)
         /// </summary>
         [Newtonsoft.Json.JsonProperty("baseFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BaseFee { get; set; }
+        public string BaseFee { get; init; }
 
         /// <summary>
         /// (optional) Priority Fee according to EIP-1559 (ETH assets)
         /// </summary>
         [Newtonsoft.Json.JsonProperty("priorityFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PriorityFee { get; set; }
+        public string PriorityFee { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17627,28 +17628,28 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class NetworkFee
+    public partial record NetworkFee
     {
         [Newtonsoft.Json.JsonProperty("feePerByte", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FeePerByte { get; set; }
+        public string FeePerByte { get; init; }
 
         [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasPrice { get; set; }
+        public string GasPrice { get; init; }
 
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkFee1 { get; set; }
+        public string NetworkFee1 { get; init; }
 
         /// <summary>
         /// (optional) Base Fee according to EIP-1559 (ETH assets)
         /// </summary>
         [Newtonsoft.Json.JsonProperty("baseFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BaseFee { get; set; }
+        public string BaseFee { get; init; }
 
         /// <summary>
         /// (optional) Priority Fee according to EIP-1559 (ETH assets)
         /// </summary>
         [Newtonsoft.Json.JsonProperty("priorityFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PriorityFee { get; set; }
+        public string PriorityFee { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17662,16 +17663,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class GasStationConfiguration
+    public partial record GasStationConfiguration
     {
         [Newtonsoft.Json.JsonProperty("gasThreshold", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasThreshold { get; set; }
+        public string GasThreshold { get; init; }
 
         [Newtonsoft.Json.JsonProperty("gasCap", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasCap { get; set; }
+        public string GasCap { get; init; }
 
         [Newtonsoft.Json.JsonProperty("maxGasPrice", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MaxGasPrice { get; set; }
+        public string MaxGasPrice { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17692,10 +17693,10 @@ namespace Trakx.Fireblocks.ApiClient
     public partial class NetworkChannel
     {
         [Newtonsoft.Json.JsonProperty("networkId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkId { get; set; }
+        public string NetworkId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17709,7 +17710,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class NetworkId
+    public partial record NetworkId
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -17731,42 +17732,42 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class NetworkIdResponse : NetworkId
+    public partial record NetworkIdResponse : NetworkId
     {
         [Newtonsoft.Json.JsonProperty("routingPolicy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public NetworkIdRoutingPolicy RoutingPolicy { get; set; }
+        public NetworkIdRoutingPolicy RoutingPolicy { get; init; }
 
         /// <summary>
         /// The specific network is discoverable.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("isDiscoverable", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsDiscoverable { get; set; }
+        public bool? IsDiscoverable { get; init; }
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TransactionRequest
+    public partial record TransactionRequest
     {
         [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AssetId { get; set; }
+        public string AssetId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("source", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransferPeerPath Source { get; set; }
+        public TransferPeerPath Source { get; init; }
 
         [Newtonsoft.Json.JsonProperty("destination", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public DestinationTransferPeerPath Destination { get; set; }
+        public DestinationTransferPeerPath Destination { get; init; }
 
         /// <summary>
         /// The amount of the transaction, in the asset's unit. A numeric value representation (either string or number) is required.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Amount { get; set; }
+        public double Amount { get; init; }
 
         /// <summary>
         /// - For BTC based assets, the fee per bytes in the asset's smallest unit (Satoshi/Latoshi etc.) A numeric value representation is required. For XRP, the fee for the transaction.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Fee { get; set; }
+        public double? Fee { get; init; }
 
         [Newtonsoft.Json.JsonProperty("feeLevel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -17776,10 +17777,10 @@ namespace Trakx.Fireblocks.ApiClient
         /// - For ETH based assets only, the fee for eip-1559 transaction pricing mechanism. Value is in gwei. - A numeric value representation is required.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("priorityFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? PriorityFee { get; set; }
+        public double? PriorityFee { get; init; }
 
         [Newtonsoft.Json.JsonProperty("failOnLowFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? FailOnLowFee { get; set; }
+        public bool? FailOnLowFee { get; init; }
 
         /// <summary>
         /// - For ETH based assets only, must be provided when using the priorityFee parameter. This will be used to limit the fee max possible fee (according to eip-1559). Value is in gwei.
@@ -17787,65 +17788,65 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>- A numeric value representation is required.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("maxFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MaxFee { get; set; }
+        public string MaxFee { get; init; }
 
         /// <summary>
         /// For ETH based asset only. this will be used instead of the fee property. Value is in gwei. A numeric value representation is required.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? GasPrice { get; set; }
+        public double? GasPrice { get; init; }
 
         /// <summary>
         /// A numeric value representation is required.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("gasLimit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? GasLimit { get; set; }
+        public double? GasLimit { get; init; }
 
         /// <summary>
         /// A numeric value representation is required.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? NetworkFee { get; set; }
+        public double? NetworkFee { get; init; }
 
         [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Note { get; set; }
+        public string Note { get; init; }
 
         [Newtonsoft.Json.JsonProperty("autoStaking", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? AutoStaking { get; set; }
+        public bool? AutoStaking { get; init; }
 
         [Newtonsoft.Json.JsonProperty("networkStaking", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NetworkStaking { get; set; }
+        public double NetworkStaking { get; init; }
 
         [Newtonsoft.Json.JsonProperty("cpuStaking", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double CpuStaking { get; set; }
+        public double CpuStaking { get; init; }
 
         [Newtonsoft.Json.JsonProperty("extraParameters", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object ExtraParameters { get; set; }
+        public object ExtraParameters { get; init; }
 
         [Newtonsoft.Json.JsonProperty("operation", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransactionOperation? Operation { get; set; }
 
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("replaceTxByHash", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ReplaceTxByHash { get; set; }
+        public string ReplaceTxByHash { get; init; }
 
         [Newtonsoft.Json.JsonProperty("externalTxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ExternalTxId { get; set; }
+        public string ExternalTxId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("destinations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<TransactionRequestDestination> Destinations { get; set; }
+        public System.Collections.Generic.List<TransactionRequestDestination> Destinations { get; init; }
 
         [Newtonsoft.Json.JsonProperty("treatAsGrossAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? TreatAsGrossAmount { get; set; }
+        public bool? TreatAsGrossAmount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("forceSweep", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? ForceSweep { get; set; }
+        public bool? ForceSweep { get; init; }
 
         [Newtonsoft.Json.JsonProperty("feePayerInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public FeePayerInfo2 FeePayerInfo { get; set; }
+        public FeePayerInfo2 FeePayerInfo { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -17859,13 +17860,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TransactionRequestDestination
+    public partial record TransactionRequestDestination
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("destination", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public DestinationTransferPeerPath Destination { get; set; }
+        public DestinationTransferPeerPath Destination { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18053,13 +18054,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error
+    public partial record Error
     {
         [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Message { get; set; }
+        public string Message { get; init; }
 
         [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Code { get; set; }
+        public double? Code { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18357,25 +18358,25 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Term
+    public partial record Term
     {
         [Newtonsoft.Json.JsonProperty("networkConnectionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NetworkConnectionId { get; set; }
+        public string NetworkConnectionId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("outgoing", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Outgoing { get; set; }
+        public bool? Outgoing { get; init; }
 
         [Newtonsoft.Json.JsonProperty("asset", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Asset { get; set; }
+        public string Asset { get; init; }
 
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Note { get; set; }
+        public string Note { get; init; }
 
         [Newtonsoft.Json.JsonProperty("operation", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Operation { get; set; }
+        public string Operation { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18389,10 +18390,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class SetConfirmationsThresholdRequest
+    public partial record SetConfirmationsThresholdRequest
     {
         [Newtonsoft.Json.JsonProperty("numOfConfirmations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? NumOfConfirmations { get; set; }
+        public double? NumOfConfirmations { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18406,13 +18407,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class SetConfirmationsThresholdResponse
+    public partial record SetConfirmationsThresholdResponse
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Success { get; set; }
+        public bool? Success { get; init; }
 
         [Newtonsoft.Json.JsonProperty("transactions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<string> Transactions { get; set; }
+        public System.Collections.Generic.List<string> Transactions { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18426,16 +18427,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DropTransactionRequest
+    public partial record DropTransactionRequest
     {
         [Newtonsoft.Json.JsonProperty("txId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TxId { get; set; }
+        public string TxId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("feeLevel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FeeLevel { get; set; }
+        public string FeeLevel { get; init; }
 
         [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasPrice { get; set; }
+        public string GasPrice { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18449,13 +18450,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DropTransactionResponse
+    public partial record DropTransactionResponse
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Success { get; set; }
+        public bool? Success { get; init; }
 
         [Newtonsoft.Json.JsonProperty("transactions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<string> Transactions { get; set; }
+        public System.Collections.Generic.List<string> Transactions { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18469,20 +18470,20 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class UnsignedMessage
+    public partial record UnsignedMessage
     {
         [Newtonsoft.Json.JsonProperty("content", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Content { get; set; }
 
         [Newtonsoft.Json.JsonProperty("bip44addressIndex", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Bip44addressIndex { get; set; }
+        public int? Bip44addressIndex { get; init; }
 
         [Newtonsoft.Json.JsonProperty("bip44change", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Bip44change { get; set; }
+        public double? Bip44change { get; init; }
 
         [Newtonsoft.Json.JsonProperty("derivationPath", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<double> DerivationPath { get; set; }
+        public System.Collections.Generic.List<double> DerivationPath { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18496,23 +18497,23 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class SignedMessage
+    public partial record SignedMessage
     {
         [Newtonsoft.Json.JsonProperty("content", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Content { get; set; }
+        public string Content { get; init; }
 
         [Newtonsoft.Json.JsonProperty("algorithm", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public SignedMessageAlgorithm? Algorithm { get; set; }
 
         [Newtonsoft.Json.JsonProperty("derivationPath", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<double> DerivationPath { get; set; }
+        public System.Collections.Generic.List<double> DerivationPath { get; init; }
 
         [Newtonsoft.Json.JsonProperty("signature", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Signature Signature { get; set; }
+        public Signature Signature { get; init; }
 
         [Newtonsoft.Json.JsonProperty("publicKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PublicKey { get; set; }
+        public string PublicKey { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18526,16 +18527,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PublicKeyInformation
+    public partial record PublicKeyInformation
     {
         [Newtonsoft.Json.JsonProperty("algorithm", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Algorithm { get; set; }
+        public string Algorithm { get; init; }
 
         [Newtonsoft.Json.JsonProperty("derivationPath", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<double> DerivationPath { get; set; }
+        public System.Collections.Generic.List<double> DerivationPath { get; init; }
 
         [Newtonsoft.Json.JsonProperty("publicKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PublicKey { get; set; }
+        public string PublicKey { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18597,16 +18598,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ValidateAddressResponse
+    public partial record ValidateAddressResponse
     {
         [Newtonsoft.Json.JsonProperty("isValid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsValid { get; set; }
+        public bool? IsValid { get; init; }
 
         [Newtonsoft.Json.JsonProperty("isActive", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsActive { get; set; }
+        public bool? IsActive { get; init; }
 
         [Newtonsoft.Json.JsonProperty("requiresTag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? RequiresTag { get; set; }
+        public bool? RequiresTag { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18620,10 +18621,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ResendWebhooksResponse
+    public partial record ResendWebhooksResponse
     {
         [Newtonsoft.Json.JsonProperty("messagesCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? MessagesCount { get; set; }
+        public double? MessagesCount { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18637,22 +18638,22 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class UnspentInputsResponse
+    public partial record UnspentInputsResponse
     {
         [Newtonsoft.Json.JsonProperty("input", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public UnspentInput Input { get; set; }
+        public UnspentInput Input { get; init; }
 
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Address { get; set; }
+        public string Address { get; init; }
 
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("confirmations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Confirmations { get; set; }
+        public double? Confirmations { get; init; }
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Status { get; set; }
+        public string Status { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18666,13 +18667,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class UnspentInput
+    public partial record UnspentInput
     {
         [Newtonsoft.Json.JsonProperty("txHash", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TxHash { get; set; }
+        public string TxHash { get; init; }
 
         [Newtonsoft.Json.JsonProperty("index", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Index { get; set; }
+        public double? Index { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18686,10 +18687,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class GetUsersResponse
+    public partial record GetUsersResponse
     {
         [Newtonsoft.Json.JsonProperty("users", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<UserResponse> Users { get; set; }
+        public System.Collections.Generic.List<UserResponse> Users { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18703,22 +18704,22 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class NetworkIdRoutingPolicy
+    public partial record NetworkIdRoutingPolicy
     {
         [Newtonsoft.Json.JsonProperty("crypto", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CustomCryptoRoutingDest Crypto { get; set; }
+        public CustomCryptoRoutingDest Crypto { get; init; }
 
         [Newtonsoft.Json.JsonProperty("sen", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CustomFiatRoutingDest Sen { get; set; }
+        public CustomFiatRoutingDest Sen { get; init; }
 
         [Newtonsoft.Json.JsonProperty("signet", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CustomFiatRoutingDest Signet { get; set; }
+        public CustomFiatRoutingDest Signet { get; init; }
 
         [Newtonsoft.Json.JsonProperty("sen_test", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public NoneNetworkRoutingDest Sen_test { get; set; }
+        public NoneNetworkRoutingDest Sen_test { get; init; }
 
         [Newtonsoft.Json.JsonProperty("signet_test", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public NoneNetworkRoutingDest Signet_test { get; set; }
+        public NoneNetworkRoutingDest Signet_test { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18732,22 +18733,22 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class NetworkConnectionRoutingPolicy
+    public partial record NetworkConnectionRoutingPolicy
     {
         [Newtonsoft.Json.JsonProperty("crypto", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CustomCryptoRoutingDest Crypto { get; set; }
+        public CustomCryptoRoutingDest Crypto { get; init; }
 
         [Newtonsoft.Json.JsonProperty("sen", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CustomFiatRoutingDest Sen { get; set; }
+        public CustomFiatRoutingDest Sen { get; init; }
 
         [Newtonsoft.Json.JsonProperty("signet", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public DefaultNetworkRoutingDest Signet { get; set; }
+        public DefaultNetworkRoutingDest Signet { get; init; }
 
         [Newtonsoft.Json.JsonProperty("sen_test", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public DefaultNetworkRoutingDest Sen_test { get; set; }
+        public DefaultNetworkRoutingDest Sen_test { get; init; }
 
         [Newtonsoft.Json.JsonProperty("signet_test", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public NoneNetworkRoutingDest Signet_test { get; set; }
+        public NoneNetworkRoutingDest Signet_test { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18761,7 +18762,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CustomFiatRoutingDest
+    public partial record CustomFiatRoutingDest
     {
         /// <summary>
         /// The network routing logic.
@@ -18798,7 +18799,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CustomCryptoRoutingDest
+    public partial record CustomCryptoRoutingDest
     {
         /// <summary>
         /// The network routing logic.
@@ -18835,7 +18836,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DefaultNetworkRoutingDest
+    public partial record DefaultNetworkRoutingDest
     {
         /// <summary>
         /// The network routing logic.
@@ -18857,7 +18858,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class NoneNetworkRoutingDest
+    public partial record NoneNetworkRoutingDest
     {
         /// <summary>
         /// No network routing logic.
@@ -18879,25 +18880,25 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class UserResponse
+    public partial record UserResponse
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FirstName { get; set; }
+        public string FirstName { get; init; }
 
         [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string LastName { get; set; }
+        public string LastName { get; init; }
 
         [Newtonsoft.Json.JsonProperty("role", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Role { get; set; }
+        public string Role { get; init; }
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Email { get; set; }
+        public string Email { get; init; }
 
         [Newtonsoft.Json.JsonProperty("enabled", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Enabled { get; set; }
+        public bool? Enabled { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18911,20 +18912,20 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class SessionMetadata
+    public partial record SessionMetadata
     {
         [Newtonsoft.Json.JsonProperty("appUrl", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string AppUrl { get; set; }
 
         [Newtonsoft.Json.JsonProperty("appName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AppName { get; set; }
+        public string AppName { get; init; }
 
         [Newtonsoft.Json.JsonProperty("appDescription", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AppDescription { get; set; }
+        public string AppDescription { get; init; }
 
         [Newtonsoft.Json.JsonProperty("appIcon", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AppIcon { get; set; }
+        public string AppIcon { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -18938,7 +18939,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class SessionDTO
+    public partial record SessionDTO
     {
         /// <summary>
         /// Id of the connection
@@ -18965,7 +18966,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// The vault to connect
         /// </summary>
         [Newtonsoft.Json.JsonProperty("vaultAccountId", Required = Newtonsoft.Json.Required.Always)]
-        public double VaultAccountId { get; set; }
+        public double VaultAccountId { get; init; }
 
         /// <summary>
         /// The default fee level
@@ -19017,7 +19018,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class GetConnectionsResponse
+    public partial record GetConnectionsResponse
     {
         /// <summary>
         /// Array with the requested Web3 connection's data
@@ -19027,7 +19028,7 @@ namespace Trakx.Fireblocks.ApiClient
         public System.Collections.Generic.List<SessionDTO> Data { get; set; } = new System.Collections.Generic.List<SessionDTO>();
 
         [Newtonsoft.Json.JsonProperty("paging", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Paging Paging { get; set; }
+        public Paging Paging { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19041,13 +19042,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateConnectionRequest
+    public partial record CreateConnectionRequest
     {
         /// <summary>
         /// The ID of the vault to connect to the Web3 connection.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("vaultAccountId", Required = Newtonsoft.Json.Required.Always)]
-        public double VaultAccountId { get; set; }
+        public double VaultAccountId { get; init; }
 
         /// <summary>
         /// The default fee level. Valid values are `MEDIUM` and `HIGH`.
@@ -19083,7 +19084,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateConnectionResponse
+    public partial record CreateConnectionResponse
     {
         /// <summary>
         /// The ID of the Web3 connection initiated.
@@ -19111,13 +19112,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class RespondToConnectionRequest
+    public partial record RespondToConnectionRequest
     {
         /// <summary>
         /// Approval of the initiated Web3 connection.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("approve", Required = Newtonsoft.Json.Required.Always)]
-        public bool Approve { get; set; }
+        public bool Approve { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19131,16 +19132,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class AddCollateralRequestBody
+    public partial record AddCollateralRequestBody
     {
         [Newtonsoft.Json.JsonProperty("transactionRequest", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransactionRequest TransactionRequest { get; set; }
+        public TransactionRequest TransactionRequest { get; init; }
 
         /// <summary>
         /// optional
         /// </summary>
         [Newtonsoft.Json.JsonProperty("isSrcCollateral", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSrcCollateral { get; set; }
+        public bool? IsSrcCollateral { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19154,16 +19155,16 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class RemoveCollateralRequestBody
+    public partial record RemoveCollateralRequestBody
     {
         [Newtonsoft.Json.JsonProperty("transactionRequest", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TransactionRequest TransactionRequest { get; set; }
+        public TransactionRequest TransactionRequest { get; init; }
 
         /// <summary>
         /// optional
         /// </summary>
         [Newtonsoft.Json.JsonProperty("isDstCollateral", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsDstCollateral { get; set; }
+        public bool? IsDstCollateral { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19177,10 +19178,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class SettlementRequestBody
+    public partial record SettlementRequestBody
     {
         [Newtonsoft.Json.JsonProperty("mainExchangeAccountId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MainExchangeAccountId { get; set; }
+        public string MainExchangeAccountId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19194,22 +19195,22 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class SettlementResponse
+    public partial record SettlementResponse
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("initiator", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Initiator { get; set; }
+        public string Initiator { get; init; }
 
         [Newtonsoft.Json.JsonProperty("exchangeReply", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ExchangeReply { get; set; }
+        public string ExchangeReply { get; init; }
 
         [Newtonsoft.Json.JsonProperty("fireblocksInitiatedTransactions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object FireblocksInitiatedTransactions { get; set; }
+        public object FireblocksInitiatedTransactions { get; init; }
 
         [Newtonsoft.Json.JsonProperty("exchangeRequestedTransactions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public SettlementResponse ExchangeRequestedTransactions { get; set; }
+        public SettlementResponse ExchangeRequestedTransactions { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19223,22 +19224,22 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ToExchangeTransaction
+    public partial record ToExchangeTransaction
     {
         [Newtonsoft.Json.JsonProperty("assetId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AssetId { get; set; }
+        public string AssetId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("dstAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DstAddress { get; set; }
+        public string DstAddress { get; init; }
 
         /// <summary>
         /// optional
         /// </summary>
         [Newtonsoft.Json.JsonProperty("dstTag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DstTag { get; set; }
+        public string DstTag { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19252,28 +19253,28 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ToCollateralTransaction
+    public partial record ToCollateralTransaction
     {
         [Newtonsoft.Json.JsonProperty("asset", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Asset { get; set; }
+        public string Asset { get; init; }
 
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("srcAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SrcAddress { get; set; }
+        public string SrcAddress { get; init; }
 
         /// <summary>
         /// optional
         /// </summary>
         [Newtonsoft.Json.JsonProperty("srcTag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SrcTag { get; set; }
+        public string SrcTag { get; init; }
 
         /// <summary>
         /// optional
         /// </summary>
         [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Fee { get; set; }
+        public string Fee { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19287,7 +19288,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBSettlementConfigCreationRequestBody
+    public partial record XBSettlementConfigCreationRequestBody
     {
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19313,7 +19314,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBSettlementConfigCreationResponse
+    public partial record XBSettlementConfigCreationResponse
     {
         [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19347,13 +19348,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBSettlementConfigEditRequestBody
+    public partial record XBSettlementConfigEditRequestBody
     {
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         [Newtonsoft.Json.JsonProperty("steps", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public XBSettlementConfigStepsRecord Steps { get; set; }
+        public XBSettlementConfigStepsRecord Steps { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19367,7 +19368,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBSettlementConfigDeletionResponse
+    public partial record XBSettlementConfigDeletionResponse
     {
         [Newtonsoft.Json.JsonProperty("configId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19385,7 +19386,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class GetAllXBSettlementConfigsResponse
+    public partial record GetAllXBSettlementConfigsResponse
     {
         [Newtonsoft.Json.JsonProperty("configurations", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -19403,7 +19404,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBCreateSettlementFlowRequestBody
+    public partial record XBCreateSettlementFlowRequestBody
     {
         [Newtonsoft.Json.JsonProperty("configId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19425,14 +19426,14 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBCreateSettlementFlowResponse
+    public partial record XBCreateSettlementFlowResponse
     {
         [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string TenantId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("flowId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FlowId { get; set; }
+        public string FlowId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("configId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19455,7 +19456,7 @@ namespace Trakx.Fireblocks.ApiClient
         public XBSettlementAsset TotalEstimatedFees { get; set; } = new XBSettlementAsset();
 
         [Newtonsoft.Json.JsonProperty("totalEstimatedTime", Required = Newtonsoft.Json.Required.Always)]
-        public double TotalEstimatedTime { get; set; }
+        public double TotalEstimatedTime { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19469,7 +19470,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBSettlementFlowExecutionResponse
+    public partial record XBSettlementFlowExecutionResponse
     {
         [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19500,7 +19501,7 @@ namespace Trakx.Fireblocks.ApiClient
         public XBSettlementAsset TotalFees { get; set; } = new XBSettlementAsset();
 
         [Newtonsoft.Json.JsonProperty("initiatedAt", Required = Newtonsoft.Json.Required.Always)]
-        public double InitiatedAt { get; set; }
+        public double InitiatedAt { get; init; }
 
         /// <summary>
         /// id of the user which launched the flow
@@ -19526,7 +19527,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBSettlementFlowExecutionStep
+    public partial record XBSettlementFlowExecutionStep
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19554,7 +19555,7 @@ namespace Trakx.Fireblocks.ApiClient
         public XBSettlementAsset Fee { get; set; } = new XBSettlementAsset();
 
         [Newtonsoft.Json.JsonProperty("startedAt", Required = Newtonsoft.Json.Required.Always)]
-        public double StartedAt { get; set; }
+        public double StartedAt { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19604,7 +19605,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBSettlementConfigStep
+    public partial record XBSettlementConfigStep
     {
         [Newtonsoft.Json.JsonProperty("stepType", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19645,7 +19646,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBSettlementFlowSetupStep
+    public partial record XBSettlementFlowSetupStep
     {
         [Newtonsoft.Json.JsonProperty("accountId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19664,7 +19665,7 @@ namespace Trakx.Fireblocks.ApiClient
         public XBSettlementAsset EstimatedFeeAmount { get; set; } = new XBSettlementAsset();
 
         [Newtonsoft.Json.JsonProperty("estimatedTime", Required = Newtonsoft.Json.Required.Always)]
-        public double EstimatedTime { get; set; }
+        public double EstimatedTime { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19678,7 +19679,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBSettlementConfigStepsRecord
+    public partial record XBSettlementConfigStepsRecord
     {
         [Newtonsoft.Json.JsonProperty("stepType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -19696,7 +19697,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBSettlementFlowStepsRecord
+    public partial record XBSettlementFlowStepsRecord
     {
         [Newtonsoft.Json.JsonProperty("stepType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -19714,7 +19715,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class XBSettlementAsset
+    public partial record XBSettlementAsset
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19736,7 +19737,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreatePayoutRequest
+    public partial record CreatePayoutRequest
     {
         [Newtonsoft.Json.JsonProperty("paymentAccount", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -19758,7 +19759,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PaymentAccount
+    public partial record PaymentAccount
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19781,10 +19782,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PayoutInstruction
+    public partial record PayoutInstruction
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("payeeAccount", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -19821,7 +19822,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PayeeAccount
+    public partial record PayeeAccount
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19844,7 +19845,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class InstructionAmount
+    public partial record InstructionAmount
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19899,7 +19900,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PayoutResponse
+    public partial record PayoutResponse
     {
         [Newtonsoft.Json.JsonProperty("payoutId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19910,7 +19911,7 @@ namespace Trakx.Fireblocks.ApiClient
         public PaymentAccountResponse PaymentAccount { get; set; } = new PaymentAccountResponse();
 
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Always)]
-        public double CreatedAt { get; set; }
+        public double CreatedAt { get; init; }
 
         [Newtonsoft.Json.JsonProperty("state", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -19942,7 +19943,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <br/>
         /// </summary>
         [Newtonsoft.Json.JsonProperty("reasonOfFailure", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ReasonOfFailure { get; set; }
+        public string ReasonOfFailure { get; init; }
 
         [Newtonsoft.Json.JsonProperty("initMethod", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -19953,7 +19954,7 @@ namespace Trakx.Fireblocks.ApiClient
         public System.Collections.Generic.List<PayoutInstructionResponse> InstructionSet { get; set; } = new System.Collections.Generic.List<PayoutInstructionResponse>();
 
         [Newtonsoft.Json.JsonProperty("reportUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ReportUrl { get; set; }
+        public string ReportUrl { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -19967,10 +19968,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PaymentAccountResponse
+    public partial record PaymentAccountResponse
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -20078,10 +20079,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PayoutInstructionResponse
+    public partial record PayoutInstructionResponse
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("payeeAccount", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -20112,10 +20113,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PayeeAccountResponse
+    public partial record PayeeAccountResponse
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -20166,7 +20167,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Transaction
+    public partial record Transaction
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -20178,10 +20179,10 @@ namespace Trakx.Fireblocks.ApiClient
         public TransactionState State { get; set; }
 
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Timestamp { get; set; }
+        public double? Timestamp { get; init; }
 
         [Newtonsoft.Json.JsonProperty("instructionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string InstructionId { get; set; }
+        public string InstructionId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -20195,7 +20196,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DispatchPayoutResponse
+    public partial record DispatchPayoutResponse
     {
         [Newtonsoft.Json.JsonProperty("payoutId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -20213,7 +20214,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TravelRuleAddress
+    public partial record TravelRuleAddress
     {
         /// <summary>
         /// Street address
@@ -20255,7 +20256,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TravelRuleValidateTransactionRequest
+    public partial record TravelRuleValidateTransactionRequest
     {
         /// <summary>
         /// Transaction asset symbol BTC,ETH)
@@ -20289,13 +20290,13 @@ namespace Trakx.Fireblocks.ApiClient
         /// "True" if the originator and beneficiary is the same person and you therefore do not need to collect any information. "False" if it is a third-party transfer.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("originatorEqualsBeneficiary", Required = Newtonsoft.Json.Required.Always)]
-        public bool OriginatorEqualsBeneficiary { get; set; }
+        public bool OriginatorEqualsBeneficiary { get; init; }
 
         /// <summary>
         /// This will also check if the transaction is a TRAVEL_RULE in the beneficiary VASP's jurisdiction
         /// </summary>
         [Newtonsoft.Json.JsonProperty("travelRuleBehavior", Required = Newtonsoft.Json.Required.Always)]
-        public bool TravelRuleBehavior { get; set; }
+        public bool TravelRuleBehavior { get; init; }
 
         /// <summary>
         /// This is the identifier assigned to the VASP the funds are being sent to
@@ -20344,13 +20345,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TravelRuleValidateTransactionResponse
+    public partial record TravelRuleValidateTransactionResponse
     {
         /// <summary>
         /// "isValid" will tell you if you have collected all the information needed for the travel rule data transfer. Once this field = "true", you can move on to the next step which is to transfer the front-end information to your back-end and perform Travel Rule Transaction create
         /// </summary>
         [Newtonsoft.Json.JsonProperty("isValid", Required = Newtonsoft.Json.Required.Always)]
-        public bool IsValid { get; set; }
+        public bool IsValid { get; init; }
 
         /// <summary>
         /// "type" will tell you if the virtual asset value converted to FIAT value of the withdrawal request is above (=TRAVELRULE) or below (=BELOW_THRESHOLD) the threshold in your jurisdiction. If it is to an unhosted wallet which does not require travel rule information to be sent and only collected, it will say NON_CUSTODIAL.
@@ -20406,7 +20407,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TravelRuleTransactionBlockchainInfo
+    public partial record TravelRuleTransactionBlockchainInfo
     {
         [Newtonsoft.Json.JsonProperty("txHash", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -20432,7 +20433,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TravelRulePiiIVMS
+    public partial record TravelRulePiiIVMS
     {
         [Newtonsoft.Json.JsonProperty("fullName", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -20482,7 +20483,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TravelRuleOwnershipProof
+    public partial record TravelRuleOwnershipProof
     {
         /// <summary>
         /// Type of ownership proof
@@ -20538,7 +20539,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TravelRuleValidateFullTransactionRequest
+    public partial record TravelRuleValidateFullTransactionRequest
     {
         /// <summary>
         /// The asset involved in the transaction
@@ -20635,13 +20636,13 @@ namespace Trakx.Fireblocks.ApiClient
         /// Whether to skip validation of beneficiary data
         /// </summary>
         [Newtonsoft.Json.JsonProperty("skipBeneficiaryDataValidation", Required = Newtonsoft.Json.Required.Always)]
-        public bool SkipBeneficiaryDataValidation { get; set; }
+        public bool SkipBeneficiaryDataValidation { get; init; }
 
         /// <summary>
         /// Whether to check if the transaction is a TRAVEL_RULE in the beneficiary VASP's jurisdiction
         /// </summary>
         [Newtonsoft.Json.JsonProperty("travelRuleBehavior", Required = Newtonsoft.Json.Required.Always)]
-        public bool TravelRuleBehavior { get; set; }
+        public bool TravelRuleBehavior { get; init; }
 
         /// <summary>
         /// Ownership proof related to the originator of the transaction
@@ -20676,7 +20677,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TravelRuleIssuer
+    public partial record TravelRuleIssuer
     {
         [Newtonsoft.Json.JsonProperty("issuerDid", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -20694,7 +20695,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TravelRuleIssuers
+    public partial record TravelRuleIssuers
     {
         [Newtonsoft.Json.JsonProperty("yearFounded", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -20764,7 +20765,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TravelRuleVASP
+    public partial record TravelRuleVASP
     {
         [Newtonsoft.Json.JsonProperty("did", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -20939,10 +20940,10 @@ namespace Trakx.Fireblocks.ApiClient
         public string Documents { get; set; }
 
         [Newtonsoft.Json.JsonProperty("hasAdmin", Required = Newtonsoft.Json.Required.Always)]
-        public bool HasAdmin { get; set; }
+        public bool HasAdmin { get; init; }
 
         [Newtonsoft.Json.JsonProperty("isNotifiable", Required = Newtonsoft.Json.Required.Always)]
-        public bool IsNotifiable { get; set; }
+        public bool IsNotifiable { get; init; }
 
         [Newtonsoft.Json.JsonProperty("issuers", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -20960,7 +20961,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TravelRuleGetAllVASPsResponse
+    public partial record TravelRuleGetAllVASPsResponse
     {
         [Newtonsoft.Json.JsonProperty("vasps", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -20978,7 +20979,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TravelRuleUpdateVASPDetails
+    public partial record TravelRuleUpdateVASPDetails
     {
         /// <summary>
         /// The decentralized identifier of the VASP
@@ -21006,7 +21007,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ErrorResponse
+    public partial record ErrorResponse
     {
         [Newtonsoft.Json.JsonProperty("error", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -21024,31 +21025,31 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body
+    public partial record Body
     {
         /// <summary>
         /// Account Name
         /// </summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         /// <summary>
         /// Optional - if true, the created account and all related transactions will not be shown on Fireblocks console
         /// </summary>
         [Newtonsoft.Json.JsonProperty("hiddenOnUI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? HiddenOnUI { get; set; }
+        public bool? HiddenOnUI { get; init; }
 
         /// <summary>
         /// Optional - Sets a customer reference ID
         /// </summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         /// <summary>
         /// Optional - Sets the autoFuel property of the vault account
         /// </summary>
         [Newtonsoft.Json.JsonProperty("autoFuel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? AutoFuel { get; set; }
+        public bool? AutoFuel { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21074,13 +21075,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body2
+    public partial record Body2
     {
         /// <summary>
         /// Account Name
         /// </summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21094,13 +21095,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body3
+    public partial record Body3
     {
         /// <summary>
         /// Customer reference ID
         /// </summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21114,13 +21115,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body4
+    public partial record Body4
     {
         /// <summary>
         /// Auto Fuel
         /// </summary>
         [Newtonsoft.Json.JsonProperty("autoFuel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? AutoFuel { get; set; }
+        public bool? AutoFuel { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21134,13 +21135,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body5
+    public partial record Body5
     {
         /// <summary>
         /// Optional - when creating an EOS wallet, the account name. If not provided, a random name will be generated
         /// </summary>
         [Newtonsoft.Json.JsonProperty("eosAccountName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string EosAccountName { get; set; }
+        public string EosAccountName { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21154,19 +21155,19 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body6
+    public partial record Body6
     {
         /// <summary>
         /// (Optional) Attach a description to the new address
         /// </summary>
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Description { get; set; }
+        public string Description { get; init; }
 
         /// <summary>
         /// Optional - Sets a customer reference ID
         /// </summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21180,13 +21181,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body7
+    public partial record Body7
     {
         /// <summary>
         /// The address description
         /// </summary>
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Description { get; set; }
+        public string Description { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21200,13 +21201,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body8
+    public partial record Body8
     {
         /// <summary>
         /// Customer reference ID
         /// </summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21220,13 +21221,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body9
+    public partial record Body9
     {
         [Newtonsoft.Json.JsonProperty("asset", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Asset { get; set; }
+        public string Asset { get; init; }
 
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Amount { get; set; }
+        public string Amount { get; init; }
 
         [Newtonsoft.Json.JsonProperty("sourceType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -21248,7 +21249,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body10
+    public partial record Body10
     {
         /// <summary>
         /// Name of the source asset (must be in a currency that is supported for conversions in the selected exchange type that corresponds to your exchange ID)
@@ -21268,7 +21269,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// The amount to transfer (in the currency of the source asset)
         /// </summary>
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Always)]
-        public double Amount { get; set; }
+        public double Amount { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21282,10 +21283,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body11
+    public partial record Body11
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Amount { get; set; }
+        public double? Amount { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21299,10 +21300,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body12
+    public partial record Body12
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Amount { get; set; }
+        public double? Amount { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21316,7 +21317,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body13
+    public partial record Body13
     {
         [Newtonsoft.Json.JsonProperty("routingPolicy", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -21355,14 +21356,14 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body14
+    public partial record Body14
     {
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Name { get; set; }
 
         [Newtonsoft.Json.JsonProperty("routingPolicy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public NetworkIdRoutingPolicy RoutingPolicy { get; set; }
+        public NetworkIdRoutingPolicy RoutingPolicy { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21376,7 +21377,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body15
+    public partial record Body15
     {
         [Newtonsoft.Json.JsonProperty("routingPolicy", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -21394,10 +21395,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body16
+    public partial record Body16
     {
         [Newtonsoft.Json.JsonProperty("isDiscoverable", Required = Newtonsoft.Json.Required.Always)]
-        public bool IsDiscoverable { get; set; }
+        public bool IsDiscoverable { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21411,7 +21412,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body17
+    public partial record Body17
     {
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -21429,19 +21430,19 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body18
+    public partial record Body18
     {
         /// <summary>
         /// the wallet's display name
         /// </summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         /// <summary>
         /// Optional - Sets a customer reference ID
         /// </summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21455,13 +21456,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body19
+    public partial record Body19
     {
         /// <summary>
         /// Customer reference ID
         /// </summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21475,7 +21476,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body20
+    public partial record Body20
     {
         /// <summary>
         /// The wallet's address or, for EOS wallets, the account name
@@ -21488,7 +21489,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// for XRP wallets, the destination tag; for EOS, the memo; for the fiat providers (Signet by Signature, SEN by Silvergate, or BLINC by BCB Group), the Bank Transfer Description
         /// </summary>
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21502,19 +21503,19 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body21
+    public partial record Body21
     {
         /// <summary>
         /// the wallet's display name
         /// </summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         /// <summary>
         /// Optional - Sets a customer reference ID
         /// </summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21528,13 +21529,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body22
+    public partial record Body22
     {
         /// <summary>
         /// Customer reference ID
         /// </summary>
         [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustomerRefId { get; set; }
+        public string CustomerRefId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21548,7 +21549,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body23
+    public partial record Body23
     {
         /// <summary>
         /// The wallet's address (or xpub) of the wallet
@@ -21561,7 +21562,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// For XRP wallets, the destination tag; for EOS/XLM, the memo; for the fiat providers (Signet by Signature, SEN by Silvergate, or BLINC by BCB Group), the Bank Transfer Description
         /// </summary>
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21575,13 +21576,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body24
+    public partial record Body24
     {
         /// <summary>
         /// the contract's display name
         /// </summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21595,7 +21596,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body25
+    public partial record Body25
     {
         /// <summary>
         /// The contract's address (or xpub) of the wallet
@@ -21608,7 +21609,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// The destination tag, for XRP wallets
         /// </summary>
         [Newtonsoft.Json.JsonProperty("tag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tag { get; set; }
+        public string Tag { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21727,13 +21728,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body26
+    public partial record Body26
     {
         [Newtonsoft.Json.JsonProperty("resendCreated", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? ResendCreated { get; set; }
+        public bool? ResendCreated { get; init; }
 
         [Newtonsoft.Json.JsonProperty("resendStatusUpdated", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? ResendStatusUpdated { get; set; }
+        public bool? ResendStatusUpdated { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21858,28 +21859,28 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Filter
+    public partial record Filter
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string UserId { get; set; }
+        public string UserId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("vaultAccountId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? VaultAccountId { get; set; }
+        public double? VaultAccountId { get; init; }
 
         [Newtonsoft.Json.JsonProperty("connectionMethod", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ConnectionMethod { get; set; }
+        public string ConnectionMethod { get; init; }
 
         [Newtonsoft.Json.JsonProperty("feeLevel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FeeLevel { get; set; }
+        public string FeeLevel { get; init; }
 
         [Newtonsoft.Json.JsonProperty("appUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AppUrl { get; set; }
+        public string AppUrl { get; init; }
 
         [Newtonsoft.Json.JsonProperty("appName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AppName { get; set; }
+        public string AppName { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21920,10 +21921,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response
+    public partial record Response
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Always)]
-        public bool Success { get; set; }
+        public bool Success { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21937,13 +21938,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response2
+    public partial record Response2
     {
         [Newtonsoft.Json.JsonProperty("isThirdPartyRouting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsThirdPartyRouting { get; set; }
+        public bool? IsThirdPartyRouting { get; init; }
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Description { get; set; }
+        public string Description { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21957,10 +21958,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response3
+    public partial record Response3
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Always)]
-        public bool Success { get; set; }
+        public bool Success { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21974,10 +21975,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response4
+    public partial record Response4
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Always)]
-        public bool Success { get; set; }
+        public bool Success { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -21991,10 +21992,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response5
+    public partial record Response5
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Always)]
-        public bool Success { get; set; }
+        public bool Success { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -22008,10 +22009,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response6
+    public partial record Response6
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Always)]
-        public bool Success { get; set; }
+        public bool Success { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -22025,10 +22026,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response7
+    public partial record Response7
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Always)]
-        public bool Success { get; set; }
+        public bool Success { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -22042,13 +22043,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response8
+    public partial record Response8
     {
         [Newtonsoft.Json.JsonProperty("setup", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public XBCreateSettlementFlowResponse Setup { get; set; }
+        public XBCreateSettlementFlowResponse Setup { get; init; }
 
         [Newtonsoft.Json.JsonProperty("execution", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public XBSettlementFlowExecutionResponse Execution { get; set; }
+        public XBSettlementFlowExecutionResponse Execution { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -22062,13 +22063,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response9
+    public partial record Response9
     {
         [Newtonsoft.Json.JsonProperty("paging", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Paging Paging { get; set; }
+        public Paging Paging { get; init; }
 
         [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<TokenOwnershipResponse> Data { get; set; }
+        public System.Collections.Generic.List<TokenOwnershipResponse> Data { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -22082,13 +22083,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response10
+    public partial record Response10
     {
         [Newtonsoft.Json.JsonProperty("paging", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Paging Paging { get; set; }
+        public Paging Paging { get; init; }
 
         [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<TokenResponse> Data { get; set; }
+        public System.Collections.Generic.List<TokenResponse> Data { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -22195,13 +22196,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Paging2
+    public partial record Paging2
     {
         [Newtonsoft.Json.JsonProperty("before", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Before { get; set; }
+        public string Before { get; init; }
 
         [Newtonsoft.Json.JsonProperty("after", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string After { get; set; }
+        public string After { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -22215,19 +22216,19 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Paging3
+    public partial record Paging3
     {
         /// <summary>
         /// A string representing a cursor. Users can use this with a new request to this API endpoint as the “before” request parameter to fetch the previous page of results.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("before", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Before { get; set; }
+        public string Before { get; init; }
 
         /// <summary>
         /// A string representing a cursor. Users can use this with a new request to this API endpoint as the “before” request parameter to fetch the next page of results.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("after", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string After { get; set; }
+        public string After { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -22319,13 +22320,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ContractCallDecodedData
+    public partial record ContractCallDecodedData
     {
         [Newtonsoft.Json.JsonProperty("contractName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ContractName { get; set; }
+        public string ContractName { get; init; }
 
         [Newtonsoft.Json.JsonProperty("functionCalls", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<object> FunctionCalls { get; set; }
+        public System.Collections.Generic.List<object> FunctionCalls { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -22396,10 +22397,10 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class FeePayerInfo
+    public partial record FeePayerInfo
     {
         [Newtonsoft.Json.JsonProperty("feePayerAccountId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FeePayerAccountId { get; set; }
+        public string FeePayerAccountId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -22467,13 +22468,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class FeePayerInfo2
+    public partial record FeePayerInfo2
     {
         /// <summary>
         /// A numeric value representation is required.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("feePayerAccountId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FeePayerAccountId { get; set; }
+        public string FeePayerAccountId { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -22502,19 +22503,19 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Signature
+    public partial record Signature
     {
         [Newtonsoft.Json.JsonProperty("fullSig", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FullSig { get; set; }
+        public string FullSig { get; init; }
 
         [Newtonsoft.Json.JsonProperty("r", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string R { get; set; }
+        public string R { get; init; }
 
         [Newtonsoft.Json.JsonProperty("s", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string S { get; set; }
+        public string S { get; init; }
 
         [Newtonsoft.Json.JsonProperty("v", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? V { get; set; }
+        public double? V { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -22696,7 +22697,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error2
+    public partial record Error2
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
