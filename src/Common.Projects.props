@@ -1,7 +1,7 @@
 <Project>
     <PropertyGroup>
         <Company>Trakx</Company>
-        <Copyright>Copyright © 2022 Trakx</Copyright>
+        <Copyright>Copyright © 2024 Trakx</Copyright>
         <RepositoryUrl>https://github.com/trakx/fireblocks-api-client</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <Deterministic>true</Deterministic>

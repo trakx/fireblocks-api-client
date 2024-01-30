@@ -39,7 +39,7 @@ public class FireblocksApiFixture : IDisposable
         var configuration = AwsConfigurationHelper.GetConfigurationFromAws<FireblocksApiConfiguration>()
         with
         {
-            BaseUrl = "https://api.fireblocks.io/v1"
+            BaseUrl = new Uri("https://api.fireblocks.io/v1")
         };
 
         var serviceCollection = new ServiceCollection();

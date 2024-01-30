@@ -57,9 +57,10 @@ jobs:
 
       - name: Build and publish nuget packages
         id: publish
-        uses: trakx/github-actions/publish-nuget@v10.0.21
+        uses: trakx/github-actions/publish-nuget@v10.0.28
         with:
           packageReadonlyPat: ${{secrets.TRAKX_BOT_READONLY_PAT}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
           debuggable: ${{steps.default-inputs.outputs.debuggable}}
           semverIncrementLevel: ${{steps.default-inputs.outputs.semverIncrementLevel}}
+          dotnetVersion: 8.x
