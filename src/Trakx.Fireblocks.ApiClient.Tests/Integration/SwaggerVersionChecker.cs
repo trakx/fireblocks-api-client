@@ -3,6 +3,7 @@ using FluentAssertions;
 using Flurl.Http;
 using Trakx.Common.Infrastructure.Environment.Env;
 using Xunit;
+using YamlDotNet.RepresentationModel;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 
@@ -20,21 +21,35 @@ public class SwaggerVersionChecker : IDisposable
     [Fact]
     public async Task VerifyOpenApiVersion()
     {
-        const string regexPattern = @"info:\r?\n\s+title(.+(\r?\n))\s+version:\s\""(?<version>[0-9\.]+)\""";
-        var versionRegex = new Regex(regexPattern, RegexOptions.Multiline);
-
+        
         var getCurrentOpenApiDescription = await _fireblocksClient.Request("api", "v1", "swagger").SendAsync(HttpMethod.Get);
         var fireblocksOpenApi = await getCurrentOpenApiDescription.GetStringAsync();
-
-        var latestVersion = versionRegex.Match(fireblocksOpenApi).Groups["version"].Value;
-
+        var latestVersion = GetVersion(fireblocksOpenApi);
+        
         var localOpenApi = GetCurrentOpenApiContent();
-        var localVersion = versionRegex.Match(localOpenApi).Groups["version"].Value;
-
+        var localVersion = GetVersion(localOpenApi);
+        
         localVersion.Should().NotBeNullOrWhiteSpace();
 
         localVersion.Should().Be(latestVersion,
             $"the latest api from fireblocks (v{latestVersion}) should be merged with the current local (v{localVersion}) to integrate latest changes.");
+    }
+
+    private static string GetVersion(string yaml )
+    {
+        using (var reader = new StringReader(yaml))
+        {
+            var yamlStream = new YamlStream();
+            yamlStream.Load(reader);
+
+            var mapping =
+                (YamlMappingNode)yamlStream.Documents[0].RootNode;
+
+            var info = (YamlMappingNode)mapping.Children[new YamlScalarNode("info")];
+            var version = ((YamlScalarNode)info.Children[new YamlScalarNode("version")]).Value;
+
+            return version;
+        }
     }
 
 

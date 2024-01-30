@@ -25,4 +25,4 @@ jobs:
         package-name: '${{github.event.inputs.name}}'
         package-type: 'nuget'
         num-old-versions-to-delete: ${{github.event.inputs.num-old-versions-to-delete}}
-          
+        dotnetVersion: 8.x

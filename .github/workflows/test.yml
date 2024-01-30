@@ -20,3 +20,4 @@ jobs:
           codacyToken: ${{secrets.CODACY_TOKEN}}
           awsAccessKeyId: ${{secrets.AWS_ACCESS_KEY_ID}}
           awsAccessKeySecret: ${{secrets.AWS_ACCESS_KEY_SECRET}}
+          dotnetVersion: 8.x

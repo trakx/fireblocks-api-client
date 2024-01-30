@@ -21,7 +21,7 @@ public sealed class BearerCredentialProviderTests : CredentialsTestsBase, IDispo
         : base(fixture, output)
     {
         var dateTimeProvider = Substitute.For<IDateTimeProvider>();
-        _nonce = DateTimeOffset.FromUnixTimeMilliseconds(12345678789);
+        _nonce = DateTimeOffset.FromUnixTimeSeconds(12345678);
         dateTimeProvider.UtcNowAsOffset.ReturnsForAnyArgs(_nonce);
 
         _bearerCredentialsProvider = new BearerCredentialsProvider(Configuration, dateTimeProvider);
@@ -34,9 +34,8 @@ public sealed class BearerCredentialProviderTests : CredentialsTestsBase, IDispo
         var message = new HttpRequestMessage {RequestUri = new Uri("https://test.com/test1/validate")};
         var messageBody = "this body is taken into account in the signature and payload";
         message.Content = new StringContent(messageBody, Encoding.UTF8);
-        _bearerCredentialsProvider.GenerateJwtToken(message);
+        var jwt =_bearerCredentialsProvider.GenerateJwtToken(message);
 
-        var jwt = _bearerCredentialsProvider.GenerateJwtToken(message);
         var handler = new JwtSecurityTokenHandler();
         handler.ValidateToken(jwt, GetValidationParameters(), out _);
         var token = handler.ReadJwtToken(jwt);
@@ -47,8 +46,9 @@ public sealed class BearerCredentialProviderTests : CredentialsTestsBase, IDispo
     private void ValidatePayload(JwtSecurityToken retrievedToken, string messageBody)
     {
         var payload = retrievedToken.Payload;
-        payload.Iat.Should().Be(Convert.ToInt32(_nonce.ToUnixTimeSeconds()));
-        payload.Exp.Should().Be(Convert.ToInt32(_nonce.ToUnixTimeSeconds()) + 20);
+        payload.IssuedAt.Should().Be(_nonce.UtcDateTime);
+        payload.Expiration.Should().Be(Convert.ToInt32(_nonce.ToUnixTimeSeconds()) + 20);
+
         payload.Sub.Should().Be(Configuration.ApiPubKey);
         payload.TryGetValue("nonce", out var retrievedNonce).Should().BeTrue();
         retrievedNonce.Should().Be(_nonce.ToUnixTimeMilliseconds());
