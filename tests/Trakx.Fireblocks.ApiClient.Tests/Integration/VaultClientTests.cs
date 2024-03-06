@@ -1,7 +1,5 @@
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit;
-using Xunit.Abstractions;
+using Trakx.Fireblocks.ApiClient.Tests.Integration.Base;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 
@@ -12,7 +10,7 @@ public class VaultClientTests : FireblocksClientTestsBase
     public VaultClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
         : base(apiFixture, output)
     {
-        _vaultClient = ServiceProvider.GetRequiredService<IVaultsClient>();
+        _vaultClient = _serviceProvider.GetRequiredService<IVaultsClient>();
     }
 
     [Fact]
@@ -23,6 +21,6 @@ public class VaultClientTests : FireblocksClientTestsBase
         var accounts = response.Content.Accounts;
         accounts.Should().NotBeNullOrEmpty();
         accounts[0].Assets.Should().NotBeNullOrEmpty();
-        accounts.Should().Contain(x => x.Assets.Any(x => x.Id== "BTC_TEST"));
+        accounts.Should().Contain(x => x.Assets.Any(x => x.Id == "BTC_TEST"));
     }
 }

@@ -7,6 +7,7 @@ using Trakx.Common.Extensions;
 
 namespace Trakx.Fireblocks.ApiClient.Utils;
 
+/// <inheritdoc />
 public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDisposable
 {
     private readonly FireblocksApiConfiguration _fireblocksConfiguration;
@@ -14,6 +15,7 @@ public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDis
     private readonly SigningCredentials _signingCredentials;
     private readonly RSA _rsa;
 
+    /// <inheritdoc />
     public BearerCredentialsProvider(FireblocksApiConfiguration configuration, IDateTimeProvider dateTimeProvider)
     {
         _fireblocksConfiguration = configuration;
@@ -42,7 +44,7 @@ public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDis
         };
     }
 
-
+    /// <inheritdoc />
     public string GenerateJwtToken(HttpRequestMessage msg)
     {
         var payload = GetPayload(msg);
@@ -62,6 +64,7 @@ public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDis
         return sha256.ComputeHash(Encoding.UTF8.GetBytes(preHash)).ToHexString();
     }
 
+    /// <inheritdoc />
     public void Dispose()
     {
         _rsa.Dispose();

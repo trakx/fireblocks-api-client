@@ -352,7 +352,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public VaultsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -2918,7 +2917,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public Exchange_accountsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -3536,7 +3534,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public Fiat_accountsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -4363,7 +4360,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public Network_connectionsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -5937,7 +5933,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public Internal_walletsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -6875,7 +6870,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public External_walletsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -7799,7 +7793,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public ContractsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -8561,7 +8554,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public Supported_assetsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -8954,7 +8946,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public TransactionsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -10374,7 +10365,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public Payments__Cross_Border_settlementClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -11363,7 +11353,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public Payments__PayoutClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -11909,7 +11898,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public Gas_stationsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -12403,7 +12391,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public UsersClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -12640,7 +12627,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public Audit_LogsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -12908,7 +12894,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public Off_exchangesClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -13418,7 +13403,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public WebhooksClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -13835,7 +13819,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public NFTs_BetaClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -14608,7 +14591,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public Web3_connectionsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 
@@ -15248,7 +15230,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         public Travel_Rule_BetaClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
         {
-            _baseUrl = "https://api.fireblocks.io/v1/";
             _httpClient = httpClient;
         }
 

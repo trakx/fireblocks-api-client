@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-using NSubstitute;
-using Trakx.Fireblocks.ApiClient.Utils;
-using Xunit;
+﻿using Trakx.Fireblocks.ApiClient.Utils;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Unit;
 
@@ -12,7 +9,7 @@ public sealed class ApiKeyCredentialsProviderTests : IDisposable
 
     public ApiKeyCredentialsProviderTests()
     {
-        var fireblocksApiConfiguration = new FireblocksApiConfiguration {ApiPubKey = "pubKey"};
+        var fireblocksApiConfiguration = new FireblocksApiConfiguration { ApiPubKey = "pubKey" };
         _bearerCredentials = Substitute.For<IBearerCredentialsProvider>();
         _provider = new ApiKeyCredentialsProvider(fireblocksApiConfiguration, _bearerCredentials);
     }

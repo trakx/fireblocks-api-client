@@ -1,8 +1,6 @@
 using System.Text.Json;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit;
-using Xunit.Abstractions;
+using Trakx.Fireblocks.ApiClient.Tests.Integration.Base;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 
@@ -14,9 +12,9 @@ public class WorkflowTests : FireblocksClientTestsBase
 
     public WorkflowTests(FireblocksApiFixture apiFixture, ITestOutputHelper output) : base(apiFixture, output)
     {
-        _vaultClient = ServiceProvider.GetRequiredService<IVaultsClient>();
-        _networkClient = ServiceProvider.GetRequiredService<INetwork_connectionsClient>();
-        _transactionsClient = ServiceProvider.GetRequiredService<ITransactionsClient>();
+        _vaultClient = _serviceProvider.GetRequiredService<IVaultsClient>();
+        _networkClient = _serviceProvider.GetRequiredService<INetwork_connectionsClient>();
+        _transactionsClient = _serviceProvider.GetRequiredService<ITransactionsClient>();
     }
 
     [Fact(Skip = "This is actually sending money across the network")]
@@ -26,8 +24,8 @@ public class WorkflowTests : FireblocksClientTestsBase
         const string sourceVaultName = "default";
 
         var trakxVaults = await _vaultClient.AccountsAllAsync();
-        Logger.Information("Retrieved vault accounts: {accounts}",
-            JsonSerializer.Serialize(trakxVaults.Content, new JsonSerializerOptions{WriteIndented = true}));
+        _logger.Information("Retrieved vault accounts: {accounts}",
+            JsonSerializer.Serialize(trakxVaults.Content, new JsonSerializerOptions { WriteIndented = true }));
 
         var partnerId = await GetNarrativeNetworkConnectionId();
 
@@ -42,7 +40,7 @@ public class WorkflowTests : FireblocksClientTestsBase
             Destination = new DestinationTransferPeerPath
             {
                 Id = partnerId,
-                Type = TransferPeerPathType. NETWORK_CONNECTION,
+                Type = TransferPeerPathType.NETWORK_CONNECTION,
             },
             Source = new TransferPeerPath
             {
@@ -68,7 +66,7 @@ public class WorkflowTests : FireblocksClientTestsBase
         var networkPartners = await _networkClient.Network_connectionsAllAsync();
         networkPartners.Content.Count.Should().BeGreaterThan(0);
 
-        Logger.Information("Retrieved network connections: {connections}",
+        _logger.Information("Retrieved network connections: {connections}",
             JsonSerializer.Serialize(networkPartners.Content, new JsonSerializerOptions { WriteIndented = true }));
         const string partnerFullName = "Narrative PCC Limited - acting in respect of Protected CH1181262820 Cell";
 

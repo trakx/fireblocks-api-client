@@ -5,19 +5,23 @@ using Trakx.Common.Logging;
 
 namespace Trakx.Fireblocks.ApiClient.Utils;
 
+/// <summary>
+/// Interface for a class that can provide credentials for Fireblocks API.
+/// </summary>
 public interface IFireblocksCredentialsProvider : ICredentialsProvider { };
 
+/// <inheritdoc />
 public class ApiKeyCredentialsProvider : IFireblocksCredentialsProvider, IDisposable
 {
-    internal const string ApiKeyHeader ="X-API-Key";
+    internal const string ApiKeyHeader = "X-API-Key";
     internal const string JwtScheme = "Bearer";
-
     private readonly FireblocksApiConfiguration _configuration;
     private readonly IBearerCredentialsProvider _bearerCredentialsProvider;
     private readonly CancellationTokenSource _tokenSource;
 
     private static readonly ILogger Logger = LoggerProvider.Create<ApiKeyCredentialsProvider>();
 
+    /// <inheritdoc />
     public ApiKeyCredentialsProvider(FireblocksApiConfiguration configuration, IBearerCredentialsProvider bearerCredentialsProvider)
     {
         _configuration = configuration;
@@ -38,6 +42,7 @@ public class ApiKeyCredentialsProvider : IFireblocksCredentialsProvider, IDispos
         Logger.LogTrace("Headers added");
     }
 
+    /// <inheritdoc />
     public Task AddCredentialsAsync(HttpRequestMessage msg)
     {
         AddCredentials(msg);
@@ -48,6 +53,7 @@ public class ApiKeyCredentialsProvider : IFireblocksCredentialsProvider, IDispos
 
     #region IDisposable
 
+    /// <inheritdoc />
     protected virtual void Dispose(bool disposing)
     {
         if (!disposing) return;

@@ -1,14 +1,10 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Text;
-using FluentAssertions;
 using Microsoft.IdentityModel.Tokens;
-using NSubstitute;
 using Trakx.Common.DateAndTime;
 using Trakx.Common.Extensions;
 using Trakx.Fireblocks.ApiClient.Utils;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Unit;
 
@@ -31,10 +27,10 @@ public sealed class BearerCredentialProviderTests : CredentialsTestsBase, IDispo
     [Fact]
     public void Bearer_token_should_have_correct_payload()
     {
-        var message = new HttpRequestMessage {RequestUri = new Uri("https://test.com/test1/validate")};
+        var message = new HttpRequestMessage { RequestUri = new Uri("https://test.com/test1/validate") };
         var messageBody = "this body is taken into account in the signature and payload";
         message.Content = new StringContent(messageBody, Encoding.UTF8);
-        var jwt =_bearerCredentialsProvider.GenerateJwtToken(message);
+        var jwt = _bearerCredentialsProvider.GenerateJwtToken(message);
 
         var handler = new JwtSecurityTokenHandler();
         handler.ValidateToken(jwt, GetValidationParameters(), out _);

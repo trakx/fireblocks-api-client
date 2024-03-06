@@ -1,7 +1,5 @@
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit;
-using Xunit.Abstractions;
+using Trakx.Fireblocks.ApiClient.Tests.Integration.Base;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 
@@ -12,7 +10,7 @@ public class TransactionsClientTests : FireblocksClientTestsBase
     public TransactionsClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
         : base(apiFixture, output)
     {
-        _transactionsClient = ServiceProvider.GetRequiredService<ITransactionsClient>();
+        _transactionsClient = _serviceProvider.GetRequiredService<ITransactionsClient>();
     }
 
     [Fact]

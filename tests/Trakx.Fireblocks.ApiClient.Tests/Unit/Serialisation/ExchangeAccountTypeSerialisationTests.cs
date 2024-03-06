@@ -1,6 +1,3 @@
-using FluentAssertions;
-using Xunit;
-
 namespace Trakx.Fireblocks.ApiClient.Tests.Unit.Serialisation;
 
 public class ExchangeAccountTypeSerialisationTests

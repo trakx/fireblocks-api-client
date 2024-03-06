@@ -1,12 +1,18 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Trakx.Fireblocks.ApiClient.Utils;
 using Trakx.Common.DateAndTime;
+using Trakx.Fireblocks.ApiClient.Utils;
 
 namespace Trakx.Fireblocks.ApiClient;
 
+/// <summary>
+/// Extension methods for adding the Fireblocks API client to the service collection.
+/// </summary>
 public static partial class AddFireblocksClientExtension
 {
+    /// <summary>
+    /// Add the Fireblocks API client to the service collection.
+    /// </summary>
     public static IServiceCollection AddFireblocksClient(
         this IServiceCollection services, IConfiguration configuration)
     {
@@ -18,6 +24,7 @@ public static partial class AddFireblocksClientExtension
         return services;
     }
 
+    /// <inheritdoc cref="AddFireblocksClient(IServiceCollection, IConfiguration)" />
     public static IServiceCollection AddFireblocksClient(
         this IServiceCollection services, FireblocksApiConfiguration apiConfiguration)
     {

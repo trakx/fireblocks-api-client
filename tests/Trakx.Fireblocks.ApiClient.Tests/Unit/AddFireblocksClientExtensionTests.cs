@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-using Microsoft.Extensions.DependencyInjection;
-using Xunit;
-using Xunit.Abstractions;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Unit;
 

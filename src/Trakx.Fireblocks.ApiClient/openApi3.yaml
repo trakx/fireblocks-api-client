@@ -4,8 +4,6 @@ info:
   version: 1.6.2
   contact:
     email: support@fireblocks.com
-servers:
-  - url: "https://api.fireblocks.io/v1"
 x-readme:
   explorer-enabled: false
   samples-languages:

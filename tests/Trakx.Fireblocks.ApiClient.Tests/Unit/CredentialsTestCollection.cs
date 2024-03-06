@@ -1,9 +1,6 @@
 ﻿using System.Security.Cryptography;
-using NSubstitute;
 using Serilog;
 using Trakx.Common.DateAndTime;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Unit;
 
@@ -22,7 +19,7 @@ public class CredentialsTestsBase
         RsaPrivatePcs8PrivateKey = Convert.ToBase64String(RsaKey.ExportPkcs8PrivateKey());
         Configuration = new FireblocksApiConfiguration
         {
-            BaseUrl =  new Uri("https://api.fireblocks.io/v1"),
+            BaseUrl = new Uri("https://api.fireblocks.io/v1"),
             ApiPrivateKey = RsaPrivatePcs8PrivateKey,
             ApiPubKey = "pubKey"
         };
