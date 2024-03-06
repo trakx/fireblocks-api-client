@@ -24,7 +24,7 @@ public class WorkflowTests : FireblocksClientTestsBase
 
         var trakxVaults = await _vaultClient.AccountsAllAsync();
         Logger.Information("Retrieved vault accounts: {accounts}",
-            JsonSerializer.Serialize(trakxVaults.Content, new JsonSerializerOptions{WriteIndented = true}));
+            JsonSerializer.Serialize(trakxVaults.Content, new JsonSerializerOptions { WriteIndented = true }));
 
         var partnerId = await GetNarrativeNetworkConnectionId();
 
@@ -39,7 +39,7 @@ public class WorkflowTests : FireblocksClientTestsBase
             Destination = new DestinationTransferPeerPath
             {
                 Id = partnerId,
-                Type = TransferPeerPathType. NETWORK_CONNECTION,
+                Type = TransferPeerPathType.NETWORK_CONNECTION,
             },
             Source = new TransferPeerPath
             {

@@ -27,10 +27,10 @@ public sealed class BearerCredentialProviderTests : CredentialsTestsBase, IDispo
     [Fact]
     public void Bearer_token_should_have_correct_payload()
     {
-        var message = new HttpRequestMessage {RequestUri = new Uri("https://test.com/test1/validate")};
+        var message = new HttpRequestMessage { RequestUri = new Uri("https://test.com/test1/validate") };
         var messageBody = "this body is taken into account in the signature and payload";
         message.Content = new StringContent(messageBody, Encoding.UTF8);
-        var jwt =_bearerCredentialsProvider.GenerateJwtToken(message);
+        var jwt = _bearerCredentialsProvider.GenerateJwtToken(message);
 
         var handler = new JwtSecurityTokenHandler();
         handler.ValidateToken(jwt, GetValidationParameters(), out _);

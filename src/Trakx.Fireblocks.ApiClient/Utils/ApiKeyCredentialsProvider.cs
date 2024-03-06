@@ -13,7 +13,7 @@ public interface IFireblocksCredentialsProvider : ICredentialsProvider { };
 /// <inheritdoc />
 public class ApiKeyCredentialsProvider : IFireblocksCredentialsProvider, IDisposable
 {
-    internal const string ApiKeyHeader ="X-API-Key";
+    internal const string ApiKeyHeader = "X-API-Key";
     internal const string JwtScheme = "Bearer";
     private readonly FireblocksApiConfiguration _configuration;
     private readonly IBearerCredentialsProvider _bearerCredentialsProvider;

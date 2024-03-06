@@ -19,7 +19,7 @@ public class CredentialsTestsBase
         RsaPrivatePcs8PrivateKey = Convert.ToBase64String(RsaKey.ExportPkcs8PrivateKey());
         Configuration = new FireblocksApiConfiguration
         {
-            BaseUrl =  new Uri("https://api.fireblocks.io/v1"),
+            BaseUrl = new Uri("https://api.fireblocks.io/v1"),
             ApiPrivateKey = RsaPrivatePcs8PrivateKey,
             ApiPubKey = "pubKey"
         };

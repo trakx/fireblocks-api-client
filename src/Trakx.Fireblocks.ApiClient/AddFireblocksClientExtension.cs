@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Trakx.Fireblocks.ApiClient.Utils;
 using Trakx.Common.DateAndTime;
+using Trakx.Fireblocks.ApiClient.Utils;
 
 namespace Trakx.Fireblocks.ApiClient;
 

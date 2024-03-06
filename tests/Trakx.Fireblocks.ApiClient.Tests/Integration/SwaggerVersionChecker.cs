@@ -13,26 +13,26 @@ public class SwaggerVersionChecker : IDisposable
         _fireblocksClient = new FlurlClient("https://docs.fireblocks.com");
     }
 
-   // [Fact(Skip = "local openapi file was changed to improve methods signature and fix nullable issues.
-   // After that, this test is no longer working, as it takes the assumption that both files, local and remote, are identical.")]
+    // [Fact(Skip = "local openapi file was changed to improve methods signature and fix nullable issues.
+    // After that, this test is no longer working, as it takes the assumption that both files, local and remote, are identical.")]
     [Fact]
     public async Task VerifyOpenApiVersion()
     {
-        
+
         var getCurrentOpenApiDescription = await _fireblocksClient.Request("api", "v1", "swagger").SendAsync(HttpMethod.Get);
         var fireblocksOpenApi = await getCurrentOpenApiDescription.GetStringAsync();
         var latestVersion = GetVersion(fireblocksOpenApi);
-        
+
         var localOpenApi = GetCurrentOpenApiContent();
         var localVersion = GetVersion(localOpenApi);
-        
+
         localVersion.Should().NotBeNullOrWhiteSpace();
 
         localVersion.Should().Be(latestVersion,
             $"the latest api from fireblocks (v{latestVersion}) should be merged with the current local (v{localVersion}) to integrate latest changes.");
     }
 
-    private static string GetVersion(string yaml )
+    private static string GetVersion(string yaml)
     {
         using (var reader = new StringReader(yaml))
         {

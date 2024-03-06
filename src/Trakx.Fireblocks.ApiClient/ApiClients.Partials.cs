@@ -30,7 +30,7 @@ namespace Trakx.Fireblocks.ApiClient
             CredentialProvider.AddCredentials(request);
         }
     }
-    
+
     internal partial class Fiat_accountsClient
     {
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
@@ -52,7 +52,7 @@ namespace Trakx.Fireblocks.ApiClient
             CredentialProvider.AddCredentials(request);
         }
     }
-    
+
     internal partial class Network_connectionsClient
     {
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
@@ -67,7 +67,7 @@ namespace Trakx.Fireblocks.ApiClient
             CredentialProvider.AddCredentials(request);
         }
     }
-    
+
     internal partial class Supported_assetsClient
     {
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
@@ -82,7 +82,7 @@ namespace Trakx.Fireblocks.ApiClient
             CredentialProvider.AddCredentials(request);
         }
     }
-    
+
     internal partial class UsersClient
     {
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url)
