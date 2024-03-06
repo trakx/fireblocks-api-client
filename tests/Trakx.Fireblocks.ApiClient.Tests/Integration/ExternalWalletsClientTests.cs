@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Trakx.Common.Testing.Mocks;
+using Trakx.Fireblocks.ApiClient.Tests.Integration.Base;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 
