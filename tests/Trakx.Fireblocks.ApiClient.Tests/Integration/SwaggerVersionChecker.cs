@@ -48,7 +48,7 @@ public class SwaggerVersionChecker : IDisposable
             var info = (YamlMappingNode)mapping.Children[new YamlScalarNode("info")];
             var version = ((YamlScalarNode)info.Children[new YamlScalarNode("version")]).Value;
 
-            return version;
+            return version!;
         }
     }
 

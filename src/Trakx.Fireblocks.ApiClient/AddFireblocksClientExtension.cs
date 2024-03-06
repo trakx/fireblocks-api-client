@@ -5,8 +5,14 @@ using Trakx.Common.DateAndTime;
 
 namespace Trakx.Fireblocks.ApiClient;
 
+/// <summary>
+/// Extension methods for adding the Fireblocks API client to the service collection.
+/// </summary>
 public static partial class AddFireblocksClientExtension
 {
+    /// <summary>
+    /// Add the Fireblocks API client to the service collection.
+    /// </summary>
     public static IServiceCollection AddFireblocksClient(
         this IServiceCollection services, IConfiguration configuration)
     {
@@ -18,6 +24,7 @@ public static partial class AddFireblocksClientExtension
         return services;
     }
 
+    /// <inheritdoc cref="AddFireblocksClient(IServiceCollection, IConfiguration)" />
     public static IServiceCollection AddFireblocksClient(
         this IServiceCollection services, FireblocksApiConfiguration apiConfiguration)
     {

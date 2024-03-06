@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <GenerateApiClient>true</GenerateApiClient>
+    <GenerateApiClient>false</GenerateApiClient>
   </PropertyGroup>
 
   <Import Project="../Packable.Projects.props" />
@@ -41,7 +41,7 @@
     </Compile>
   </ItemGroup>
 
-  <Target Name="NSwag" BeforeTargets="PreBuild" Condition="'$(GenerateApiClient)'=='True' ">
+  <Target Name="NSwag" BeforeTargets="Build" Condition="'$(GenerateApiClient)'=='True' ">
     <Copy SourceFiles="@(Reference)" DestinationFolder="$(OutDir)References" />
     <Exec Command="$(NSwagExe_Net80) run nswag.json /variables:Configuration=$(Configuration)" />
     <RemoveDir Directories="$(OutDir)References" />
