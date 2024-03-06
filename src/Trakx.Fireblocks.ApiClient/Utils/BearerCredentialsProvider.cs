@@ -7,7 +7,7 @@ using Trakx.Common.Extensions;
 
 namespace Trakx.Fireblocks.ApiClient.Utils;
 
-/// <inheritdoc />
+/// <inheritdoc cref="IBearerCredentialsProvider" />
 public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDisposable
 {
     private readonly FireblocksApiConfiguration _fireblocksConfiguration;
@@ -15,7 +15,7 @@ public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDis
     private readonly SigningCredentials _signingCredentials;
     private readonly RSA _rsa;
 
-    /// <inheritdoc />
+    /// <inheritdoc cref="IBearerCredentialsProvider" />
     public BearerCredentialsProvider(FireblocksApiConfiguration configuration, IDateTimeProvider dateTimeProvider)
     {
         _fireblocksConfiguration = configuration;

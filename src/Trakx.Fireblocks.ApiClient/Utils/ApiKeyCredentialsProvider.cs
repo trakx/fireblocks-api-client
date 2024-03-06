@@ -10,7 +10,7 @@ namespace Trakx.Fireblocks.ApiClient.Utils;
 /// </summary>
 public interface IFireblocksCredentialsProvider : ICredentialsProvider { };
 
-/// <inheritdoc />
+/// <inheritdoc cref="IFireblocksCredentialsProvider" />
 public class ApiKeyCredentialsProvider : IFireblocksCredentialsProvider, IDisposable
 {
     internal const string ApiKeyHeader = "X-API-Key";
@@ -21,7 +21,7 @@ public class ApiKeyCredentialsProvider : IFireblocksCredentialsProvider, IDispos
 
     private static readonly ILogger Logger = LoggerProvider.Create<ApiKeyCredentialsProvider>();
 
-    /// <inheritdoc />
+    /// <inheritdoc cref="IFireblocksCredentialsProvider" />
     public ApiKeyCredentialsProvider(FireblocksApiConfiguration configuration, IBearerCredentialsProvider bearerCredentialsProvider)
     {
         _configuration = configuration;
@@ -53,7 +53,7 @@ public class ApiKeyCredentialsProvider : IFireblocksCredentialsProvider, IDispos
 
     #region IDisposable
 
-    /// <inheritdoc />
+    /// <inheritdoc cref="IDisposable.Dispose" />
     protected virtual void Dispose(bool disposing)
     {
         if (!disposing) return;
