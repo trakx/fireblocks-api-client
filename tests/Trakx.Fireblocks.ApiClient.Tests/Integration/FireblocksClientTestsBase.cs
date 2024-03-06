@@ -1,10 +1,6 @@
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using Trakx.Common.Infrastructure.Environment.Aws;
 using Trakx.Common.Testing.Configuration;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 

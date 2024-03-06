@@ -1,8 +1,5 @@
 using System.Text.Json;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 

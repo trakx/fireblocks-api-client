@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-using NSubstitute;
-using Trakx.Fireblocks.ApiClient.Utils;
-using Xunit;
+﻿using Trakx.Fireblocks.ApiClient.Utils;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Unit;
 

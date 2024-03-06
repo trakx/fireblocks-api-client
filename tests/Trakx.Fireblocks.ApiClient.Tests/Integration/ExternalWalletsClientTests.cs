@@ -1,8 +1,5 @@
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Trakx.Common.Testing.Mocks;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 

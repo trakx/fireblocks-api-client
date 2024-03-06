@@ -1,14 +1,10 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Text;
-using FluentAssertions;
 using Microsoft.IdentityModel.Tokens;
-using NSubstitute;
 using Trakx.Common.DateAndTime;
 using Trakx.Common.Extensions;
 using Trakx.Fireblocks.ApiClient.Utils;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Unit;
 

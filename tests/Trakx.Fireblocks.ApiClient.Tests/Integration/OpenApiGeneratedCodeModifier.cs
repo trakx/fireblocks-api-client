@@ -1,6 +1,5 @@
 ﻿using FluentAssertions.Execution;
 using Trakx.Common.Infrastructure.Environment.Env;
-using Xunit.Abstractions;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 
