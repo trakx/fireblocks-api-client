@@ -9,7 +9,7 @@ public class ExchangeAccountsClientTests : FireblocksClientTestsBase
     public ExchangeAccountsClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
         : base(apiFixture, output)
     {
-        _exchangeAccountsClient = ServiceProvider.GetRequiredService<IExchange_accountsClient>();
+        _exchangeAccountsClient = _serviceProvider.GetRequiredService<IExchange_accountsClient>();
     }
 
     [Fact]

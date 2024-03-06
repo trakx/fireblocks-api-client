@@ -10,7 +10,7 @@ public class UsersClientTests : FireblocksClientTestsBase
     public UsersClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
         : base(apiFixture, output)
     {
-        _usersClient = ServiceProvider.GetRequiredService<IUsersClient>();
+        _usersClient = _serviceProvider.GetRequiredService<IUsersClient>();
     }
 
     [Fact(Skip = "Fireblocks api is always returning 429 - too many requests for this end-point.")]

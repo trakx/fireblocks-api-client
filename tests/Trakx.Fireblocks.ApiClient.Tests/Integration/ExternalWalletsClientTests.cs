@@ -11,7 +11,7 @@ public class ExternalWalletsClientTests : FireblocksClientTestsBase
     public ExternalWalletsClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
         : base(apiFixture, output)
     {
-        _externalWalletsClient = ServiceProvider.GetRequiredService<IExternal_walletsClient>();
+        _externalWalletsClient = _serviceProvider.GetRequiredService<IExternal_walletsClient>();
         _mockCreator = new MockCreator(output);
     }
 

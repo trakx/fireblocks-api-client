@@ -7,14 +7,13 @@ namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 [Collection(nameof(ApiTestCollection))]
 public class FireblocksClientTestsBase
 {
-    protected readonly ServiceProvider ServiceProvider;
-    protected ILogger Logger;
+    protected readonly ServiceProvider _serviceProvider;
+    protected readonly ILogger _logger;
 
     protected FireblocksClientTestsBase(FireblocksApiFixture apiFixture, ITestOutputHelper output)
     {
-        Logger = new LoggerConfiguration().WriteTo.TestOutput(output).CreateLogger();
-
-        ServiceProvider = apiFixture.ServiceProvider;
+        _logger = new LoggerConfiguration().WriteTo.TestOutput(output).CreateLogger();
+        _serviceProvider = apiFixture.ServiceProvider;
     }
 }
 

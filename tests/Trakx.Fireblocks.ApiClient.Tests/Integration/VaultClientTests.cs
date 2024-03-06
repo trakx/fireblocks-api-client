@@ -9,7 +9,7 @@ public class VaultClientTests : FireblocksClientTestsBase
     public VaultClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
         : base(apiFixture, output)
     {
-        _vaultClient = ServiceProvider.GetRequiredService<IVaultsClient>();
+        _vaultClient = _serviceProvider.GetRequiredService<IVaultsClient>();
     }
 
     [Fact]

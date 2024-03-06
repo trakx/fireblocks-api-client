@@ -9,7 +9,7 @@ public class TransactionsClientTests : FireblocksClientTestsBase
     public TransactionsClientTests(FireblocksApiFixture apiFixture, ITestOutputHelper output)
         : base(apiFixture, output)
     {
-        _transactionsClient = ServiceProvider.GetRequiredService<ITransactionsClient>();
+        _transactionsClient = _serviceProvider.GetRequiredService<ITransactionsClient>();
     }
 
     [Fact]
