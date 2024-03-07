@@ -27,7 +27,7 @@ public class AddFireblocksClientExtensionTests : CredentialsTestsBase
         _serviceProvider.CheckServiceRegistration<IClientConfigurator, ClientConfigurator>();
         _serviceProvider.CheckServiceRegistration<IFireblocksApiClientsFactory, FireblocksApiClientsFactory>();
     }
-    
+
     [Fact]
     public void AddApiClients_throws_if_config_is_missing()
     {

@@ -17,13 +17,13 @@ public class FireblocksApiClientsFactoryTests
         // Arrange
         using var rsa = RSA.Create();
         var privateKey = rsa.ExportPkcs8PrivateKey();
-        
+
         var newApiCredentials = new FireblocksApiCredentialsConfiguration
         {
             ApiPubKey = "new-public-key",
             ApiPrivateKey = Convert.ToBase64String(privateKey)
         };
-        
+
         // Act
         var client = func(newApiCredentials);
 
@@ -37,7 +37,7 @@ public class FireblocksApiClientsFactoryTests
 
         var credentialsProvider = (ApiKeyCredentialsProvider)clientImplementation.CredentialsProvider;
         credentialsProvider.ApiCredentialsConfiguration.Should().BeEquivalentTo(newApiCredentials);
-        
+
         var bearerCredentialsProvider = (BearerCredentialsProvider)credentialsProvider.BearerCredentialsProvider;
         bearerCredentialsProvider.ApiCredentialsConfiguration.Should().BeEquivalentTo(newApiCredentials);
     }
@@ -55,10 +55,10 @@ public class FireblocksApiClientsFactoryTestsData : IEnumerable<object[]>
             ApiPubKey = "original-public-key",
             ApiPrivateKey = "original-private-key"
         };
-        
+
         var httpClientFactory = Substitute.For<IHttpClientFactory>();
         var dateTimeProvider = Substitute.For<IDateTimeProvider>();
-        
+
         Factory = new FireblocksApiClientsFactory(apiConfiguration, httpClientFactory, dateTimeProvider);
     }
 
