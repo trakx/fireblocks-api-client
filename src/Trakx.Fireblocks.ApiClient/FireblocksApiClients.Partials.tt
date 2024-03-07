@@ -7,11 +7,11 @@ namespace Trakx.Fireblocks.ApiClient
 {
 <#
 var clientNames = new [] { "Audit_Logs", "Contracts", "Exchange_accounts",
-    "External_wallets", "Fee_payer", "Fiat_accounts", "Gas_stations",
-    "Internal_wallets", "Network_connection", "Network_connections",
-    "Off_exchanges", "Payments", "Supported_assets", "Transactions",
-    "Transfer_tickets", "Users", "Vaults", "Webhooks","NFTs_Beta", "Web3_connections",
-    "Payments__Cross_Border_settlementClient", "Payments__PayoutClient", "Travel_Rule_BetaClient"
+    "External_wallets", "Fiat_accounts", "Gas_stations",
+    "Internal_wallets", "Network_connections",
+    "Off_exchanges", "Supported_assets", "Transactions",
+    "Users", "Vaults", "Webhooks", "NFTs_Beta", "Web3_connections",
+    "Payments__Cross_Border_settlement", "Payments__Payout", "Travel_Rule_Beta"
 };
 
 foreach(var name in clientNames)
