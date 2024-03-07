@@ -10,7 +10,7 @@
   "codeGenerators": {
     "openApiToCSharpClient": {
       "clientBaseClass": "AuthorisedClient",
-      "configurationClass": "ClientConfigurator",
+      "configurationClass": "IClientConfigurator",
       "generateClientClasses": true,
       "generateClientInterfaces": true,
       "clientBaseInterface": "IFireblocksApiClientBase",
