@@ -24,7 +24,7 @@ public record FireblocksApiConfiguration
     /// </summary>
     [AwsParameter]
     public string ApiPrivateKey { get; init; } = default!;
-    
+
     /// <summary>
     /// Initial delay used to wait after a failure before retrying.
     /// See <see cref="Polly.Contrib.WaitAndRetry.Backoff"/>.

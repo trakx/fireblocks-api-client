@@ -1,4 +1,4 @@
-#pragma warning disable S1172, IDE0060 // Unused method parameters should be removed
+﻿#pragma warning disable S1172, IDE0060 // Unused method parameters should be removed
 
 namespace Trakx.Fireblocks.ApiClient;
 
@@ -112,6 +112,27 @@ internal partial class NFTs_BetaClient
     }
 }
 internal partial class Web3_connectionsClient
+{
+    partial void PrepareRequest(HttpClient client, HttpRequestMessage request, string url)
+    {
+        CredentialProvider.AddCredentials(request);
+    }
+}
+internal partial class Payments__Cross_Border_settlementClient
+{
+    partial void PrepareRequest(HttpClient client, HttpRequestMessage request, string url)
+    {
+        CredentialProvider.AddCredentials(request);
+    }
+}
+internal partial class Payments__PayoutClient
+{
+    partial void PrepareRequest(HttpClient client, HttpRequestMessage request, string url)
+    {
+        CredentialProvider.AddCredentials(request);
+    }
+}
+internal partial class Travel_Rule_BetaClient
 {
     partial void PrepareRequest(HttpClient client, HttpRequestMessage request, string url)
     {
