@@ -11,6 +11,6 @@ public class OpenApiGeneratedCodeModifier : Trakx.Common.Testing.Documentation.O
         var foundRoot = default(DirectoryInfo).TryWalkBackToRepositoryRoot(out var rootDirectory)!;
         if (!foundRoot) throw new AssertionFailedException("Failed to retrieve repository root.");
         FilePaths.Add(Path.Combine(rootDirectory!.FullName, "src",
-            "Trakx.Fireblocks.ApiClient", "ApiClients.cs"));
+            "Trakx.Fireblocks.ApiClient", "FireblocksApiClients.cs"));
     }
 }

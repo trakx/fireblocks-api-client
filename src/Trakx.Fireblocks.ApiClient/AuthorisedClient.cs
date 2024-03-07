@@ -26,14 +26,4 @@ internal abstract class AuthorisedClient
     {
         return Task.FromResult(_httpClientFactory.CreateClient(HttpClientName));
     }
-
-    /// <summary>
-    /// Create a new <see cref="HttpRequestMessage"/> with the credentials added.
-    /// </summary>
-    protected Task<HttpRequestMessage> CreateHttpRequestMessageAsync(CancellationToken cancellationToken)
-    {
-        HttpRequestMessage httpRequestMessage = new();
-        CredentialProvider.AddCredentials(httpRequestMessage);
-        return Task.FromResult(httpRequestMessage);
-    }
 }
