@@ -4,16 +4,36 @@ namespace Trakx.Fireblocks.ApiClient;
 
 internal abstract class AuthorisedClient
 {
-    public FireblocksApiConfiguration Configuration { get; protected set; }
-    internal string BaseUrl { get; }
-    protected readonly ICredentialsProvider CredentialProvider;
+    private readonly IHttpClientFactory _httpClientFactory;
+    internal readonly ICredentialsProvider CredentialProvider;
+    protected string BaseUrl { get; }
+    public virtual string HttpClientName { get; }
 
-    protected AuthorisedClient(ClientConfigurator clientConfigurator)
+    protected AuthorisedClient(IClientConfigurator clientConfigurator)
     {
-        Configuration = clientConfigurator.Configuration;
-        CredentialProvider = clientConfigurator.GetCredentialsProvider();
+        _httpClientFactory = clientConfigurator.HttpClientFactory;
+        HttpClientName = this.GetType().FullName!;
+        CredentialProvider = clientConfigurator.CredentialProvider;
 
-        BaseUrl = Configuration.BaseUrl.AbsoluteUri;
+        BaseUrl = clientConfigurator.ApiClientConfiguration.BaseUrl.AbsoluteUri;
         if (BaseUrl[^1] != '/') BaseUrl += "/";
+    }
+
+    /// <summary>
+    /// Create a new <see cref="HttpClient"/>.
+    /// </summary>
+    public Task<HttpClient> CreateHttpClientAsync(CancellationToken cancellationToken)
+    {
+        return Task.FromResult(_httpClientFactory.CreateClient(HttpClientName));
+    }
+
+    /// <summary>
+    /// Create a new <see cref="HttpRequestMessage"/> with the credentials added.
+    /// </summary>
+    protected Task<HttpRequestMessage> CreateHttpRequestMessageAsync(CancellationToken cancellationToken)
+    {
+        HttpRequestMessage httpRequestMessage = new();
+        CredentialProvider.AddCredentials(httpRequestMessage);
+        return Task.FromResult(httpRequestMessage);
     }
 }
