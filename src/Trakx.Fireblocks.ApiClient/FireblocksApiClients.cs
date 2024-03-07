@@ -5,6 +5,7 @@
 //----------------------
 
 using Trakx.Common.ApiClient;
+using Trakx.Common.ApiClient.Exceptions;
 
 #pragma warning disable CS0618
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
@@ -24,7 +25,7 @@ namespace Trakx.Fireblocks.ApiClient
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IVaultsClient
+    public partial interface IVaultsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -347,12 +348,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class VaultsClient : AuthorisedClient, IVaultsClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public VaultsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public VaultsClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -381,8 +380,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<VaultAccount>>> AccountsAllAsync(string namePrefix = null, string nameSuffix = null, double? minAmountThreshold = null, string assetId = null, double? maxBip44AddressIndexUsed = null, double? maxBip44ChangeAddressIndexUsed = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -491,8 +490,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -576,8 +575,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<VaultAccountsPagedResponse>> Accounts_pagedAsync(string namePrefix = null, string nameSuffix = null, double? minAmountThreshold = null, string assetId = null, double? maxBip44AddressIndexUsed = null, double? maxBip44ChangeAddressIndexUsed = null, OrderBy? orderBy = null, string before = null, string after = null, double? limit = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -699,8 +698,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (vaultAccountId == null)
                 throw new System.ArgumentNullException("vaultAccountId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -788,8 +787,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -876,8 +875,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<PaginatedAssetWalletResponse>> Asset_walletsAsync(double? totalAmountLargerThan = null, string assetId = null, string before = null, string after = null, double? limit = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -979,8 +978,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (vaultAccountId == null)
                 throw new System.ArgumentNullException("vaultAccountId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1061,8 +1060,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (vaultAccountId == null)
                 throw new System.ArgumentNullException("vaultAccountId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1147,8 +1146,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1240,8 +1239,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1328,8 +1327,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1417,8 +1416,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1509,8 +1508,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1605,8 +1604,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1702,8 +1701,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1795,8 +1794,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1893,8 +1892,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -1990,8 +1989,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (addressId == null)
                 throw new System.ArgumentNullException("addressId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -2089,8 +2088,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -2186,8 +2185,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (addressId == null)
                 throw new System.ArgumentNullException("addressId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -2282,8 +2281,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -2373,8 +2372,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (algorithm == null)
                 throw new System.ArgumentNullException("algorithm");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -2474,8 +2473,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (addressIndex == null)
                 throw new System.ArgumentNullException("addressIndex");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -2569,8 +2568,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<VaultAsset>>> AssetsAllAsync(string accountNamePrefix = null, string accountNameSuffix = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -2663,8 +2662,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -2847,7 +2846,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IExchange_accountsClient
+    public partial interface IExchange_accountsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2912,12 +2911,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class Exchange_accountsClient : AuthorisedClient, IExchange_accountsClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Exchange_accountsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Exchange_accountsClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -2946,8 +2943,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<ExchangeAccount>>> Exchange_accountsAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -3031,8 +3028,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (exchangeAccountId == null)
                 throw new System.ArgumentNullException("exchangeAccountId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -3117,8 +3114,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (exchangeAccountId == null)
                 throw new System.ArgumentNullException("exchangeAccountId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -3199,8 +3196,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (exchangeAccountId == null)
                 throw new System.ArgumentNullException("exchangeAccountId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -3288,8 +3285,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -3474,7 +3471,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IFiat_accountsClient
+    public partial interface IFiat_accountsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3529,12 +3526,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class Fiat_accountsClient : AuthorisedClient, IFiat_accountsClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Fiat_accountsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Fiat_accountsClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -3563,8 +3558,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<FiatAccount>>> Fiat_accountsAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -3648,8 +3643,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (accountId == null)
                 throw new System.ArgumentNullException("accountId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -3734,8 +3729,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (accountId == null)
                 throw new System.ArgumentNullException("accountId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -3819,8 +3814,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (accountId == null)
                 throw new System.ArgumentNullException("accountId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -4002,7 +3997,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface INetwork_connectionsClient
+    public partial interface INetwork_connectionsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4355,12 +4350,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class Network_connectionsClient : AuthorisedClient, INetwork_connectionsClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Network_connectionsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Network_connectionsClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -4405,8 +4398,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<NetworkConnectionResponse>>> Network_connectionsAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -4502,8 +4495,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<NetworkConnectionResponse>> Network_connectionsPOSTAsync(NetworkConnection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -4607,8 +4600,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (connectionId == null)
                 throw new System.ArgumentNullException("connectionId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -4702,8 +4695,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetType == null)
                 throw new System.ArgumentNullException("assetType");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -4806,8 +4799,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (connectionId == null)
                 throw new System.ArgumentNullException("connectionId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -4908,8 +4901,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (connectionId == null)
                 throw new System.ArgumentNullException("connectionId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -5006,8 +4999,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<NetworkIdResponse>>> Network_idsAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -5103,8 +5096,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<NetworkIdResponse>> Network_idsPOSTAsync(Body14 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -5208,8 +5201,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (networkId == null)
                 throw new System.ArgumentNullException("networkId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -5310,8 +5303,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (networkId == null)
                 throw new System.ArgumentNullException("networkId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -5412,8 +5405,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (networkId == null)
                 throw new System.ArgumentNullException("networkId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -5522,8 +5515,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -5632,8 +5625,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -5821,7 +5814,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IInternal_walletsClient
+    public partial interface IInternal_walletsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5928,12 +5921,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class Internal_walletsClient : AuthorisedClient, IInternal_walletsClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Internal_walletsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Internal_walletsClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -5964,8 +5955,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<UnmanagedWallet>>> Internal_walletsAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -6045,8 +6036,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> Internal_walletsPOSTAsync(Body18 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -6134,8 +6125,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -6220,8 +6211,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -6303,8 +6294,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -6392,8 +6383,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -6484,8 +6475,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -6580,8 +6571,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -6760,7 +6751,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IExternal_walletsClient
+    public partial interface IExternal_walletsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -6865,12 +6856,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class External_walletsClient : AuthorisedClient, IExternal_walletsClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public External_walletsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public External_walletsClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -6899,8 +6888,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<UnmanagedWallet>>> External_walletsAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -6980,8 +6969,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> External_walletsPOSTAsync(Body21 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -7069,8 +7058,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -7155,8 +7144,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (walletId == null)
                 throw new System.ArgumentNullException("walletId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -7238,8 +7227,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -7327,8 +7316,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -7419,8 +7408,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -7515,8 +7504,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -7695,7 +7684,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IContractsClient
+    public partial interface IContractsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -7788,12 +7777,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class ContractsClient : AuthorisedClient, IContractsClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public ContractsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public ContractsClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -7822,8 +7809,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<UnmanagedWallet>>> ContractsAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -7903,8 +7890,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<UnmanagedWallet>> ContractsPOSTAsync(Body24 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -7992,8 +7979,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (contractId == null)
                 throw new System.ArgumentNullException("contractId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -8078,8 +8065,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (contractId == null)
                 throw new System.ArgumentNullException("contractId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -8162,8 +8149,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -8254,8 +8241,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -8350,8 +8337,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -8530,7 +8517,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface ISupported_assetsClient
+    public partial interface ISupported_assetsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -8549,12 +8536,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class Supported_assetsClient : AuthorisedClient, ISupported_assetsClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Supported_assetsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Supported_assetsClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -8583,8 +8568,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<AssetTypeResponse>>> Supported_assetsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -8766,7 +8751,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface ITransactionsClient
+    public partial interface ITransactionsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -8941,12 +8926,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class TransactionsClient : AuthorisedClient, ITransactionsClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public TransactionsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public TransactionsClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -8987,8 +8970,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<TransactionResponse>>> TransactionsAllAsync(string before = null, string after = null, string status = null, OrderBy2? orderBy = null, Sort? sort = null, int? limit = null, SourceType? sourceType = null, string sourceId = null, DestType? destType = null, string destId = null, string assets = null, string txHash = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -9118,8 +9101,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<CreateTransactionResponse>> TransactionsPOSTAsync(TransactionRequest body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -9204,8 +9187,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<EstimatedTransactionFeeResponse>> Estimate_feeAsync(TransactionRequest body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -9293,8 +9276,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (txId == null)
                 throw new System.ArgumentNullException("txId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -9389,8 +9372,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (externalTxId == null)
                 throw new System.ArgumentNullException("externalTxId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -9476,8 +9459,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (txId == null)
                 throw new System.ArgumentNullException("txId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -9567,8 +9550,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (txId == null)
                 throw new System.ArgumentNullException("txId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -9658,8 +9641,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (txId == null)
                 throw new System.ArgumentNullException("txId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -9746,8 +9729,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (txId == null)
                 throw new System.ArgumentNullException("txId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -9830,8 +9813,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (txId == null)
                 throw new System.ArgumentNullException("txId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -9918,8 +9901,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (address == null)
                 throw new System.ArgumentNullException("address");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -10006,8 +9989,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (txHash == null)
                 throw new System.ArgumentNullException("txHash");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -10097,8 +10080,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -10283,7 +10266,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IPayments__Cross_Border_settlementClient
+    public partial interface IPayments__Cross_Border_settlementClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -10360,12 +10343,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class Payments__Cross_Border_settlementClient : AuthorisedClient, IPayments__Cross_Border_settlementClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Payments__Cross_Border_settlementClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Payments__Cross_Border_settlementClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -10391,8 +10372,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<XBSettlementConfigCreationResponse>> ConfigsPOSTAsync(XBSettlementConfigCreationRequestBody body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -10489,8 +10470,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<GetAllXBSettlementConfigsResponse>> ConfigsGETAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -10587,8 +10568,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (configId == null)
                 throw new System.ArgumentNullException("configId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -10686,8 +10667,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (configId == null)
                 throw new System.ArgumentNullException("configId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -10789,8 +10770,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (configId == null)
                 throw new System.ArgumentNullException("configId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -10884,8 +10865,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<XBCreateSettlementFlowResponse>> FlowsPOSTAsync(XBCreateSettlementFlowRequestBody body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -10986,8 +10967,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (flowId == null)
                 throw new System.ArgumentNullException("flowId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -11085,8 +11066,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (flowId == null)
                 throw new System.ArgumentNullException("flowId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -11287,7 +11268,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IPayments__PayoutClient
+    public partial interface IPayments__PayoutClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -11348,12 +11329,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class Payments__PayoutClient : AuthorisedClient, IPayments__PayoutClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Payments__PayoutClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Payments__PayoutClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -11391,8 +11370,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<PayoutResponse>> PayoutPOSTAsync(CreatePayoutRequest body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -11513,8 +11492,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (payoutId == null)
                 throw new System.ArgumentNullException("payoutId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -11629,8 +11608,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (payoutId == null)
                 throw new System.ArgumentNullException("payoutId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -11839,7 +11818,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IGas_stationsClient
+    public partial interface IGas_stationsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -11893,12 +11872,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class Gas_stationsClient : AuthorisedClient, IGas_stationsClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Gas_stationsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Gas_stationsClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -11927,8 +11904,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<GasStationPropertiesResponse>> Gas_stationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -12012,8 +11989,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (assetId == null)
                 throw new System.ArgumentNullException("assetId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -12097,8 +12074,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -12183,8 +12160,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -12365,7 +12342,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IUsersClient
+    public partial interface IUsersClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -12386,12 +12363,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class UsersClient : AuthorisedClient, IUsersClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public UsersClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public UsersClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -12422,8 +12397,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<GetUsersResponse>> UsersAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -12605,7 +12580,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IAudit_LogsClient
+    public partial interface IAudit_LogsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -12622,12 +12597,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class Audit_LogsClient : AuthorisedClient, IAudit_LogsClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Audit_LogsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Audit_LogsClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -12657,8 +12630,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (timePeriod == null)
                 throw new System.ArgumentNullException("timePeriod");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -12837,7 +12810,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IOff_exchangesClient
+    public partial interface IOff_exchangesClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -12889,12 +12862,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class Off_exchangesClient : AuthorisedClient, IOff_exchangesClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Off_exchangesClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Off_exchangesClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -12923,8 +12894,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<CreateTransactionResponse>> AddAsync(AddCollateralRequestBody body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -13008,8 +12979,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<CreateTransactionResponse>> RemovePOSTAsync(RemoveCollateralRequestBody body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -13093,8 +13064,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<SettlementResponse>> TraderAsync(SettlementRequestBody body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -13181,8 +13152,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (mainExchangeAccountId == null)
                 throw new System.ArgumentNullException("mainExchangeAccountId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -13367,7 +13338,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IWebhooksClient
+    public partial interface IWebhooksClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -13398,12 +13369,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class WebhooksClient : AuthorisedClient, IWebhooksClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public WebhooksClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public WebhooksClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -13432,8 +13401,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ResendWebhooksResponse>> ResendAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -13521,8 +13490,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -13703,7 +13672,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface INFTs_BetaClient
+    public partial interface INFTs_BetaClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -13814,12 +13783,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class NFTs_BetaClient : AuthorisedClient, INFTs_BetaClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public NFTs_BetaClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public NFTs_BetaClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -13859,8 +13826,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (vaultAccountId == null)
                 throw new System.ArgumentNullException("vaultAccountId");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -13947,8 +13914,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<Response9>> GetOwnedNFTsAsync(BlockchainDescriptor2? blockchainDescriptor = null, string vaultAccountIds = null, string ids = null, string collectionIds = null, string pageCursor = null, double? pageSize = null, System.Collections.Generic.List<Anonymous> sort = null, Order? order = null, Status? status = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -14069,8 +14036,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -14149,8 +14116,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -14238,8 +14205,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (ids == null)
                 throw new System.ArgumentNullException("ids");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -14344,8 +14311,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -14523,7 +14490,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IWeb3_connectionsClient
+    public partial interface IWeb3_connectionsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -14586,12 +14553,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class Web3_connectionsClient : AuthorisedClient, IWeb3_connectionsClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Web3_connectionsClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Web3_connectionsClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -14624,8 +14589,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<GetConnectionsResponse>> GetAsync(Order3? order = null, Filter filter = null, Sort2? sort = null, double? pageSize = null, string next = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -14740,8 +14705,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -14843,8 +14808,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -14941,8 +14906,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -15127,7 +15092,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface ITravel_Rule_BetaClient
+    public partial interface ITravel_Rule_BetaClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -15225,12 +15190,10 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal partial class Travel_Rule_BetaClient : AuthorisedClient, ITravel_Rule_BetaClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Travel_Rule_BetaClient(ClientConfigurator configuration, System.Net.Http.HttpClient httpClient) : base(configuration)
+        public Travel_Rule_BetaClient(IClientConfigurator configuration) : base(configuration)
         {
-            _httpClient = httpClient;
         }
 
         private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
@@ -15268,8 +15231,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -15370,8 +15333,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -15473,8 +15436,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (did == null)
                 throw new System.ArgumentNullException("did");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -15579,8 +15542,8 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<TravelRuleGetAllVASPsResponse>> TravelRuleApiController_findAllVaspAsync(string order = null, double? per_page = null, double? page = null, string fields = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -15683,8 +15646,8 @@ namespace Trakx.Fireblocks.ApiClient
             if (body == null)
                 throw new System.ArgumentNullException("body");
 
-            var client_ = _httpClient;
-            var disposeClient_ = false;
+            var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
+            var disposeClient_ = true;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
@@ -22727,42 +22690,6 @@ namespace Trakx.Fireblocks.ApiClient
 
     }
 
-
-
-    [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ApiException : System.Exception
-    {
-        public int StatusCode { get; private set; }
-
-        public string Response { get; private set; }
-
-        public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> Headers { get; private set; }
-
-        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Exception innerException)
-            : base(message + "\n\nStatus: " + statusCode + "\nResponse: \n" + ((response == null) ? "(null)" : response.Substring(0, response.Length >= 512 ? 512 : response.Length)), innerException)
-        {
-            StatusCode = statusCode;
-            Response = response;
-            Headers = headers;
-        }
-
-        public override string ToString()
-        {
-            return string.Format("HTTP Response: \n\n{0}\n\n{1}", Response, base.ToString());
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ApiException<TResult> : ApiException
-    {
-        public TResult Result { get; private set; }
-
-        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result, System.Exception innerException)
-            : base(message, statusCode, response, headers, innerException)
-        {
-            Result = result;
-        }
-    }
 
 }
 

@@ -18,26 +18,20 @@
     <PackageReference Include="Polly.Caching.Memory" Version="3.0.2" />
     <PackageReference Include="Trakx.Common" Version="1.1.0" />
     <PackageReference Include="Trakx.Common.ApiClient" Version="1.1.0" />
+    <PackageReference Include="Trakx.Common.Configuration" Version="1.1.0" />
     <PackageReference Include="Trakx.Common.Logging" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="ApiClients.Partials.tt">
+    <None Update="FireblocksApiClients.Partials.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ApiClients.Partials.cs</LastGenOutput>
-    </None>
-    <None Update="ClientRegistrations.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClientRegistrations.cs</LastGenOutput>
+      <LastGenOutput>FireblocksApiClients.Partials.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ApiClients.Partials.cs">
-      <DependentUpon>ApiClients.Partials.tt</DependentUpon>
-    </Compile>
-    <Compile Update="ClientRegistrations.cs">
-      <DependentUpon>ClientRegistrations.tt</DependentUpon>
+    <Compile Update="FireblocksApiClients.Partials.cs">
+      <DependentUpon>FireblocksApiClients.Partials.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

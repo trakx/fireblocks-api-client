@@ -31,7 +31,7 @@ public class FireblocksApiFixture : IDisposable
 
     public FireblocksApiFixture()
     {
-        var configuration = AwsConfigurationHelper.GetConfigurationFromAws<FireblocksApiConfiguration>()
+        var apiConfiguration = AwsConfigurationHelper.GetConfigurationFromAws<FireblocksApiConfiguration>()
         with
         {
             BaseUrl = new Uri("https://api.fireblocks.io/v1")
@@ -39,8 +39,7 @@ public class FireblocksApiFixture : IDisposable
 
         var serviceCollection = new ServiceCollection();
 
-        serviceCollection.AddSingleton(configuration);
-        serviceCollection.AddFireblocksClient(configuration);
+        serviceCollection.AddFireblocksClient(apiConfiguration);
 
         ServiceProvider = serviceCollection.BuildServiceProvider();
     }

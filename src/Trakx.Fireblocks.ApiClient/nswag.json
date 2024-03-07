@@ -10,17 +10,17 @@
   "codeGenerators": {
     "openApiToCSharpClient": {
       "clientBaseClass": "AuthorisedClient",
-      "configurationClass": "ClientConfigurator",
+      "configurationClass": "IClientConfigurator",
       "generateClientClasses": true,
       "generateClientInterfaces": true,
-      "clientBaseInterface": null,
-      "injectHttpClient": true,
+      "clientBaseInterface": "IFireblocksApiClientBase",
+      "injectHttpClient": false,
       "disposeHttpClient": true,
       "protectedMethods": [],
-      "generateExceptionClasses": true,
+      "generateExceptionClasses": false,
       "exceptionClass": "ApiException",
       "wrapDtoExceptions": true,
-      "useHttpClientCreationMethod": false,
+      "useHttpClientCreationMethod": true,
       "httpClientType": "System.Net.Http.HttpClient",
       "useHttpRequestMessageCreationMethod": false,
       "useBaseUrl": true,
@@ -30,7 +30,7 @@
       "clientClassAccessModifier": "internal",
       "typeAccessModifier": "public",
       "generateContractsOutput": false,
-      "contractsNamespace": null,
+      "contractsNamespace": "Trakx.Fireblocks.ApiClient.Contracts",
       "contractsOutputFilePath": null,
       "parameterDateTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
       "parameterDateFormat": "yyyy-MM-dd",
@@ -41,7 +41,8 @@
       "className": "{controller}Client",
       "operationGenerationMode": "MultipleClientsFromFirstTagAndOperationId",
       "additionalNamespaceUsages": [
-        "Trakx.Common.ApiClient"
+        "Trakx.Common.ApiClient",
+        "Trakx.Common.ApiClient.Exceptions"
       ],
       "additionalContractNamespaceUsages": [],
       "generateOptionalParameters": true,
@@ -90,7 +91,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "ApiClients.cs"
+      "output": "FireblocksApiClients.cs"
     }
   }
 }
