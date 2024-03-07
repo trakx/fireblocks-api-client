@@ -23,7 +23,8 @@ public interface IClientConfigurator
     IHttpClientFactory HttpClientFactory { get; }
 }
 
-internal class ClientConfigurator : IClientConfigurator
+/// <inheritdoc cref="IClientConfigurator" />
+public class ClientConfigurator : IClientConfigurator
 {
     /// <inheritdoc cref="ClientConfigurator" />
     public ClientConfigurator(
