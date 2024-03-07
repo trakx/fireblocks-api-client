@@ -22,6 +22,19 @@
     <PackageReference Include="Trakx.Common.Logging" Version="1.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="FireblocksApiClients.Partials.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FireblocksApiClients.Partials.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="FireblocksApiClients.Partials.cs">
+      <DependentUpon>FireblocksApiClients.Partials.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
   <Target Name="NSwag" BeforeTargets="Build" Condition="'$(GenerateApiClient)'=='True' ">
     <Copy SourceFiles="@(Reference)" DestinationFolder="$(OutDir)References" />
     <Exec Command="$(NSwagExe_Net80) run nswag.json /variables:Configuration=$(Configuration)" />
