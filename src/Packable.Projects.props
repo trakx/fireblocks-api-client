@@ -7,7 +7,6 @@
     <IncludeSymbols>true</IncludeSymbols>
     <PackageTags>trakx</PackageTags>
     <PackageIcon>package-icon.png</PackageIcon>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
