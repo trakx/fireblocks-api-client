@@ -12,12 +12,13 @@ public class FireblocksApiClientPartialsTests
         foreach (var apiClientInterface in apiClientInterfaces)
         {
             var apiClientImplementation = ApiClientReflection.GetApiClientImplementation(apiClientInterface);
-            if (apiClientImplementation == null)
-                throw new NotImplementedException($"No implementation found for {apiClientInterface.Name}");
+            apiClientImplementation.Should().NotBeNull($"No implementation found for {apiClientInterface.Name}");
 
-            var methods = apiClientImplementation.GetMethods(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var method = methods.FirstOrDefault(x => x.Name == "PrepareRequest");
-            method.Should().NotBeNull("Failed to find PrepareRequest method in " + apiClientImplementation.Name);
+            var prepareRequestMethod = apiClientImplementation!
+                .GetMethods(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                .FirstOrDefault(x => x.Name == "PrepareRequest");
+
+            prepareRequestMethod.Should().NotBeNull("Failed to find PrepareRequest method in " + apiClientImplementation.Name);
         }
     }
 }
