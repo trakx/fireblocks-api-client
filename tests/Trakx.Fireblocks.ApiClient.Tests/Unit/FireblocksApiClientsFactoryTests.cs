@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Security.Cryptography;
-using System.Text;
 using Trakx.Common.DateAndTime;
 using Trakx.Fireblocks.ApiClient.Utils;
 
@@ -62,7 +61,7 @@ public class FireblocksApiClientsFactoryTestsData : IEnumerable<object[]>
         
         Factory = new FireblocksApiClientsFactory(apiConfiguration, httpClientFactory, dateTimeProvider);
     }
-    
+
     public IEnumerator<object[]> GetEnumerator()
     {
         yield return MakeMemberData<IAudit_LogsClient, Audit_LogsClient>();
