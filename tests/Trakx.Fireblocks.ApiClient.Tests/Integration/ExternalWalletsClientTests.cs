@@ -20,14 +20,14 @@ public class ExternalWalletsClientTests : FireblocksClientTestsBase
     [Fact]
     public async Task GetExternalWalletsAsync_should_return_all_wallets()
     {
-        var response = await _externalWalletsClient.External_walletsAllAsync();
+        var response = await _externalWalletsClient.GetExternalWalletsAsync();
         response.Content.Should().NotBeEmpty();
     }
 
     [Fact]
     public async Task GetExternalWalletAsync_should_return_one_particular_wallet()
     {
-        var response = await _externalWalletsClient.External_walletsGETAsync("60af415a-61df-59d5-de2b-580cebc097fc", CancellationToken.None);
+        var response = await _externalWalletsClient.GetExternalWalletAsync("60af415a-61df-59d5-de2b-580cebc097fc");
         response.Content.Should().NotBeNull();
     }
 
@@ -36,7 +36,7 @@ public class ExternalWalletsClientTests : FireblocksClientTestsBase
     {
         var walletName = _mockCreator.GetString(10);
         var refId = _mockCreator.GetString(10);
-        var response = await _externalWalletsClient.External_walletsPOSTAsync(new Body21
+        var response = await _externalWalletsClient.CreateExternalWalletAsync(body: new CreateWalletRequest
         {
             Name = walletName,
             CustomerRefId = refId
@@ -46,14 +46,14 @@ public class ExternalWalletsClientTests : FireblocksClientTestsBase
         // After write op, fireblocks needs some time to refresh data :(
         await Task.Delay(2000);
 
-        var response2 = await _externalWalletsClient.External_walletsGETAsync(walletId);
+        var response2 = await _externalWalletsClient.GetExternalWalletAsync(walletId);
         response2.Content.Name.Should().Be(walletName);
-        await _externalWalletsClient.External_walletsDELETEAsync(walletId);
+        await _externalWalletsClient.DeleteExternalWalletAsync(walletId);
 
         // After write op, fireblocks needs some time to refresh data :(
         await Task.Delay(2000);
 
-        await new Func<Task>(async () => await _externalWalletsClient.External_walletsGETAsync(walletId)).Should()
+        await new Func<Task>(async () => await _externalWalletsClient.GetExternalWalletAsync(walletId)).Should()
             .ThrowAsync<ApiException>();
     }
 }
