@@ -7,19 +7,29 @@ using Trakx.Common.Extensions;
 
 namespace Trakx.Fireblocks.ApiClient.Utils;
 
+/// <inheritdoc cref="IBearerCredentialsProvider" />
 public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDisposable
 {
-    private readonly FireblocksApiConfiguration _fireblocksConfiguration;
+    internal readonly FireblocksApiCredentialsConfiguration ApiCredentialsConfiguration;
     private readonly IDateTimeProvider _dateTimeProvider;
     private readonly SigningCredentials _signingCredentials;
     private readonly RSA _rsa;
 
+    /// <summary>
+    /// Constructor to use the default <see cref="FireblocksApiCredentialsConfiguration"/>.
+    /// </summary>
     public BearerCredentialsProvider(FireblocksApiConfiguration configuration, IDateTimeProvider dateTimeProvider)
+        : this((FireblocksApiCredentialsConfiguration)configuration, dateTimeProvider) { }
+
+    /// <summary>
+    /// Constructor to use a custom <see cref="FireblocksApiCredentialsConfiguration"/>.
+    /// </summary>
+    public BearerCredentialsProvider(FireblocksApiCredentialsConfiguration apiCredentialsConfiguration, IDateTimeProvider dateTimeProvider)
     {
-        _fireblocksConfiguration = configuration;
+        ApiCredentialsConfiguration = apiCredentialsConfiguration;
         _dateTimeProvider = dateTimeProvider;
         _rsa = RSA.Create();
-        _rsa.ImportPkcs8PrivateKey(Convert.FromBase64String(_fireblocksConfiguration.ApiPrivateKey), out _);
+        _rsa.ImportPkcs8PrivateKey(Convert.FromBase64String(ApiCredentialsConfiguration.ApiPrivateKey), out _);
         var securityKey = new RsaSecurityKey(_rsa);
         _signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.RsaSha256);
     }
@@ -37,12 +47,12 @@ public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDis
             {"nonce", nonce},
             {"iat", issuedTimestamp},
             {"exp", expirationTimestamp},
-            {"sub", _fireblocksConfiguration.ApiPubKey},
+            {"sub", ApiCredentialsConfiguration.ApiPubKey},
             {"bodyHash", hashBody}
         };
     }
 
-
+    /// <inheritdoc />
     public string GenerateJwtToken(HttpRequestMessage msg)
     {
         var payload = GetPayload(msg);
@@ -62,6 +72,7 @@ public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDis
         return sha256.ComputeHash(Encoding.UTF8.GetBytes(preHash)).ToHexString();
     }
 
+    /// <inheritdoc />
     public void Dispose()
     {
         _rsa.Dispose();

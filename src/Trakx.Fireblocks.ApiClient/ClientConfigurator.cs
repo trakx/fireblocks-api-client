@@ -1,23 +1,48 @@
-﻿using Trakx.Common.ApiClient;
-using Trakx.Fireblocks.ApiClient.Utils;
+﻿using Trakx.Fireblocks.ApiClient.Utils;
 
 namespace Trakx.Fireblocks.ApiClient;
 
-internal class ClientConfigurator
+/// <summary>
+/// Configuration for the API client.
+/// </summary>
+public interface IClientConfigurator
 {
-    private readonly IFireblocksCredentialsProvider _provider;
+    /// <summary>
+    /// Configuration for the API client.
+    /// </summary>
+    FireblocksApiConfiguration ApiClientConfiguration { get; }
 
-    public ClientConfigurator(FireblocksApiConfiguration configuration,
-        IFireblocksCredentialsProvider provider)
+    /// <summary>
+    /// Credential provider for the API client.
+    /// </summary>
+    IFireblocksCredentialsProvider CredentialProvider { get; }
+
+    /// <summary>
+    /// Factory for <see cref="HttpClient"/>.
+    /// </summary>
+    IHttpClientFactory HttpClientFactory { get; }
+}
+
+/// <inheritdoc cref="IClientConfigurator" />
+public class ClientConfigurator : IClientConfigurator
+{
+    /// <inheritdoc cref="ClientConfigurator" />
+    public ClientConfigurator(
+        FireblocksApiConfiguration apiClientConfiguration,
+        IFireblocksCredentialsProvider credentialProvider,
+        IHttpClientFactory httpClientFactory)
     {
-        _provider = provider;
-        Configuration = configuration;
+        ApiClientConfiguration = apiClientConfiguration;
+        CredentialProvider = credentialProvider;
+        HttpClientFactory = httpClientFactory;
     }
 
-    public FireblocksApiConfiguration Configuration { get; }
+    /// <inheritdoc />
+    public FireblocksApiConfiguration ApiClientConfiguration { get; }
 
-    public ICredentialsProvider GetCredentialsProvider()
-    {
-        return _provider;
-    }
+    /// <inheritdoc />
+    public IFireblocksCredentialsProvider CredentialProvider { get; }
+
+    /// <inheritdoc />
+    public IHttpClientFactory HttpClientFactory { get; }
 }
