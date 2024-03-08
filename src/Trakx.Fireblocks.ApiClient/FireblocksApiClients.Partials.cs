@@ -1,7 +1,7 @@
 ﻿#pragma warning disable S1172, IDE0060 // Unused method parameters should be removed
 
 namespace Trakx.Fireblocks.ApiClient;
-
+/*
 internal partial class Audit_LogsClient
 {
     partial void PrepareRequest(HttpClient client, HttpRequestMessage request, string url)
@@ -138,4 +138,4 @@ internal partial class Travel_Rule_BetaClient
     {
         CredentialsProvider.AddCredentials(request);
     }
-}
+}*/
