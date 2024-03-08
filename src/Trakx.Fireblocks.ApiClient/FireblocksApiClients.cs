@@ -3661,7 +3661,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="limit">number of exchanges per page</param>
         /// <returns>An ExchangeAccount object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<ExchangeAccountsPaged>>> GetPagedExchangeAccountsAsync(double limit, string before = null, string after = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ExchangeAccountsPaged>> GetPagedExchangeAccountsAsync(double limit, string before = null, string after = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3832,7 +3832,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="limit">number of exchanges per page</param>
         /// <returns>An ExchangeAccount object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<ExchangeAccountsPaged>>> GetPagedExchangeAccountsAsync(double limit, string before = null, string after = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ExchangeAccountsPaged>> GetPagedExchangeAccountsAsync(double limit, string before = null, string after = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (limit == null)
                 throw new System.ArgumentNullException("limit");
@@ -3887,12 +3887,12 @@ namespace Trakx.Fireblocks.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<ExchangeAccountsPaged>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<ExchangeAccountsPaged>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new Trakx.Common.ApiClient.Response<System.Collections.Generic.List<ExchangeAccountsPaged>>(status_, headers_, objectResponse_.Object);
+                            return new Trakx.Common.ApiClient.Response<ExchangeAccountsPaged>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -26913,8 +26913,8 @@ namespace Trakx.Fireblocks.ApiClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial record ExchangeAccountsPaged
     {
-        [Newtonsoft.Json.JsonProperty("ExchangeAccount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<ExchangeAccount> ExchangeAccount { get; init; }
+        [Newtonsoft.Json.JsonProperty("exchanges", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.List<ExchangeAccount> Exchanges { get; init; }
 
         [Newtonsoft.Json.JsonProperty("paging", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Paging5 Paging { get; init; }
@@ -35464,6 +35464,9 @@ namespace Trakx.Fireblocks.ApiClient
 
         [System.Runtime.Serialization.EnumMember(Value = @"XDB_ASSET")]
         XDB_ASSET = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NEAR_ASSET")]
+        NEAR_ASSET = 10,
 
     }
 

@@ -1520,9 +1520,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExchangeAccountsPaged'
+                $ref: '#/components/schemas/ExchangeAccountsPaged'
         default:
           $ref: '#/components/responses/Error'
   /exchange_accounts/{exchangeAccountId}:
@@ -8983,7 +8981,7 @@ components:
     ExchangeAccountsPaged:
       type: object
       properties:
-        ExchangeAccount:
+        exchanges:
           type: array
           items:
             $ref: '#/components/schemas/ExchangeAccount'
@@ -9570,6 +9568,7 @@ components:
             - TRON_TRC20
             - XLM_ASSET
             - XDB_ASSET
+            - NEAR_ASSET
         contractAddress:
           type: string
         nativeAsset:

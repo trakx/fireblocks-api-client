@@ -23,5 +23,4 @@ public class SupportedAssetsClientTests : FireblocksClientTestsBase
         var asset = assets.Content.Where(i => i.Id.Contains("ftt", StringComparison.InvariantCultureIgnoreCase)).ToList();
         assets.Content.Should().NotBeEmpty();
     }
-
 }
