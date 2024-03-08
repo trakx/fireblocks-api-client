@@ -30,6 +30,7 @@ public static partial class AddFireblocksClientExtension
         services.AddSingleton<IBearerCredentialsProvider, BearerCredentialsProvider>();
         services.AddSingleton<IFireblocksCredentialsProvider, ApiKeyCredentialsProvider>();
         services.AddSingleton<IClientConfigurator, ClientConfigurator>();
+        services.AddSingleton<IFireblocksApiClientsFactory, FireblocksApiClientsFactory>();
 
         services.AddApiClientsFromBaseType<IFireblocksApiClientBase>(
             medianFirstRetryDelayMillis: apiConfiguration.InitialRetryDelayInMilliseconds,

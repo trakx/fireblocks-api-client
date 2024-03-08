@@ -5,7 +5,7 @@ namespace Trakx.Fireblocks.ApiClient;
 internal abstract class AuthorisedClient
 {
     private readonly IHttpClientFactory _httpClientFactory;
-    internal readonly ICredentialsProvider CredentialProvider;
+    internal readonly ICredentialsProvider CredentialsProvider;
     protected string BaseUrl { get; }
     public virtual string HttpClientName { get; }
 
@@ -13,7 +13,7 @@ internal abstract class AuthorisedClient
     {
         _httpClientFactory = clientConfigurator.HttpClientFactory;
         HttpClientName = this.GetType().FullName!;
-        CredentialProvider = clientConfigurator.CredentialProvider;
+        CredentialsProvider = clientConfigurator.CredentialProvider;
 
         BaseUrl = clientConfigurator.ApiClientConfiguration.BaseUrl.AbsoluteUri;
         if (BaseUrl[^1] != '/') BaseUrl += "/";
