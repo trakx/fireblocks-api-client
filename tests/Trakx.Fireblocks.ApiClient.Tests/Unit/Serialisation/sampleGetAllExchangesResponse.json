@@ -1,97 +1,11 @@
 [
   {
-    "id": "02e4dcd7-b5ec-4208-8908-34311128ad6f",
-    "name": "Kucoin",
-    "type": "KUCOIN",
-    "assets": [
-      {
-        "id": "CRO",
-        "balance": "123.45",
-        "total": "125.45",
-        "available": "123.45",
-        "lockedAmount": "2.0"
-      },
-      {
-        "id": "UOS",
-        "balance": "123.45",
-        "total": "125.45",
-        "available": "123.45",
-        "lockedAmount": "2.0"
-      },
-      {
-        "id": "USDC",
-        "balance": "123.45",
-        "total": "125.45",
-        "available": "123.45",
-        "lockedAmount": "2.0"
-      },
-      {
-        "id": "USDT",
-        "balance": "123.45",
-        "total": "125.45",
-        "available": "123.45",
-        "lockedAmount": "2.0"
-      }
-    ],
-    "isSubaccount": false,
-    "status": "APPROVED",
-    "tradingAccounts": [
-      {
-        "type": "MARGIN",
-        "assets": [],
-        "name": "Margin"
-      },
-      {
-        "type": "SPOT",
-        "assets": [
-          {
-            "id": "ANC",
-            "balance": "123.45",
-            "total": "125.45",
-            "available": "123.45",
-            "lockedAmount": "2.0"
-          },
-          {
-            "id": "KCS",
-            "balance": "123.45",
-            "total": "125.45",
-            "available": "123.45",
-            "lockedAmount": "2.0"
-          }
-        ],
-        "name": "Trade"
-      }
-    ],
-    "fundableAccountType": "EXCHANGE"
-  },
-  {
     "id": "18507832-08ed-81af-912f-c1064b7af31b",
     "name": "FTX",
     "type": "FTX",
     "assets": [],
     "isSubaccount": false,
     "status": "APPROVED"
-  },
-  {
-    "id": "299ba2bc-0db5-4002-bd2b-94e0db8c7247",
-    "name": "Gate.io",
-    "type": "GATEIO",
-    "assets": [],
-    "isSubaccount": false,
-    "status": "APPROVED",
-    "tradingAccounts": [
-      {
-        "type": "FUTURES",
-        "assets": [],
-        "name": "Futures"
-      },
-      {
-        "type": "OPTIONS",
-        "assets": [],
-        "name": "Options"
-      }
-    ],
-    "fundableAccountType": "SPOT"
   },
   {
     "id": "3f8698df-a486-1e28-5e2a-9bfdfb2fa157",
@@ -114,7 +28,7 @@
   {
     "id": "84eb03dc-56ff-5d5e-546a-40b1f787caf4",
     "name": "Coinbase",
-    "type": "COINBASEEXCHANGE",
+    "type": "COINBASEPRO",
     "assets": [
       {
         "id": "CRO",

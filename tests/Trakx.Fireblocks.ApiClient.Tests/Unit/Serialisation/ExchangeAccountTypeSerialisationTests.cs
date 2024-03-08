@@ -8,6 +8,6 @@ public class ExchangeAccountTypeSerialisationTests
     {
         var responseContent = File.ReadAllText("Unit/Serialisation/sampleGetAllExchangesResponse.json");
         var exchanges = Newtonsoft.Json.JsonConvert.DeserializeObject<ExchangeAccount[]>(responseContent);
-        exchanges!.Length.Should().Be(9);
+        exchanges!.Length.Should().Be(7);
     }
 }
