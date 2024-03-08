@@ -30,7 +30,7 @@
       "clientClassAccessModifier": "internal",
       "typeAccessModifier": "public",
       "generateContractsOutput": false,
-      "contractsNamespace": "Trakx.Fireblocks.ApiClient.Contracts",
+      "contractsNamespace": null,
       "contractsOutputFilePath": null,
       "parameterDateTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
       "parameterDateFormat": "yyyy-MM-dd",

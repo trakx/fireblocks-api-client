@@ -11,8 +11,8 @@ public class FireblocksApiClientsFactoryTests
     [ClassData(typeof(FireblocksApiClientsFactoryTestsData))]
     public void CreateApiClient_should_create_new_client_with_given_credentials(
         Func<FireblocksApiCredentialsConfiguration, IFireblocksApiClientBase> func,
-        Type expectedInterfaceType,
-        Type expectedImplementationType)
+        System.Type expectedInterfaceType,
+        System.Type expectedImplementationType)
     {
         // Arrange
         using var rsa = RSA.Create();
@@ -73,16 +73,31 @@ public class FireblocksApiClientsFactoryTestsData : IEnumerable<object[]>
         yield return MakeMemberData<IInternal_walletsClient, Internal_walletsClient>();
         yield return MakeMemberData<INetwork_connectionsClient, Network_connectionsClient>();
         yield return MakeMemberData<IOff_exchangesClient, Off_exchangesClient>();
-        yield return MakeMemberData<ISupported_assetsClient, Supported_assetsClient>();
         yield return MakeMemberData<ITransactionsClient, TransactionsClient>();
         yield return MakeMemberData<IUsersClient, UsersClient>();
         yield return MakeMemberData<IVaultsClient, VaultsClient>();
         yield return MakeMemberData<IWebhooksClient, WebhooksClient>();
-        yield return MakeMemberData<INFTs_BetaClient, NFTs_BetaClient>();
         yield return MakeMemberData<IWeb3_connectionsClient, Web3_connectionsClient>();
-        yield return MakeMemberData<IPayments__Cross_Border_settlementClient, Payments__Cross_Border_settlementClient>();
         yield return MakeMemberData<IPayments__PayoutClient, Payments__PayoutClient>();
-        yield return MakeMemberData<ITravel_Rule_BetaClient, Travel_Rule_BetaClient>();
+        yield return MakeMemberData<IAssetsClient, AssetsClient>();
+        yield return MakeMemberData<IWorkspaceClient, WorkspaceClient>();
+        yield return MakeMemberData<IBlockchains_and_assetsClient, Blockchains_and_assetsClient>();
+        yield return MakeMemberData<IUser_groups__BetaClient, User_groups__BetaClient>();
+        yield return MakeMemberData<IStaking__BetaClient, Staking__BetaClient>();
+        yield return MakeMemberData<IAdmin_QuorumClient, Admin_QuorumClient>();
+        yield return MakeMemberData<INFTsClient, NFTsClient>();
+        yield return MakeMemberData<ITravel_Rule__BetaClient, Travel_Rule__BetaClient>();
+        yield return MakeMemberData<IComplianceClient, ComplianceClient>();
+        yield return MakeMemberData<ICompliance_Screening_ConfigurationClient, Compliance_Screening_ConfigurationClient>();
+        yield return MakeMemberData<IOTA__BetaClient, OTA__BetaClient>();
+        yield return MakeMemberData<IWorkspace_Status__BetaClient, Workspace_Status__BetaClient>();
+        yield return MakeMemberData<IPolicy_Editor__BetaClient, Policy_Editor__BetaClient>();
+        yield return MakeMemberData<IConsole_UserClient, Console_UserClient>();
+        yield return MakeMemberData<IApi_UserClient, Api_UserClient>();
+        yield return MakeMemberData<IReset_deviceClient, Reset_deviceClient>();
+        yield return MakeMemberData<IWhitelist_ip_addressesClient, Whitelist_ip_addressesClient>();
+        yield return MakeMemberData<ISmart_TransferClient, Smart_TransferClient>();
+        yield return MakeMemberData<IJobsClient, JobsClient>();
     }
 
     private object[] MakeMemberData<TApiClientInterface, TApiClientImplementation>() where TApiClientInterface : IFireblocksApiClientBase

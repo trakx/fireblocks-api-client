@@ -6,12 +6,42 @@
 namespace Trakx.Fireblocks.ApiClient
 {
 <#
-var clientNames = new [] { "Audit_Logs", "Contracts", "Exchange_accounts",
-    "External_wallets", "Fiat_accounts", "Gas_stations",
-    "Internal_wallets", "Network_connections",
-    "Off_exchanges", "Supported_assets", "Transactions",
-    "Users", "Vaults", "Webhooks", "NFTs_Beta", "Web3_connections",
-    "Payments__Cross_Border_settlement", "Payments__Payout", "Travel_Rule_Beta"
+var clientNames = new []
+{
+    "Audit_LogsClient",
+    "ContractsClient",
+    "Exchange_accountsClient",
+    "External_walletsClient",
+    "Fiat_accountsClient",
+    "Gas_stationsClient",
+    "Internal_walletsClient",
+    "Network_connectionsClient",
+    "Off_exchangesClient",
+    "TransactionsClient",
+    "UsersClient",
+    "VaultsClient",
+    "WebhooksClient",
+    "Web3_connectionsClient",
+    "Payments__PayoutClient",
+    "AssetsClient",
+    "WorkspaceClient",
+    "Blockchains_and_assetsClient",
+    "User_groups__BetaClient",
+    "Staking__BetaClient",
+    "Admin_QuorumClient",
+    "NFTsClient",
+    "Travel_Rule__BetaClient",
+    "ComplianceClient",
+    "Compliance_Screening_ConfigurationClient",
+    "OTA__BetaClient",
+    "Workspace_Status__BetaClient",
+    "Policy_Editor__BetaClient",
+    "Console_UserClient",
+    "Api_UserClient",
+    "Reset_deviceClient",
+    "Whitelist_ip_addressesClient",
+    "Smart_TransferClient",
+    "JobsClient"
 };
 
 foreach(var name in clientNames)
@@ -24,6 +54,7 @@ foreach(var name in clientNames)
             CredentialProvider.AddCredentials(request);
         }
     }
+
 <#
 }
 #>

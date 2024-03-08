@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.Extensions.DependencyInjection;
 using Trakx.Fireblocks.ApiClient.Tests.Integration.Base;
 
@@ -16,7 +17,7 @@ public class TransactionsClientTests : FireblocksClientTestsBase
     [Fact]
     public async Task GetTransactionsAsync_should_query_ethereum_transactions_when_passing_eth_asset_id()
     {
-        var response = await _transactionsClient.TransactionsAllAsync(assets: "ETH_TEST3", limit: 2);
+        var response = await _transactionsClient.GetTransactionsAsync(assets: "ETH_TEST3", limit: 2);
         response.Content.Should().NotBeEmpty();
     }
 
@@ -25,7 +26,7 @@ public class TransactionsClientTests : FireblocksClientTestsBase
     {
         var trans = new TransactionRequest
         {
-            Amount = 0.001,
+            Amount = "0.001",
             Destination = new DestinationTransferPeerPath
             {
                 Id = "0",
@@ -40,15 +41,15 @@ public class TransactionsClientTests : FireblocksClientTestsBase
             AssetId = "ETH_TEST3",
             MaxFee = "0.1"
         };
-        var createResponse = await _transactionsClient.TransactionsPOSTAsync(trans);
+        var createResponse = await _transactionsClient.CreateTransactionAsync(body: trans);
         var id = createResponse.Content.Id;
 
-        var getResponse = await _transactionsClient.TransactionsGETAsync(id, CancellationToken.None);
+        var getResponse = await _transactionsClient.GetTransactionAsync(id);
         var actualTrans = getResponse.Content;
         actualTrans.AssetId.Should().Be(trans.AssetId);
-        actualTrans.Amount.Should().Be(trans.Amount);
+        actualTrans.AmountInfo.Amount.Should().Be(trans.Amount);
 
-        var cancelResponse = await _transactionsClient.CancelAsync(id, CancellationToken.None);
+        var cancelResponse = await _transactionsClient.CancelTransactionAsync(id);
 
         cancelResponse.Content.Should().NotBeNull();
         cancelResponse.Content.Success.Should().BeTrue();
