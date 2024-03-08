@@ -132,7 +132,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FireblocksJobCreated'
+                $ref: '#/components/schemas/BatchJobCreated'
         default:
           $ref: '#/components/responses/Error'
   /vault/accounts_paged:
@@ -1370,7 +1370,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FireblocksJobCreated'
+                $ref: '#/components/schemas/BatchJobCreated'
         default:
           $ref: '#/components/responses/Error'
       operationId: createAssetsBulk
@@ -8376,7 +8376,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FireblocksJobs'
+                $ref: '#/components/schemas/BatchJobs'
         default:
           $ref: '#/components/responses/Error'
   /batch/{jobId}:
@@ -8402,7 +8402,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FireblocksJob'
+                $ref: '#/components/schemas/BatchJob'
         default:
           $ref: '#/components/responses/Error'
   /batch/{jobId}/pause:
@@ -8493,7 +8493,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FireblocksTasks'
+                $ref: '#/components/schemas/BatchTasks'
         default:
           $ref: '#/components/responses/Error'
 components:
@@ -8642,7 +8642,7 @@ components:
           type: array
           items:
             type: string
-    FireblocksJobCreated:
+    BatchJobCreated:
       type: object
       properties:
         jobId:
@@ -13948,7 +13948,7 @@ components:
             type: string
       required:
         - userGroupIds
-    FireblocksTask:
+    BatchTask:
       type: object
       properties:
         id:
@@ -13965,7 +13965,7 @@ components:
           type: number
         state:
           type: string
-    FireblocksJob:
+    BatchJob:
       type: object
       properties:
         id:
@@ -13985,15 +13985,15 @@ components:
         tasks:
           type: array
           items:
-            $ref: '#/components/schemas/FireblocksTask'
-    FireblocksJobs:
+            $ref: '#/components/schemas/BatchTask'
+    BatchJobs:
       type: array
       items:
-        $ref: '#/components/schemas/FireblocksJob'
-    FireblocksTasks:
+        $ref: '#/components/schemas/BatchJob'
+    BatchTasks:
       type: array
       items:
-        $ref: '#/components/schemas/FireblocksTask'
+        $ref: '#/components/schemas/BatchTask'
   responses:
     Error:
       description: Error Response

@@ -64,7 +64,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="idempotency_Key">A unique identifier for the request. If the request is sent multiple times with the same idempotency key, the server will return the same response as the first request. The idempotency key is valid for 24 hours.</param>
         /// <returns>A JobCreated object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<FireblocksJobCreated>> CreateMultipleAccountsAsync(CreateMultipleAccountsRequest body, string idempotency_Key = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<BatchJobCreated>> CreateMultipleAccountsAsync(CreateMultipleAccountsRequest body, string idempotency_Key = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -617,7 +617,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="idempotency_Key">A unique identifier for the request. If the request is sent multiple times with the same idempotency key, the server will return the same response as the first request. The idempotency key is valid for 24 hours.</param>
         /// <returns>A JobCreated object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<FireblocksJobCreated>> CreateMultipleAccountsAsync(CreateMultipleAccountsRequest body, string idempotency_Key = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<BatchJobCreated>> CreateMultipleAccountsAsync(CreateMultipleAccountsRequest body, string idempotency_Key = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -668,12 +668,12 @@ namespace Trakx.Fireblocks.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<FireblocksJobCreated>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<BatchJobCreated>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new Trakx.Common.ApiClient.Response<FireblocksJobCreated>(status_, headers_, objectResponse_.Object);
+                            return new Trakx.Common.ApiClient.Response<BatchJobCreated>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -3149,7 +3149,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="idempotency_Key">A unique identifier for the request. If the request is sent multiple times with the same idempotency key, the server will return the same response as the first request. The idempotency key is valid for 24 hours.</param>
         /// <returns>A JobCreated object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<FireblocksJobCreated>> CreateAssetsBulkAsync(CreateAssetsBulkRequest body, string idempotency_Key = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<BatchJobCreated>> CreateAssetsBulkAsync(CreateAssetsBulkRequest body, string idempotency_Key = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 
@@ -3191,7 +3191,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="idempotency_Key">A unique identifier for the request. If the request is sent multiple times with the same idempotency key, the server will return the same response as the first request. The idempotency key is valid for 24 hours.</param>
         /// <returns>A JobCreated object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<FireblocksJobCreated>> CreateAssetsBulkAsync(CreateAssetsBulkRequest body, string idempotency_Key = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<BatchJobCreated>> CreateAssetsBulkAsync(CreateAssetsBulkRequest body, string idempotency_Key = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -3242,12 +3242,12 @@ namespace Trakx.Fireblocks.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<FireblocksJobCreated>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<BatchJobCreated>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new Trakx.Common.ApiClient.Response<FireblocksJobCreated>(status_, headers_, objectResponse_.Object);
+                            return new Trakx.Common.ApiClient.Response<BatchJobCreated>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -25264,7 +25264,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="toTime">End of time range in ms since 1970</param>
         /// <returns>An array of jobs</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<FireblocksJob>>> GetJobsAsync(int? fromTime = null, int? toTime = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<BatchJob>>> GetJobsAsync(int? fromTime = null, int? toTime = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -25276,7 +25276,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="jobId">The requested job id</param>
         /// <returns>A JSON object that describes the job</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<FireblocksJob>> GetJobAsync(string jobId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<BatchJob>> GetJobAsync(string jobId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -25327,7 +25327,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="jobId">The requested job id</param>
         /// <returns>An array of tasks</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<FireblocksTask>>> GetJobTasksAsync(string jobId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<BatchTask>>> GetJobTasksAsync(string jobId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 
@@ -25366,7 +25366,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="toTime">End of time range in ms since 1970</param>
         /// <returns>An array of jobs</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<FireblocksJob>>> GetJobsAsync(int? fromTime = null, int? toTime = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<BatchJob>>> GetJobsAsync(int? fromTime = null, int? toTime = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = await CreateHttpClientAsync(cancellationToken).ConfigureAwait(false);
             var disposeClient_ = true;
@@ -25417,12 +25417,12 @@ namespace Trakx.Fireblocks.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<FireblocksJob>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<BatchJob>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new Trakx.Common.ApiClient.Response<System.Collections.Generic.List<FireblocksJob>>(status_, headers_, objectResponse_.Object);
+                            return new Trakx.Common.ApiClient.Response<System.Collections.Generic.List<BatchJob>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -25458,7 +25458,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="jobId">The requested job id</param>
         /// <returns>A JSON object that describes the job</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<FireblocksJob>> GetJobAsync(string jobId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<BatchJob>> GetJobAsync(string jobId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (jobId == null)
                 throw new System.ArgumentNullException("jobId");
@@ -25503,12 +25503,12 @@ namespace Trakx.Fireblocks.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<FireblocksJob>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<BatchJob>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new Trakx.Common.ApiClient.Response<FireblocksJob>(status_, headers_, objectResponse_.Object);
+                            return new Trakx.Common.ApiClient.Response<BatchJob>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -25802,7 +25802,7 @@ namespace Trakx.Fireblocks.ApiClient
         /// <param name="jobId">The requested job id</param>
         /// <returns>An array of tasks</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<FireblocksTask>>> GetJobTasksAsync(string jobId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<System.Collections.Generic.List<BatchTask>>> GetJobTasksAsync(string jobId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (jobId == null)
                 throw new System.ArgumentNullException("jobId");
@@ -25848,12 +25848,12 @@ namespace Trakx.Fireblocks.ApiClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<FireblocksTask>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<BatchTask>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new Trakx.Common.ApiClient.Response<System.Collections.Generic.List<FireblocksTask>>(status_, headers_, objectResponse_.Object);
+                            return new Trakx.Common.ApiClient.Response<System.Collections.Generic.List<BatchTask>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -26233,7 +26233,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record FireblocksJobCreated
+    public partial record BatchJobCreated
     {
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string JobId { get; init; }
@@ -34373,7 +34373,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record FireblocksTask
+    public partial record BatchTask
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Id { get; init; }
@@ -34408,7 +34408,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial record FireblocksJob
+    public partial record BatchJob
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Id { get; init; }
@@ -34432,7 +34432,7 @@ namespace Trakx.Fireblocks.ApiClient
         public string State { get; init; }
 
         [Newtonsoft.Json.JsonProperty("tasks", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<FireblocksTask> Tasks { get; init; }
+        public System.Collections.Generic.List<BatchTask> Tasks { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -34446,13 +34446,13 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class FireblocksJobs : System.Collections.Generic.List<FireblocksJob>
+    public partial class BatchJobs : System.Collections.Generic.List<BatchJob>
     {
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class FireblocksTasks : System.Collections.Generic.List<FireblocksTask>
+    public partial class BatchTasks : System.Collections.Generic.List<BatchTask>
     {
 
     }
