@@ -25250,7 +25250,7 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IClient : IFireblocksApiClientBase
+    public partial interface IJobsClient : IFireblocksApiClientBase
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -25332,11 +25332,11 @@ namespace Trakx.Fireblocks.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    internal partial class Client : AuthorisedClient, IClient
+    internal partial class JobsClient : AuthorisedClient, IJobsClient
     {
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Client(IClientConfigurator configuration) : base(configuration)
+        public JobsClient(IClientConfigurator configuration) : base(configuration)
         {
         }
 

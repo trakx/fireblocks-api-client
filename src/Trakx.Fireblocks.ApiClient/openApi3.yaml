@@ -8351,6 +8351,8 @@ paths:
     get:
       operationId: getJobs
       summary: Return a list of jobs belonging to tenant
+      tags:
+        - Jobs
       description: >-
         Get an array of objects including all active, paused, canceled, and
         complete jobs in a workspace.
@@ -8383,6 +8385,8 @@ paths:
     get:
       operationId: getJob
       summary: Get job details
+      tags:
+        - Jobs
       description: Get an object describing the given job
       parameters:
         - in: path
@@ -8406,6 +8410,8 @@ paths:
   /batch/{jobId}/pause:
     post:
       summary: Pause a job
+      tags:
+        - Jobs
       description: >-
         Pause the given job, after the current task is done. A paused job can
         later be resumed by calling ‘continue’, or canceled.
@@ -8427,6 +8433,8 @@ paths:
     post:
       operationId: continueJob
       summary: Continue a paused job
+      tags:
+        - Jobs
       description: Continue the given paused job.
       parameters:
         - in: path
@@ -8445,6 +8453,8 @@ paths:
     post:
       operationId: cancelJob
       summary: Cancel a running job
+      tags:
+        - Jobs
       description: >-
         Stop the given job immediately. If the job is in the ‘Active’ state, the
         job will be canceled after completing the current task. Vault accounts
@@ -8466,6 +8476,8 @@ paths:
     get:
       operationId: getJobTasks
       summary: Return a list of tasks for given job
+      tags:
+        - Jobs
       description: Return a list of tasks for given job
       parameters:
         - in: path
