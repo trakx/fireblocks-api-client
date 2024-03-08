@@ -3278,7 +3278,7 @@ paths:
       summary: List all asset types supported by Fireblocks
       description: Returns all asset types supported by Fireblocks.
       tags:
-        - Blockchains & assets
+        - Blockchains and assets
       x-readme:
         code-samples:
           - language: python
@@ -4553,7 +4553,7 @@ paths:
         - Please note that this endpoint is available only for API keys with
         Admin permissions.
       tags:
-        - User groups (Beta)
+        - User groups - Beta
       responses:
         '200':
           description: List of the user groups in your workspace
@@ -4581,7 +4581,7 @@ paths:
         - Please note that this endpoint is available only for API keys with
         Admin permissions.
       tags:
-        - User groups (Beta)
+        - User groups - Beta
       parameters:
         - $ref: '#/components/parameters/X-Idempotency-Key'
       requestBody:
@@ -4618,7 +4618,7 @@ paths:
         - Please note that this endpoint is available only for API keys with
         Admin permissions.
       tags:
-        - User groups (Beta)
+        - User groups - Beta
       parameters:
         - in: path
           required: true
@@ -4653,7 +4653,7 @@ paths:
         - Please note that this endpoint is available only for API keys with
         Admin permissions.
       tags:
-        - User groups (Beta)
+        - User groups - Beta
       parameters:
         - in: path
           required: true
@@ -4695,7 +4695,7 @@ paths:
         - Please note that this endpoint is available only for API keys with
         Admin permissions.
       tags:
-        - User groups (Beta)
+        - User groups - Beta
       parameters:
         - in: path
           required: true
@@ -5012,7 +5012,7 @@ paths:
                 - SOL
           description: ''
       tags:
-        - Staking (Beta)
+        - Staking - Beta
   /staking/chains/{chainDescriptor}/chainInfo:
     get:
       operationId: getChainInfo
@@ -5040,7 +5040,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ChainInfoResponseDto'
       tags:
-        - Staking (Beta)
+        - Staking - Beta
   /staking/chains/{chainDescriptor}/{actionId}:
     post:
       operationId: executeAction
@@ -5117,7 +5117,7 @@ paths:
                 withdraw:
                   value: {}
       tags:
-        - Staking (Beta)
+        - Staking - Beta
   /staking/positions:
     get:
       operationId: getAllDelegations
@@ -5145,7 +5145,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/DelegationDto'
       tags:
-        - Staking (Beta)
+        - Staking - Beta
   /staking/positions/summary:
     get:
       operationId: getSummary
@@ -5183,7 +5183,7 @@ paths:
                   - chainDescriptor: SOL
                     amount: '0.077345939'
       tags:
-        - Staking (Beta)
+        - Staking - Beta
   /staking/positions/summary/vaults:
     get:
       operationId: getSummaryByVault
@@ -5237,7 +5237,7 @@ paths:
                     - chainDescriptor: SOL
                       amount: '0.011191566'
       tags:
-        - Staking (Beta)
+        - Staking - Beta
   /staking/positions/{id}:
     get:
       operationId: getDelegationById
@@ -5252,7 +5252,6 @@ paths:
           description: The unique identifier of the staking position
           schema:
             type: string
-            format: uuid
       responses:
         '200':
           description: Position data was returned successfully
@@ -5261,7 +5260,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DelegationDto'
       tags:
-        - Staking (Beta)
+        - Staking - Beta
   /staking/providers:
     get:
       operationId: getProviders
@@ -5278,7 +5277,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/ProviderDto'
       tags:
-        - Staking (Beta)
+        - Staking - Beta
   /staking/providers/{providerId}/approveTermsOfService:
     post:
       operationId: approveTermsOfServiceByProviderId
@@ -5309,7 +5308,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProvidersResponseDto'
       tags:
-        - Staking (Beta)
+        - Staking - Beta
   /admin_quorum:
     put:
       operationId: setAdminQuorumThreshold
@@ -6236,7 +6235,7 @@ paths:
         '500':
           description: Internal server error
       tags:
-        - Travel Rule (Beta)
+        - Travel Rule - Beta
   /screening/travel_rule/transaction/validate/full:
     post:
       operationId: validateFullTravelRuleTransaction
@@ -6277,7 +6276,7 @@ paths:
         '500':
           description: Internal server error
       tags:
-        - Travel Rule (Beta)
+        - Travel Rule - Beta
   /screening/travel_rule/vasp/{did}:
     get:
       operationId: getVASPByDID
@@ -6323,7 +6322,7 @@ paths:
         '500':
           description: Internal server error
       tags:
-        - Travel Rule (Beta)
+        - Travel Rule - Beta
   /screening/travel_rule/vasp:
     get:
       operationId: getVASPs
@@ -6379,7 +6378,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TravelRuleGetAllVASPsResponse'
       tags:
-        - Travel Rule (Beta)
+        - Travel Rule - Beta
   /screening/travel_rule/vasp/update:
     put:
       operationId: updateVasp
@@ -6420,7 +6419,7 @@ paths:
         '500':
           description: Internal server error
       tags:
-        - Travel Rule (Beta)
+        - Travel Rule - Beta
   /screening/travel_rule/post_screening_policy:
     get:
       operationId: getPostScreeningPolicy
@@ -6586,7 +6585,7 @@ paths:
         '500':
           description: Internal server error
       tags:
-        - OTA (Beta)
+        - OTA - Beta
     get:
       operationId: getOtaStatus
       summary: Returns current OTA status
@@ -6604,7 +6603,7 @@ paths:
         '404':
           description: Configuration not found for tenant
       tags:
-        - OTA (Beta)
+        - OTA - Beta
   /management/workspace_status:
     get:
       operationId: getWorkspaceStatus
@@ -6623,7 +6622,7 @@ paths:
         '404':
           description: Workspace not found
       tags:
-        - Workspace Status (Beta)
+        - Workspace Status - Beta
   /tap/active_policy:
     get:
       operationId: getActivePolicy
@@ -6638,7 +6637,7 @@ paths:
         please contact your Fireblocks Customer Success Manager or send an email
         to CSM@fireblocks.com.
       tags:
-        - Policy Editor (Beta)
+        - Policy Editor - Beta
       x-readme:
         code-samples:
           - language: python
@@ -6673,7 +6672,7 @@ paths:
         please contact your Fireblocks Customer Success Manager or send an email
         to CSM@fireblocks.com.
       tags:
-        - Policy Editor (Beta)
+        - Policy Editor - Beta
       x-readme:
         code-samples:
           - language: python
@@ -6707,7 +6706,7 @@ paths:
         please contact your Fireblocks Customer Success Manager or send an email
         to CSM@fireblocks.com.
       tags:
-        - Policy Editor (Beta)
+        - Policy Editor - Beta
       parameters:
         - $ref: '#/components/parameters/X-Idempotency-Key'
       x-readme:
@@ -6749,7 +6748,7 @@ paths:
         please contact your Fireblocks Customer Success Manager or send an email
         to CSM@fireblocks.com.
       tags:
-        - Policy Editor (Beta)
+        - Policy Editor - Beta
       x-readme:
         code-samples:
           - language: python
@@ -6793,7 +6792,7 @@ paths:
         please contact your Fireblocks Customer Success Manager or send an email
         to CSM@fireblocks.com.
       tags:
-        - Policy Editor (Beta)
+        - Policy Editor - Beta
       x-readme:
         code-samples:
           - language: python

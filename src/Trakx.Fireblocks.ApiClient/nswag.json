@@ -39,7 +39,7 @@
       "serializeTypeInformation": false,
       "queryNullValue": "null",
       "className": "{controller}Client",
-      "operationGenerationMode": "MultipleClientsFromPathSegments",
+      "operationGenerationMode": "MultipleClientsFromFirstTagAndOperationId",
       "additionalNamespaceUsages": [
         "Trakx.Common.ApiClient",
         "Trakx.Common.ApiClient.Exceptions"
