@@ -1,9 +1,11 @@
-﻿openapi: 3.0.0
+openapi: 3.0.0
 info:
   title: Fireblocks API
   version: 1.6.2
   contact:
     email: support@fireblocks.com
+servers:
+  - url: https://api.fireblocks.io/v1
 x-readme:
   explorer-enabled: false
   samples-languages:
@@ -132,7 +134,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchJobCreated'
+                $ref: '#/components/schemas/JobCreated'
         default:
           $ref: '#/components/responses/Error'
   /vault/accounts_paged:
@@ -1370,7 +1372,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchJobCreated'
+                $ref: '#/components/schemas/JobCreated'
         default:
           $ref: '#/components/responses/Error'
       operationId: createAssetsBulk
@@ -1520,7 +1522,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExchangeAccountsPaged'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExchangeAccountsPaged'
         default:
           $ref: '#/components/responses/Error'
   /exchange_accounts/{exchangeAccountId}:
@@ -3276,7 +3280,7 @@ paths:
       summary: List all asset types supported by Fireblocks
       description: Returns all asset types supported by Fireblocks.
       tags:
-        - Blockchains and assets
+        - Blockchains & assets
       x-readme:
         code-samples:
           - language: python
@@ -4059,67 +4063,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '501':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '502':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '503':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '504':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '505':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '506':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '507':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '508':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '510':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '511':
+        5XX:
           description: Internal error.
           content:
             application/json:
@@ -4186,67 +4130,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '501':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '502':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '503':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '504':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '505':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '506':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '507':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '508':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '510':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '511':
+        5XX:
           description: Internal error.
           content:
             application/json:
@@ -4339,67 +4223,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '501':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '502':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '503':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '504':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '505':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '506':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '507':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '508':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '510':
-          description: Internal error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '511':
+        5XX:
           description: Internal error.
           content:
             application/json:
@@ -4551,7 +4375,7 @@ paths:
         - Please note that this endpoint is available only for API keys with
         Admin permissions.
       tags:
-        - User groups - Beta
+        - User groups (Beta)
       responses:
         '200':
           description: List of the user groups in your workspace
@@ -4579,7 +4403,7 @@ paths:
         - Please note that this endpoint is available only for API keys with
         Admin permissions.
       tags:
-        - User groups - Beta
+        - User groups (Beta)
       parameters:
         - $ref: '#/components/parameters/X-Idempotency-Key'
       requestBody:
@@ -4616,7 +4440,7 @@ paths:
         - Please note that this endpoint is available only for API keys with
         Admin permissions.
       tags:
-        - User groups - Beta
+        - User groups (Beta)
       parameters:
         - in: path
           required: true
@@ -4651,7 +4475,7 @@ paths:
         - Please note that this endpoint is available only for API keys with
         Admin permissions.
       tags:
-        - User groups - Beta
+        - User groups (Beta)
       parameters:
         - in: path
           required: true
@@ -4693,7 +4517,7 @@ paths:
         - Please note that this endpoint is available only for API keys with
         Admin permissions.
       tags:
-        - User groups - Beta
+        - User groups (Beta)
       parameters:
         - in: path
           required: true
@@ -5010,7 +4834,7 @@ paths:
                 - SOL
           description: ''
       tags:
-        - Staking - Beta
+        - Staking (Beta)
   /staking/chains/{chainDescriptor}/chainInfo:
     get:
       operationId: getChainInfo
@@ -5038,7 +4862,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ChainInfoResponseDto'
       tags:
-        - Staking - Beta
+        - Staking (Beta)
   /staking/chains/{chainDescriptor}/{actionId}:
     post:
       operationId: executeAction
@@ -5115,7 +4939,7 @@ paths:
                 withdraw:
                   value: {}
       tags:
-        - Staking - Beta
+        - Staking (Beta)
   /staking/positions:
     get:
       operationId: getAllDelegations
@@ -5143,7 +4967,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/DelegationDto'
       tags:
-        - Staking - Beta
+        - Staking (Beta)
   /staking/positions/summary:
     get:
       operationId: getSummary
@@ -5181,7 +5005,7 @@ paths:
                   - chainDescriptor: SOL
                     amount: '0.077345939'
       tags:
-        - Staking - Beta
+        - Staking (Beta)
   /staking/positions/summary/vaults:
     get:
       operationId: getSummaryByVault
@@ -5235,7 +5059,7 @@ paths:
                     - chainDescriptor: SOL
                       amount: '0.011191566'
       tags:
-        - Staking - Beta
+        - Staking (Beta)
   /staking/positions/{id}:
     get:
       operationId: getDelegationById
@@ -5258,7 +5082,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DelegationDto'
       tags:
-        - Staking - Beta
+        - Staking (Beta)
   /staking/providers:
     get:
       operationId: getProviders
@@ -5275,7 +5099,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/ProviderDto'
       tags:
-        - Staking - Beta
+        - Staking (Beta)
   /staking/providers/{providerId}/approveTermsOfService:
     post:
       operationId: approveTermsOfServiceByProviderId
@@ -5306,7 +5130,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProvidersResponseDto'
       tags:
-        - Staking - Beta
+        - Staking (Beta)
   /admin_quorum:
     put:
       operationId: setAdminQuorumThreshold
@@ -6233,7 +6057,7 @@ paths:
         '500':
           description: Internal server error
       tags:
-        - Travel Rule - Beta
+        - Travel Rule (Beta)
   /screening/travel_rule/transaction/validate/full:
     post:
       operationId: validateFullTravelRuleTransaction
@@ -6274,7 +6098,7 @@ paths:
         '500':
           description: Internal server error
       tags:
-        - Travel Rule - Beta
+        - Travel Rule (Beta)
   /screening/travel_rule/vasp/{did}:
     get:
       operationId: getVASPByDID
@@ -6320,7 +6144,7 @@ paths:
         '500':
           description: Internal server error
       tags:
-        - Travel Rule - Beta
+        - Travel Rule (Beta)
   /screening/travel_rule/vasp:
     get:
       operationId: getVASPs
@@ -6376,7 +6200,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TravelRuleGetAllVASPsResponse'
       tags:
-        - Travel Rule - Beta
+        - Travel Rule (Beta)
   /screening/travel_rule/vasp/update:
     put:
       operationId: updateVasp
@@ -6417,7 +6241,7 @@ paths:
         '500':
           description: Internal server error
       tags:
-        - Travel Rule - Beta
+        - Travel Rule (Beta)
   /screening/travel_rule/post_screening_policy:
     get:
       operationId: getPostScreeningPolicy
@@ -6583,7 +6407,7 @@ paths:
         '500':
           description: Internal server error
       tags:
-        - OTA - Beta
+        - OTA (Beta)
     get:
       operationId: getOtaStatus
       summary: Returns current OTA status
@@ -6601,7 +6425,7 @@ paths:
         '404':
           description: Configuration not found for tenant
       tags:
-        - OTA - Beta
+        - OTA (Beta)
   /management/workspace_status:
     get:
       operationId: getWorkspaceStatus
@@ -6620,7 +6444,7 @@ paths:
         '404':
           description: Workspace not found
       tags:
-        - Workspace Status - Beta
+        - Workspace Status (Beta)
   /tap/active_policy:
     get:
       operationId: getActivePolicy
@@ -6635,7 +6459,7 @@ paths:
         please contact your Fireblocks Customer Success Manager or send an email
         to CSM@fireblocks.com.
       tags:
-        - Policy Editor - Beta
+        - Policy Editor (Beta)
       x-readme:
         code-samples:
           - language: python
@@ -6670,7 +6494,7 @@ paths:
         please contact your Fireblocks Customer Success Manager or send an email
         to CSM@fireblocks.com.
       tags:
-        - Policy Editor - Beta
+        - Policy Editor (Beta)
       x-readme:
         code-samples:
           - language: python
@@ -6704,7 +6528,7 @@ paths:
         please contact your Fireblocks Customer Success Manager or send an email
         to CSM@fireblocks.com.
       tags:
-        - Policy Editor - Beta
+        - Policy Editor (Beta)
       parameters:
         - $ref: '#/components/parameters/X-Idempotency-Key'
       x-readme:
@@ -6746,7 +6570,7 @@ paths:
         please contact your Fireblocks Customer Success Manager or send an email
         to CSM@fireblocks.com.
       tags:
-        - Policy Editor - Beta
+        - Policy Editor (Beta)
       x-readme:
         code-samples:
           - language: python
@@ -6790,7 +6614,7 @@ paths:
         please contact your Fireblocks Customer Success Manager or send an email
         to CSM@fireblocks.com.
       tags:
-        - Policy Editor - Beta
+        - Policy Editor (Beta)
       x-readme:
         code-samples:
           - language: python
@@ -6850,97 +6674,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '501':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '502':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '503':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '504':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '505':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '506':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '507':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '508':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '510':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '511':
+        5XX:
           description: Internal error.
           headers:
             X-Request-ID:
@@ -6993,97 +6727,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '501':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '502':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '503':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '504':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '505':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '506':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '507':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '508':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '510':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '511':
+        5XX:
           description: Internal error.
           headers:
             X-Request-ID:
@@ -7125,97 +6769,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '501':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '502':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '503':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '504':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '505':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '506':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '507':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '508':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '510':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '511':
+        5XX:
           description: Internal error.
           headers:
             X-Request-ID:
@@ -7263,97 +6817,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '501':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '502':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '503':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '504':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '505':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '506':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '507':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '508':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '510':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '511':
+        5XX:
           description: Internal error.
           headers:
             X-Request-ID:
@@ -7403,97 +6867,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '501':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '502':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '503':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '504':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '505':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '506':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '507':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '508':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '510':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '511':
+        5XX:
           description: Internal error.
           headers:
             X-Request-ID:
@@ -7542,97 +6916,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '501':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '502':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '503':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '504':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '505':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '506':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '507':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '508':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '510':
-          description: Internal error.
-          headers:
-            X-Request-ID:
-              $ref: '#/components/headers/X-Request-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '511':
+        5XX:
           description: Internal error.
           headers:
             X-Request-ID:
@@ -8349,8 +7633,6 @@ paths:
     get:
       operationId: getJobs
       summary: Return a list of jobs belonging to tenant
-      tags:
-        - Jobs
       description: >-
         Get an array of objects including all active, paused, canceled, and
         complete jobs in a workspace.
@@ -8376,15 +7658,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchJobs'
+                $ref: '#/components/schemas/Jobs'
         default:
           $ref: '#/components/responses/Error'
   /batch/{jobId}:
     get:
       operationId: getJob
       summary: Get job details
-      tags:
-        - Jobs
       description: Get an object describing the given job
       parameters:
         - in: path
@@ -8402,14 +7682,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchJob'
+                $ref: '#/components/schemas/Job'
         default:
           $ref: '#/components/responses/Error'
   /batch/{jobId}/pause:
     post:
       summary: Pause a job
-      tags:
-        - Jobs
       description: >-
         Pause the given job, after the current task is done. A paused job can
         later be resumed by calling ‘continue’, or canceled.
@@ -8431,8 +7709,6 @@ paths:
     post:
       operationId: continueJob
       summary: Continue a paused job
-      tags:
-        - Jobs
       description: Continue the given paused job.
       parameters:
         - in: path
@@ -8451,8 +7727,6 @@ paths:
     post:
       operationId: cancelJob
       summary: Cancel a running job
-      tags:
-        - Jobs
       description: >-
         Stop the given job immediately. If the job is in the ‘Active’ state, the
         job will be canceled after completing the current task. Vault accounts
@@ -8474,8 +7748,6 @@ paths:
     get:
       operationId: getJobTasks
       summary: Return a list of tasks for given job
-      tags:
-        - Jobs
       description: Return a list of tasks for given job
       parameters:
         - in: path
@@ -8493,7 +7765,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchTasks'
+                $ref: '#/components/schemas/Tasks'
         default:
           $ref: '#/components/responses/Error'
 components:
@@ -8642,7 +7914,7 @@ components:
           type: array
           items:
             type: string
-    BatchJobCreated:
+    JobCreated:
       type: object
       properties:
         jobId:
@@ -8981,7 +8253,7 @@ components:
     ExchangeAccountsPaged:
       type: object
       properties:
-        exchanges:
+        ExchangeAccount:
           type: array
           items:
             $ref: '#/components/schemas/ExchangeAccount'
@@ -9568,7 +8840,6 @@ components:
             - TRON_TRC20
             - XLM_ASSET
             - XDB_ASSET
-            - NEAR_ASSET
         contractAddress:
           type: string
         nativeAsset:
@@ -13948,7 +13219,7 @@ components:
             type: string
       required:
         - userGroupIds
-    BatchTask:
+    Task:
       type: object
       properties:
         id:
@@ -13965,7 +13236,7 @@ components:
           type: number
         state:
           type: string
-    BatchJob:
+    Job:
       type: object
       properties:
         id:
@@ -13985,15 +13256,15 @@ components:
         tasks:
           type: array
           items:
-            $ref: '#/components/schemas/BatchTask'
-    BatchJobs:
+            $ref: '#/components/schemas/Task'
+    Jobs:
       type: array
       items:
-        $ref: '#/components/schemas/BatchJob'
-    BatchTasks:
+        $ref: '#/components/schemas/Job'
+    Tasks:
       type: array
       items:
-        $ref: '#/components/schemas/BatchTask'
+        $ref: '#/components/schemas/Task'
   responses:
     Error:
       description: Error Response

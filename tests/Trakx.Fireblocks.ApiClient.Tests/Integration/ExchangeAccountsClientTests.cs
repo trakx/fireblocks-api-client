@@ -16,7 +16,7 @@ public class ExchangeAccountsClientTests : FireblocksClientTestsBase
     [Fact]
     public async Task Exchange_accountsAllAsync_should_return_all_accounts()
     {
-        var response = await _exchangeAccountsClient.Exchange_accountsAllAsync();
-        response.Content.Should().BeEmpty();
+        var response = await _exchangeAccountsClient.GetPagedExchangeAccountsAsync(5);
+        response.Content.Exchanges.Should().BeEmpty();
     }
 }

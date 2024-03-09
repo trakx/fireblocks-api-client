@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Trakx.Fireblocks.ApiClient.Tests.Integration.Base;
@@ -23,7 +24,7 @@ public class WorkflowTests : FireblocksClientTestsBase
     {
         const string sourceVaultName = "default";
 
-        var trakxVaults = await _vaultClient.AccountsAllAsync();
+        var trakxVaults = await _vaultClient.GetVaultAccountsAsync();
         _logger.Information("Retrieved vault accounts: {accounts}",
             JsonSerializer.Serialize(trakxVaults.Content, new JsonSerializerOptions { WriteIndented = true }));
 
@@ -35,7 +36,7 @@ public class WorkflowTests : FireblocksClientTestsBase
         var transactionRequest = new TransactionRequest
         {
             FailOnLowFee = true,
-            Amount = 0.01d,
+            Amount = "0.01",
             AssetId = "USDC",
             Destination = new DestinationTransferPeerPath
             {
@@ -52,18 +53,18 @@ public class WorkflowTests : FireblocksClientTestsBase
             FeeLevel = TransactionRequestFeeLevel.MEDIUM
         };
 
-        var sendTransaction = await _transactionsClient.TransactionsPOSTAsync(transactionRequest);
+        var sendTransaction = await _transactionsClient.CreateTransactionAsync(body: transactionRequest);
 
         var transactionResponse = sendTransaction.Content;
         transactionResponse.Id.Should().NotBeNullOrEmpty();
 
-        var retrievedTransaction = await _transactionsClient.TransactionsGETAsync(transactionResponse.Id);
-        retrievedTransaction.Content.Amount.Should().Be(0.01d);
+        var retrievedTransaction = await _transactionsClient.GetTransactionAsync(transactionResponse.Id);
+        retrievedTransaction.Content.AmountInfo.Amount.Should().Be(transactionRequest.Amount);
     }
 
     private async Task<string> GetNarrativeNetworkConnectionId()
     {
-        var networkPartners = await _networkClient.Network_connectionsAllAsync();
+        var networkPartners = await _networkClient.GetNetworkConnectionsAsync();
         networkPartners.Content.Count.Should().BeGreaterThan(0);
 
         _logger.Information("Retrieved network connections: {connections}",
