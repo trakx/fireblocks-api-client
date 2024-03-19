@@ -4,7 +4,7 @@
   </PropertyGroup>
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
   <ItemGroup>
-    <PackageReference Include="Trakx.Common.Testing" Version="1.1.0" />
+    <PackageReference Include="Trakx.Common.Testing" Version="1.1.1-retry-extra-action-api-client-1693-10a522d" />
     <PackageReference Include="MartinCostello.Logging.XUnit" Version="0.3.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <PackageReference Include="xunit" Version="2.7.0" />
