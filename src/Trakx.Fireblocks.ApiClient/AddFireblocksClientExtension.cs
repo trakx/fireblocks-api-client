@@ -34,7 +34,12 @@ public static partial class AddFireblocksClientExtension
 
         services.AddApiClientsFromBaseType<IFireblocksApiClientBase>(
             medianFirstRetryDelayMillis: apiConfiguration.InitialRetryDelayInMilliseconds,
-            retryCount: apiConfiguration.MaxRetryCount
+            retryCount: apiConfiguration.MaxRetryCount,
+            runOnRetry: async (_, _, _, _, serviceProvider, request) =>
+            {
+                var credentialsProvider = serviceProvider.GetRequiredService<IFireblocksCredentialsProvider>();
+                await credentialsProvider.AddCredentialsAsync(request);
+            }
         );
 
         return services;

@@ -7,8 +7,8 @@
   <Import Project="../Packable.Projects.props" />
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.2" />
-    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.3" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.4.1" />
     <PackageReference Include="Polly.Contrib.WaitAndRetry" Version="1.1.1" />
     <PackageReference Include="NSwag.MSBuild" Version="14.0.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -16,10 +16,10 @@
     </PackageReference>
     <PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
     <PackageReference Include="Polly.Caching.Memory" Version="3.0.2" />
-    <PackageReference Include="Trakx.Common" Version="1.1.0" />
-    <PackageReference Include="Trakx.Common.ApiClient" Version="1.1.0" />
-    <PackageReference Include="Trakx.Common.Configuration" Version="1.1.0" />
-    <PackageReference Include="Trakx.Common.Logging" Version="1.1.0" />
+    <PackageReference Include="Trakx.Common" Version="1.1.1" />
+    <PackageReference Include="Trakx.Common.ApiClient" Version="1.1.1" />
+    <PackageReference Include="Trakx.Common.Configuration" Version="1.1.1" />
+    <PackageReference Include="Trakx.Common.Logging" Version="1.1.1" />
   </ItemGroup>
 
   <ItemGroup>
