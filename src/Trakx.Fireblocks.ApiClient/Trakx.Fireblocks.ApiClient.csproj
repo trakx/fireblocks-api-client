@@ -16,8 +16,8 @@
     </PackageReference>
     <PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
     <PackageReference Include="Polly.Caching.Memory" Version="3.0.2" />
-    <PackageReference Include="Trakx.Common.ApiClient" Version="1.1.3" />
-    <PackageReference Include="Trakx.Common.Configuration" Version="1.1.3" />
+    <PackageReference Include="Trakx.Common.ApiClient" Version="1.1.4" />
+    <PackageReference Include="Trakx.Common.Configuration" Version="1.1.4" />
   </ItemGroup>
 
   <ItemGroup>
