@@ -21,7 +21,7 @@ public class TransactionsClientTests : FireblocksClientTestsBase
         response.Content.Should().NotBeEmpty();
     }
 
-    [Fact]
+    [Fact(Skip = "ETH_TEST3 is deprecated")]
     public async Task CreateTransactionAsync_should_create_and_cancel_a_new_transaction()
     {
         var trans = new TransactionRequest

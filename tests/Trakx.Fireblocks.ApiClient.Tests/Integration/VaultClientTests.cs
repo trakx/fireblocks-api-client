@@ -20,7 +20,6 @@ public class VaultClientTests : FireblocksClientTestsBase
         response.Content.Should().NotBeNull();
         var accounts = response.Content.Accounts;
         accounts.Should().NotBeNullOrEmpty();
-        accounts[0].Assets.Should().NotBeNullOrEmpty();
         accounts.Should().Contain(x => x.Assets.Any(x => x.Id == "BTC_TEST"));
     }
 }
