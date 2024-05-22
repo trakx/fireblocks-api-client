@@ -26748,59 +26748,80 @@ namespace Trakx.Fireblocks.ApiClient
         [System.Runtime.Serialization.EnumMember(Value = @"BITTREX")]
         BITTREX = 7,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"BLINC")]
+        BLINC = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"BYBIT")]
+        BYBIT = 9,
+
         [System.Runtime.Serialization.EnumMember(Value = @"CIRCLE")]
-        CIRCLE = 8,
+        CIRCLE = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"COINBASEEXCHANGE")]
+        COINBASEEXCHANGE = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"COINBASEPRO")]
-        COINBASEPRO = 9,
+        COINBASEPRO = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"COINMETRO")]
-        COINMETRO = 10,
+        COINMETRO = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"COINSPRO")]
-        COINSPRO = 11,
+        COINSPRO = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"CRYPTOCOM")]
-        CRYPTOCOM = 12,
+        CRYPTOCOM = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"DERIBIT")]
-        DERIBIT = 13,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FTX")]
-        FTX = 14,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FIXUS")]
-        FIXUS = 15,
+        DERIBIT = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"GEMINI")]
-        GEMINI = 16,
+        GEMINI = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"HITBTC")]
-        HITBTC = 17,
+        HITBTC = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"HUOBI")]
-        HUOBI = 18,
+        HUOBI = 19,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"INDEPENDENTRESERVE")]
+        INDEPENDENTRESERVE = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"KORBIT")]
-        KORBIT = 19,
+        KORBIT = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"KRAKEN")]
-        KRAKEN = 20,
+        KRAKEN = 22,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"KRAKENINTL")]
+        KRAKENINTL = 23,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"KUCOIN")]
+        KUCOIN = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"LIQUID")]
-        LIQUID = 21,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"POLONIEX")]
-        POLONIEX = 22,
+        LIQUID = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"OKCOIN")]
-        OKCOIN = 23,
+        OKCOIN = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"OKEX")]
-        OKEX = 24,
+        OKEX = 27,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"SEEDCX")]
-        SEEDCX = 25,
+        [System.Runtime.Serialization.EnumMember(Value = @"PAXOS")]
+        PAXOS = 28,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"POLONIEX")]
+        POLONIEX = 29,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"External")]
+        External = 30,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Internal")]
+        Internal = 31,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"GATEIO")]
+        GATEIO = 32,
 
     }
 
