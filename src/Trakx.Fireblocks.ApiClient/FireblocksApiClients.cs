@@ -26802,6 +26802,9 @@ namespace Trakx.Fireblocks.ApiClient
         [System.Runtime.Serialization.EnumMember(Value = @"SEEDCX")]
         SEEDCX = 25,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"GATEIO")]
+        GATEIO = 26,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
