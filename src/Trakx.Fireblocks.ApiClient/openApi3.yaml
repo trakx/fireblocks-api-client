@@ -8907,27 +8907,25 @@ components:
         - BITSO
         - BITSTAMP
         - BITTREX
-        - BYBIT
-        - CIRCLEO
-        - COINBASEEXCHANGE
+        - CIRCLE
         - COINBASEPRO
         - COINMETRO
         - COINSPRO
         - CRYPTOCOM
         - DERIBIT
-        - GATE
+        - FTX
+        - FIXUS
         - GEMINI
         - HITBTC
         - HUOBI
-        - IR
         - KORBIT
         - KRAKEN
-        - KRAKENINTL
         - LIQUID
         - POLONIEX
         - OKCOIN
         - OKEX
         - SEEDCX
+        - GATEIO
     ExchangeAsset:
       type: object
       properties:
