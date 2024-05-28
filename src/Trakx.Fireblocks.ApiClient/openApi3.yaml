@@ -8926,6 +8926,7 @@ components:
         - OKEX
         - SEEDCX
         - GATEIO
+        - KUCOIN
     ExchangeAsset:
       type: object
       properties:
