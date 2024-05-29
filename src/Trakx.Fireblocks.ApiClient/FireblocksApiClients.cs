@@ -26808,6 +26808,18 @@ namespace Trakx.Fireblocks.ApiClient
         [System.Runtime.Serialization.EnumMember(Value = @"KUCOIN")]
         KUCOIN = 27,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"BYBIT")]
+        BYBIT = 28,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"COINBASEEXCHANGE")]
+        COINBASEEXCHANGE = 29,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"IR")]
+        IR = 30,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"KRAKENINTL")]
+        KRAKENINTL = 31,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]

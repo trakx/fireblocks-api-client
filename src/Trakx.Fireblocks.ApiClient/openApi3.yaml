@@ -8927,6 +8927,10 @@ components:
         - SEEDCX
         - GATEIO
         - KUCOIN
+        - BYBIT
+        - COINBASEEXCHANGE
+        - IR
+        - KRAKENINTL
     ExchangeAsset:
       type: object
       properties:
