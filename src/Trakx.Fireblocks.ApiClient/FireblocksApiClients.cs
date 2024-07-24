@@ -27914,8 +27914,7 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AssetTypeResponseType Type { get; set; }
+        public string Type { get; set; }
 
         [Newtonsoft.Json.JsonProperty("contractAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ContractAddress { get; init; }
@@ -35452,45 +35451,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         [System.Runtime.Serialization.EnumMember(Value = @"FIAT_ACCOUNT")]
         FIAT_ACCOUNT = 0,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.2.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AssetTypeResponseType
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ALGO_ASSET")]
-        ALGO_ASSET = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"BASE_ASSET")]
-        BASE_ASSET = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"BEP20")]
-        BEP20 = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"COMPOUND")]
-        COMPOUND = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ERC20")]
-        ERC20 = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"FIAT")]
-        FIAT = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"SOL_ASSET")]
-        SOL_ASSET = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"TRON_TRC20")]
-        TRON_TRC20 = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"XLM_ASSET")]
-        XLM_ASSET = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"XDB_ASSET")]
-        XDB_ASSET = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"NEAR_ASSET")]
-        NEAR_ASSET = 10,
 
     }
 

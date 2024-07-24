@@ -9565,18 +9565,6 @@ components:
           type: string
         type:
           type: string
-          enum:
-            - ALGO_ASSET
-            - BASE_ASSET
-            - BEP20
-            - COMPOUND
-            - ERC20
-            - FIAT
-            - SOL_ASSET
-            - TRON_TRC20
-            - XLM_ASSET
-            - XDB_ASSET
-            - NEAR_ASSET
         contractAddress:
           type: string
         nativeAsset:
