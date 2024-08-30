@@ -25,20 +25,22 @@ public static partial class AddFireblocksClientExtension
     public static IServiceCollection AddFireblocksClient(this IServiceCollection services, FireblocksApiConfiguration apiConfiguration)
     {
         services.AddSingleton(apiConfiguration);
-
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
         services.AddSingleton<IBearerCredentialsProvider, BearerCredentialsProvider>();
         services.AddSingleton<IFireblocksCredentialsProvider, ApiKeyCredentialsProvider>();
         services.AddSingleton<IClientConfigurator, ClientConfigurator>();
         services.AddSingleton<IFireblocksApiClientsFactory, FireblocksApiClientsFactory>();
 
-        services.AddApiClientsFromBaseType<IFireblocksApiClientBase>(
-            medianFirstRetryDelayMillis: apiConfiguration.InitialRetryDelayInMilliseconds,
-            retryCount: apiConfiguration.MaxRetryCount,
-            runOnRetry: async (_, _, _, _, serviceProvider, request) =>
+        services.AddApiClientsOfBaseTypeWithHttpClient<IFireblocksApiClientBase>(
+            new ApiClientWithHttpClientRetryOptions
             {
-                var credentialsProvider = serviceProvider.GetRequiredService<IFireblocksCredentialsProvider>();
-                await credentialsProvider.AddCredentialsAsync(request);
+                RetryCount = apiConfiguration.MaxRetryCount,
+                MedianFirstRetryDelayMillis = apiConfiguration.InitialRetryDelayInMilliseconds,
+                OnRetry = async context =>
+                {
+                    var credentialsProvider = context.ServiceProvider.GetRequiredService<IFireblocksCredentialsProvider>();
+                    await credentialsProvider.AddCredentialsAsync(context.Request);
+                }
             }
         );
 
