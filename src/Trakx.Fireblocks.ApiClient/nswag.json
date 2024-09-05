@@ -29,9 +29,9 @@
       "exposeJsonSerializerSettings": false,
       "clientClassAccessModifier": "internal",
       "typeAccessModifier": "public",
-      "generateContractsOutput": false,
-      "contractsNamespace": null,
-      "contractsOutputFilePath": null,
+      "generateContractsOutput": true,
+      "contractsNamespace": "Trakx.Fireblocks.ApiClient",
+      "contractsOutputFilePath": "FireblocksApiInterfacesAndModels.cs",
       "parameterDateTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
       "parameterDateFormat": "yyyy-MM-dd",
       "generateUpdateJsonSerializerSettingsMethod": true,
@@ -44,7 +44,10 @@
         "Trakx.Common.ApiClient",
         "Trakx.Common.ApiClient.Exceptions"
       ],
-      "additionalContractNamespaceUsages": [],
+      "additionalContractNamespaceUsages": [
+        "Trakx.Common.ApiClient",
+        "Trakx.Common.ApiClient.Exceptions"
+      ],
       "generateOptionalParameters": true,
       "generateJsonMethods": false,
       "enforceFlagEnums": false,

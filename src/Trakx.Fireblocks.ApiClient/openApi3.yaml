@@ -8898,41 +8898,6 @@ components:
         vaultAccountIdTo:
           description: The largest vault account ID in the range
           type: string
-    ExchangeType:
-      type: string
-      enum:
-        - BINANCE
-        - BINANCEUS
-        - BITFINEX
-        - BITHUMB
-        - BITMEX
-        - BITSO
-        - BITSTAMP
-        - BITTREX
-        - CIRCLE
-        - COINBASEPRO
-        - COINMETRO
-        - COINSPRO
-        - CRYPTOCOM
-        - DERIBIT
-        - FTX
-        - FIXUS
-        - GEMINI
-        - HITBTC
-        - HUOBI
-        - KORBIT
-        - KRAKEN
-        - LIQUID
-        - POLONIEX
-        - OKCOIN
-        - OKEX
-        - SEEDCX
-        - GATEIO
-        - KUCOIN
-        - BYBIT
-        - COINBASEEXCHANGE
-        - IR
-        - KRAKENINTL
     ExchangeAsset:
       type: object
       properties:
@@ -8963,7 +8928,8 @@ components:
         id:
           type: string
         type:
-          $ref: '#/components/schemas/ExchangeType'
+          type: string
+          description: Type of the exchange (identification name of the exchange)
         name:
           type: string
           description: Display name of the exchange account
