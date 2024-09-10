@@ -25,7 +25,6 @@
         "Trakx.Common.ApiClient",
         "Trakx.Common.ApiClient.Exceptions"
       ],
-
       "generateContractsOutput": true,
       "contractsNamespace": "Trakx.Fireblocks.ApiClient",
       "contractsOutputFilePath": "FireblocksApiInterfacesAndModels.cs",
@@ -44,13 +43,11 @@
       "exceptionClass": "ApiException",
       "generateExceptionClasses": false,
       "wrapDtoExceptions": true,
-
       "exposeJsonSerializerSettings": false,
       "generateJsonMethods": false,
       "jsonConverters": null,
       "generateUpdateJsonSerializerSettingsMethod": true,
       "jsonSerializerSettingsTransformationMethod": null,
-
       "anyType": "object",
       "arrayBaseType": "System.Collections.Generic.List",
       "arrayInstanceType": "System.Collections.Generic.List",
@@ -69,8 +66,8 @@
       "generateDataAnnotations": true,
       "generateDefaultValues": true,
       "generateDtoTypes": true,
-      "generateImmutableArrayProperties": true,
-      "generateImmutableDictionaryProperties": true,
+      "generateImmutableArrayProperties": false,
+      "generateImmutableDictionaryProperties": false,
       "generateOptionalParameters": true,
       "generateOptionalPropertiesAsNullable": true,
       "generateResponseClasses": false,
