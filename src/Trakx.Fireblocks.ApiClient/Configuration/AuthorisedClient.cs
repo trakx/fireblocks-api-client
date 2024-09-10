@@ -28,15 +28,14 @@ internal abstract class AuthorisedClient
         return Task.FromResult(_httpClientFactory.CreateClient(HttpClientName));
     }
 
-    protected Task PrepareRequestAsync(HttpClient client, HttpRequestMessage request, StringBuilder urlBuilder, CancellationToken cancellationToken)
+    protected Task PrepareRequestAsync(HttpClient client, HttpRequestMessage request, string url, CancellationToken cancellationToken)
     {
         CredentialsProvider.AddCredentials(request);
         return Task.CompletedTask;
     }
 
-    protected Task PrepareRequestAsync(HttpClient client, HttpRequestMessage request, string url, CancellationToken cancellationToken)
+    protected Task PrepareRequestAsync(HttpClient client, HttpRequestMessage request, StringBuilder urlBuilder, CancellationToken cancellationToken)
     {
-        CredentialsProvider.AddCredentials(request);
         return Task.CompletedTask;
     }
 
