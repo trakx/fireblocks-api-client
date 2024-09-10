@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <GenerateApiClient>false</GenerateApiClient>
@@ -18,19 +18,6 @@
     <PackageReference Include="Polly.Caching.Memory" Version="3.0.2" />
     <PackageReference Include="Trakx.Common.ApiClient" Version="1.3.0" />
     <PackageReference Include="Trakx.Common.Configuration" Version="1.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="FireblocksApiClients.Partials.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FireblocksApiClients.Partials.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="FireblocksApiClients.Partials.cs">
-      <DependentUpon>FireblocksApiClients.Partials.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <Target Name="NSwag" BeforeTargets="Build" Condition="'$(GenerateApiClient)'=='True' ">

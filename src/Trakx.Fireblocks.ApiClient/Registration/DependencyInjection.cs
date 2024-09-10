@@ -10,7 +10,7 @@ namespace Trakx.Fireblocks.ApiClient;
 /// <summary>
 /// Extension methods for adding the Fireblocks API client to the service collection.
 /// </summary>
-public static partial class AddFireblocksClientExtension
+public static partial class DependencyInjection
 {
     /// <summary>
     /// Add the Fireblocks API client to the service collection.
