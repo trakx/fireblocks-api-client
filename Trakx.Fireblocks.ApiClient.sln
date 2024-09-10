@@ -4,20 +4,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{98C835BB-FC91-4E63-A7D0-490C0B106216}"
+	ProjectSection(SolutionItems) = preProject
+		src\Packable.Projects.props = src\Packable.Projects.props
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trakx.Fireblocks.ApiClient", "src\Trakx.Fireblocks.ApiClient\Trakx.Fireblocks.ApiClient.csproj", "{889CE721-DFF4-4C9B-9411-9A6A3A0C86AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trakx.Fireblocks.ApiClient", "src\Trakx.Fireblocks.ApiClient\Trakx.Fireblocks.ApiClient.csproj", "{889CE721-DFF4-4C9B-9411-9A6A3A0C86AA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{517B44C8-EF84-4D81-BC83-14EE2E86CF6B}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Directory.Build.props = tests\Directory.Build.props
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trakx.Fireblocks.ApiClient.Tests", "tests\Trakx.Fireblocks.ApiClient.Tests\Trakx.Fireblocks.ApiClient.Tests.csproj", "{3D993886-7560-48DC-B063-CDED891549AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trakx.Fireblocks.ApiClient.Tests", "tests\Trakx.Fireblocks.ApiClient.Tests\Trakx.Fireblocks.ApiClient.Tests.csproj", "{3D993886-7560-48DC-B063-CDED891549AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{889CE721-DFF4-4C9B-9411-9A6A3A0C86AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -29,8 +32,14 @@ Global
 		{3D993886-7560-48DC-B063-CDED891549AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D993886-7560-48DC-B063-CDED891549AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{889CE721-DFF4-4C9B-9411-9A6A3A0C86AA} = {98C835BB-FC91-4E63-A7D0-490C0B106216}
 		{3D993886-7560-48DC-B063-CDED891549AF} = {517B44C8-EF84-4D81-BC83-14EE2E86CF6B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00A2B7AE-AE22-486A-84A3-BD3BE48983BD}
 	EndGlobalSection
 EndGlobal
