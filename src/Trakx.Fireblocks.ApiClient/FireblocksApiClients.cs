@@ -45,10 +45,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// List vault accounts
@@ -92,12 +88,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -112,7 +108,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -184,12 +180,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "vault/accounts"
                     urlBuilder_.Append("vault/accounts");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -204,7 +200,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -279,12 +275,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "vault/accounts/bulk"
                     urlBuilder_.Append("vault/accounts/bulk");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -299,7 +295,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -395,12 +391,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -415,7 +411,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -477,12 +473,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("vault/accounts/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(vaultAccountId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -497,7 +493,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -573,12 +569,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("vault/accounts/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(vaultAccountId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -593,7 +589,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -680,12 +676,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -700,7 +696,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -767,12 +763,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(vaultAccountId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/hide");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -787,7 +783,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -853,12 +849,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(vaultAccountId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/unhide");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -873,7 +869,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -946,12 +942,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/activate");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -966,7 +962,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -1043,12 +1039,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(vaultAccountId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/set_customer_ref_id");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -1063,7 +1059,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -1135,12 +1131,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(vaultAccountId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/set_auto_fuel");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -1155,7 +1151,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -1222,12 +1218,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -1242,7 +1238,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -1322,12 +1318,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -1342,7 +1338,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -1420,12 +1416,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/balance");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -1440,7 +1436,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -1518,12 +1514,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/addresses");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -1538,7 +1534,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -1619,12 +1615,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/addresses");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -1639,7 +1635,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -1726,12 +1722,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -1746,7 +1742,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -1825,12 +1821,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -1845,7 +1841,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -1925,12 +1921,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("/addresses/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(addressId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -1945,7 +1941,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -2029,12 +2025,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(addressId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/set_customer_ref_id");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -2049,7 +2045,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -2128,12 +2124,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(addressId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/create_legacy");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -2148,7 +2144,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -2221,12 +2217,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/unspent_inputs");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -2241,7 +2237,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -2316,12 +2312,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -2336,7 +2332,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -2423,12 +2419,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -2443,7 +2439,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -2514,12 +2510,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -2534,7 +2530,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -2599,12 +2595,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("vault/assets/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -2619,7 +2615,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -2787,10 +2783,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Bulk creation of wallets
@@ -2831,12 +2823,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "vault/assets/bulk"
                     urlBuilder_.Append("vault/assets/bulk");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -2851,7 +2843,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -3019,10 +3011,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Freeze Workspace
@@ -3060,12 +3048,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "workspace/freeze"
                     urlBuilder_.Append("workspace/freeze");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -3080,7 +3068,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -3243,10 +3231,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// List exchange accounts
@@ -3273,12 +3257,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "exchange_accounts"
                     urlBuilder_.Append("exchange_accounts");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -3293,7 +3277,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -3369,12 +3353,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -3389,7 +3373,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -3455,12 +3439,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("exchange_accounts/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(exchangeAccountId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -3475,7 +3459,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -3549,12 +3533,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(exchangeAccountId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/internal_transfer");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -3569,7 +3553,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -3638,12 +3622,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(exchangeAccountId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/convert");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -3658,7 +3642,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -3725,12 +3709,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -3745,7 +3729,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -3913,10 +3897,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// List fiat accounts
@@ -3942,12 +3922,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "fiat_accounts"
                     urlBuilder_.Append("fiat_accounts");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -3962,7 +3942,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -4028,12 +4008,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("fiat_accounts/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(accountId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -4048,7 +4028,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -4122,12 +4102,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(accountId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/redeem_to_linked_dda");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -4142,7 +4122,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -4211,12 +4191,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(accountId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/deposit_from_linked_dda");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -4231,7 +4211,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -4394,10 +4374,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// List network connections
@@ -4439,12 +4415,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "network_connections"
                     urlBuilder_.Append("network_connections");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -4459,7 +4435,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -4544,12 +4520,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "network_connections"
                     urlBuilder_.Append("network_connections");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -4564,7 +4540,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -4651,12 +4627,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(connectionId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/set_routing_policy");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -4671,7 +4647,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -4743,12 +4719,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("/is_third_party_routing/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetType, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -4763,7 +4739,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -4845,12 +4821,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("network_connections/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(connectionId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -4865,7 +4841,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -4947,12 +4923,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("network_connections/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(connectionId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -4967,7 +4943,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -5044,12 +5020,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "network_ids"
                     urlBuilder_.Append("network_ids");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -5064,7 +5040,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -5149,12 +5125,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "network_ids"
                     urlBuilder_.Append("network_ids");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -5169,7 +5145,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -5251,12 +5227,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("network_ids/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(networkId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -5271,7 +5247,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -5353,12 +5329,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("network_ids/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(networkId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -5373,7 +5349,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -5460,12 +5436,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(networkId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/set_routing_policy");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -5480,7 +5456,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -5570,12 +5546,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(networkId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/set_discoverability");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -5590,7 +5566,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -5680,12 +5656,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(networkId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/set_name");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -5700,7 +5676,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -5868,10 +5844,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// List internal wallets
@@ -5899,12 +5871,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "internal_wallets"
                     urlBuilder_.Append("internal_wallets");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -5919,7 +5891,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -5988,12 +5960,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "internal_wallets"
                     urlBuilder_.Append("internal_wallets");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -6008,7 +5980,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -6074,12 +6046,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("internal_wallets/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(walletId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -6094,7 +6066,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -6159,12 +6131,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("internal_wallets/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(walletId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -6179,7 +6151,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -6251,12 +6223,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(walletId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/set_customer_ref_id");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -6271,7 +6243,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -6338,12 +6310,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -6358,7 +6330,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -6438,12 +6410,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -6458,7 +6430,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -6529,12 +6501,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -6549,7 +6521,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -6712,10 +6684,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// List external wallets
@@ -6741,12 +6709,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "external_wallets"
                     urlBuilder_.Append("external_wallets");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -6761,7 +6729,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -6830,12 +6798,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "external_wallets"
                     urlBuilder_.Append("external_wallets");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -6850,7 +6818,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -6916,12 +6884,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("external_wallets/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(walletId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -6936,7 +6904,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -7001,12 +6969,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("external_wallets/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(walletId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -7021,7 +6989,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -7093,12 +7061,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(walletId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/set_customer_ref_id");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -7113,7 +7081,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -7180,12 +7148,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -7200,7 +7168,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -7280,12 +7248,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -7300,7 +7268,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -7371,12 +7339,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -7391,7 +7359,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -7554,10 +7522,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// List contracts
@@ -7583,12 +7547,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "contracts"
                     urlBuilder_.Append("contracts");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -7603,7 +7567,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -7672,12 +7636,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "contracts"
                     urlBuilder_.Append("contracts");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -7692,7 +7656,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -7758,12 +7722,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("contracts/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(contractId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -7778,7 +7742,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -7843,12 +7807,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("contracts/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(contractId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -7863,7 +7827,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -7930,12 +7894,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -7950,7 +7914,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -8030,12 +7994,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -8050,7 +8014,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -8121,12 +8085,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -8141,7 +8105,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -8304,10 +8268,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// List all asset types supported by Fireblocks
@@ -8333,12 +8293,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "supported_assets"
                     urlBuilder_.Append("supported_assets");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -8353,7 +8313,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -8521,10 +8481,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// List transaction history
@@ -8624,12 +8580,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -8644,7 +8600,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -8717,12 +8673,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "transactions"
                     urlBuilder_.Append("transactions");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -8737,7 +8693,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -8807,12 +8763,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "transactions/estimate_fee"
                     urlBuilder_.Append("transactions/estimate_fee");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -8827,7 +8783,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -8893,12 +8849,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("transactions/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(txId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -8913,7 +8869,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -8989,12 +8945,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("transactions/external_tx_id/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(externalTxId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -9009,7 +8965,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -9084,12 +9040,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(txId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/set_confirmation_threshold");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -9104,7 +9060,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -9183,12 +9139,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(txId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/drop");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -9203,7 +9159,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -9279,12 +9235,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(txId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/cancel");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -9299,7 +9255,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -9375,12 +9331,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(txId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/freeze");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -9395,7 +9351,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -9467,12 +9423,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(txId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/unfreeze");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -9487,7 +9443,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -9555,12 +9511,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(address, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -9575,7 +9531,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -9650,12 +9606,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(txHash, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/set_confirmation_threshold");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -9670,7 +9626,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -9738,12 +9694,12 @@ namespace Trakx.Fireblocks.ApiClient
             urlBuilder_.Append(System.Uri.EscapeDataString("assetId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -9758,7 +9714,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -9926,10 +9882,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Create a payout instruction set
@@ -9972,12 +9924,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "payments/payout"
                     urlBuilder_.Append("payments/payout");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -9992,7 +9944,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -10197,12 +10149,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(payoutId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/actions/execute");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -10217,7 +10169,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -10411,12 +10363,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("payments/payout/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(payoutId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -10431,7 +10383,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -10725,10 +10677,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Get gas station settings
@@ -10754,12 +10702,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "gas_station"
                     urlBuilder_.Append("gas_station");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -10774,7 +10722,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -10840,12 +10788,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("gas_station/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -10860,7 +10808,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -10931,12 +10879,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "gas_station/configuration"
                     urlBuilder_.Append("gas_station/configuration");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -10951,7 +10899,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -11022,12 +10970,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("gas_station/configuration/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -11042,7 +10990,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -11205,10 +11153,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// List user groups
@@ -11238,12 +11182,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "management/user_groups"
                     urlBuilder_.Append("management/user_groups");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -11258,7 +11202,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -11334,12 +11278,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "management/user_groups"
                     urlBuilder_.Append("management/user_groups");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -11354,7 +11298,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -11424,12 +11368,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("management/user_groups/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(groupId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -11444,7 +11388,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -11525,12 +11469,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("management/user_groups/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(groupId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -11545,7 +11489,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -11614,12 +11558,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("management/user_groups/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(groupId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -11634,7 +11578,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 204)
@@ -11797,10 +11741,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// List users
@@ -11828,12 +11768,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "users"
                     urlBuilder_.Append("users");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -11848,7 +11788,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -12016,10 +11956,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Get audit logs
@@ -12052,12 +11988,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -12072,7 +12008,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -12144,12 +12080,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -12164,7 +12100,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -12327,10 +12263,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// add collateral
@@ -12364,12 +12296,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "off_exchange/add"
                     urlBuilder_.Append("off_exchange/add");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -12384,7 +12316,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -12453,12 +12385,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "off_exchange/remove"
                     urlBuilder_.Append("off_exchange/remove");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -12473,7 +12405,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -12542,12 +12474,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "off_exchange/settlements/trader"
                     urlBuilder_.Append("off_exchange/settlements/trader");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -12562,7 +12494,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -12629,12 +12561,12 @@ namespace Trakx.Fireblocks.ApiClient
             urlBuilder_.Append(System.Uri.EscapeDataString("mainExchangeAccountId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(mainExchangeAccountId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -12649,7 +12581,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -12715,12 +12647,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("off_exchange/collateral_accounts/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(mainExchangeAccountId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -12735,7 +12667,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -12903,10 +12835,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Resend failed webhooks
@@ -12937,12 +12865,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "webhooks/resend"
                     urlBuilder_.Append("webhooks/resend");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -12957,7 +12885,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -13033,12 +12961,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("webhooks/resend/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(txId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -13053,7 +12981,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -13216,10 +13144,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Return an alphabetical list of supported chains.
@@ -13241,12 +13165,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "staking/chains"
                     urlBuilder_.Append("staking/chains");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -13261,7 +13185,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -13321,12 +13245,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(chainDescriptor, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/chainInfo");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -13341,7 +13265,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -13417,12 +13341,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(actionId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -13437,7 +13361,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -13498,12 +13422,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -13518,7 +13442,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -13572,12 +13496,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "staking/positions/summary"
                     urlBuilder_.Append("staking/positions/summary");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -13592,7 +13516,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -13646,12 +13570,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "staking/positions/summary/vaults"
                     urlBuilder_.Append("staking/positions/summary/vaults");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -13666,7 +13590,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -13725,12 +13649,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("staking/positions/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -13745,7 +13669,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -13799,12 +13723,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "staking/providers"
                     urlBuilder_.Append("staking/providers");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -13819,7 +13743,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -13885,12 +13809,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(providerId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/approveTermsOfService");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -13905,7 +13829,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -14069,10 +13993,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Update admin quorum threshold
@@ -14108,12 +14028,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "admin_quorum"
                     urlBuilder_.Append("admin_quorum");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -14128,7 +14048,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -14291,10 +14211,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Refresh vault account tokens
@@ -14335,12 +14251,12 @@ namespace Trakx.Fireblocks.ApiClient
             urlBuilder_.Append(System.Uri.EscapeDataString("vaultAccountId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(vaultAccountId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -14355,7 +14271,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 202)
@@ -14478,12 +14394,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -14498,7 +14414,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -14601,12 +14517,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -14621,7 +14537,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -14719,12 +14635,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -14739,7 +14655,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -14804,12 +14720,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("nfts/tokens/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -14824,7 +14740,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 202)
@@ -14880,12 +14796,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("nfts/tokens/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -14900,7 +14816,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -14983,12 +14899,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -15003,7 +14919,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -15075,12 +14991,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/status");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -15095,7 +15011,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -15157,12 +15073,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "nfts/ownership/tokens/status"
                     urlBuilder_.Append("nfts/ownership/tokens/status");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -15177,7 +15093,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -15251,12 +15167,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "nfts/ownership/tokens/spam"
                     urlBuilder_.Append("nfts/ownership/tokens/spam");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -15271,7 +15187,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -15442,10 +15358,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// List all open Web3 connections.
@@ -15497,12 +15409,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -15517,7 +15429,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -15599,12 +15511,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "connections/wc"
                     urlBuilder_.Append("connections/wc");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -15619,7 +15531,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -15706,12 +15618,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("connections/wc/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -15726,7 +15638,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -15800,12 +15712,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("connections/wc/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -15820,7 +15732,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -15991,10 +15903,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Validate Travel Rule Transaction
@@ -16037,12 +15945,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "screening/travel_rule/transaction/validate"
                     urlBuilder_.Append("screening/travel_rule/transaction/validate");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -16057,7 +15965,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -16143,12 +16051,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "screening/travel_rule/transaction/validate/full"
                     urlBuilder_.Append("screening/travel_rule/transaction/validate/full");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -16163,7 +16071,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -16249,12 +16157,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -16269,7 +16177,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -16366,12 +16274,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -16386,7 +16294,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -16460,12 +16368,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "screening/travel_rule/vasp/update"
                     urlBuilder_.Append("screening/travel_rule/vasp/update");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -16480,7 +16388,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -16656,10 +16564,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Travel Rule - View Post-Screening Policy
@@ -16685,12 +16589,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "screening/travel_rule/post_screening_policy"
                     urlBuilder_.Append("screening/travel_rule/post_screening_policy");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -16705,7 +16609,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -16762,12 +16666,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "screening/travel_rule/screening_policy"
                     urlBuilder_.Append("screening/travel_rule/screening_policy");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -16782,7 +16686,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -16844,12 +16748,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "screening/travel_rule/policy_configuration"
                     urlBuilder_.Append("screening/travel_rule/policy_configuration");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -16864,7 +16768,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -16926,12 +16830,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "screening/aml/policy_configuration"
                     urlBuilder_.Append("screening/aml/policy_configuration");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -16946,7 +16850,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -17003,12 +16907,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "screening/aml/screening_policy"
                     urlBuilder_.Append("screening/aml/screening_policy");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -17023,7 +16927,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -17080,12 +16984,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "screening/aml/post_screening_policy"
                     urlBuilder_.Append("screening/aml/post_screening_policy");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -17100,7 +17004,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -17162,12 +17066,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "screening/configurations"
                     urlBuilder_.Append("screening/configurations");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -17182,7 +17086,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -17346,10 +17250,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Get Travel Rule Screening Policy Configuration
@@ -17375,12 +17275,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "screening/travel_rule/policy_configuration"
                     urlBuilder_.Append("screening/travel_rule/policy_configuration");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -17395,7 +17295,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -17452,12 +17352,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "screening/aml/policy_configuration"
                     urlBuilder_.Append("screening/aml/policy_configuration");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -17472,7 +17372,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -17636,10 +17536,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Enable or disable transactions to OTA
@@ -17675,12 +17571,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "management/ota"
                     urlBuilder_.Append("management/ota");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -17695,7 +17591,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 202)
@@ -17765,12 +17661,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "management/ota"
                     urlBuilder_.Append("management/ota");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -17785,7 +17681,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -17955,10 +17851,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Returns current workspace status
@@ -17984,12 +17876,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "management/workspace_status"
                     urlBuilder_.Append("management/workspace_status");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -18004,7 +17896,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -18174,10 +18066,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Get the active policy and its validation
@@ -18205,12 +18093,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "tap/active_policy"
                     urlBuilder_.Append("tap/active_policy");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -18225,7 +18113,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -18288,12 +18176,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "tap/draft"
                     urlBuilder_.Append("tap/draft");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -18308,7 +18196,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -18382,12 +18270,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "tap/draft"
                     urlBuilder_.Append("tap/draft");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -18402,7 +18290,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -18476,12 +18364,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "tap/draft"
                     urlBuilder_.Append("tap/draft");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -18496,7 +18384,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -18570,12 +18458,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "tap/publish"
                     urlBuilder_.Append("tap/publish");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -18590,7 +18478,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -18758,10 +18646,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// get console users
@@ -18786,12 +18670,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "management/users"
                     urlBuilder_.Append("management/users");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -18806,7 +18690,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -18999,12 +18883,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "management/users"
                     urlBuilder_.Append("management/users");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -19019,7 +18903,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 204)
@@ -19318,10 +19202,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// get api users
@@ -19346,12 +19226,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "management/api_users"
                     urlBuilder_.Append("management/api_users");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -19366,7 +19246,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -19559,12 +19439,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "management/api_users"
                     urlBuilder_.Append("management/api_users");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -19579,7 +19459,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 204)
@@ -19872,10 +19752,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// resets device
@@ -19911,12 +19787,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/reset_device");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -19931,7 +19807,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 204)
@@ -20224,10 +20100,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// gets ip addresses
@@ -20258,12 +20130,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(userId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/whitelist_ip_addresses");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -20278,7 +20150,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -20571,10 +20443,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Create Ticket
@@ -20611,12 +20479,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "smart-transfers"
                     urlBuilder_.Append("smart-transfers");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -20631,7 +20499,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -20760,12 +20628,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -20780,7 +20648,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -20851,12 +20719,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("smart-transfers/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(ticketId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -20871,7 +20739,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -20964,12 +20832,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(ticketId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/expires-in");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -20984,7 +20852,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -21087,12 +20955,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(ticketId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/external-id");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -21107,7 +20975,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -21210,12 +21078,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(ticketId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/submit");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -21230,7 +21098,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -21327,12 +21195,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(ticketId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/fulfill");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -21347,7 +21215,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -21444,12 +21312,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(ticketId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/cancel");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -21464,7 +21332,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -21567,12 +21435,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(ticketId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/terms");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -21587,7 +21455,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -21673,12 +21541,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("/terms/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(termId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -21693,7 +21561,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -21790,12 +21658,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("/terms/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(termId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -21810,7 +21678,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -21895,12 +21763,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("/terms/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(termId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -21915,7 +21783,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 204)
@@ -22008,12 +21876,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(termId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/fund");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -22028,7 +21896,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -22136,12 +22004,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(termId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/manually-fund");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -22156,7 +22024,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -22254,12 +22122,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "smart-transfers/settings/user-groups"
                     urlBuilder_.Append("smart-transfers/settings/user-groups");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -22274,7 +22142,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
@@ -22351,12 +22219,12 @@ namespace Trakx.Fireblocks.ApiClient
                     // Operation Path: "smart-transfers/settings/user-groups"
                     urlBuilder_.Append("smart-transfers/settings/user-groups");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -22371,7 +22239,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -22555,10 +22423,6 @@ namespace Trakx.Fireblocks.ApiClient
 
         static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
 
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Return a list of jobs belonging to tenant
@@ -22596,12 +22460,12 @@ namespace Trakx.Fireblocks.ApiClient
             }
             urlBuilder_.Length--;
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -22616,7 +22480,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -22682,12 +22546,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append("batch/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(jobId, System.Globalization.CultureInfo.InvariantCulture)));
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -22702,7 +22566,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -22773,12 +22637,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(jobId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/pause");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -22793,7 +22657,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -22859,12 +22723,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(jobId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/continue");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -22879,7 +22743,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -22945,12 +22809,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(jobId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/cancel");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -22965,7 +22829,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
@@ -23027,12 +22891,12 @@ namespace Trakx.Fireblocks.ApiClient
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(jobId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/tasks");
 
-                    PrepareRequest(client_, request_, urlBuilder_);
+                    await PrepareRequestAsync(client_, request_, urlBuilder_, cancellationToken).ConfigureAwait(false);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
-                    PrepareRequest(client_, request_, url_);
+                    await PrepareRequestAsync(client_, request_, url_, cancellationToken).ConfigureAwait(false);
 
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
@@ -23047,7 +22911,7 @@ namespace Trakx.Fireblocks.ApiClient
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
+                        await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
