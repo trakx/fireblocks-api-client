@@ -6,11 +6,11 @@ using Trakx.Fireblocks.ApiClient.Utils;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Unit;
 
-public class AddFireblocksClientExtensionTests : CredentialsTestsBase
+public class DependencyInjectionTests : CredentialsTestsBase
 {
     private readonly ServiceProvider _serviceProvider;
 
-    public AddFireblocksClientExtensionTests(RsaKeyFixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public DependencyInjectionTests(RsaKeyFixture fixture, ITestOutputHelper output) : base(fixture, output)
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddFireblocksClient(Configuration);

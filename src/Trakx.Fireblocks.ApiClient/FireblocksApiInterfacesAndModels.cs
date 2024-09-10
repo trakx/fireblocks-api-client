@@ -4885,7 +4885,7 @@ namespace Trakx.Fireblocks.ApiClient
         public double? Th { get; set; }
 
         [Newtonsoft.Json.JsonProperty("users", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.IDictionary<string, Anonymous6> Users { get; }
+        public System.Collections.Generic.IDictionary<string, Anonymous6> Users { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
