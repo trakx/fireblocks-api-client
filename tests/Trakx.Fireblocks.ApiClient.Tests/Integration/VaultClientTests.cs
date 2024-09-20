@@ -22,4 +22,14 @@ public class VaultClientTests : FireblocksClientTestsBase
         accounts.Should().NotBeNullOrEmpty();
         accounts.Should().Contain(x => x.Assets.Any(x => x.Id == "BTC_TEST"));
     }
+
+    [Fact]
+    public async Task GetVaultAccountsAsync_is_case_insensitive()
+    {
+        var response = await _vaultClient.GetPagedVaultAccountsAsync(namePrefix: "exchange");
+        response.Content.Should().NotBeNull();
+        var accounts = response.Content.Accounts;
+        accounts.Should().NotBeNullOrEmpty();
+        accounts.Should().Contain(x => x.Name == "Exchange Warm Wallet");
+    }
 }
