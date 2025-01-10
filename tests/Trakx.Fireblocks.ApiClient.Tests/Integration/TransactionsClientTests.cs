@@ -17,7 +17,7 @@ public class TransactionsClientTests : FireblocksClientTestsBase
     [Fact]
     public async Task GetTransactionsAsync_should_query_ethereum_transactions_when_passing_eth_asset_id()
     {
-        var response = await _transactionsClient.GetTransactionsAsync(assets: "ETH_TEST3", limit: 2);
+        var response = await _transactionsClient.GetTransactionsAsync(assets: "ETH_TEST5", limit: 2);
         response.Content.Should().NotBeEmpty();
     }
 
