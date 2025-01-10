@@ -36,6 +36,7 @@ public static partial class DependencyInjection
             {
                 RetryCount = apiConfiguration.MaxRetryCount,
                 MedianFirstRetryDelayMillis = apiConfiguration.InitialRetryDelayInMilliseconds,
+                FastFirst = false,
                 OnRetry = async context =>
                 {
                     var credentialsProvider = context.ServiceProvider.GetRequiredService<IFireblocksCredentialsProvider>();
