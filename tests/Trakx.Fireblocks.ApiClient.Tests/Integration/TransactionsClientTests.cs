@@ -21,7 +21,7 @@ public class TransactionsClientTests : FireblocksClientTestsBase
         response.Content.Should().NotBeEmpty();
     }
 
-    [Fact(Skip = "ETH_TEST3 is deprecated")]
+    [Fact]
     public async Task CreateTransactionAsync_should_create_and_cancel_a_new_transaction()
     {
         var trans = new TransactionRequest
@@ -38,7 +38,7 @@ public class TransactionsClientTests : FireblocksClientTestsBase
                 Id = "2",
                 Type = TransferPeerPathType.VAULT_ACCOUNT,
             },
-            AssetId = "ETH_TEST3",
+            AssetId = "ETH_TEST5",
             MaxFee = "0.1"
         };
         var createResponse = await _transactionsClient.CreateTransactionAsync(body: trans);
