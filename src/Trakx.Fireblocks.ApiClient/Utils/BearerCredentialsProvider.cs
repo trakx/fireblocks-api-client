@@ -34,6 +34,7 @@ public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDis
         _signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.RsaSha256);
     }
 
+    // Reference: https://developers.fireblocks.com/reference/signing-a-request-jwt-structure
     private JwtPayload GetPayload(HttpRequestMessage msg)
     {
         var nonce = GetNonce();
