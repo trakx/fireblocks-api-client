@@ -46,8 +46,15 @@ public sealed class BearerCredentialProviderTests : CredentialsTestsBase, IDispo
         payload.Expiration.Should().Be(Convert.ToInt32(_nonce.ToUnixTimeSeconds()) + 20);
 
         payload.Sub.Should().Be(Configuration.ApiPubKey);
+
         payload.TryGetValue("nonce", out var retrievedNonce).Should().BeTrue();
-        retrievedNonce.Should().Be(_nonce.ToUnixTimeMilliseconds());
+        string expectedNonceTicks = $"{_nonce.UtcTicks}-";
+        string nonceAsString = retrievedNonce!.ToString()!;
+
+        string nonceGuid = nonceAsString[expectedNonceTicks.Length..];
+        nonceAsString.Should().Contain(expectedNonceTicks);
+        Guid.TryParse(nonceGuid, out var _).Should().BeTrue();
+
         payload.TryGetValue("bodyHash", out var retrievedBodyHash).Should().BeTrue();
         using var sha256 = SHA256.Create();
         retrievedBodyHash.Should()
