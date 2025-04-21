@@ -1,0 +1,27 @@
+name: Delete nuget packages and tags
+
+on:
+  workflow_dispatch:
+    inputs:
+      num-pre-release-versions-to-keep:
+        description: 'The number of pre-release versions to keep starting from the newest version.'
+        default: '5'
+        required: false
+
+jobs:
+  delete-tags:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete tags
+        uses: trakx/github-actions/delete-tags@v10.2.3
+        with:
+          num-tags-to-keep: ${{github.event.inputs.num-pre-release-versions-to-keep}}
+
+  delete-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete Trakx.Fireblocks.ApiClient versions
+        uses: trakx/github-actions/delete-nuget-version@v10.2.3
+        with:
+          package-name: "Trakx.Fireblocks.ApiClient"
+          num-old-pre-release-versions-to-keep: ${{github.event.inputs.num-pre-release-versions-to-keep}}
