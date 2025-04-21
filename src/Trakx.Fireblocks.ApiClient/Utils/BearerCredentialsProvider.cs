@@ -62,7 +62,8 @@ public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDis
         return sTokenHandler.WriteToken(token);
     }
 
-    private long GetNonce() => _dateTimeProvider.UtcNowAsOffset.ToUnixTimeMilliseconds();
+    // Nonce is a random string that must be unique for each request.
+    private string GetNonce() => $"{_dateTimeProvider.UtcNowAsOffset.UtcTicks}-{Guid.NewGuid()}";
 
     private long GetIssuedTimestamp() => _dateTimeProvider.UtcNowAsOffset.ToUnixTimeSeconds();
 
