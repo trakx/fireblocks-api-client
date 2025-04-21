@@ -34,6 +34,7 @@ public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDis
         _signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.RsaSha256);
     }
 
+    // Reference: https://developers.fireblocks.com/reference/signing-a-request-jwt-structure
     private JwtPayload GetPayload(HttpRequestMessage msg)
     {
         var nonce = GetNonce();
@@ -62,7 +63,8 @@ public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDis
         return sTokenHandler.WriteToken(token);
     }
 
-    private long GetNonce() => _dateTimeProvider.UtcNowAsOffset.ToUnixTimeMilliseconds();
+    // Nonce is a random string that must be unique for each request.
+    private static string GetNonce() => Guid.NewGuid().ToString();
 
     private long GetIssuedTimestamp() => _dateTimeProvider.UtcNowAsOffset.ToUnixTimeSeconds();
 
