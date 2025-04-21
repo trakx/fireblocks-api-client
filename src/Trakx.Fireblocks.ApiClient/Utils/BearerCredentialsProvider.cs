@@ -64,7 +64,7 @@ public sealed class BearerCredentialsProvider : IBearerCredentialsProvider, IDis
     }
 
     // Nonce is a random string that must be unique for each request.
-    private string GetNonce() => $"{_dateTimeProvider.UtcNowAsOffset.UtcTicks}-{Guid.NewGuid()}";
+    private static string GetNonce() => Guid.NewGuid().ToString();
 
     private long GetIssuedTimestamp() => _dateTimeProvider.UtcNowAsOffset.ToUnixTimeSeconds();
 

@@ -23,7 +23,6 @@ public sealed class BearerCredentialProviderTests : CredentialsTestsBase, IDispo
         _bearerCredentialsProvider = new BearerCredentialsProvider(Configuration, dateTimeProvider);
     }
 
-
     [Fact]
     public void Bearer_token_should_have_correct_payload()
     {
@@ -48,12 +47,7 @@ public sealed class BearerCredentialProviderTests : CredentialsTestsBase, IDispo
         payload.Sub.Should().Be(Configuration.ApiPubKey);
 
         payload.TryGetValue("nonce", out var retrievedNonce).Should().BeTrue();
-        string expectedNonceTicks = $"{_nonce.UtcTicks}-";
-        string nonceAsString = retrievedNonce!.ToString()!;
-
-        string nonceGuid = nonceAsString[expectedNonceTicks.Length..];
-        nonceAsString.Should().Contain(expectedNonceTicks);
-        Guid.TryParse(nonceGuid, out var _).Should().BeTrue();
+        Guid.TryParse(retrievedNonce!.ToString(), out var _).Should().BeTrue();
 
         payload.TryGetValue("bodyHash", out var retrievedBodyHash).Should().BeTrue();
         using var sha256 = SHA256.Create();
