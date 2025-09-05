@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete tags
-        uses: trakx/github-actions/delete-tags@v10.2.4
+        uses: trakx/github-actions/delete-tags@v10.2.7
         with:
           num-tags-to-keep: ${{github.event.inputs.num-pre-release-versions-to-keep}}
 
@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete Trakx.Fireblocks.ApiClient versions
-        uses: trakx/github-actions/delete-nuget-version@v10.2.4
+        uses: trakx/github-actions/delete-nuget-version@v10.2.7
         with:
           package-name: "Trakx.Fireblocks.ApiClient"
           num-old-pre-release-versions-to-keep: ${{github.event.inputs.num-pre-release-versions-to-keep}}
