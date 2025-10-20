@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Test and cover solutions
         id: test
-        uses: trakx/github-actions/test-dotnet@v10.2.7
+        uses: trakx/github-actions/test-dotnet@v10.2.8
         with:
           packageReadonlyPat: ${{secrets.TRAKX_BOT_READONLY_PAT}}
           awsAccessKeyId: ${{secrets.AWS_ACCESS_KEY_ID}}
