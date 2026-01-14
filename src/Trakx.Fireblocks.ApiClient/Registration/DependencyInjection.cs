@@ -10,7 +10,7 @@ namespace Trakx.Fireblocks.ApiClient;
 /// <summary>
 /// Extension methods for adding the Fireblocks API client to the service collection.
 /// </summary>
-public static partial class DependencyInjection
+public static class DependencyInjection
 {
     /// <summary>
     /// Add the Fireblocks API client to the service collection.
@@ -42,8 +42,8 @@ public static partial class DependencyInjection
                     var credentialsProvider = context.ServiceProvider.GetRequiredService<IFireblocksCredentialsProvider>();
                     await credentialsProvider.AddCredentialsAsync(context.Request);
                 }
-            }
-        );
+            },
+            apiConfiguration.BaseUrl);
 
         return services;
     }

@@ -15,11 +15,11 @@ public record FireblocksApiConfiguration : FireblocksApiCredentialsConfiguration
 
     /// <inheritdoc />
     [AwsParameter]
-    public override string ApiPubKey { get; init; } = default!;
+    public override string ApiPubKey { get; init; } = null!;
 
     /// <inheritdoc />
     [AwsParameter]
-    public override string ApiPrivateKey { get; init; } = default!;
+    public override string ApiPrivateKey { get; init; } = null!;
 
     /// <summary>
     /// Initial delay used to wait after a failure before retrying.

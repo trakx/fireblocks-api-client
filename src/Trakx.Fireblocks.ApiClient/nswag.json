@@ -33,12 +33,12 @@
         "Trakx.Common.ApiClient.Exceptions"
       ],
 
-      "useBaseUrl": true,
+      "useBaseUrl": false,
       "generateBaseUrlProperty": false,
-      "injectHttpClient": false,
+      "injectHttpClient": true,
       "disposeHttpClient": true,
       "httpClientType": "System.Net.Http.HttpClient",
-      "useHttpClientCreationMethod": true,
+      "useHttpClientCreationMethod": false,
       "useHttpRequestMessageCreationMethod": false,
       "exceptionClass": "ApiException",
       "generateExceptionClasses": false,
