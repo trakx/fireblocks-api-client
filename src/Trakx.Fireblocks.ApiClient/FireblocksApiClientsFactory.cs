@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using Trakx.Common.ApiClient.Utils;
 using Trakx.Common.DateAndTime;
 using Trakx.Fireblocks.ApiClient.Utils;
@@ -16,35 +17,30 @@ public interface IFireblocksApiClientsFactory
 }
 
 /// <inheritdoc />
-public class FireblocksApiClientsFactory : IFireblocksApiClientsFactory
+public class FireblocksApiClientsFactory(
+    IServiceProvider serviceProvider,
+    IDateTimeProvider dateTimeProvider) : IFireblocksApiClientsFactory
 {
-    private readonly FireblocksApiConfiguration _apiConfiguration;
-    private readonly IHttpClientFactory _httpClientFactory;
-    private readonly IDateTimeProvider _dateTimeProvider;
-
-    /// <inheritdoc cref="FireblocksApiClientsFactory" />
-    public FireblocksApiClientsFactory(
-        FireblocksApiConfiguration apiConfiguration,
-        IHttpClientFactory httpClientFactory,
-        IDateTimeProvider dateTimeProvider)
-    {
-        _apiConfiguration = apiConfiguration;
-        _httpClientFactory = httpClientFactory;
-        _dateTimeProvider = dateTimeProvider;
-    }
-
     /// <inheritdoc />
     public TApiClient CreateApiClient<TApiClient>(FireblocksApiCredentialsConfiguration credentialsConfiguration) where TApiClient : IFireblocksApiClientBase
     {
-        var bearerCredentialsProvider = new BearerCredentialsProvider(credentialsConfiguration, _dateTimeProvider);
+        var defaultConfiguration = serviceProvider.GetRequiredService<FireblocksApiConfiguration>();
+
+        var customConfiguration = defaultConfiguration with
+        {
+            ApiPubKey = credentialsConfiguration.ApiPubKey,
+            ApiPrivateKey = credentialsConfiguration.ApiPrivateKey
+        };
+
+        var bearerCredentialsProvider = new BearerCredentialsProvider(customConfiguration, dateTimeProvider);
         var apiCredentialsProvider = new ApiKeyCredentialsProvider(credentialsConfiguration, bearerCredentialsProvider);
-        var clientConfigurator = new ClientConfigurator(_apiConfiguration, apiCredentialsProvider, _httpClientFactory);
+        var clientConfigurator = new ClientConfigurator(apiCredentialsProvider);
 
         var implementationType = ApiClientReflection.GetApiClientImplementation(typeof(TApiClient));
         if (implementationType is null)
             throw new NotImplementedException($"No implementation found for {typeof(TApiClient).Name}");
 
-        var client = (TApiClient)Activator.CreateInstance(implementationType, clientConfigurator)!;
+        var client = (TApiClient)ActivatorUtilities.CreateInstance(serviceProvider, implementationType, clientConfigurator);
         return client;
     }
 }
