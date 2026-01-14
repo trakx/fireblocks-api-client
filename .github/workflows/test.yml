@@ -19,4 +19,4 @@ jobs:
           packageReadonlyPat: ${{secrets.TRAKX_BOT_READONLY_PAT}}
           awsAccessKeyId: ${{secrets.AWS_ACCESS_KEY_ID}}
           awsAccessKeySecret: ${{secrets.AWS_ACCESS_KEY_SECRET}}
-          dotnetVersion: 8.x
+          dotnetVersion: 10.x

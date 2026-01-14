@@ -39,7 +39,8 @@ public class FireblocksApiClientsFactoryTests
         credentialsProvider.ApiCredentialsConfiguration.Should().BeEquivalentTo(newApiCredentials);
 
         var bearerCredentialsProvider = (BearerCredentialsProvider)credentialsProvider.BearerCredentialsProvider;
-        bearerCredentialsProvider.ApiCredentialsConfiguration.Should().BeEquivalentTo(newApiCredentials);
+        bearerCredentialsProvider.Configuration.ApiPubKey.Should().Be(newApiCredentials.ApiPubKey);
+        bearerCredentialsProvider.Configuration.ApiPrivateKey.Should().Be(newApiCredentials.ApiPrivateKey);
     }
 }
 
@@ -49,17 +50,27 @@ public class FireblocksApiClientsFactoryTestsData : IEnumerable<object[]>
 
     public FireblocksApiClientsFactoryTestsData()
     {
-        var apiConfiguration = new FireblocksApiConfiguration
-        {
-            BaseUrl = new Uri("https://localhost:5001"),
-            ApiPubKey = "original-public-key",
-            ApiPrivateKey = "original-private-key"
-        };
+        using var rsa = RSA.Create();
+        var privateKey = rsa.ExportPkcs8PrivateKey();
 
-        var httpClientFactory = Substitute.For<IHttpClientFactory>();
+        var serviceProvider = Substitute.For<IServiceProvider>();
+
+        serviceProvider
+            .GetService(typeof(HttpClient))
+            .Returns(Substitute.For<HttpClient>());
+
+        serviceProvider
+            .GetService(typeof(FireblocksApiConfiguration))
+            .Returns(new FireblocksApiConfiguration
+            {
+                BaseUrl = new Uri("https://api.fireblocks.io/v1"),
+                ApiPrivateKey = Convert.ToBase64String(privateKey),
+                ApiPubKey = "original-public-key"
+            });
+
         var dateTimeProvider = Substitute.For<IDateTimeProvider>();
 
-        Factory = new FireblocksApiClientsFactory(apiConfiguration, httpClientFactory, dateTimeProvider);
+        Factory = new FireblocksApiClientsFactory(serviceProvider, dateTimeProvider);
     }
 
     public IEnumerator<object[]> GetEnumerator()
