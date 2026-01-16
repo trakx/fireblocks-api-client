@@ -40,7 +40,10 @@ public class FireblocksApiClientsFactory(
         if (implementationType is null)
             throw new NotImplementedException($"No implementation found for {typeof(TApiClient).Name}");
 
-        var client = (TApiClient)ActivatorUtilities.CreateInstance(serviceProvider, implementationType, clientConfigurator);
+        var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
+        var httpClient = httpClientFactory.CreateClient(implementationType.FullName!);
+
+        var client = (TApiClient)ActivatorUtilities.CreateInstance(serviceProvider, implementationType, clientConfigurator, httpClient);
         return client;
     }
 }
