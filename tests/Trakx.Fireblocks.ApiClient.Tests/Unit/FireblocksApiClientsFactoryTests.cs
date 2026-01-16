@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Security.Cryptography;
 using Trakx.Common.DateAndTime;
+using Trakx.Common.Extensions;
 using Trakx.Fireblocks.ApiClient.Utils;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Unit;
@@ -32,6 +33,12 @@ public class FireblocksApiClientsFactoryTests
         client.Should().BeAssignableTo(expectedInterfaceType);
         client.Should().BeOfType(expectedImplementationType);
 
+        // Check if private property _httpClient has baseAddress not null
+        var clientProperties = client.GetType().GetAllFields();
+        var httpClientProperty = clientProperties.Single(p => p.Name == "_httpClient");
+        var httpClient = (HttpClient)httpClientProperty.GetValue(client)!;
+        httpClient.BaseAddress.Should().NotBeNull();
+
         var clientImplementation = (AuthorisedClient)client;
         clientImplementation.CredentialsProvider.Should().BeOfType<ApiKeyCredentialsProvider>();
 
@@ -53,7 +60,18 @@ public class FireblocksApiClientsFactoryTestsData : IEnumerable<object[]>
         using var rsa = RSA.Create();
         var privateKey = rsa.ExportPkcs8PrivateKey();
 
+        var baseUri = new Uri("https://api.fireblocks.io/v1");
+        
         var serviceProvider = Substitute.For<IServiceProvider>();
+
+        var httpClient = new HttpClient { BaseAddress = baseUri };
+
+        var httpClientFactory = Substitute.For<IHttpClientFactory>();
+        httpClientFactory.CreateClient(Arg.Any<string>()).Returns(httpClient);
+
+        serviceProvider
+            .GetService(typeof(IHttpClientFactory))
+            .Returns(httpClientFactory);
 
         serviceProvider
             .GetService(typeof(HttpClient))
@@ -63,7 +81,7 @@ public class FireblocksApiClientsFactoryTestsData : IEnumerable<object[]>
             .GetService(typeof(FireblocksApiConfiguration))
             .Returns(new FireblocksApiConfiguration
             {
-                BaseUrl = new Uri("https://api.fireblocks.io/v1"),
+                BaseUrl = baseUri,
                 ApiPrivateKey = Convert.ToBase64String(privateKey),
                 ApiPubKey = "original-public-key"
             });
