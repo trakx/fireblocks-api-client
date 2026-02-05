@@ -520,6 +520,17 @@ namespace Trakx.Fireblocks.ApiClient
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ExchangeAsset>> GetExchangeAccountAssetAsync(string exchangeAccountId, string assetId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get exchange credentials public key
+        /// </summary>
+        /// <remarks>
+        /// Returns the public key used to encrypt exchange account credentials and PII data for travel rule compliance when withdrawing from exchanges like Binance.
+        /// </remarks>
+        /// <returns>The public key response</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Trakx.Common.ApiClient.Response<ExchangeCredentialsPublicKeyResponse>> GetExchangeAccountsCredentialsPublicKeyAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -3703,6 +3714,27 @@ namespace Trakx.Fireblocks.ApiClient
 
         [Newtonsoft.Json.JsonProperty("nextUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NextUrl { get; init; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record ExchangeCredentialsPublicKeyResponse
+    {
+
+        /// <summary>
+        /// The RSA public key in PEM format used to encrypt exchange credentials/PII data
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("publicKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string PublicKey { get; init; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
