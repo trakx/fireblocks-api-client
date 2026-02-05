@@ -19,4 +19,13 @@ public class ExchangeAccountsClientTests : FireblocksClientTestsBase
         var response = await _exchangeAccountsClient.GetPagedExchangeAccountsAsync(5);
         response.Content.Exchanges.Should().BeEmpty();
     }
+
+    [Fact]
+    public async Task GetExchangeAccountsCredentialsPublicKeyAsync_should_return_public_key()
+    {
+        var response = await _exchangeAccountsClient.GetExchangeAccountsCredentialsPublicKeyAsync();
+        response.Content.Should().NotBeNull();
+        response.Content.PublicKey.Should().NotBeNullOrEmpty();
+        response.Content.PublicKey.Should().StartWith("-----BEGIN PUBLIC KEY-----");
+    }
 }
