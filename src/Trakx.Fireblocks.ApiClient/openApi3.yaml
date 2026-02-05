@@ -1671,6 +1671,27 @@ paths:
         default:
           $ref: '#/components/responses/Error'
       operationId: getExchangeAccountAsset
+  /exchange_accounts/credentials_public_key:
+    get:
+      summary: Get exchange credentials public key
+      description: >-
+        Returns the public key used to encrypt exchange account credentials and PII data
+        for travel rule compliance when withdrawing from exchanges like Binance.
+      tags:
+        - Exchange accounts
+      responses:
+        '200':
+          description: The public key response
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/X-Request-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExchangeCredentialsPublicKeyResponse'
+        default:
+          $ref: '#/components/responses/Error'
+      operationId: getExchangeAccountsCredentialsPublicKey
   /fiat_accounts:
     get:
       summary: List fiat accounts
@@ -8972,6 +8993,12 @@ components:
           type: string
         nextUrl:
           type: string
+    ExchangeCredentialsPublicKeyResponse:
+      type: object
+      properties:
+        publicKey:
+          type: string
+          description: The RSA public key in PEM format used to encrypt exchange credentials/PII data
     TradingAccountType:
       type: string
       enum:

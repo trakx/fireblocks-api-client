@@ -74,10 +74,6 @@ public class FireblocksApiClientsFactoryTestsData : IEnumerable<object[]>
             .Returns(httpClientFactory);
 
         serviceProvider
-            .GetService(typeof(HttpClient))
-            .Returns(Substitute.For<HttpClient>());
-
-        serviceProvider
             .GetService(typeof(FireblocksApiConfiguration))
             .Returns(new FireblocksApiConfiguration
             {

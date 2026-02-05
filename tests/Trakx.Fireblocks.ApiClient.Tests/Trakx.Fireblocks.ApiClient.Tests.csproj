@@ -38,6 +38,9 @@
     <None Update="Unit\Serialisation\sampleGetAllExchangesResponse.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Unit\Serialisation\sampleCredentialsPublicKeyResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
