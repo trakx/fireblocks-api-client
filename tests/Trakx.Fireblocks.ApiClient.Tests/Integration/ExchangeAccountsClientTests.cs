@@ -29,7 +29,7 @@ public class ExchangeAccountsClientTests : FireblocksClientTestsBase
         response.Content.PublicKey.Should().StartWith("-----BEGIN PUBLIC KEY-----");
     }
 
-    [Fact]
+    [Fact(Skip = "there are no exhcanges in Dev workspace")]
     public async Task List_exchange_accounts_with_details()
     {
         string? after = null;
