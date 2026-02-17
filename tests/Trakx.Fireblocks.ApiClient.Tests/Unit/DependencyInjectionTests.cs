@@ -2,6 +2,7 @@
 using Trakx.Common.DateAndTime;
 using Trakx.Common.Testing.Configuration;
 using Trakx.Common.Testing.Extensions;
+using Trakx.Fireblocks.ApiClient.TravelRule;
 using Trakx.Fireblocks.ApiClient.Utils;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Unit;
@@ -26,6 +27,8 @@ public class DependencyInjectionTests : CredentialsTestsBase
         _serviceProvider.CheckServiceRegistration<IFireblocksCredentialsProvider, ApiKeyCredentialsProvider>();
         _serviceProvider.CheckServiceRegistration<IClientConfigurator, ClientConfigurator>();
         _serviceProvider.CheckServiceRegistration<IFireblocksApiClientsFactory, FireblocksApiClientsFactory>();
+        _serviceProvider.CheckServiceRegistration<IRsaEncryptionService, RsaEncryptionService>();
+        _serviceProvider.CheckServiceRegistration<IBinanceTravelRuleService, BinanceTravelRuleService>();
     }
 
     [Fact]

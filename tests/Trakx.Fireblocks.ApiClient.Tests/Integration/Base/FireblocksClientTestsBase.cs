@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using Trakx.Common.Infrastructure.Environment.Env;
 using Trakx.Common.Testing.Configuration;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration.Base;
@@ -31,17 +32,24 @@ public class FireblocksApiFixture : IDisposable
 
     public FireblocksApiFixture()
     {
-        var apiConfiguration = AwsConfigurationHelper.GetConfigurationFromAws<FireblocksApiConfiguration>()
-        with
-        {
-            BaseUrl = new Uri("https://api.fireblocks.io/v1")
-        };
+        var apiConfiguration = GetConfiguration();
 
         var serviceCollection = new ServiceCollection();
-
         serviceCollection.AddFireblocksClient(apiConfiguration);
-
         ServiceProvider = serviceCollection.BuildServiceProvider();
+    }
+
+    private static FireblocksApiConfiguration GetConfiguration()
+    {
+        try
+        {
+            return EnvConfigurationHelper.GetConfigurationFromEnv<FireblocksApiConfiguration>();
+        }
+        catch
+        {
+            return AwsConfigurationHelper.GetConfigurationFromAws<FireblocksApiConfiguration>("Production")
+                with { BaseUrl = new Uri("https://api.fireblocks.io/v1") };
+        }
     }
 
     protected virtual void Dispose(bool disposing)
