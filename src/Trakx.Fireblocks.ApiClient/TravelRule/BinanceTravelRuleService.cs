@@ -2,72 +2,30 @@ namespace Trakx.Fireblocks.ApiClient.TravelRule;
 
 /// <inheritdoc />
 internal class BinanceTravelRuleService(
-    IExchange_accountsClient exchangeAccountsClient,
-    ITransactionsClient transactionsClient,
-    IRsaEncryptionService encryptionService) : IBinanceTravelRuleService
+    ITransactionsClient transactionsClient) : IBinanceTravelRuleService
 {
-    private string? _cachedPublicKeyPem;
-
     /// <inheritdoc />
-    public async Task<ExtraParameters> BuildWithdrawalExtraParametersAsync(CancellationToken cancellationToken = default)
+    public Task<ExtraParameters> BuildWithdrawalExtraParametersAsync(CancellationToken cancellationToken = default)
     {
-        return await BuildExtraParametersAsync(
-            partyKey: "beneficiary",
-            transactionDirection: "withdraw",
-            vaspSection: new Dictionary<string, object>
-            {
-                ["beneficiaryVASP"] = new Dictionary<string, object> { ["vaspCode"] = "BINANCE" },
-                ["originatingVASP"] = new Dictionary<string, object> { ["vaspCountry"] = "FR" }
-            },
-            cancellationToken);
-    }
-
-    /// <inheritdoc />
-    public async Task<ExtraParameters> BuildDepositExtraParametersAsync(CancellationToken cancellationToken = default)
-    {
-        return await BuildExtraParametersAsync(
-            partyKey: "originator",
-            transactionDirection: "deposit",
-            vaspSection: new Dictionary<string, object>
-            {
-                ["originatingVASP"] = new Dictionary<string, object> { ["vaspName"] = "Binance" },
-                ["beneficiaryVASP"] = new Dictionary<string, object> { ["vaspCountry"] = "FR" }
-            },
-            cancellationToken);
-    }
-
-    private async Task<ExtraParameters> BuildExtraParametersAsync(
-        string partyKey,
-        string transactionDirection,
-        Dictionary<string, object> vaspSection,
-        CancellationToken cancellationToken)
-    {
-        var pem = await GetPublicKeyAsync(cancellationToken);
-
         var data = new Dictionary<string, object>
         {
-            [partyKey] = new Dictionary<string, object>
+            ["beneficiary"] = new Dictionary<string, object>
             {
-                ["participantRelationshipType"] = encryptionService.Encrypt("FirstParty", pem),
-                ["entityType"] = encryptionService.Encrypt("Business", pem)
+                ["participantRelationshipType"] = "FirstParty",
+                ["entityType"] = "Business"
             },
             ["transactionData"] = new Dictionary<string, object>
             {
-                [transactionDirection] = new Dictionary<string, object>
+                ["withdraw"] = new Dictionary<string, object>
                 {
-                    ["isAddressVerified"] = encryptionService.Encrypt(true, pem)
+                    ["isAddressVerified"] = true
                 }
+            },
+            ["originatingVASP"] = new Dictionary<string, object>
+            {
+                ["vaspCountry"] = "FR"
             }
         };
-
-        foreach (var (key, value) in vaspSection)
-        {
-            var plainValues = (Dictionary<string, object>)value;
-            var encrypted = new Dictionary<string, object>();
-            foreach (var (fieldKey, fieldValue) in plainValues)
-                encrypted[fieldKey] = encryptionService.Encrypt((string)fieldValue, pem);
-            data[key] = encrypted;
-        }
 
         var piiData = new Dictionary<string, object>
         {
@@ -78,7 +36,42 @@ internal class BinanceTravelRuleService(
 
         var extraParameters = new ExtraParameters();
         extraParameters.AdditionalProperties["piiData"] = piiData;
-        return extraParameters;
+        return Task.FromResult(extraParameters);
+    }
+
+    /// <inheritdoc />
+    public Task<ExtraParameters> BuildDepositExtraParametersAsync(CancellationToken cancellationToken = default)
+    {
+        var data = new Dictionary<string, object>
+        {
+            ["originator"] = new Dictionary<string, object>
+            {
+                ["participantRelationshipType"] = "FirstParty",
+                ["entityType"] = "Business"
+            },
+            ["transactionData"] = new Dictionary<string, object>
+            {
+                ["deposit"] = new Dictionary<string, object>
+                {
+                    ["isAddressVerified"] = true
+                }
+            },
+            ["originatingVASP"] = new Dictionary<string, object>
+            {
+                ["vaspName"] = "Binance"
+            }
+        };
+
+        var piiData = new Dictionary<string, object>
+        {
+            ["type"] = "exchange-service-travel-rule",
+            ["typeVersion"] = "1.0.0",
+            ["data"] = data
+        };
+
+        var extraParameters = new ExtraParameters();
+        extraParameters.AdditionalProperties["piiData"] = piiData;
+        return Task.FromResult(extraParameters);
     }
 
     /// <inheritdoc />
@@ -141,12 +134,5 @@ internal class BinanceTravelRuleService(
 
         var response = await transactionsClient.CreateTransactionAsync(body: request, cancellationToken: cancellationToken);
         return response.Content;
-    }
-
-    private async Task<string> GetPublicKeyAsync(CancellationToken cancellationToken)
-    {
-        return _cachedPublicKeyPem ??= (await exchangeAccountsClient
-            .GetExchangeAccountsCredentialsPublicKeyAsync(cancellationToken))
-            .Content.PublicKey;
     }
 }
