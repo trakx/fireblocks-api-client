@@ -27,6 +27,7 @@ public class DependencyInjectionTests : CredentialsTestsBase
         _serviceProvider.CheckServiceRegistration<IFireblocksCredentialsProvider, ApiKeyCredentialsProvider>();
         _serviceProvider.CheckServiceRegistration<IClientConfigurator, ClientConfigurator>();
         _serviceProvider.CheckServiceRegistration<IFireblocksApiClientsFactory, FireblocksApiClientsFactory>();
+        _serviceProvider.CheckServiceRegistration<IRsaEncryptionService, RsaEncryptionService>();
         _serviceProvider.CheckServiceRegistration<IBinanceTravelRuleService, BinanceTravelRuleService>();
     }
 

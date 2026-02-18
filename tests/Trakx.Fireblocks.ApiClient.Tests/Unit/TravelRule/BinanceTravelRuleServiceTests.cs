@@ -1,15 +1,28 @@
+using System.Security.Cryptography;
+using System.Text;
 using Trakx.Common.ApiClient;
 using Trakx.Fireblocks.ApiClient.TravelRule;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Unit.TravelRule;
 
-public class BinanceTravelRuleServiceTests
+public class BinanceTravelRuleServiceTests : IDisposable
 {
     private readonly BinanceTravelRuleService _sut;
     private readonly ITransactionsClient _transactionsClient;
+    private readonly RSA _rsa;
 
     public BinanceTravelRuleServiceTests()
     {
+        _rsa = RSA.Create(2048);
+        var publicKeyPem = _rsa.ExportSubjectPublicKeyInfoPem();
+
+        var exchangeAccountsClient = Substitute.For<IExchange_accountsClient>();
+        exchangeAccountsClient.GetExchangeAccountsCredentialsPublicKeyAsync(Arg.Any<CancellationToken>())
+            .Returns(new Response<ExchangeCredentialsPublicKeyResponse>(
+                200,
+                new Dictionary<string, IEnumerable<string>>(),
+                new ExchangeCredentialsPublicKeyResponse { PublicKey = publicKeyPem }));
+
         _transactionsClient = Substitute.For<ITransactionsClient>();
         _transactionsClient.CreateTransactionAsync(
                 Arg.Any<Guid?>(), Arg.Any<string>(), Arg.Any<TransactionRequest>(), Arg.Any<CancellationToken>())
@@ -18,7 +31,8 @@ public class BinanceTravelRuleServiceTests
                 new Dictionary<string, IEnumerable<string>>(),
                 new CreateTransactionResponse { Id = "tx-123", Status = "SUBMITTED" }));
 
-        _sut = new BinanceTravelRuleService(_transactionsClient);
+        var encryptionService = new RsaEncryptionService();
+        _sut = new BinanceTravelRuleService(exchangeAccountsClient, _transactionsClient, encryptionService);
     }
 
     [Fact]
@@ -39,17 +53,18 @@ public class BinanceTravelRuleServiceTests
 
         var beneficiary = data!["beneficiary"] as Dictionary<string, object>;
         beneficiary.Should().NotBeNull();
-        beneficiary!["participantRelationshipType"].Should().Be("FirstParty");
-        beneficiary["entityType"].Should().Be("Business");
+        DecryptValue(beneficiary!["participantRelationshipType"]).Should().Be("FirstParty");
+        DecryptValue(beneficiary["entityType"]).Should().Be("Business");
 
         var transactionData = data["transactionData"] as Dictionary<string, object>;
         var withdraw = (transactionData!["withdraw"] as Dictionary<string, object>)!;
-        withdraw["isAddressVerified"].Should().Be(true);
+        DecryptBool(withdraw["isAddressVerified"]).Should().BeTrue();
 
+        //explicitly diverge from Fireblocks documentation, the doc is wrong.
         data.Should().NotContainKey("beneficiaryVASP");
 
         var originatingVasp = data["originatingVASP"] as Dictionary<string, object>;
-        originatingVasp!["vaspCountry"].Should().Be("FR");
+        DecryptValue(originatingVasp!["vaspCountry"]).Should().Be("FR");
     }
 
     [Fact]
@@ -70,16 +85,17 @@ public class BinanceTravelRuleServiceTests
 
         var originator = data!["originator"] as Dictionary<string, object>;
         originator.Should().NotBeNull();
-        originator!["participantRelationshipType"].Should().Be("FirstParty");
-        originator["entityType"].Should().Be("Business");
+        DecryptValue(originator!["participantRelationshipType"]).Should().Be("FirstParty");
+        DecryptValue(originator["entityType"]).Should().Be("Business");
 
         var originatingVasp = data["originatingVASP"] as Dictionary<string, object>;
-        originatingVasp!["vaspName"].Should().Be("Binance");
+        DecryptValue(originatingVasp!["vaspName"]).Should().Be("Binance");
 
         var transactionData = data["transactionData"] as Dictionary<string, object>;
         var deposit = (transactionData!["deposit"] as Dictionary<string, object>)!;
-        deposit["isAddressVerified"].Should().Be(true);
+        DecryptBool(deposit["isAddressVerified"]).Should().BeTrue();
 
+        //explicitly diverge from Fireblocks documentation, the doc is wrong.
         data.Should().NotContainKey("beneficiaryVASP");
     }
 
@@ -126,15 +142,22 @@ public class BinanceTravelRuleServiceTests
             Arg.Any<CancellationToken>());
     }
 
-    [Fact(Skip = "Integration test — requires real Fireblocks credentials and Binance exchange account")]
-    public async Task WithdrawFromBinance_should_transfer_JUP_to_vault()
+    private string DecryptValue(object encryptedBase64)
     {
-        await _sut.WithdrawFromBinanceAsync(
-            exchangeAccountId: "7b29fd51-6098-4c45-8471-4195cdcbdd70",
-            vaultAccountId: "0",
-            assetId: "JUP_SOL",
-            amount: "10",
-            note: "test travel rule compliance",
-            customerRefId: Guid.NewGuid().ToString());
+        var encryptedBytes = Convert.FromBase64String((string)encryptedBase64);
+        var decryptedBytes = _rsa.Decrypt(encryptedBytes, RSAEncryptionPadding.OaepSHA256);
+        return Encoding.UTF8.GetString(decryptedBytes);
+    }
+
+    private bool DecryptBool(object encryptedBase64)
+    {
+        var encryptedBytes = Convert.FromBase64String((string)encryptedBase64);
+        var decryptedBytes = _rsa.Decrypt(encryptedBytes, RSAEncryptionPadding.OaepSHA256);
+        return BitConverter.ToBoolean(decryptedBytes);
+    }
+
+    public void Dispose()
+    {
+        _rsa.Dispose();
     }
 }

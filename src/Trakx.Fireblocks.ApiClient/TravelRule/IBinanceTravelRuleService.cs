@@ -1,7 +1,7 @@
 namespace Trakx.Fireblocks.ApiClient.TravelRule;
 
 /// <summary>
-/// Service for building PII data required by Binance travel rule compliance.
+/// Service for building encrypted PII data required by Binance travel rule compliance.
 /// See: https://developers.fireblocks.com/docs/a-developers-guide-to-constructing-encrypted-pii-messages-for-binance-via-fireblocks
 /// </summary>
 public interface IBinanceTravelRuleService
