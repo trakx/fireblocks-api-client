@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Trakx.Common.ApiClient;
 using Trakx.Common.Configuration;
 using Trakx.Common.DateAndTime;
+using Trakx.Fireblocks.ApiClient.TravelRule;
 using Trakx.Fireblocks.ApiClient.Utils;
 
 namespace Trakx.Fireblocks.ApiClient;
@@ -30,6 +31,8 @@ public static class DependencyInjection
         services.AddSingleton<IFireblocksCredentialsProvider, ApiKeyCredentialsProvider>();
         services.AddSingleton<IClientConfigurator, ClientConfigurator>();
         services.AddSingleton<IFireblocksApiClientsFactory, FireblocksApiClientsFactory>();
+        services.AddSingleton<IRsaEncryptionService, RsaEncryptionService>();
+        services.AddSingleton<IBinanceTravelRuleService, BinanceTravelRuleService>();
 
         services.AddApiClientsOfBaseTypeWithHttpClient<IFireblocksApiClientBase>(
             new ApiClientWithHttpClientRetryOptions
