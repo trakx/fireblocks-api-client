@@ -4,7 +4,7 @@ using Trakx.Fireblocks.ApiClient.Tests.Integration.Base;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration;
 
-public class TransactionsClientTests : FireblocksClientTestsBase
+public partial class TransactionsClientTests : FireblocksClientTestsBase
 {
     private readonly ITransactionsClient _transactionsClient;
 

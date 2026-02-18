@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using Trakx.Common.Infrastructure.Environment.Env;
 using Trakx.Common.Testing.Configuration;
 
 namespace Trakx.Fireblocks.ApiClient.Tests.Integration.Base;

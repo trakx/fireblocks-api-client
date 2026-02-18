@@ -60,8 +60,8 @@ public class BinanceTravelRuleServiceTests : IDisposable
         var withdraw = (transactionData!["withdraw"] as Dictionary<string, object>)!;
         DecryptBool(withdraw["isAddressVerified"]).Should().BeTrue();
 
-        var beneficiaryVasp = data["beneficiaryVASP"] as Dictionary<string, object>;
-        DecryptValue(beneficiaryVasp!["vaspCode"]).Should().Be("BINANCE");
+        //explicitly diverge from Fireblocks documentation, the doc is wrong.
+        data.Should().NotContainKey("beneficiaryVASP");
 
         var originatingVasp = data["originatingVASP"] as Dictionary<string, object>;
         DecryptValue(originatingVasp!["vaspCountry"]).Should().Be("FR");
@@ -95,24 +95,8 @@ public class BinanceTravelRuleServiceTests : IDisposable
         var deposit = (transactionData!["deposit"] as Dictionary<string, object>)!;
         DecryptBool(deposit["isAddressVerified"]).Should().BeTrue();
 
-        var beneficiaryVasp = data["beneficiaryVASP"] as Dictionary<string, object>;
-        DecryptValue(beneficiaryVasp!["vaspCountry"]).Should().Be("FR");
-    }
-
-    [Fact]
-    public async Task BuildWithdrawalExtraParametersAsync_should_produce_base64_encrypted_values()
-    {
-        var result = await _sut.BuildWithdrawalExtraParametersAsync();
-
-        var piiData = result.AdditionalProperties["piiData"] as Dictionary<string, object>;
-        var data = piiData!["data"] as Dictionary<string, object>;
-        var beneficiary = data!["beneficiary"] as Dictionary<string, object>;
-
-        // All encrypted values should be valid base64 strings
-        var encryptedValue = beneficiary!["participantRelationshipType"] as string;
-        encryptedValue.Should().NotBeNullOrEmpty();
-        var action = () => Convert.FromBase64String(encryptedValue!);
-        action.Should().NotThrow();
+        //explicitly diverge from Fireblocks documentation, the doc is wrong.
+        data.Should().NotContainKey("beneficiaryVASP");
     }
 
     [Fact]

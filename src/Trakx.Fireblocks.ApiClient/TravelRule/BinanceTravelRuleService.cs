@@ -16,7 +16,6 @@ internal class BinanceTravelRuleService(
             transactionDirection: "withdraw",
             vaspSection: new Dictionary<string, object>
             {
-                ["beneficiaryVASP"] = new Dictionary<string, object> { ["vaspCode"] = "BINANCE" },
                 ["originatingVASP"] = new Dictionary<string, object> { ["vaspCountry"] = "FR" }
             },
             cancellationToken);
@@ -30,8 +29,7 @@ internal class BinanceTravelRuleService(
             transactionDirection: "deposit",
             vaspSection: new Dictionary<string, object>
             {
-                ["originatingVASP"] = new Dictionary<string, object> { ["vaspName"] = "Binance" },
-                ["beneficiaryVASP"] = new Dictionary<string, object> { ["vaspCountry"] = "FR" }
+                ["originatingVASP"] = new Dictionary<string, object> { ["vaspName"] = "Binance" }
             },
             cancellationToken);
     }
