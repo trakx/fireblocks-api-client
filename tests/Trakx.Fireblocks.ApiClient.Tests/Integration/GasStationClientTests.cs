@@ -19,6 +19,7 @@ public class GasStationClientTests : FireblocksClientTestsBase
     {
         var response = await _gasStationClient.GetGasStationInfoAsync();
         response.Content.Should().NotBeNull();
+        response.Content.Configuration.Should().NotBeNull();
 
         var raw = JsonConvert.SerializeObject(response.Content, Formatting.Indented);
         _logger.Information("Global Gas Station response:\n{Raw}", raw);
@@ -42,6 +43,7 @@ public class GasStationClientTests : FireblocksClientTestsBase
     {
         var response = await _gasStationClient.GetGasStationByAssetIdAsync(assetId);
         response.Content.Should().NotBeNull();
+        response.Content.Configuration.Should().NotBeNull();
 
         var raw = JsonConvert.SerializeObject(response.Content, Formatting.Indented);
         _logger.Information("Gas Station config for {AssetId}:\n{Raw}", assetId, raw);
@@ -95,9 +97,13 @@ public class GasStationClientTests : FireblocksClientTestsBase
 
         await _gasStationClient.UpdateGasStationConfigurationByAssetIdAsync(assetId, config);
 
-        // read back to confirm
+        // read back to confirm the values were applied
         var response = await _gasStationClient.GetGasStationByAssetIdAsync(assetId);
         response.Content.Should().NotBeNull();
+        response.Content.Configuration.Should().NotBeNull();
+        response.Content.Configuration.GasThreshold.Should().Be(gasThreshold);
+        response.Content.Configuration.GasCap.Should().Be(gasCap);
+        response.Content.Configuration.MaxGasPrice.Should().Be(maxGasPrice);
 
         var raw = JsonConvert.SerializeObject(response.Content, Formatting.Indented);
         _logger.Information("Gas Station config for {AssetId} after update:\n{Raw}", assetId, raw);
