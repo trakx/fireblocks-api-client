@@ -11421,7 +11421,7 @@ namespace Trakx.Fireblocks.ApiClient
                         await ProcessResponseAsync(client_, response_, cancellationToken).ConfigureAwait(false);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ == 200)
                         {
                             return new Trakx.Common.ApiClient.Response(status_, headers_);
                         }
