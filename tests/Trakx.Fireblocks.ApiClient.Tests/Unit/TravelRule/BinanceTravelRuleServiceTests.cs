@@ -110,7 +110,7 @@ public class BinanceTravelRuleServiceTests : IDisposable
             Arg.Any<Guid?>(),
             Arg.Any<string>(),
             Arg.Is<TransactionRequest>(r =>
-                r.Source.Type == TransferPeerPathType.EXCHANGE_ACCOUNT &&
+                r!.Source.Type == TransferPeerPathType.EXCHANGE_ACCOUNT &&
                 r.Source.Id == "exchange-1" &&
                 r.Destination.Type == TransferPeerPathType.VAULT_ACCOUNT &&
                 r.Destination.Id == "vault-2" &&
@@ -132,7 +132,7 @@ public class BinanceTravelRuleServiceTests : IDisposable
             Arg.Any<Guid?>(),
             Arg.Any<string>(),
             Arg.Is<TransactionRequest>(r =>
-                r.Source.Type == TransferPeerPathType.VAULT_ACCOUNT &&
+                r!.Source.Type == TransferPeerPathType.VAULT_ACCOUNT &&
                 r.Source.Id == "vault-2" &&
                 r.Destination.Type == TransferPeerPathType.EXCHANGE_ACCOUNT &&
                 r.Destination.Id == "exchange-1" &&
