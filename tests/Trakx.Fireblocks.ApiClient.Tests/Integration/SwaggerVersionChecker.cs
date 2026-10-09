@@ -13,9 +13,9 @@ public class SwaggerVersionChecker : IDisposable
         _fireblocksClient = new FlurlClient("https://docs.fireblocks.com");
     }
 
-    // [Fact(Skip = "local openapi file was changed to improve methods signature and fix nullable issues.
-    // After that, this test is no longer working, as it takes the assumption that both files, local and remote, are identical.")]
-    [Fact]
+    // The local openapi file was changed to improve method signatures and fix nullable issues, so it no longer matches
+    // the remote one, and the remote endpoint (docs.fireblocks.com/api/v1/swagger) now redirects to the HTML developer portal.
+    [Fact(Skip = "Fireblocks no longer serves the OpenAPI description at docs.fireblocks.com/api/v1/swagger.")]
     public async Task VerifyOpenApiVersion()
     {
 
