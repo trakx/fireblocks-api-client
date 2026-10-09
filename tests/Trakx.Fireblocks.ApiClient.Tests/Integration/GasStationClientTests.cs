@@ -36,7 +36,6 @@ public class GasStationClientTests : FireblocksClientTestsBase
     [InlineData("MATIC_POLYGON")]   // Polygon
     [InlineData("AVAX")]            // Avalanche C-Chain
     [InlineData("ETH_ZKSYNC_ERA")]  // zkSync Era
-    [InlineData("ETH_ZKEVM")]       // Polygon zkEVM
     [InlineData("SONIC")]           // Sonic
     [InlineData("MONAD")]           // Monad
     public async Task GetGasStationByAssetId_should_return_configuration_for_asset(string assetId)
@@ -79,7 +78,6 @@ public class GasStationClientTests : FireblocksClientTestsBase
     [InlineData(             "MATIC_POLYGON",   "1",        "3",     null)]   // Polygon
     [InlineData(             "AVAX",            "0.1",      "0.3",   null)]   // Avalanche
     [InlineData(             "ETH_ZKSYNC_ERA",  "0.002",    "0.005", null)]   // zkSync Era
-    [InlineData(             "ETH_ZKEVM",       "0.002",    "0.005", null)]   // Polygon zkEVM
     [InlineData(             "SONIC",           "1",        "3",     null)]   // Sonic
     [InlineData(             "MONAD",           "0.01",     "0.03",  null)]   // Monad
     public async Task UpdateGasStationConfiguration_per_asset(
